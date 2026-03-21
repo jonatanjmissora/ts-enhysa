@@ -1,7 +1,6 @@
 import NuevoReporteEmpresa from "@/components/dashboard/nuevo-reporte/empresa"
 import NuevoReporteInstrumental from "@/components/dashboard/nuevo-reporte/instrumental"
 import NuevoReportePersona from "@/components/dashboard/nuevo-reporte/persona"
-import { Button } from "@/components/ui/button"
 import { createFileRoute, Link } from "@tanstack/react-router"
 
 export const Route = createFileRoute("/_protected/new-report")({

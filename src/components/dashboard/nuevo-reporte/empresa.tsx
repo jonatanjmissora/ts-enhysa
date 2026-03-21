@@ -1,6 +1,3 @@
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-
 export default function NuevoReporteEmpresa() {
 	return (
 		<div className="flex flex-col gap-2 flex-1">
@@ -8,49 +5,49 @@ export default function NuevoReporteEmpresa() {
 				<div className="bg-accent text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
 					2
 				</div>
-				<span className="text-lg font-semibold tracking-wider">Empresa</span>
+				<span className="text-xl font-semibold tracking-wider">Empresa</span>
 			</div>
-			<article className="bg-accent rounded-xl p-6 flex-1 flex flex-col gap-4">
+			<article className="bg-accent rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg">
 				<div className="grid grid-cols-2 gap-4">
 					<div className="flex flex-col gap-2">
-						<Label className="font-semibold" htmlFor="cuit">
+						<label className="font-semibold" htmlFor="cuit">
 							CUIT
-						</Label>
-						<Input
+						</label>
+						<input
 							id="cuit"
-							className="dark:bg-background"
+							className="bg-background py-2 px-4 rounded-lg"
 							placeholder="00-00000000-0"
 						/>
 					</div>
 					<div className="flex flex-col gap-2">
-						<Label className="font-semibold" htmlFor="razon-social">
+						<label className="font-semibold" htmlFor="razon-social">
 							Razón Social
-						</Label>
-						<Input
+						</label>
+						<input
 							id="razon-social"
-							className="dark:bg-background"
+							className="bg-background py-2 px-4 rounded-lg"
 							placeholder="Nombre de la empresa"
 						/>
 					</div>
 				</div>
 				<div className="flex flex-col gap-2">
-					<Label className="font-semibold" htmlFor="direccion">
+					<label className="font-semibold" htmlFor="direccion">
 						Dirección
-					</Label>
-					<Input
+					</label>
+					<input
 						id="direccion"
-						className="dark:bg-background"
+						className="bg-background py-2 px-4 rounded-lg"
 						placeholder="Calle, Altura, Ciudad"
 					/>
 				</div>
 				<div className="flex flex-col gap-2">
-					<Label className="font-semibold" htmlFor="cant-empleados">
+					<label className="font-semibold" htmlFor="cant-empleados">
 						Cantidad de empleados
-					</Label>
-					<Input
+					</label>
+					<input
 						id="cant-empleados"
 						placeholder="Ej. 25"
-						className="dark:bg-background"
+						className="bg-background py-2 px-4 rounded-lg"
 					/>
 				</div>
 			</article>
