@@ -28,7 +28,7 @@ export default function DashboardMenu() {
 						<Link
 							to="/new-project"
 							className="flex items-center gap-4 text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
-							activeProps={{ className: "bg-background" }}
+							activeProps={{ className: "bg-background shadow-xl" }}
 						>
 							<FilePlus size={24} />
 							Nuevo Proyecto
@@ -36,7 +36,7 @@ export default function DashboardMenu() {
 						<Link
 							to="/reports"
 							className="flex items-center gap-4 text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
-							activeProps={{ className: "bg-background" }}
+							activeProps={{ className: "bg-background shadow-xl" }}
 						>
 							<FileChartColumn size={24} />
 							Mis Informes
@@ -44,7 +44,7 @@ export default function DashboardMenu() {
 						<Link
 							to="/profile"
 							className="flex items-center gap-4 text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
-							activeProps={{ className: "bg-background" }}
+							activeProps={{ className: "bg-background shadow-xl" }}
 						>
 							<UserIcon size={24} />
 							Perfil

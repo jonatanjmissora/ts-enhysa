@@ -19,7 +19,7 @@ export default function InicioRecientes() {
 					<Button className="bg-accent text-foreground hover:bg-accent/80">
 						Cumple
 					</Button>
-					<ChevronRight size={24} />
+					<ChevronRight size={24} className="cursor-pointer" />
 				</div>
 			</div>
 
@@ -37,7 +37,7 @@ export default function InicioRecientes() {
 					<Button className="bg-accent text-foreground hover:bg-accent/80">
 						Cumple
 					</Button>
-					<ChevronRight size={24} />
+					<ChevronRight size={24} className="cursor-pointer" />
 				</div>
 			</div>
 
@@ -55,7 +55,7 @@ export default function InicioRecientes() {
 					<Button className="bg-accent text-foreground hover:bg-accent/80">
 						Cumple
 					</Button>
-					<ChevronRight size={24} />
+					<ChevronRight size={24} className="cursor-pointer" />
 				</div>
 			</div>
 		</div>

@@ -12,7 +12,9 @@ export default function User() {
 					<p className="text-foreground/40">Plan profesional</p>
 				</div>
 			</div>
-			<p className="p-4 text-foreground/75">Cerrar sesion</p>
+			<p className="p-4 text-foreground/75 cursor-pointer hover:text-foreground">
+				Cerrar sesion
+			</p>
 		</div>
 	)
 }

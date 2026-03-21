@@ -28,7 +28,7 @@ export default function InicioPlan() {
 					<p>Soporte prioritario</p>
 				</div>
 			</div>
-			<Button className="rounded-xl bg-background text-foreground text-xl w-full py-7 tracking-widest shadow-xl hover:bg-background/80">
+			<Button className="rounded-xl bg-background text-foreground text-xl w-full py-7 tracking-widest shadow-xl hover:bg-background/80 cursor-pointer">
 				Gestionar Plan
 			</Button>
 
