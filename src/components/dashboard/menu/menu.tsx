@@ -26,7 +26,7 @@ export default function DashboardMenu() {
 							Inicio
 						</Link>
 						<Link
-							to="/new-project"
+							to="/new-report"
 							className="flex items-center gap-4 text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
 							activeProps={{ className: "bg-background shadow-xl" }}
 						>
