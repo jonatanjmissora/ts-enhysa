@@ -1,7 +1,7 @@
 export default function User() {
 	return (
 		<div className="flex flex-col gap-4 m-6">
-			<div className="flex items-center gap-2 p-4 bg-background rounded-lg">
+			<div className="flex items-center gap-2 p-4 bg-background rounded-lg shadow-xl">
 				<div className="p-4 bg-accent rounded-full flex justify-center items-center">
 					JM
 				</div>
