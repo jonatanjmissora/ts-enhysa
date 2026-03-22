@@ -45,8 +45,12 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 	}),
 	beforeLoad: async () => ({
 		theme: ((await getThemeServerFn()) ?? "auto") as "light" | "dark" | "auto",
-		session: await getSession(),
+		// session: await getSession(),
 	}),
+	loader: async () => {
+		const session = await getSession()
+		return { session }
+	},
 	shellComponent: RootDocument,
 	errorComponent: DefaultCatchBoundary,
 	notFoundComponent: () => <NotFound />,
