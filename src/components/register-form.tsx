@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
-import { Link, useRouter } from "@tanstack/react-router"
+import { useRouter } from "@tanstack/react-router"
 import { authClient } from "@/lib/auth-client"
 import { useState } from "react"
 import { Eye, EyeClosed } from "lucide-react"
@@ -32,10 +32,15 @@ const formSchema = z.object({
 
 export function RegisterForm({
 	className,
+	setActiveForm,
 	...props
-}: React.ComponentProps<"div">) {
+}: React.ComponentProps<"div"> & {
+	setActiveForm: (form: "login" | "register") => void
+}) {
 	const router = useRouter()
+	const [loading, setLoading] = useState(false)
 	const [showPassword, setShowPassword] = useState(false)
+
 	const form = useForm({
 		defaultValues: {
 			nombre: "",
@@ -67,25 +72,28 @@ export function RegisterForm({
 	})
 
 	const signIn = async () => {
-		toast.info("Funcionalidad de Google no implementada en el starter")
-		// return await authClient.signIn.social({
-		// 	provider: "google",
-		// 	callbackURL: "/",
-		// })
+		setLoading(true)
+
+		try {
+			await authClient.signIn.social({
+				provider: "google",
+				callbackURL: "/",
+			})
+		} catch (_err) {
+			// error ANTES de redirigir
+			setLoading(false)
+			toast.error("No se pudo iniciar sesión con Google")
+		}
 	}
 
 	return (
-		<div
-			className={cn(
-				"min-w-1/4 flex flex-col gap-6 w-full sm:w-1/4 mx-auto",
-				className
-			)}
-			{...props}
-		>
-			<Card>
+		<div className={cn("w-90 relative mr-50", className)} {...props}>
+			<Card className="bg-background shadow-2xl">
 				<CardHeader className="text-center">
 					<CardTitle className="text-xl">Bienvenido a la app</CardTitle>
-					<CardDescription>Ingresa con una cuenta de Google</CardDescription>
+					<CardDescription className="text-foreground/75">
+						Ingresa con una cuenta de Google
+					</CardDescription>
 				</CardHeader>
 				<CardContent>
 					<form
@@ -97,15 +105,24 @@ export function RegisterForm({
 					>
 						<FieldGroup>
 							<Field>
-								<Button variant="outline" type="button" onClick={signIn}>
-									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-										<title>Google</title>
-										<path
-											d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
-											fill="currentColor"
-										/>
-									</svg>
-									Google
+								<Button
+									variant="outline"
+									type="button"
+									onClick={signIn}
+									className="text-foreground/75 dark:bg-accent shadow cursor-pointer"
+								>
+									{loading ? (
+										"Iniciando..."
+									) : (
+										<div className="flex items-center gap-2">
+											<img
+												src="/google-icon-logo.svg"
+												alt="Google"
+												className="h-5"
+											/>{" "}
+											Google
+										</div>
+									)}
 								</Button>
 							</Field>
 							<FieldSeparator>O continua con</FieldSeparator>
@@ -125,8 +142,9 @@ export function RegisterForm({
 												onBlur={field.handleBlur}
 												onChange={e => field.handleChange(e.target.value)}
 												aria-invalid={isInvalid}
-												placeholder="ruben blada"
+												placeholder="nombre apellido"
 												autoComplete="off"
+												className="dark:bg-accent"
 											/>
 											{isInvalid && (
 												<FieldError errors={field.state.meta.errors} />
@@ -153,6 +171,7 @@ export function RegisterForm({
 												aria-invalid={isInvalid}
 												placeholder="m@example.com"
 												autoComplete="off"
+												className="dark:bg-accent"
 											/>
 											{isInvalid && (
 												<FieldError errors={field.state.meta.errors} />
@@ -180,6 +199,7 @@ export function RegisterForm({
 													aria-invalid={isInvalid}
 													placeholder="********"
 													type={showPassword ? "text" : "password"}
+													className="dark:bg-accent"
 												/>
 												<button
 													type="button"
@@ -202,12 +222,22 @@ export function RegisterForm({
 							/>
 
 							<Field>
-								<Button type="submit">Registrar</Button>
+								<Button
+									type="submit"
+									className="bg-green-600 tracking-wider font-semibold shadow hover:bg-green-500 cursor-pointer"
+								>
+									Registrar
+								</Button>
 								<FieldDescription className="text-center">
 									Ya tienes cuenta ?{" "}
-									<Link to="/login" viewTransition={{ types: ["rotateZ"] }}>
+									<button
+										type="button"
+										onClick={() => setActiveForm("login")}
+										// viewTransition={{ types: ["rotateZ"] }}
+										className="cursor-pointer dark:hover:text-green-400 underline"
+									>
 										Ingresar
-									</Link>
+									</button>
 								</FieldDescription>
 							</Field>
 						</FieldGroup>

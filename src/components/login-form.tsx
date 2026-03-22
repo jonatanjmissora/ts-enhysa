@@ -19,7 +19,6 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
-import { Link } from "@tanstack/react-router"
 import { useRouter } from "@tanstack/react-router"
 import { useState } from "react"
 import { authClient } from "@/lib/auth-client"
@@ -32,8 +31,11 @@ const formSchema = z.object({
 
 export function LoginForm({
 	className,
+	setActiveForm,
 	...props
-}: React.ComponentProps<"div">) {
+}: React.ComponentProps<"div"> & {
+	setActiveForm: (form: "login" | "register") => void
+}) {
 	const router = useRouter()
 	const [loading, setLoading] = useState(false)
 	const [showPassword, setShowPassword] = useState(false)
@@ -79,12 +81,10 @@ export function LoginForm({
 
 	return (
 		<div className={cn("w-90 relative ml-50", className)} {...props}>
-			<Card className="bg-white/80 border-transparent shadow-2xl">
+			<Card className="bg-background shadow-2xl">
 				<CardHeader className="text-center">
-					<CardTitle className="text-xl text-background">
-						Bienvenido de nuevo
-					</CardTitle>
-					<CardDescription className="text-background/75">
+					<CardTitle className="text-xl">Bienvenido de nuevo</CardTitle>
+					<CardDescription className="text-foreground/75">
 						Ingresa con una cuenta
 					</CardDescription>
 				</CardHeader>
@@ -102,7 +102,7 @@ export function LoginForm({
 									variant="outline"
 									type="button"
 									onClick={signIn}
-									className="dark:bg-accent/20 text-background/75 dark:border-gray-400 shadow cursor-pointer"
+									className="text-foreground/75 dark:bg-accent shadow cursor-pointer"
 								>
 									{loading ? (
 										"Iniciando..."
@@ -119,7 +119,7 @@ export function LoginForm({
 								</Button>
 							</Field>
 							<FieldSeparator>
-								<span className="text-accent bg-transparent">
+								<span className="text-foreground/75 bg-background">
 									O continua con
 								</span>
 							</FieldSeparator>
@@ -131,14 +131,8 @@ export function LoginForm({
 										field.state.meta.isTouched && !field.state.meta.isValid
 									return (
 										<Field data-invalid={isInvalid}>
-											<FieldLabel
-												htmlFor={field.name}
-												className="text-background"
-											>
-												Email
-											</FieldLabel>
+											<FieldLabel htmlFor={field.name}>Email</FieldLabel>
 											<Input
-												className="dark:bg-accent/10 text-background/75 dark:border-gray-400 shadow"
 												id={field.name}
 												name={field.name}
 												value={field.state.value}
@@ -146,6 +140,7 @@ export function LoginForm({
 												onChange={e => field.handleChange(e.target.value)}
 												aria-invalid={isInvalid}
 												placeholder="m@example.com"
+												className="dark:bg-accent"
 											/>
 											{isInvalid && (
 												<FieldError errors={field.state.meta.errors} />
@@ -162,15 +157,10 @@ export function LoginForm({
 										field.state.meta.isTouched && !field.state.meta.isValid
 									return (
 										<Field data-invalid={isInvalid}>
-											<FieldLabel
-												htmlFor={field.name}
-												className="text-background"
-											>
-												Contraseña
-											</FieldLabel>
+											<FieldLabel htmlFor={field.name}>Contraseña</FieldLabel>
 											<div className="relative">
 												<Input
-													className="dark:bg-accent/10 text-background/75 dark:border-gray-400 shadow"
+													className="dark:bg-accent"
 													id={field.name}
 													name={field.name}
 													value={field.state.value}
@@ -207,15 +197,16 @@ export function LoginForm({
 								>
 									Ingresar
 								</Button>
-								<FieldDescription className="text-center text-background/65">
+								<FieldDescription className="text-center">
 									No tiene cuenta ?{" "}
-									<Link
-										to="/register"
+									<button
+										onClick={() => setActiveForm("register")}
 										// viewTransition={{ types: ["rotateZ"] }}
-										className="dark:hover:text-background"
+										className="cursor-pointer dark:hover:text-green-400 underline"
+										type="button"
 									>
 										Registrate
-									</Link>
+									</button>
 								</FieldDescription>
 							</Field>
 						</FieldGroup>

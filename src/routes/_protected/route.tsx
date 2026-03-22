@@ -1,9 +1,9 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router"
-// import { protectedRoute } from "@/lib/protected-route"
+import { protectedRoute } from "@/lib/protected-route"
 import DashboardMenu from "@/components/dashboard/menu/menu"
 
 export const Route = createFileRoute("/_protected")({
-	// loader: async () => await protectedRoute(),
+	loader: async () => await protectedRoute(),
 	component: RouteComponent,
 })
 
