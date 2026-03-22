@@ -35,7 +35,7 @@ export default function NuevoReporteInstrumental() {
 				</div>
 				<input
 					id="certificado"
-					className="bg-background py-2 px-4 rounded-lg"
+					className="bg-background py-2 px-4 rounded-lg h-30"
 					type="file"
 				/>
 			</article>

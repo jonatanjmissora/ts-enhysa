@@ -24,7 +24,7 @@ function App() {
 				</div>
 			</header>
 
-			<main className="flex-1 p-20 sm:py-10 2xl:py-20 flex flex-col gap-10 justify-center">
+			<main className="flex-1 px-20 py-4 flex flex-col justify-around">
 				<InicioHeader />
 
 				<InicioTags />
