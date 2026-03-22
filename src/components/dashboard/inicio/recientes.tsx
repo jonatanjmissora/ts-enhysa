@@ -3,16 +3,20 @@ import { ChevronRight, FileChartColumn } from "lucide-react"
 
 export default function InicioRecientes() {
 	return (
-		<div className="flex-1 p-10 bg-accent border border-border rounded-xl flex flex-col gap-6">
-			<header className="text-2xl tracking-wider">Protocolos Recientes</header>
-			<div className="p-6 bg-background border border-border rounded-xl flex justify-between items-center shadow-xl">
+		<div className="flex-1 sm:p-6 2xl:p-10 bg-accent rounded-xl flex flex-col sm:gap-3 2xl:gap-6">
+			<header className="sm:text-xl 2xl:text-2xl tracking-wider sm:pb-4 2xl:pb-0">
+				Protocolos Recientes
+			</header>
+			<div className="px-6 sm:py-4 2xl:py-6 bg-background rounded-xl flex justify-between items-center shadow-xl">
 				<div className="flex gap-4 items-center">
-					<FileChartColumn className="size-14 text-foreground/70 p-2 bg-accent rounded-lg shadow-xl" />
+					<FileChartColumn className="sm:size-10 2xl:size-14 text-foreground/70 p-2 bg-accent rounded-lg shadow-xl" />
 					<div className="flex flex-col gap-0">
-						<p className="text-lg font-semibold">
+						<p className="sm:text-sm 2xl:text-lg font-semibold">
 							Empresa Metalurgica SA - Planta A
 						</p>
-						<p className="text-foreground/50">Realizado el 15/05/2024</p>
+						<p className="sm:text-sm 2xl:text-base text-foreground/50">
+							Realizado el 15/05/2024
+						</p>
 					</div>
 				</div>
 				<div className="flex items-center gap-4">
@@ -23,14 +27,16 @@ export default function InicioRecientes() {
 				</div>
 			</div>
 
-			<div className="p-6 bg-background border border-border rounded-xl flex justify-between items-center shadow-xl">
-				<div className="flex gap-4 items-center">
-					<FileChartColumn className="size-14 text-foreground/70 p-2 bg-accent rounded-lg shadow-xl" />
+			<div className="px-6 sm:py-4 2xl:py-6 bg-background rounded-xl flex justify-between items-center shadow-xl">
+				<div className="flex sm:gap-2 2xl:gap-4 items-center">
+					<FileChartColumn className="sm:size-10 2xl:size-14 text-foreground/70 p-2 bg-accent rounded-lg shadow-xl" />
 					<div className="flex flex-col gap-0">
-						<p className="text-lg font-semibold">
+						<p className="sm:text-sm 2xl:text-lg font-semibold">
 							Empresa Metalurgica SA - Planta A
 						</p>
-						<p className="text-foreground/50">Realizado el 15/05/2024</p>
+						<p className="sm:text-sm 2xl:text-base text-foreground/50">
+							Realizado el 15/05/2024
+						</p>
 					</div>
 				</div>
 				<div className="flex items-center gap-4">
@@ -41,14 +47,16 @@ export default function InicioRecientes() {
 				</div>
 			</div>
 
-			<div className="p-6 bg-background border border-border rounded-xl flex justify-between items-center shadow-xl">
+			<div className="px-6 sm:py-4 2xl:py-6 bg-background rounded-xl flex justify-between items-center shadow-xl">
 				<div className="flex gap-4 items-center">
-					<FileChartColumn className="size-14 text-foreground/70 p-2 bg-accent rounded-lg shadow-xl" />
+					<FileChartColumn className="sm:size-10 2xl:size-14 text-foreground/70 p-2 bg-accent rounded-lg shadow-xl" />
 					<div className="flex flex-col gap-0">
-						<p className="text-lg font-semibold">
+						<p className="sm:text-sm 2xl:text-lg font-semibold">
 							Empresa Metalurgica SA - Planta A
 						</p>
-						<p className="text-foreground/50">Realizado el 15/05/2024</p>
+						<p className="sm:text-sm 2xl:text-base text-foreground/50">
+							Realizado el 15/05/2024
+						</p>
 					</div>
 				</div>
 				<div className="flex items-center gap-4">

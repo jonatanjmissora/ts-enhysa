@@ -12,19 +12,19 @@ export const Route = createFileRoute("/_protected/")({
 function App() {
 	return (
 		<div className="min-h-screen flex flex-col">
-			<header className="text-xl font-semibold tracking-wider h-24 px-20 bg-accent border border-background flex justify-between items-center">
+			<header className="sm:text-base 2xl:text-xl font-semibold tracking-wider sm:h-20 2xl:h-24 px-20 bg-accent border border-background flex justify-between items-center">
 				<span>Protocolo de Iluminación Res 84/12 SRT</span>
 				<div className="flex items-center gap-2">
-					<div className="bg-background/50 rounded-full p-2 px-3 text-foreground/50 italic font-thin cursor-pointer">
+					<div className="bg-background/50 rounded-full sm:p-1 2xl:p-2 sm:px-2 2xl:px-3 text-foreground/50 italic font-thin cursor-pointer">
 						es
 					</div>
 					<div className="bg-background/50 rounded-full p-2 px-3 cursor-pointer">
-						<Sun size={20} className="text-foreground/50" />
+						<Sun className="text-foreground/50 sm:size-4 2xl:size-5" />
 					</div>
 				</div>
 			</header>
 
-			<main className="flex-1 p-20 flex flex-col gap-10 justify-center">
+			<main className="flex-1 p-20 sm:py-10 2xl:py-20 flex flex-col gap-10 justify-center">
 				<InicioHeader />
 
 				<InicioTags />
