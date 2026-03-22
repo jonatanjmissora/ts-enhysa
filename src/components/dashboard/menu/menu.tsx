@@ -4,8 +4,8 @@ import { Link } from "@tanstack/react-router"
 
 export default function DashboardMenu() {
 	return (
-		<div className="flex h-full flex-col justify-between">
-			<div className="flex flex-col gap-4 m-6">
+		<div className="flex flex-col justify-between h-screen fixed top-0 left-0 sm:w-[22dvw] 2xl:w-1/4 bg-accent">
+			<div className="flex flex-col mx-6">
 				<div className="flex items-center gap-3 py-10 px-4">
 					<img
 						src="./public/EnHySa_logo.webp"
@@ -13,47 +13,49 @@ export default function DashboardMenu() {
 						className="size-20"
 					/>
 
-					<p className="text-4xl font-bold tracking-widest">EnHySa App</p>
+					<p className="sm:text-[1.6rem] 2xl:text-4xl font-bold tracking-widest">
+						EnHySa App
+					</p>
 				</div>
 				<nav>
-					<ul className="flex flex-col gap-4">
+					<ul className="flex flex-col sm:gap-2 2xl:gap-4">
 						<Link
 							to="/"
-							className="flex items-center gap-4 text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
+							className="flex items-center gap-4 sm:text-lg 2xl:text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
 							activeProps={{ className: "bg-background" }}
 						>
-							<Home size={24} />
+							<Home className="sm:size-6 2xl:size-7" />
 							Inicio
 						</Link>
 						<Link
 							to="/new-report"
-							className="flex items-center gap-4 text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
+							className="flex items-center gap-4 sm:text-lg 2xl:text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
 							activeProps={{ className: "bg-background shadow-xl" }}
 						>
-							<FilePlus size={24} />
+							<FilePlus className="sm:size-6 2xl:size-7" />
 							Nuevo Proyecto
 						</Link>
 						<Link
 							to="/reports"
-							className="flex items-center gap-4 text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
+							className="flex items-center gap-4 sm:text-lg 2xl:text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
 							activeProps={{ className: "bg-background shadow-xl" }}
 						>
-							<FileChartColumn size={24} />
+							<FileChartColumn className="sm:size-6 2xl:size-7" />
 							Mis Informes
 						</Link>
 						<Link
 							to="/profile"
-							className="flex items-center gap-4 text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
+							className="flex items-center gap-4 sm:text-lg 2xl:text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
 							activeProps={{ className: "bg-background shadow-xl" }}
 						>
-							<UserIcon size={24} />
+							<UserIcon className="sm:size-6 2xl:size-7" />
 							Perfil
 						</Link>
 					</ul>
 				</nav>
 			</div>
 
-			<footer className="border-t-2 border-background pb-4">
+			<footer className="border-t-[1.5px] border-background sm:pb-0 2xl:pb-4">
 				<User />
 			</footer>
 		</div>

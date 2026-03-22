@@ -10,10 +10,10 @@ export const Route = createFileRoute("/_protected")({
 function RouteComponent() {
 	return (
 		<section className="w-screen min-h-screen overflow-hidden flex">
-			<aside className="w-1/4 bg-accent">
+			<aside className="sm:w-[22dvw] 2xl:w-1/4">
 				<DashboardMenu />
 			</aside>
-			<article className="w-3/4">
+			<article className="sm:w-[78dvw] 2xl:w-3/4">
 				<Outlet />
 			</article>
 		</section>
