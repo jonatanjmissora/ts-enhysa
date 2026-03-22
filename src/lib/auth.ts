@@ -18,10 +18,22 @@ interface AuthOptions {
 	}
 	plugins: any[]
 	database?: any
+	socialProviders?: {
+		google: {
+			clientId: string
+			clientSecret: string
+		}
+	}
 }
 
-let authOptions: AuthOptions = {
+const authOptions: AuthOptions = {
 	baseURL,
+	socialProviders: {
+		google: {
+			clientId: process.env.GOOGLE_CLIENT_ID as string,
+			clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+		},
+	},
 	emailAndPassword: {
 		enabled: true,
 	},
