@@ -11,5 +11,7 @@ dashboard
 
 * mis informes
 
-* perfil
+styles
+===============
+hacer cards con foco radial
 

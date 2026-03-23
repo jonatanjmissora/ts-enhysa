@@ -15,7 +15,6 @@ import { useState } from "react"
 export default function User() {
 	const { session } = useLoaderData({ from: "__root__" })
 	const { avatar, fullName } = getUserInfo(session)
-
 	return (
 		<div className="flex flex-col sm:gap-2 2xl:gap-4 m-6">
 			<div className="flex items-center gap-4 p-4 bg-background rounded-lg shadow-xl">

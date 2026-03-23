@@ -31,11 +31,11 @@ function RouteComponent() {
 				{/* CENTER */}
 				<div className="bg-linear-to-b from-background/80 to-background/70 w-140 h-[200dvh] absolute left-225 -bottom-80 -rotate-25 shadow-2xl"></div>
 				<div className="absolute left-250 top-1/2 translate-y-[-50%] z-10 flex flex-col gap-3 justify-center items-center">
-					<img src="./logo2.png" alt="" className="w-40" />
-					<h1 className="text-7xl font-bold tracking-widest text-green-700">
+					<img src="./logo2.png" alt="" className="w-50" />
+					<h1 className="text-8xl font-bold tracking-widest text-green-700">
 						EnHySa
 					</h1>
-					<p className="text-lg italic text-center tracking-wider w-[80%] text-pretty text-foreground/75">
+					<p className="text-xl italic text-center tracking-wider w-[80%] text-pretty text-foreground/75">
 						Gestiona tus informes de iluminación y protocolo.
 					</p>
 				</div>

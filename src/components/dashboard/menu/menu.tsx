@@ -1,4 +1,4 @@
-import { FileChartColumn, FilePlus, Home, UserIcon } from "lucide-react"
+import { FileChartColumn, FilePlus, Home, UserRound } from "lucide-react"
 import User from "./user"
 import { Link } from "@tanstack/react-router"
 
@@ -22,7 +22,7 @@ export default function DashboardMenu() {
 						<Link
 							to="/"
 							className="flex items-center gap-4 sm:text-lg 2xl:text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
-							activeProps={{ className: "bg-background" }}
+							activeProps={{ className: "themeBtnBackground shadow-xl" }}
 						>
 							<Home className="sm:size-6 2xl:size-7" />
 							Inicio
@@ -30,7 +30,7 @@ export default function DashboardMenu() {
 						<Link
 							to="/new-report"
 							className="flex items-center gap-4 sm:text-lg 2xl:text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
-							activeProps={{ className: "bg-background shadow-xl" }}
+							activeProps={{ className: "themeBtnBackground shadow-xl" }}
 						>
 							<FilePlus className="sm:size-6 2xl:size-7" />
 							Nuevo Proyecto
@@ -38,7 +38,7 @@ export default function DashboardMenu() {
 						<Link
 							to="/reports"
 							className="flex items-center gap-4 sm:text-lg 2xl:text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
-							activeProps={{ className: "bg-background shadow-xl" }}
+							activeProps={{ className: "themeBtnBackground shadow-xl" }}
 						>
 							<FileChartColumn className="sm:size-6 2xl:size-7" />
 							Mis Informes
@@ -46,9 +46,9 @@ export default function DashboardMenu() {
 						<Link
 							to="/profile"
 							className="flex items-center gap-4 sm:text-lg 2xl:text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
-							activeProps={{ className: "bg-background shadow-xl" }}
+							activeProps={{ className: "themeBtnBackground shadow-xl" }}
 						>
-							<UserIcon className="sm:size-6 2xl:size-7" />
+							<UserRound className="sm:size-6 2xl:size-7" />
 							Perfil
 						</Link>
 					</ul>

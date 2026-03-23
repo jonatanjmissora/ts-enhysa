@@ -222,12 +222,12 @@ export function RegisterForm({
 							/>
 
 							<Field>
-								<Button
+								<button
 									type="submit"
-									className="bg-green-600 tracking-wider font-semibold shadow hover:bg-green-500 cursor-pointer"
+									className="themeBtnAccent tracking-wider font-semibold shadow cursor-pointer rounded-xl py-2"
 								>
 									Registrar
-								</Button>
+								</button>
 								<FieldDescription className="text-center">
 									Ya tienes cuenta ?{" "}
 									<button

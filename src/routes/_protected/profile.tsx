@@ -1,6 +1,7 @@
+import { USER } from "@/lib/mock/user"
 import { getUserInfo } from "@/lib/utils"
 import { createFileRoute, useLoaderData } from "@tanstack/react-router"
-import { Pencil } from "lucide-react"
+import { Pencil, Save } from "lucide-react"
 import { useState } from "react"
 
 export const Route = createFileRoute("/_protected/profile")({
@@ -17,12 +18,12 @@ function RouteComponent() {
 			<div className="flex flex-col gap-2 relative">
 				<div className="flex justify-between items-center">
 					<div></div>
-					<div className="absolute -top-10 left-10">
+					<div className="absolute -top-10 -left-10">
 						{avatar ? (
 							<img
 								src={avatar}
 								alt="User avatar"
-								className="sm:size-20 2xl:size-24 rounded-sm"
+								className="sm:size-30 2xl:size-24 rounded-sm"
 							/>
 						) : (
 							<div className="bg-accent p-2 rounded-full">
@@ -33,9 +34,21 @@ function RouteComponent() {
 					<div>
 						<p>{fullName.toUpperCase()}</p>
 					</div>
-					<button className="text-foreground/50 px-4 py-2 rounded-lg flex items-center gap-2 cursor-pointer dark:bg-accent dark:hover:bg-accent/50">
-						<Pencil className="size-5" />
-						Editar
+					<button
+						className="text-foreground/50 px-4 py-2 rounded-lg cursor-pointer themeBtnAccent"
+						onClick={() => setEditMode(prev => !prev)}
+					>
+						{editMode ? (
+							<div className="flex items-center gap-2 w-20">
+								<Save className="size-5" />
+								Guardar
+							</div>
+						) : (
+							<div className="flex items-center gap-2 w-20">
+								<Pencil className="size-5" />
+								Editar
+							</div>
+						)}
 					</button>
 				</div>
 				<article className="bg-accent rounded-xl flex flex-col gap-6 text-lg p-10">
@@ -47,6 +60,8 @@ function RouteComponent() {
 							id="nombre-completo"
 							className="bg-background py-2 px-4 rounded-lg"
 							placeholder="Ingrese el nombre y apellido"
+							defaultValue={USER.name}
+							readOnly={!editMode}
 						/>
 					</div>
 					<div className="grid grid-cols-2 gap-4">
@@ -58,6 +73,8 @@ function RouteComponent() {
 								id="matricula"
 								className="bg-background py-2 px-4 rounded-lg"
 								placeholder="N° Matrícula "
+								defaultValue={USER.matricula}
+								readOnly={!editMode}
 							/>
 						</div>
 						<div className="flex flex-col gap-2">
@@ -68,6 +85,8 @@ function RouteComponent() {
 								id="cargo"
 								className="bg-background py-2 px-4 rounded-lg"
 								placeholder="Ej. Seguridad e Higiene"
+								defaultValue={USER.cargo}
+								readOnly={!editMode}
 							/>
 						</div>
 					</div>

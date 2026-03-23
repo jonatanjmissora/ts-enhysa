@@ -2,6 +2,7 @@ import NuevoReporteEmpresa from "@/components/dashboard/nuevo-reporte/empresa"
 import NuevoReporteInstrumental from "@/components/dashboard/nuevo-reporte/instrumental"
 import NuevoReportePersona from "@/components/dashboard/nuevo-reporte/persona"
 import { createFileRoute, Link } from "@tanstack/react-router"
+import { Save, X } from "lucide-react"
 import { useState } from "react"
 
 export const Route = createFileRoute("/_protected/new-report")({
@@ -9,7 +10,7 @@ export const Route = createFileRoute("/_protected/new-report")({
 })
 
 function RouteComponent() {
-	const [actualStep, setActualStep] = useState(2)
+	const [actualStep, setActualStep] = useState(1)
 
 	return (
 		<div className="min-h-screen flex flex-col">
@@ -17,8 +18,9 @@ function RouteComponent() {
 				<span>Protocolo de Iluminación Res 84/12 SRT</span>
 				<Link
 					to="/"
-					className="bg-background hover:bg-background/80 rounded-xl shadow-xl sm:text-sm 2xl:text-lg text-foreground tracking-wide px-6 py-3 cursor-pointer m-0"
+					className="flex items-center justify-center gap-4 themeBtnAccent rounded-lg shadow-xl sm:text-sm 2xl:text-lg text-foreground tracking-wider px-6 py-3 cursor-pointer m-0"
 				>
+					<X className="size-4" />
 					Cancelar
 				</Link>
 			</header>
@@ -38,8 +40,9 @@ function RouteComponent() {
 				<button
 					onClick={() => setActualStep(2)}
 					type="button"
-					className="bg-accent text-center hover:bg-accent/80 rounded-xl shadow-xl text-lg text-foreground tracking-wide px-6 py-4 cursor-pointer m-0"
+					className="flex items-center gap-4 themeBtnAccent justify-center rounded-xl shadow-xl text-lg text-foreground tracking-wide px-6 py-4 cursor-pointer m-0"
 				>
+					<Save className="size-6" />
 					Guardar y Continuar
 				</button>
 			</main>
@@ -57,16 +60,26 @@ function RouteComponent() {
 
 				<div className="flex items-strech gap-10">
 					<div className="flex-1 bg-accent rounded-xl p-6 flex flex-col items-center justify-center gap-4 shadow-xl">
-						<input
-							type="file"
-							className="sm:h-40 2xl:h-60 bg-background rounded-lg"
-						/>
+						<div className="relative">
+							<img
+								src="./public/plano.webp"
+								alt="plano"
+								className="absolute z-1 h-full w-full object-contain opcity-50"
+							/>
+							<span className="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white bg-accent p-4 py-2">
+								Ingrese Plano
+							</span>
+							<input
+								type="file"
+								className="sm:h-40 2xl:h-60 bg-background rounded-lg relative z-100 opacity-0 cursor-pointer"
+							/>
+						</div>
 						<p className="italic text-center tracking-wider text-foreground/50 sm:text-sm 2xl:text-xl text-pretty px-6">
 							El indice del Local (RI) es un valor numerico que representa la
 							geometria del recinto para calculos luminotexnicos.
 						</p>
 					</div>
-					<div className="flex-1 bg-accent rounded-xl p-4 flex flex-col items-center justify-center gap-12 border-dotted border-2 border-foreground/20">
+					<div className="flex-1 bg-orange-700/20 rounded-xl p-4 flex flex-col items-center justify-center gap-12 border-dotted border-2 border-foreground/20">
 						<p className="italic text-center tracking-wider text-foreground/50 sm:text-lg 2xl:text-xl text-pretty">
 							FORMULA APLICADA
 						</p>
@@ -86,7 +99,7 @@ function RouteComponent() {
 						</p>
 						<div className="flex flex-col gap-2">
 							<div className="flex items-center justify-between gap-6">
-								<div className="font-semibold bg-background rounded-full py-1 px-3">
+								<div className="font-semibold bg-blue-500/70 rounded-full py-1 px-3">
 									L
 								</div>
 								<span>Largo (m)</span>
@@ -97,7 +110,7 @@ function RouteComponent() {
 								/>
 							</div>
 							<div className="flex items-center justify-between gap-6">
-								<div className="font-semibold bg-background rounded-full py-1 px-3">
+								<div className="font-semibold bg-blue-500/70 rounded-full py-1 px-3">
 									w
 								</div>
 								<span>Ancho (m)</span>
@@ -108,7 +121,7 @@ function RouteComponent() {
 								/>
 							</div>
 							<div className="flex items-center justify-between gap-6">
-								<div className="font-semibold bg-background rounded-full py-1 px-3">
+								<div className="font-semibold bg-blue-500/70 rounded-full py-1 px-3">
 									H
 								</div>
 								<span>Altura (m)</span>
@@ -120,7 +133,7 @@ function RouteComponent() {
 							</div>
 						</div>
 					</div>
-					<div className="flex-1 bg-accent rounded-xl p-6 flex flex-col items-center justify-center gap-4 shadow-xl">
+					<div className="flex-1 bg-blue-700/30 rounded-xl p-6 flex flex-col items-center justify-center gap-4 shadow-xl">
 						<p className="text-xl font-semibold tracking-wide">
 							Resultado RI (Redondeado)
 						</p>
@@ -136,6 +149,14 @@ function RouteComponent() {
 						</div>
 					</div>
 				</div>
+				<button
+					onClick={() => setActualStep(3)}
+					type="button"
+					className="flex items-center gap-4 themeBtnAccent justify-center rounded-xl shadow-xl text-lg text-foreground tracking-wide px-6 py-4 cursor-pointer m-0"
+				>
+					<Save className="size-6" />
+					Guardar y Continuar
+				</button>
 			</main>
 
 			{/* ==================================================================== */}
@@ -145,11 +166,7 @@ function RouteComponent() {
 			<main
 				className={`${actualStep === 3 ? "flex-1" : "hidden"} p-20 sm:py-10 2xl:py-20 flex flex-col gap-10 justify-center`}
 			>
-				<div className="flex items-stretch gap-10">
-					<NuevoReportePersona />
-					<NuevoReporteEmpresa />
-				</div>
-				<NuevoReporteInstrumental />
+				<div className="flex items-stretch gap-10">step 3</div>
 				<button
 					type="button"
 					className="bg-accent text-center hover:bg-accent/80 rounded-xl shadow-xl text-lg text-foreground tracking-wide px-6 py-4 cursor-pointer m-0"

@@ -1,15 +1,17 @@
+import { Cpu } from "lucide-react"
+
 export default function NuevoReporteInstrumental() {
 	return (
 		<div className="flex flex-col gap-2">
 			<div className="flex items-center gap-2">
-				<div className="bg-accent text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
-					3
+				<div className="bg-orange-700/75 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
+					<Cpu className="size-6" />
 				</div>
 				<span className="text-xl font-semibold tracking-wider">
 					Instrumental
 				</span>
 			</div>
-			<article className="bg-accent rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg">
+			<article className="bg-orange-700/30 rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg">
 				<p className="text-lg font-semibold">Datos del Luxómetro</p>
 				<div className="grid grid-cols-2 gap-4">
 					<div className="flex flex-col gap-2">

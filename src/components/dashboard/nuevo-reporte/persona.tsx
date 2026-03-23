@@ -1,13 +1,15 @@
+import { UserRound } from "lucide-react"
+
 export default function NuevoReportePersona() {
 	return (
 		<div className="flex flex-col gap-2 flex-1">
 			<div className="flex items-center gap-2">
-				<div className="bg-accent text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
-					1
+				<div className="bg-blue-700/75 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
+					<UserRound className="size-6" />
 				</div>
 				<span className="text-xl font-semibold tracking-wider">Persona</span>
 			</div>
-			<article className="bg-accent rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg">
+			<article className="bg-blue-700/30 rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg">
 				<div className="flex flex-col gap-2">
 					<label className="font-semibold" htmlFor="nombre-completo">
 						Nombre Completo

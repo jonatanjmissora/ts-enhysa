@@ -14,7 +14,7 @@ export default function InicioHeader() {
 			</div>
 			<Link
 				to="/new-report"
-				className="flex items-center gap-2 sm:text-base 2xl:text-xl tracking-wide p-6 py-4 bg-accent text-foreground hover:bg-accent/50 rounded-xl"
+				className="flex items-center gap-2 sm:text-base 2xl:text-xl tracking-wide p-6 py-4 text-foreground rounded-xl themeBtnAccent shadow"
 			>
 				<FilePlus className="sm:size-5 2xl:size-6" />
 				Nuevo Protocolo

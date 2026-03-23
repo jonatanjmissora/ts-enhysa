@@ -16,12 +16,12 @@ export const PreferencesMenu = () => {
 
 	return (
 		<div className="flex items-center gap-2">
-			<div className="bg-background/50 rounded-full sm:p-1 2xl:p-2 sm:px-2 2xl:px-3 text-foreground/50 italic font-thin cursor-pointer">
+			<div className="bg-background/50 rounded-full sm:p-1 2xl:p-2 sm:px-2 2xl:px-3 text-foreground/50 italic font-thin cursor-pointer hover:ring hover:ring-green-500/50 dark:hover:ring-green-500/20">
 				es
 			</div>
 			<button
 				onClick={toggleTheme}
-				className="bg-background/50 rounded-full p-2 px-3 cursor-pointer"
+				className="bg-background/50 rounded-full p-2 px-3 cursor-pointer hover:ring hover:ring-green-500/50 dark:hover:ring-green-500/20"
 			>
 				{theme === "dark" ? (
 					<Moon size={14} className="text-muted-foreground" />
