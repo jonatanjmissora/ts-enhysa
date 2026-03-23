@@ -3,7 +3,7 @@ import InicioHeader from "@/components/dashboard/inicio/header"
 import InicioTags from "@/components/dashboard/inicio/tags"
 import InicioRecientes from "@/components/dashboard/inicio/recientes"
 import InicioPlan from "@/components/dashboard/inicio/plan"
-import { Sun } from "lucide-react"
+import { PreferencesMenu } from "@/components/layout/preferences-menu"
 
 export const Route = createFileRoute("/_protected/")({
 	component: App,
@@ -14,14 +14,7 @@ function App() {
 		<div className="min-h-screen flex flex-col">
 			<header className="sm:text-base 2xl:text-xl font-semibold tracking-wider sm:h-20 2xl:h-24 px-20 bg-accent border border-background flex justify-between items-center">
 				<span>Protocolo de Iluminación Res 84/12 SRT</span>
-				<div className="flex items-center gap-2">
-					<div className="bg-background/50 rounded-full sm:p-1 2xl:p-2 sm:px-2 2xl:px-3 text-foreground/50 italic font-thin cursor-pointer">
-						es
-					</div>
-					<div className="bg-background/50 rounded-full p-2 px-3 cursor-pointer">
-						<Sun className="text-foreground/50 sm:size-4 2xl:size-5" />
-					</div>
-				</div>
+				<PreferencesMenu />
 			</header>
 
 			<main className="flex-1 px-20 py-4 flex flex-col justify-around">

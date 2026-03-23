@@ -2,6 +2,7 @@ import { LoginForm } from "@/components/login-form"
 import { RegisterForm } from "@/components/register-form"
 import { createFileRoute } from "@tanstack/react-router"
 import { useState } from "react"
+import { PreferencesMenu } from "@/components/layout/preferences-menu"
 
 export const Route = createFileRoute("/login/")({
 	component: RouteComponent,
@@ -41,6 +42,9 @@ function RouteComponent() {
 				{/* RIGHT */}
 				<div className="bg-linear-to-b from-background/80 to-background/70 w-[55dvw] h-[150dvh] absolute -right-30 -bottom-30 -rotate-25 shadow-2xl"></div>
 				<RegisterForm setActiveForm={setActiveForm} />
+			</div>
+			<div className="absolute top-4 left-4">
+				<PreferencesMenu />
 			</div>
 		</section>
 	)
