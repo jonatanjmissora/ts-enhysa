@@ -1,6 +1,5 @@
 login/register
 ===============
-tema
 idioma
 
 dashboard
