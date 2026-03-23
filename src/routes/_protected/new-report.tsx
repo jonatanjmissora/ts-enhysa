@@ -59,7 +59,7 @@ function RouteComponent() {
 				</p>
 
 				<div className="flex items-strech gap-10">
-					<div className="flex-1 bg-accent rounded-xl p-6 flex flex-col items-center justify-center gap-4 shadow-xl">
+					<div className="flex-1 bg-accent rounded-xl p-6 flex flex-col items-center justify-center gap-4 shadow-xl ring ring-foreground/20">
 						<div className="relative">
 							<img
 								src="./public/plano.webp"
@@ -93,7 +93,7 @@ function RouteComponent() {
 				</div>
 
 				<div className="flex items-strech gap-10">
-					<div className="flex-1 bg-accent rounded-xl p-6 flex flex-col justify-center gap-4 shadow-xl">
+					<div className="flex-1 bg-accent rounded-xl p-6 flex flex-col justify-center gap-4 shadow-xl ring ring-foreground/20">
 						<p className="text-xl font-semibold tracking-wide">
 							Dimensiones del Local (M)
 						</p>
@@ -133,7 +133,7 @@ function RouteComponent() {
 							</div>
 						</div>
 					</div>
-					<div className="flex-1 bg-blue-700/30 rounded-xl p-6 flex flex-col items-center justify-center gap-4 shadow-xl">
+					<div className="flex-1 bg-blue-700/30 rounded-xl p-6 flex flex-col items-center justify-center gap-4 shadow-xl ring ring-foreground/20">
 						<p className="text-xl font-semibold tracking-wide">
 							Resultado RI (Redondeado)
 						</p>

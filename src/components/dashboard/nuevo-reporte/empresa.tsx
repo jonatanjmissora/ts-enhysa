@@ -9,7 +9,7 @@ export default function NuevoReporteEmpresa() {
 				</div>
 				<span className="text-xl font-semibold tracking-wider">Empresa</span>
 			</div>
-			<article className="bg-teal-700/50 rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg">
+			<article className="dark:bg-(--dark-teal-opa) bg-(--teal-opa) rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg shadow-xl ring ring-foreground/20">
 				<div className="grid grid-cols-2 gap-4">
 					<div className="flex flex-col gap-2">
 						<label className="font-semibold" htmlFor="cuit">

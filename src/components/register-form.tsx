@@ -105,12 +105,7 @@ export function RegisterForm({
 					>
 						<FieldGroup>
 							<Field>
-								<Button
-									variant="outline"
-									type="button"
-									onClick={signIn}
-									className="text-foreground/75 dark:bg-accent shadow cursor-pointer"
-								>
+								<Button variant="theme" type="button" onClick={signIn}>
 									{loading ? (
 										"Iniciando..."
 									) : (
@@ -125,7 +120,11 @@ export function RegisterForm({
 									)}
 								</Button>
 							</Field>
-							<FieldSeparator>O continua con</FieldSeparator>
+							<FieldSeparator>
+								<span className="text-foreground/75 dk:bg-background bg-accent">
+									O continua con
+								</span>
+							</FieldSeparator>
 
 							<form.Field
 								name="nombre"

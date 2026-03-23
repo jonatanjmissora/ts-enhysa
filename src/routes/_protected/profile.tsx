@@ -51,7 +51,7 @@ function RouteComponent() {
 						)}
 					</button>
 				</div>
-				<article className="bg-accent rounded-xl flex flex-col gap-6 text-lg p-10">
+				<article className="flex flex-col items-stretch gap-6 text-lg p-10 cardAccent">
 					<div className="flex flex-col gap-2">
 						<label className="font-semibold" htmlFor="nombre-completo">
 							Nombre Completo

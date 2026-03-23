@@ -3,11 +3,11 @@ import { ChevronRight, FileChartColumn } from "lucide-react"
 
 export default function InicioRecientes() {
 	return (
-		<div className="flex-1 sm:p-6 2xl:p-10 bg-accent rounded-xl flex flex-col sm:gap-3 2xl:gap-6">
+		<div className="flex-1 sm:p-6 2xl:p-10 flex-col sm:gap-3 2xl:gap-6 cardAccent items-start">
 			<header className="sm:text-xl 2xl:text-2xl tracking-wider sm:pb-4 2xl:pb-0">
 				Protocolos Recientes
 			</header>
-			<div className="px-6 sm:py-4 2xl:py-6 bg-background rounded-xl flex justify-between items-center shadow-xl">
+			<div className="px-6 sm:py-4 2xl:py-6 cardBackground justify-between w-full">
 				<div className="flex gap-4 items-center">
 					<FileChartColumn className="sm:size-10 2xl:size-14 text-foreground/70 p-2 bg-accent rounded-lg shadow-xl" />
 					<div className="flex flex-col gap-0">
@@ -27,7 +27,7 @@ export default function InicioRecientes() {
 				</div>
 			</div>
 
-			<div className="px-6 sm:py-4 2xl:py-6 bg-background rounded-xl flex justify-between items-center shadow-xl">
+			<div className="px-6 sm:py-4 2xl:py-6 cardBackground justify-between w-full">
 				<div className="flex sm:gap-2 2xl:gap-4 items-center">
 					<FileChartColumn className="sm:size-10 2xl:size-14 text-foreground/70 p-2 bg-accent rounded-lg shadow-xl" />
 					<div className="flex flex-col gap-0">
@@ -47,7 +47,7 @@ export default function InicioRecientes() {
 				</div>
 			</div>
 
-			<div className="px-6 sm:py-4 2xl:py-6 bg-background rounded-xl flex justify-between items-center shadow-xl">
+			<div className="px-6 sm:py-4 2xl:py-6 cardBackground justify-between w-full">
 				<div className="flex gap-4 items-center">
 					<FileChartColumn className="sm:size-10 2xl:size-14 text-foreground/70 p-2 bg-accent rounded-lg shadow-xl" />
 					<div className="flex flex-col gap-0">

@@ -1,9 +1,8 @@
-import { Button } from "@/components/ui/button"
 import { CheckCircle, Shield } from "lucide-react"
 
 export default function InicioPlan() {
 	return (
-		<div className="flex-1 sm:p-6 2xl:p-10 bg-accent border border-border rounded-xl text-lg relative">
+		<div className="flex-1 sm:p-6 2xl:p-10 cardAccent flex-col justify-start items-start text-lg relative">
 			<p className="font-semibold sm:text-base 2xl:text-2xl tracking-wider">
 				Tu Suscripción
 			</p>

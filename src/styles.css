@@ -51,6 +51,14 @@
   --chart-brown: oklch(0.645 0.246 16.439);
   --ring-dark: oklch(0.442 0.017 285.786);
 
+  /* Opacity */
+  --dark-blue-opa: oklch(30.21% 0.02858 267.718);
+  --dark-teal-opa: oklch(30.522% 0.0502 190.784);
+  --dark-orange-opa: oklch(35.295% 0.03678 77.876);
+  --blue-opa: oklch(76.889% 0.05993 268.88);
+  --teal-opa: oklch(82.441% 0.06317 193.549);
+  --orange-opa: oklch(79.608% 0.03301 82.73);
+
   /* Shared properties */
   --radius: 0.625rem;
 }
@@ -243,6 +251,13 @@ code {
   .themeBtnBackground {
     @apply ring ring-green-300 dark:ring-green-900/50 bg-linear-to-t from-green-600/50 dark:from-green-600/20  to-background hover:to-green-600/50 dark:hover:to-green-600/20 transition-colors;
   }
+  .cardAccent {
+   @apply shadow-xl ring ring-foreground/15 dark:ring-foreground/10 bg-accent rounded-xl flex items-center
+  }
+.cardBackground {
+   @apply shadow-xl ring ring-foreground/10 dark:ring-foreground/3 bg-background rounded-xl flex items-center
+  }
+
 }
 
 /* ============================================

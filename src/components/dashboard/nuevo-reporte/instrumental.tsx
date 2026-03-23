@@ -11,7 +11,7 @@ export default function NuevoReporteInstrumental() {
 					Instrumental
 				</span>
 			</div>
-			<article className="bg-orange-700/30 rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg">
+			<article className="dark:bg-(--dark-orange-opa) bg-(--orange-opa) rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg shadow-xl ring ring-foreground/20">
 				<p className="text-lg font-semibold">Datos del Luxómetro</p>
 				<div className="grid grid-cols-2 gap-4">
 					<div className="flex flex-col gap-2">

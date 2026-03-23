@@ -81,7 +81,7 @@ export function LoginForm({
 
 	return (
 		<div className={cn("w-90 relative ml-50", className)} {...props}>
-			<Card className="bg-background shadow-2xl">
+			<Card className="cardAccent">
 				<CardHeader className="text-center">
 					<CardTitle className="text-xl">Bienvenido de nuevo</CardTitle>
 					<CardDescription className="text-foreground/75">
@@ -98,12 +98,7 @@ export function LoginForm({
 					>
 						<FieldGroup>
 							<Field>
-								<Button
-									variant="outline"
-									type="button"
-									onClick={signIn}
-									className="text-foreground/75 dark:bg-accent shadow cursor-pointer"
-								>
+								<Button variant="theme" type="button" onClick={signIn}>
 									{loading ? (
 										"Iniciando..."
 									) : (
@@ -119,7 +114,7 @@ export function LoginForm({
 								</Button>
 							</Field>
 							<FieldSeparator>
-								<span className="text-foreground/75 bg-background">
+								<span className="text-foreground/75 dk:bg-background bg-accent">
 									O continua con
 								</span>
 							</FieldSeparator>
@@ -140,7 +135,6 @@ export function LoginForm({
 												onChange={e => field.handleChange(e.target.value)}
 												aria-invalid={isInvalid}
 												placeholder="m@example.com"
-												className="dark:bg-accent"
 											/>
 											{isInvalid && (
 												<FieldError errors={field.state.meta.errors} />
@@ -160,7 +154,6 @@ export function LoginForm({
 											<FieldLabel htmlFor={field.name}>Contraseña</FieldLabel>
 											<div className="relative">
 												<Input
-													className="dark:bg-accent"
 													id={field.name}
 													name={field.name}
 													value={field.state.value}

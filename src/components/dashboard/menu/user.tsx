@@ -17,7 +17,7 @@ export default function User() {
 	const { avatar, fullName } = getUserInfo(session)
 	return (
 		<div className="flex flex-col sm:gap-2 2xl:gap-4 m-6">
-			<div className="flex items-center gap-4 p-4 bg-background rounded-lg shadow-xl">
+			<div className="gap-4 p-4 cardBackground">
 				<div className="bg-accent rounded-full flex justify-center items-center">
 					{avatar ? (
 						<img
