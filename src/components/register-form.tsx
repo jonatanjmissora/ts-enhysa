@@ -88,7 +88,7 @@ export function RegisterForm({
 
 	return (
 		<div className={cn("w-90 relative mr-50", className)} {...props}>
-			<Card className="bg-background shadow-2xl">
+			<Card className="cardBackground items-stretch">
 				<CardHeader className="text-center">
 					<CardTitle className="text-xl">Bienvenido a la app</CardTitle>
 					<CardDescription className="text-foreground/75">

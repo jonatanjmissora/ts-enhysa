@@ -81,7 +81,7 @@ export function LoginForm({
 
 	return (
 		<div className={cn("w-90 relative ml-50", className)} {...props}>
-			<Card className="cardAccent">
+			<Card className="cardBackground items-stretch">
 				<CardHeader className="text-center">
 					<CardTitle className="text-xl">Bienvenido de nuevo</CardTitle>
 					<CardDescription className="text-foreground/75">
