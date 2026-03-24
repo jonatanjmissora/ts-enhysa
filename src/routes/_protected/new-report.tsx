@@ -59,46 +59,12 @@ function RouteComponent() {
 				</p>
 
 				<div className="flex items-strech gap-10">
-					<div className="flex-1 bg-accent rounded-xl p-6 flex flex-col items-center justify-center gap-4 shadow-xl ring ring-foreground/20">
-						<div className="relative">
-							<img
-								src="/plano.webp"
-								alt="plano"
-								className="absolute z-1 h-full w-full object-contain opcity-50"
-							/>
-							<span className="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white bg-accent p-4 py-2">
-								Ingrese Plano
-							</span>
-							<input
-								type="file"
-								className="sm:h-40 2xl:h-60 bg-background rounded-lg relative z-100 opacity-0 cursor-pointer"
-							/>
-						</div>
-						<p className="italic text-center tracking-wider text-foreground/50 sm:text-sm 2xl:text-xl text-pretty px-6">
-							El indice del Local (RI) es un valor numerico que representa la
-							geometria del recinto para calculos luminotexnicos.
-						</p>
-					</div>
-					<div className="flex-1 bg-orange-700/20 rounded-xl p-4 flex flex-col items-center justify-center gap-12 border-dotted border-2 border-foreground/20">
-						<p className="italic text-center tracking-wider text-foreground/50 sm:text-lg 2xl:text-xl text-pretty">
-							FORMULA APLICADA
-						</p>
-						<p className="sm:text-2xl 2xl:text-4xl font-semibold">
-							RI = (L x W) / (H x (L + W))
-						</p>
-						<p className="sm:text-sm 2xl:text-base tracking-wider text-foreground/50">
-							L = Longitud W = Ancho H = Altura
-						</p>
-					</div>
-				</div>
-
-				<div className="flex items-strech gap-10">
-					<div className="flex-1 bg-accent rounded-xl p-6 flex flex-col justify-center gap-4 shadow-xl ring ring-foreground/20">
-						<p className="text-xl font-semibold tracking-wide">
+					<div className="flex-1 bg-accent rounded-xl p-6 flex flex-col justify-center items-center gap-4 shadow-xl ring ring-foreground/20">
+						<span className="text-xl font-semibold tracking-wide py-4">
 							Dimensiones del Local (M)
-						</p>
+						</span>
 						<div className="flex flex-col gap-2">
-							<div className="flex items-center justify-between gap-6">
+							<div className="flex items-center justify-center gap-6">
 								<div className="font-semibold bg-blue-500/70 rounded-full py-1 px-3">
 									L
 								</div>
@@ -109,7 +75,7 @@ function RouteComponent() {
 									placeholder="Ej. 10.00"
 								/>
 							</div>
-							<div className="flex items-center justify-between gap-6">
+							<div className="flex items-center justify-center gap-6">
 								<div className="font-semibold bg-blue-500/70 rounded-full py-1 px-3">
 									w
 								</div>
@@ -120,7 +86,7 @@ function RouteComponent() {
 									placeholder="Ej. 8.00"
 								/>
 							</div>
-							<div className="flex items-center justify-between gap-6">
+							<div className="flex items-center justify-center gap-6">
 								<div className="font-semibold bg-blue-500/70 rounded-full py-1 px-3">
 									H
 								</div>
@@ -133,6 +99,26 @@ function RouteComponent() {
 							</div>
 						</div>
 					</div>
+
+					<div className="flex-1 bg-accent rounded-xl p-6 flex flex-col items-center justify-center gap-4 shadow-xl ring ring-foreground/20">
+						<div className="relative w-90 h-60 bg-foreground/60 cursor-pointer">
+							<img
+								src="/plano.webp"
+								alt="plano"
+								className="absolute inset-0 z-1 h-full w-full object-cover opacity-40"
+							/>
+							<span className="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white bg-accent p-4 py-2">
+								Croquis del Plano
+							</span>
+						</div>
+						<p className="italic text-center tracking-wider text-foreground/50 sm:text-sm 2xl:text-xl text-pretty px-6">
+							El indice del Local (RI) es un valor numerico que representa la
+							geometria del recinto para calculos luminotexnicos.
+						</p>
+					</div>
+				</div>
+
+				<div className="flex items-strech gap-10">
 					<div className="flex-1 bg-blue-700/30 rounded-xl p-6 flex flex-col items-center justify-center gap-4 shadow-xl ring ring-foreground/20">
 						<p className="text-xl font-semibold tracking-wide">
 							Resultado RI (Redondeado)
@@ -147,6 +133,18 @@ function RouteComponent() {
 								calc applied
 							</button>
 						</div>
+					</div>
+
+					<div className="flex-1 bg-orange-700/20 rounded-xl p-4 flex flex-col items-center justify-center gap-12 border-dotted border-2 border-foreground/20">
+						<p className="italic text-center tracking-wider text-foreground/50 sm:text-lg 2xl:text-xl text-pretty">
+							FORMULA APLICADA
+						</p>
+						<p className="sm:text-2xl 2xl:text-4xl font-semibold">
+							RI = (L x W) / (H x (L + W))
+						</p>
+						<p className="sm:text-sm 2xl:text-base tracking-wider text-foreground/50">
+							L = Longitud W = Ancho H = Altura
+						</p>
 					</div>
 				</div>
 				<button
