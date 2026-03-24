@@ -62,7 +62,7 @@ function RouteComponent() {
 					<div className="flex-1 bg-accent rounded-xl p-6 flex flex-col items-center justify-center gap-4 shadow-xl ring ring-foreground/20">
 						<div className="relative">
 							<img
-								src="./public/plano.webp"
+								src="/plano.webp"
 								alt="plano"
 								className="absolute z-1 h-full w-full object-contain opcity-50"
 							/>

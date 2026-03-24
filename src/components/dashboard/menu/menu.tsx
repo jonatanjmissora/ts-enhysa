@@ -7,11 +7,7 @@ export default function DashboardMenu() {
 		<div className="flex flex-col justify-between h-screen fixed top-0 left-0 sm:w-[22dvw] 2xl:w-1/4 bg-accent">
 			<div className="flex flex-col mx-6">
 				<div className="flex items-center gap-3 py-10 px-4">
-					<img
-						src="./public/EnHySa_logo.webp"
-						alt="logo EnHySa"
-						className="size-20"
-					/>
+					<img src="/EnHySa_logo.webp" alt="logo EnHySa" className="size-20" />
 
 					<p className="sm:text-[1.6rem] 2xl:text-4xl font-bold tracking-widest">
 						EnHySa App

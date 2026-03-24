@@ -31,7 +31,7 @@ function RouteComponent() {
 				{/* CENTER */}
 				<div className="bg-linear-to-b dark:from-background/80 dark:to-background/70 from-(--gray-300)/80 to-(--gray-100)/70 w-140 h-[200dvh] absolute left-225 -bottom-80 -rotate-25 shadow-2xl"></div>
 				<div className="absolute left-250 top-1/2 translate-y-[-50%] z-10 flex flex-col gap-3 justify-center items-center">
-					<img src="./logo2.png" alt="" className="w-50" />
+					<img src="/logo2.png" alt="" className="w-50" />
 					<h1 className="text-8xl font-bold tracking-widest text-green-700">
 						EnHySa
 					</h1>
