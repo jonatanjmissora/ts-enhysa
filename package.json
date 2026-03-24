@@ -4,7 +4,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev --port 3000",
-		"build": "pnpm exec tanstack-start build",
+		"build": "npx tanstack-start build",
 		"start": "node .output/server/index.mjs",
 		"preview": "vite preview",
 		"test": "vitest run",
@@ -51,6 +51,7 @@
 	"devDependencies": {
 		"@biomejs/biome": "2.2.4",
 		"@tanstack/devtools-vite": "^0.3.11",
+		"@tanstack/start": "^1.120.20",
 		"@testing-library/dom": "^10.4.0",
 		"@testing-library/react": "^16.2.0",
 		"@types/node": "^22.10.2",
