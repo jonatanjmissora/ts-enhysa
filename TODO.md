@@ -15,3 +15,5 @@ styles
 ===============
 hacer cards con foco radial
 
+TODO
+modificar puntos del croquis
