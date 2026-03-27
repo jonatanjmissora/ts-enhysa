@@ -1,5 +1,4 @@
 import { Trash2 } from "lucide-react"
-import type { PuntosType } from "./main"
 import PuntosAlertDialog from "./puntos-alert-dialog"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
@@ -10,6 +9,7 @@ import {
 	AlertDialog,
 	AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { PuntosType } from "@/routes/_protected/new-report"
 
 export default function PuntosMedicion({
 	cantidadFilas,
@@ -93,8 +93,18 @@ const Punto = ({
 			<input
 				type="number"
 				className={`rounded-lg py-1 w-full text-center ${inputValue === 0 ? "bg-amber-400/25" : "bg-background"}`}
-				value={inputValue}
-				onChange={e => setInputValue(Number(e.target.value))}
+				value={inputValue || ""}
+				placeholder="Ej. 1,23"
+				onChange={e => {
+					setInputValue(Number(e.target.value))
+					const nuevosPuntos = puntos.map(punto => {
+						if (punto?.nombre === nombre) {
+							return { ...punto, valor: Number(e.target.value) }
+						}
+						return punto
+					})
+					setPuntos(nuevosPuntos)
+				}}
 			/>
 			<DeletePuntoAlertDialog
 				nombre={nombre}

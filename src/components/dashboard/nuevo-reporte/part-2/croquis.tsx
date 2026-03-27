@@ -1,4 +1,4 @@
-import { PuntosType } from "./main"
+import { PuntosType } from "@/routes/_protected/new-report"
 import CroquisAlertDialog from "./croquis-alert-dialog"
 import { Lightbulb } from "lucide-react"
 
@@ -23,7 +23,7 @@ export function Croquis({
 			<div className="flex justify-between items-center gap-6 w-3/4 mx-auto">
 				<div className="flex items-center gap-3 ">
 					<div className="bg-purple-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
-						3
+						2
 					</div>
 					<span className="sm:text-lg 2xl:text-xl font-semibold tracking-wider">
 						Croquis del Plano
@@ -50,12 +50,23 @@ export function Croquis({
 						/>
 					</div>
 				) : (
-					<CeldasGridWithPuntos
-						cantidad_filas={cantidadFilas}
-						cantidad_columnas={cantidadColumnas}
-						celdasSeleccionadas={celdasSeleccionadas}
-						puntos={puntos}
-					/>
+					<div className="relative">
+						<p className="absolute left-0 -top-20 border-b border-white py-1 text-center w-full my-4 text-foreground/50 tracking-widest">
+							Largo {cantidadColumnas}m
+						</p>
+						<div className="absolute -left-30 top-0 h-full w-max px-2 border-r border-white py-1 text-center mx-4 flex items-center text-foreground/50  tracking-widest">
+							<div className="flex flex-col">
+								<span>Ancho</span>
+								<span>{cantidadFilas}m</span>
+							</div>
+						</div>
+						<CeldasGridWithPuntos
+							cantidad_filas={cantidadFilas}
+							cantidad_columnas={cantidadColumnas}
+							celdasSeleccionadas={celdasSeleccionadas}
+							puntos={puntos}
+						/>
+					</div>
 				)}
 			</div>
 			<p className="italic text-center tracking-wider text-foreground/50 sm:text-sm 2xl:text-xl text-pretty px-6">

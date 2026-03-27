@@ -17,3 +17,4 @@ hacer cards con foco radial
 
 TODO
 modificar puntos del croquis
+quitar puntos[0] === null

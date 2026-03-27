@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Lightbulb, Plus } from "lucide-react"
-import type { PuntosType } from "./main"
+import { PuntosType } from "@/routes/_protected/new-report"
 
 export default function PuntosAlertDialog({
 	cantidad_filas,
@@ -87,7 +87,7 @@ const CroquisElement = ({
 					</p>
 					{puntos[0] !== null &&
 						puntos.map((punto, index) => (
-							<p key={`punto-${index}`}>{punto.nombre}</p>
+							<p key={`punto-${index}`}>{punto?.nombre}</p>
 						))}
 				</div>
 			</div>
@@ -142,6 +142,7 @@ export function CeldasGrid({
 			valor: 0,
 			valorX: x,
 			valorY: y,
+			cumple: false,
 		}
 		if (puntos[0] === null) {
 			setPuntos([newPunto])

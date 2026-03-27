@@ -5,12 +5,21 @@ import { createFileRoute, Link } from "@tanstack/react-router"
 import { X } from "lucide-react"
 import { useState } from "react"
 
+export type PuntosType = {
+	nombre: string
+	valor: number
+	valorX: number
+	valorY: number
+	cumple: boolean
+} | null
+
 export const Route = createFileRoute("/_protected/new-report")({
 	component: RouteComponent,
 })
 
 function RouteComponent() {
 	const [actualStep, setActualStep] = useState(1)
+	const [puntos, setPuntos] = useState<PuntosType[]>([null])
 
 	return (
 		<div className="min-h-screen flex flex-col">
@@ -35,13 +44,23 @@ function RouteComponent() {
 			{/* PARTE 2 */}
 			{/* ==================================================================== */}
 
-			<NewReportPart2 actualStep={actualStep} setActualStep={setActualStep} />
+			<NewReportPart2
+				actualStep={actualStep}
+				setActualStep={setActualStep}
+				puntos={puntos}
+				setPuntos={setPuntos}
+			/>
 
 			{/* ==================================================================== */}
 			{/* PARTE 3 */}
 			{/* ==================================================================== */}
 
-			<NewReportPart3 actualStep={actualStep} setActualStep={setActualStep} />
+			<NewReportPart3
+				actualStep={actualStep}
+				setActualStep={setActualStep}
+				puntos={puntos}
+				setPuntos={setPuntos}
+			/>
 		</div>
 	)
 }

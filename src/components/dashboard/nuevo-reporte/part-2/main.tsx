@@ -3,27 +3,24 @@ import PuntosMedicion from "./puntos-medicion"
 import { Croquis } from "./croquis"
 import { useState } from "react"
 import { Save } from "lucide-react"
-
-export type PuntosType = {
-	nombre: string
-	valor: number
-	valorX: number
-	valorY: number
-} | null
+import { PuntosType } from "@/routes/_protected/new-report"
 
 export default function NewReportPart2({
 	actualStep,
 	setActualStep,
+	puntos,
+	setPuntos,
 }: {
 	actualStep: number
 	setActualStep: (step: number) => void
+	puntos: PuntosType[]
+	setPuntos: (puntos: PuntosType[]) => void
 }) {
 	const [largo, setLargo] = useState<number>(0)
 	const [ancho, setAncho] = useState<number>(0)
 	const [alto, setAlto] = useState<number>(0)
 	const [celdasSeleccionadas, setCeldasSeleccionadas] = useState<string[]>([])
 	const [componentStep, setComponentStep] = useState<number>(1)
-	const [puntos, setPuntos] = useState<PuntosType[]>([null])
 
 	return (
 		<main
@@ -72,7 +69,7 @@ export default function NewReportPart2({
 				className="flex items-center gap-4 themeBtnAccent justify-center rounded-xl shadow-xl text-lg text-foreground tracking-wide px-6 py-4 cursor-pointer m-0"
 			>
 				<Save className="size-6" />
-				Guardar y Continuar
+				Guardar y Calcular
 			</button>
 		</main>
 	)
