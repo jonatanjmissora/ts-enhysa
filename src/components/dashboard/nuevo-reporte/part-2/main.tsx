@@ -23,21 +23,14 @@ export default function NewReportPart2({
 	const [alto, setAlto] = useState<number>(0)
 	const [celdasSeleccionadas, setCeldasSeleccionadas] = useState<string[]>([])
 	const [componentStep, setComponentStep] = useState<number>(1)
-	const [puntos, setPuntos] = useState<PuntosType[]>([
-		{
-			nombre: "punto 1",
-			valor: 1.45,
-			valorX: 0,
-			valorY: 0,
-		},
-	])
+	const [puntos, setPuntos] = useState<PuntosType[]>([null])
 
 	return (
 		<main
 			className={`${actualStep === 2 ? "flex-1" : "hidden"} p-20 sm:py-10 2xl:py-20 flex flex-col sm:gap-6 2xl:gap-10 justify-center`}
 		>
-			<div className="flex gap-10">
-				<div className="flex flex-col gap-10 flex-1">
+			<div className="flex items-stretch gap-10">
+				<div className="flex-1 flex flex-col gap-10 sm:w-[40%] 2xl:-1/2">
 					<MedidasPlano
 						cantidadFilas={largo}
 						cantidadColumnas={ancho}
@@ -49,7 +42,7 @@ export default function NewReportPart2({
 						setCeldasSeleccionadas={setCeldasSeleccionadas}
 					/>
 
-					<div className={` ${componentStep < 3 && "opacity-50 blur"}`}>
+					<div className={`flex-1 ${componentStep < 3 && "opacity-50 blur"}`}>
 						<PuntosMedicion
 							cantidadFilas={largo}
 							cantidadColumnas={ancho}
@@ -60,7 +53,7 @@ export default function NewReportPart2({
 					</div>
 				</div>
 
-				<div className={` ${componentStep < 2 && "opacity-50 blur"}`}>
+				<div className={`h-full ${componentStep < 2 && "opacity-50 blur"}`}>
 					<Croquis
 						cantidadFilas={largo}
 						cantidadColumnas={ancho}

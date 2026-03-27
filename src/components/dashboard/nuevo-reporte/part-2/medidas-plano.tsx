@@ -19,15 +19,15 @@ export default function MedidasPlano({
 }) {
 	return (
 		<div className="flex-1 bg-accent rounded-xl p-6 flex flex-col justify-center gap-8 shadow-xl ring ring-foreground/20">
-			<div className="flex items-center gap-3 w-3/4 mx-auto">
+			<div className="flex items-center gap-3 w-full mx-auto">
 				<div className="bg-blue-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
 					1
 				</div>
-				<span className="text-xl font-semibold tracking-wider">
+				<span className="sm:text-lg 2xl:text-xl font-semibold tracking-wider">
 					Dimensiones del Local (m)
 				</span>
 			</div>
-			<div className="flex flex-col gap-3 w-3/4 mx-auto">
+			<div className="flex flex-col gap-3 w-full mx-auto">
 				<div className="flex gap-6">
 					<div className="font-semibold bg-blue-500/70 rounded-full py-1 px-3 w-8 flex items-center justify-center">
 						L

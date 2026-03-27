@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import {
 	AlertDialog,
 	AlertDialogTrigger,
@@ -26,7 +26,7 @@ export default function PuntosAlertDialog({
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild>
-				<button className="cardBackground p-4 py-2 text-center text-xl cursor-pointer">
+				<button className="cardBackground p-4 py-2 text-center sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75">
 					<Plus size={16} />
 					nuevo punto
 				</button>
@@ -78,17 +78,22 @@ const CroquisElement = ({
 						cantidad_columnas={cantidad_columnas}
 						celdasSeleccionadas={celdasSeleccionadas}
 						puntos={puntos}
+						setPuntos={setPuntos}
 					/>
 				</div>
 				<div className="absolute top-0 -right-24 flex flex-col gap-2">
 					<p className="text-lg tracking-wide text-foreground/50 italic">
 						puntos
 					</p>
-					<p className="text-foreground/80">punto-{puntos.length}</p>
+					{puntos[0] !== null &&
+						puntos.map((punto, index) => (
+							<p key={`punto-${index}`}>{punto.nombre}</p>
+						))}
 				</div>
 			</div>
 			<p>
-				Seleccione el punto-{puntos.length + 1} de medicion dentro del plano.
+				Seleccione el punto-{puntos[0] === null ? "1" : puntos.length + 1} de
+				medicion dentro del plano.
 			</p>
 			<Button
 				variant="theme"
@@ -108,18 +113,48 @@ export function CeldasGrid({
 	cantidad_columnas,
 	celdasSeleccionadas,
 	puntos,
+	setPuntos,
 }: {
 	cantidad_filas: number
 	cantidad_columnas: number
 	celdasSeleccionadas: string[]
 	puntos: PuntosType[]
+	setPuntos: (puntos: PuntosType[]) => void
 }) {
+	const gridRef = useRef<HTMLButtonElement | null>(null)
 	const getKey = (row: number, col: number) => `${row}-${col}`
 	const cellSize = 60
 
+	const setPuntoOnGrid = (e: React.MouseEvent<HTMLButtonElement>) => {
+		const grid = gridRef.current
+		if (!grid) return
+
+		const rect = grid.getBoundingClientRect()
+
+		const x = e.clientX - rect.left
+		const y = e.clientY - rect.top
+
+		console.log("X:", x, "Y:", y)
+
+		// Add punto to puntos array
+		const newPunto = {
+			nombre: `punto-${puntos[0] === null ? 1 : puntos.length + 1}`,
+			valor: 0,
+			valorX: x,
+			valorY: y,
+		}
+		if (puntos[0] === null) {
+			setPuntos([newPunto])
+		} else {
+			setPuntos([...puntos, newPunto])
+		}
+	}
+
 	return (
-		<div
+		<button
 			className="grid relative cursor-pointer"
+			onClick={setPuntoOnGrid}
+			ref={gridRef}
 			style={{
 				gridTemplateColumns: `repeat(${cantidad_columnas}, ${cellSize}px)`,
 			}}
@@ -139,18 +174,27 @@ export function CeldasGrid({
 				))
 			)}
 
-			<div>
-				{puntos.map((punto, index) => (
-					<div key={punto?.nombre || index} className="absolute top-0 left-0">
-						<div className="relative cardBackground size-10 rounded-full justify-center">
-							<Lightbulb className="absolute top-1 left-1 text-amber-400 rotate-180" />
-							<span className="absolute bottom-1 right-1 text-sm text-amber-400 flex items-center justify-center">
-								{index + 1}
-							</span>
+			{puntos[0] !== null && (
+				<div>
+					{puntos.map((punto, index) => (
+						<div
+							key={punto?.nombre || index}
+							className="absolute"
+							style={{
+								top: `${punto?.valorY ? punto.valorY - 14 : 0}px`,
+								left: `${punto?.valorX ? punto.valorX - 14 : 0}px`,
+							}}
+						>
+							<div className="relative cardBackground size-10 rounded-full justify-center">
+								<Lightbulb className="absolute top-1 left-1 text-amber-400 rotate-180" />
+								<span className="absolute bottom-1 right-1 text-sm text-amber-400 flex items-center justify-center">
+									{index + 1}
+								</span>
+							</div>
 						</div>
-					</div>
-				))}
-			</div>
-		</div>
+					))}
+				</div>
+			)}
+		</button>
 	)
 }

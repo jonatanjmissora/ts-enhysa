@@ -25,7 +25,7 @@ export default function CroquisAlertDialog({
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild>
-				<button className="cardBackground p-4 py-2 text-center text-xl cursor-pointer">
+				<button className="cardBackground p-4 py-2 text-center sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75">
 					{celdasSeleccionadas.length === 0
 						? "Ingresar Plano"
 						: "Modificar Plano"}

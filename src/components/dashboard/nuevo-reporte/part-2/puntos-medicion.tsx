@@ -1,6 +1,15 @@
-import { Plus, Trash2 } from "lucide-react"
+import { Trash2 } from "lucide-react"
 import type { PuntosType } from "./main"
 import PuntosAlertDialog from "./puntos-alert-dialog"
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import {
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogTitle,
+	AlertDialog,
+	AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 export default function PuntosMedicion({
 	cantidadFilas,
@@ -22,7 +31,7 @@ export default function PuntosMedicion({
 					<div className="bg-orange-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
 						3
 					</div>
-					<span className="text-xl font-semibold tracking-wider">
+					<span className="sm:text-lg 2xl:text-xl font-semibold tracking-wider">
 						Punto de medición
 					</span>
 				</div>
@@ -35,15 +44,15 @@ export default function PuntosMedicion({
 					setPuntos={setPuntos}
 				/>
 			</div>
-			<div className="flex flex-col gap-3 w-3/4 mx-auto">
-				<div className="w-full grid grid-cols-[1fr_1fr_20px] gap-4 place-items-center text-xl font-bold italic tracking-wider border-b border-foreground/20 pb-2">
+			<div className="flex flex-col gap-3 sm:w-full 2xl:w-3/4 mx-auto">
+				<div className="w-full grid grid-cols-[1fr_1fr_20px] gap-4 place-items-center sm:text-base 2xl:text-lg sm:font-semibold 2xl:font-bold italic tracking-wider border-b border-foreground/20 pb-2">
 					<span>nombre</span>
 					<span>valor</span>
 					<span></span>
 				</div>
 				{puntos[0] === null ? (
 					<div className="w-full grid grid-cols-[1fr_1fr_20px] gap-4 place-items-center">
-						<span>no hay punto</span>
+						<span className="text-amber-400">no hay puntos. . .</span>
 						<span></span>
 						<span></span>
 					</div>
@@ -53,6 +62,8 @@ export default function PuntosMedicion({
 							key={punto?.nombre}
 							nombre={punto?.nombre || ""}
 							valor={punto?.valor || 0}
+							puntos={puntos}
+							setPuntos={setPuntos}
 						/>
 					))
 				)}
@@ -61,20 +72,84 @@ export default function PuntosMedicion({
 	)
 }
 
-const Punto = ({ nombre, valor }: { nombre: string; valor: number }) => {
+const Punto = ({
+	nombre,
+	valor,
+	puntos,
+	setPuntos,
+}: {
+	nombre: string
+	valor: number
+	puntos: PuntosType[]
+	setPuntos: (puntos: PuntosType[]) => void
+}) => {
+	const [inputValue, setInputValue] = useState(valor)
+
 	return (
 		<div className="w-full grid grid-cols-[1fr_1fr_20px] gap-4 place-items-center">
-			<input
-				type="text"
-				className="rounded-lg bg-background py-1 w-full text-center"
-				value={nombre}
-			/>
+			<span className="rounded-lg bg-background py-1 w-full text-center">
+				{nombre}
+			</span>
 			<input
 				type="number"
-				className="rounded-lg bg-background py-1 w-full text-center"
-				value={valor}
+				className={`rounded-lg py-1 w-full text-center ${inputValue === 0 ? "bg-amber-400/25" : "bg-background"}`}
+				value={inputValue}
+				onChange={e => setInputValue(Number(e.target.value))}
 			/>
-			<Trash2 size={20} className="text-red-600/40 cursor-pointer" />
+			<DeletePuntoAlertDialog
+				nombre={nombre}
+				puntos={puntos}
+				setPuntos={setPuntos}
+			/>
 		</div>
+	)
+}
+
+export function DeletePuntoAlertDialog({
+	nombre,
+	puntos,
+	setPuntos,
+}: {
+	nombre: string
+	puntos: PuntosType[]
+	setPuntos: (puntos: PuntosType[]) => void
+}) {
+	const [open, setOpen] = useState(false)
+
+	const eliminarPunto = () => {
+		const nuevosPuntos = puntos.filter(punto => punto?.nombre !== nombre)
+		setPuntos(nuevosPuntos)
+		setOpen(false)
+	}
+
+	return (
+		<AlertDialog open={open} onOpenChange={setOpen}>
+			<AlertDialogTrigger asChild>
+				<Trash2
+					size={20}
+					className="text-red-600/40 cursor-pointer hover:text-red-600"
+				/>
+			</AlertDialogTrigger>
+			<AlertDialogContent className="py-20 px-10 bg-red-900/10 backdrop-blur-xl">
+				<AlertDialogTitle className="text-center">
+					¿Estás seguro de que quieres eliminar {nombre} ?
+				</AlertDialogTitle>
+				<AlertDialogDescription className="text-center"></AlertDialogDescription>
+				<div className="flex justify-end gap-4">
+					<Button
+						variant="outline"
+						className="cursor-pointer"
+						onClick={() => {
+							setOpen(false)
+						}}
+					>
+						Cancelar
+					</Button>
+					<Button className="cursor-pointer" onClick={eliminarPunto}>
+						Confirmar
+					</Button>
+				</div>
+			</AlertDialogContent>
+		</AlertDialog>
 	)
 }
