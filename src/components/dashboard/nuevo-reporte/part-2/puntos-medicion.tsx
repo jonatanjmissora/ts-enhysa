@@ -99,7 +99,11 @@ const Punto = ({
 					setInputValue(Number(e.target.value))
 					const nuevosPuntos = puntos.map(punto => {
 						if (punto?.nombre === nombre) {
-							return { ...punto, valor: Number(e.target.value) }
+							return {
+								...punto,
+								valor: Number(e.target.value),
+								cumple: Number(e.target.value) >= 1,
+							}
 						}
 						return punto
 					})

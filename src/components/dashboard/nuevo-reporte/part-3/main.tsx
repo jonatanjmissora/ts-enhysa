@@ -1,16 +1,23 @@
-import { BookmarkCheck, Download } from "lucide-react"
-import { CeldasGridWithPuntos } from "../part-2/croquis"
+import { BookmarkCheck } from "lucide-react"
 import Resumen from "./resumen"
 import { PuntosType } from "@/routes/_protected/new-report"
+import NewReportPart3Tags from "./tags"
+import NewReportPart3Plano from "./plano"
 
 export default function NewReportPart3({
 	actualStep,
 	setActualStep,
 	puntos,
+	cantidadFilas,
+	cantidadColumnas,
+	celdasSeleccionadas,
 }: {
 	actualStep: number
 	setActualStep: (step: number) => void
 	puntos: PuntosType[]
+	cantidadFilas: number
+	cantidadColumnas: number
+	celdasSeleccionadas: string[]
 }) {
 	const finalizarProyecto = () => {
 		// TODO: implementar
@@ -25,27 +32,21 @@ export default function NewReportPart3({
 				<div className="flex-1 flex flex-col gap-10 sm:w-[40%] 2xl:w-1/2">
 					<Resumen puntos={puntos} />
 
-					<div className={`flex-1 cardAccent p-20`}>FORMULA</div>
+					<div className={`flex-1 cardAccent p-20 items-center justify-center`}>
+						AQUI VA LA FORMULA
+					</div>
 				</div>
 
-				<div className="h-full w-1/2 cardAccent flex items-center justify-center p-20">
-					<CeldasGridWithPuntos
-						cantidad_filas={3}
-						cantidad_columnas={2}
-						celdasSeleccionadas={["11"]}
+				<div className="flex flex-col gap-10 h-full w-1/2">
+					<NewReportPart3Tags puntos={puntos} />
+
+					<NewReportPart3Plano
 						puntos={puntos}
+						cantidadFilas={cantidadFilas}
+						cantidadColumnas={cantidadColumnas}
+						celdasSeleccionadas={celdasSeleccionadas}
 					/>
 				</div>
-			</div>
-
-			<div className="flex justify-end">
-				<button
-					type="button"
-					className="cardAccent py-2 px-5 cursor-pointer hover:bg-accent/50 flex items-center justify-center gap-2"
-				>
-					<Download className="size-6" />
-					Descargar PDF
-				</button>
 			</div>
 
 			<button
@@ -54,7 +55,7 @@ export default function NewReportPart3({
 				onClick={finalizarProyecto}
 			>
 				<BookmarkCheck className="size-6" />
-				Finalizar Reporte
+				Generar Reporte PDF
 			</button>
 		</main>
 	)

@@ -90,7 +90,6 @@ export function CeldasGridWithPuntos({
 }) {
 	const getKey = (row: number, col: number) => `${row}-${col}`
 	const cellSize = 60
-
 	return (
 		<div
 			className="grid relative cursor-pointer"

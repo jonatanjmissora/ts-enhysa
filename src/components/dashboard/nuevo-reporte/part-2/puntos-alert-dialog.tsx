@@ -134,8 +134,6 @@ export function CeldasGrid({
 		const x = e.clientX - rect.left
 		const y = e.clientY - rect.top
 
-		console.log("X:", x, "Y:", y)
-
 		// Add punto to puntos array
 		const newPunto = {
 			nombre: `punto-${puntos[0] === null ? 1 : puntos.length + 1}`,
