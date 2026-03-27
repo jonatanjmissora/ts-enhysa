@@ -1,4 +1,4 @@
-import { Cpu } from "lucide-react"
+import { Cpu, Upload } from "lucide-react"
 
 export default function NuevoReporteInstrumental() {
 	return (
@@ -35,11 +35,17 @@ export default function NuevoReporteInstrumental() {
 						/>
 					</div>
 				</div>
-				<input
-					id="certificado"
-					className="bg-background py-2 px-4 rounded-lg h-30"
-					type="file"
-				/>
+				<div className="relative w-full h-30 mx-auto cardBackground flex items-center justify-center">
+					<div className="w-[90%] h-[60%] italic text-foreground/50 tracking-wider text-lg flex items-center justify-center gap-4 border-3 border-dashed border-foreground/10 rounded-lg">
+						<Upload size={20} />
+						<span>Ingresar certificado digital</span>
+					</div>
+					<input
+						name="certificado"
+						type="file"
+						className="absolute inset-0 opacity-0 cursor-pointer"
+					/>
+				</div>
 			</article>
 		</div>
 	)

@@ -6,6 +6,7 @@ import NewReportPart3Plano from "./plano"
 
 export default function NewReportPart3({
 	actualStep,
+	nombre,
 	setActualStep,
 	puntos,
 	cantidadFilas,
@@ -13,6 +14,7 @@ export default function NewReportPart3({
 	celdasSeleccionadas,
 }: {
 	actualStep: number
+	nombre: string
 	setActualStep: (step: number) => void
 	puntos: PuntosType[]
 	cantidadFilas: number
@@ -30,7 +32,7 @@ export default function NewReportPart3({
 		>
 			<div className="flex items-stretch gap-10">
 				<div className="flex-1 flex flex-col gap-10 sm:w-[40%] 2xl:w-1/2">
-					<Resumen puntos={puntos} />
+					<Resumen puntos={puntos} nombre={nombre} />
 
 					<div className={`flex-1 cardAccent p-20 items-center justify-center`}>
 						AQUI VA LA FORMULA
@@ -42,6 +44,7 @@ export default function NewReportPart3({
 
 					<NewReportPart3Plano
 						puntos={puntos}
+						nombre={nombre}
 						cantidadFilas={cantidadFilas}
 						cantidadColumnas={cantidadColumnas}
 						celdasSeleccionadas={celdasSeleccionadas}

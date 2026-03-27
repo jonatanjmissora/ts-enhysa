@@ -26,10 +26,12 @@ export default function PuntosAlertDialog({
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild>
-				<button className="cardBackground gap-1 p-3 py-1 text-center sm:text-xs 2xl:text-lg cursor-pointer hover:bg-background/75">
-					<Plus size={12} />
-					inserte punto
-				</button>
+				<div className="w-full flex justify-end">
+					<button className="cardBackground gap-1 p-3 py-1 text-center sm:text-xs 2xl:text-lg cursor-pointer hover:bg-background/75">
+						<Plus size={12} />
+						inserte punto
+					</button>
+				</div>
 			</AlertDialogTrigger>
 			<AlertDialogContent className="p-30 px-40">
 				<CroquisElement

@@ -97,7 +97,7 @@ export function Croquis({
 				geometria del recinto para calculos luminotécnicos.
 			</p>
 
-			<div className="relative w-3/4 h-30 mx-auto cardBackground flex items-center justify-center">
+			<div className="sm:w-full 2xl:w-3/4 relative h-30 mx-auto cardBackground flex items-center justify-center">
 				<div className="w-[90%] h-[60%] italic text-foreground/50 tracking-wider text-lg flex items-center justify-center gap-4 border-3 border-dashed border-foreground/10 rounded-lg">
 					<Upload size={20} />
 					<span>Ingresar imagenes del lugar</span>
@@ -108,11 +108,11 @@ export function Croquis({
 				/>
 			</div>
 
-			<div className="w-3/4 mx-auto border-b border-foreground/20 flex items-center gap-6">
+			<div className="sm:w-full 2xl:w-3/4 mx-auto border-b border-foreground/20 flex items-center gap-6">
 				<NewReportPart2Locacion />
 			</div>
 
-			<div className="w-3/4 mx-auto border-b border-foreground/20 flex items-center gap-6">
+			<div className="sm:w-full 2xl:w-3/4 mx-auto border-b border-foreground/20 flex items-center gap-6">
 				<NewReportPart2Observaciones />
 			</div>
 

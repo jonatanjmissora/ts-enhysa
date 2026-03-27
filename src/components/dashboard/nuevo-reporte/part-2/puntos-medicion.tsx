@@ -26,8 +26,8 @@ export default function PuntosMedicion({
 }) {
 	return (
 		<div className="flex-1 cardAccent flex-col p-10 px-14 gap-6">
-			<div className="flex justify-between items-center gap-6 w-full">
-				<div className="flex items-center gap-3 ">
+			<div className="flex flex-col justify-between items-center gap-1 w-full">
+				<div className="flex items-center gap-3 mr-auto">
 					<div className="bg-orange-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
 						<Database className="size-6" />
 					</div>

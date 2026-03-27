@@ -39,16 +39,16 @@ export default function NuevoReporteEmpresa() {
 					<input
 						id="direccion"
 						className="bg-background py-2 px-4 rounded-lg"
-						placeholder="Calle, Altura, Ciudad"
+						placeholder="Calle, Altura"
 					/>
 				</div>
 				<div className="flex flex-col gap-2">
 					<label className="font-semibold" htmlFor="cant-empleados">
-						Cantidad de empleados
+						Localidad
 					</label>
 					<input
-						id="cant-empleados"
-						placeholder="Ej. 25"
+						id="localidad"
+						placeholder="Ciudad, Provincia, Pais"
 						className="bg-background py-2 px-4 rounded-lg"
 					/>
 				</div>

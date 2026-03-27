@@ -8,11 +8,13 @@ import {
 
 export default function NewReportPart3Plano({
 	puntos,
+	nombre,
 	cantidadFilas,
 	cantidadColumnas,
 	celdasSeleccionadas,
 }: {
 	puntos: PuntosType[]
+	nombre: string
 	cantidadFilas: number
 	cantidadColumnas: number
 	celdasSeleccionadas: string[]
@@ -24,7 +26,7 @@ export default function NewReportPart3Plano({
 					<RulerDimensionLine className="size-6" />
 				</div>
 				<span className="sm:text-xl 2xl:text-2xl font-semibold tracking-wider py-2">
-					Detalle de las mediciones
+					Plano de {nombre}
 				</span>
 			</div>
 			<div className="flex-1 flex items-center">

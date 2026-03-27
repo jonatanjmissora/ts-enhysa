@@ -22,6 +22,7 @@ export default function NewReportPart2Locacion() {
 						loading="lazy"
 						referrerPolicy="no-referrer-when-downgrade"
 						title="google maps location"
+						className="w-full h-80 object-cover"
 					/>
 				</AccordionContent>
 			</AccordionItem>

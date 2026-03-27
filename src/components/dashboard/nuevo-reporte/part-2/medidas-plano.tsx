@@ -29,7 +29,7 @@ export default function MedidasPlano({
 				<div className="bg-blue-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
 					<Box className="size-6" />
 				</div>
-				<span className="w-full sm:text-xl 2xl:text-2xl font-semibold tracking-wider py-2">
+				<span className="w-full sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2">
 					Dimensiones de {nombre || "Depósito"} (m)
 				</span>
 			</div>
@@ -41,7 +41,7 @@ export default function MedidasPlano({
 					<span className="w-30">Nombre</span>
 					<input
 						type="text"
-						className="w-80 bg-background py-1 px-4 rounded-lg text-center"
+						className="w-40 bg-background py-1 px-4 rounded-lg text-center"
 						placeholder="Ej. Depósito"
 						value={nombre}
 						onChange={e => {
@@ -56,7 +56,7 @@ export default function MedidasPlano({
 					<span className="w-30">Largo (m)</span>
 					<input
 						type="number"
-						className="w-80 bg-background py-1 px-4 rounded-lg text-center"
+						className="w-40 bg-background py-1 px-4 rounded-lg text-center"
 						placeholder="Ej. 10.00"
 						value={cantidadFilas === 0 ? "" : cantidadFilas}
 						onChange={e => {
@@ -73,7 +73,7 @@ export default function MedidasPlano({
 					<span className="w-30">Ancho (m)</span>
 					<input
 						type="number"
-						className="w-80 bg-background py-1 px-4 rounded-lg text-center"
+						className="w-40 bg-background py-1 px-4 rounded-lg text-center"
 						placeholder="Ej. 8.00"
 						value={cantidadColumnas === 0 ? "" : cantidadColumnas}
 						onChange={e => {
@@ -90,7 +90,7 @@ export default function MedidasPlano({
 					<span className="w-30">Altura (m)</span>
 					<input
 						type="number"
-						className="w-80 bg-background py-1 px-4 rounded-lg text-center"
+						className="w-40 bg-background py-1 px-4 rounded-lg text-center"
 						placeholder="Ej. 2,50"
 						value={cantidadAltura === 0 ? "" : cantidadAltura}
 						onChange={e => {

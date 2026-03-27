@@ -1,7 +1,13 @@
 import { PuntosType } from "@/routes/_protected/new-report"
 import { Info, Lightbulb } from "lucide-react"
 
-export default function NewReportResumen({ puntos }: { puntos: PuntosType[] }) {
+export default function NewReportResumen({
+	puntos,
+	nombre,
+}: {
+	puntos: PuntosType[]
+	nombre: string
+}) {
 	if (!puntos || puntos.length === 0) return null
 
 	return (
@@ -11,7 +17,7 @@ export default function NewReportResumen({ puntos }: { puntos: PuntosType[] }) {
 					<Info className="size-6" />
 				</div>
 				<span className="sm:text-xl 2xl:text-2xl font-semibold tracking-wider py-2">
-					Detalle de las mediciones
+					Detalle de las mediciones - {nombre}
 				</span>
 			</div>
 

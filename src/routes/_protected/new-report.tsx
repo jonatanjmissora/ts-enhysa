@@ -2,7 +2,7 @@ import NewReportPart1 from "@/components/dashboard/nuevo-reporte/part-1/main"
 import NewReportPart2 from "@/components/dashboard/nuevo-reporte/part-2/main"
 import NewReportPart3 from "@/components/dashboard/nuevo-reporte/part-3/main"
 import { createFileRoute, Link } from "@tanstack/react-router"
-import { ChevronLeft, ChevronRight, X } from "lucide-react"
+import { ChevronLeft, ChevronRight, Trash2 } from "lucide-react"
 import { useState } from "react"
 
 export type PuntosType = {
@@ -59,8 +59,8 @@ function RouteComponent() {
 						to="/"
 						className="flex items-center justify-center gap-2 themeBtnAccent rounded-lg shadow-xl sm:text-sm 2xl:text-lg text-foreground tracking-wider px-6 py-1 cursor-pointer m-0"
 					>
-						<X className="size-5" />
-						Cancelar
+						<Trash2 className="size-5" />
+						descartar
 					</Link>
 				</div>
 			</header>
@@ -98,6 +98,7 @@ function RouteComponent() {
 
 			<NewReportPart3
 				actualStep={actualStep}
+				nombre={nombre}
 				setActualStep={setActualStep}
 				cantidadFilas={largo}
 				cantidadColumnas={ancho}

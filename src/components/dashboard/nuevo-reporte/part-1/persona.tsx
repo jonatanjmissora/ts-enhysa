@@ -1,3 +1,4 @@
+import { USER } from "@/lib/mock/user"
 import { UserRound } from "lucide-react"
 
 export default function NuevoReportePersona() {
@@ -18,6 +19,7 @@ export default function NuevoReportePersona() {
 						id="nombre-completo"
 						className="bg-background py-2 px-4 rounded-lg"
 						placeholder="Ingrese el nombre y apellido"
+						defaultValue={USER.name}
 					/>
 				</div>
 				<div className="grid grid-cols-2 gap-4">
@@ -29,6 +31,7 @@ export default function NuevoReportePersona() {
 							id="matricula"
 							className="bg-background py-2 px-4 rounded-lg"
 							placeholder="N° Matrícula "
+							defaultValue={USER.matricula}
 						/>
 					</div>
 					<div className="flex flex-col gap-2">
@@ -39,14 +42,15 @@ export default function NuevoReportePersona() {
 							id="cargo"
 							className="bg-background py-2 px-4 rounded-lg"
 							placeholder="Ej. Seguridad e Higiene"
+							defaultValue={USER.cargo}
 						/>
 					</div>
 				</div>
-				<input
-					id="foto"
-					className="bg-background h-20 py-2 px-4 rounded-lg"
-					type="file"
-				/>
+				<div className="bg-background h-20 py-2 px-4 rounded-lg flex items-center justify-center">
+					<p className="text-center text-foreground/50 italic">
+						Foto de la matricula
+					</p>
+				</div>
 			</article>
 		</div>
 	)

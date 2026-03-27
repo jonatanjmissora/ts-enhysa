@@ -1,7 +1,8 @@
+import { Textarea } from "@/components/ui/textarea"
 import { USER } from "@/lib/mock/user"
 import { getUserInfo } from "@/lib/utils"
 import { createFileRoute, useLoaderData } from "@tanstack/react-router"
-import { Pencil, Save } from "lucide-react"
+import { Pencil, Save, Upload } from "lucide-react"
 import { useState } from "react"
 
 export const Route = createFileRoute("/_protected/profile")({
@@ -14,8 +15,8 @@ function RouteComponent() {
 	const [editMode, setEditMode] = useState(false)
 
 	return (
-		<div className="flex justify-center items-center min-h-screen">
-			<div className="flex flex-col gap-2 relative">
+		<div className="flex justify-center items-center min-h-screen p-20">
+			<div className="flex flex-col gap-2 relative w-1/2">
 				<div className="flex justify-between items-center">
 					<div></div>
 					<div className="absolute -top-10 -left-10">
@@ -64,6 +65,47 @@ function RouteComponent() {
 							readOnly={!editMode}
 						/>
 					</div>
+
+					<div className="grid grid-cols-2 gap-4">
+						<div className="flex flex-col gap-2">
+							<label className="font-semibold" htmlFor="dni">
+								DNI
+							</label>
+							<input
+								id="dni"
+								className="bg-background py-2 px-4 rounded-lg"
+								placeholder="N° Documento "
+								defaultValue={USER.dni}
+								readOnly={!editMode}
+							/>
+						</div>
+						<div className="flex flex-col gap-2">
+							<label className="font-semibold" htmlFor="telefono">
+								Teléfono
+							</label>
+							<input
+								id="telefono"
+								className="bg-background py-2 px-4 rounded-lg"
+								placeholder="Ej. 000-0000000"
+								defaultValue={USER.telefono}
+								readOnly={!editMode}
+							/>
+						</div>
+					</div>
+
+					<div className="flex flex-col gap-2">
+						<label className="font-semibold" htmlFor="direccion">
+							Dirección
+						</label>
+						<input
+							id="direccion"
+							className="bg-background py-2 px-4 rounded-lg"
+							placeholder="Ingrese la dirección"
+							defaultValue={USER.direccion}
+							readOnly={!editMode}
+						/>
+					</div>
+
 					<div className="grid grid-cols-2 gap-4">
 						<div className="flex flex-col gap-2">
 							<label className="font-semibold" htmlFor="matricula">
@@ -90,11 +132,47 @@ function RouteComponent() {
 							/>
 						</div>
 					</div>
-					<input
-						id="foto"
-						className="bg-background h-20 py-2 px-4 rounded-lg"
-						type="file"
-					/>
+					<div className="relative w-full h-30 mx-auto cardBackground flex items-center justify-center">
+						<div className="w-[90%] h-[60%] italic text-foreground/50 tracking-wider text-lg flex items-center justify-center gap-4 border-3 border-dashed border-foreground/10 rounded-lg">
+							<Upload size={20} />
+							<span>Ingresar foto de matricula</span>
+						</div>
+						<input
+							name="matricula-photo"
+							type="file"
+							className="absolute inset-0 opacity-0 cursor-pointer"
+						/>
+					</div>
+
+					<div className="flex flex-col gap-2">
+						<label className="font-semibold" htmlFor="signature">
+							Firma
+						</label>
+						<div className="relative w-full h-30 mx-auto cardBackground flex items-center justify-center">
+							<div className="w-[90%] h-[60%] italic text-foreground/50 tracking-wider text-lg flex items-center justify-center gap-4 border-3 border-dashed border-foreground/10 rounded-lg">
+								<Upload size={20} />
+								<span>Ingresar firma digital</span>
+							</div>
+							<input
+								name="signature"
+								type="file"
+								className="absolute inset-0 opacity-0 cursor-pointer"
+							/>
+						</div>
+					</div>
+
+					<div className="flex flex-col gap-2">
+						<label className="font-semibold" htmlFor="footer">
+							Pie de pagina para reportes
+						</label>
+						<Textarea
+							name="footer"
+							className="bg-background py-2 px-4 rounded-lg"
+							placeholder="Ingrese el pied de pagina"
+							defaultValue={USER.footer}
+							readOnly={!editMode}
+						/>
+					</div>
 				</article>
 			</div>
 		</div>
