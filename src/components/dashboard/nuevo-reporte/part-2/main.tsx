@@ -9,6 +9,8 @@ import { toast } from "sonner"
 export default function NewReportPart2({
 	actualStep,
 	setActualStep,
+	nombre,
+	setNombre,
 	puntos,
 	setPuntos,
 	cantidadFilas,
@@ -22,6 +24,8 @@ export default function NewReportPart2({
 }: {
 	actualStep: number
 	setActualStep: (step: number) => void
+	nombre: string
+	setNombre: (nombre: string) => void
 	puntos: PuntosType[]
 	setPuntos: (puntos: PuntosType[]) => void
 	cantidadFilas: number
@@ -50,9 +54,11 @@ export default function NewReportPart2({
 		<main
 			className={`${actualStep === 2 ? "flex-1" : "hidden"} p-20 sm:py-10 2xl:py-20 flex flex-col sm:gap-6 2xl:gap-10 justify-center`}
 		>
-			<div className="flex items-stretch gap-10">
-				<div className="flex-1 flex flex-col gap-10 sm:w-[40%] 2xl:-1/2">
+			<div className="flex gap-10">
+				<div className="flex flex-col gap-10 sm:w-[40%] 2xl:w-1/2">
 					<MedidasPlano
+						nombre={nombre}
+						setNombre={setNombre}
 						cantidadFilas={cantidadFilas}
 						cantidadColumnas={cantidadColumnas}
 						cantidadAltura={cantidadAltura}
@@ -63,7 +69,9 @@ export default function NewReportPart2({
 						setCeldasSeleccionadas={setCeldasSeleccionadas}
 					/>
 
-					<div className={`flex-1 ${componentStep < 3 && "opacity-50 blur"}`}>
+					<div
+						className={`flex-1 flex flex-col ${componentStep < 3 && "opacity-50 blur"}`}
+					>
 						<PuntosMedicion
 							cantidadFilas={cantidadFilas}
 							cantidadColumnas={cantidadColumnas}
@@ -74,8 +82,9 @@ export default function NewReportPart2({
 					</div>
 				</div>
 
-				<div className={`h-full ${componentStep < 2 && "opacity-50 blur"}`}>
+				<div className={`${componentStep < 2 && "opacity-50 blur"}`}>
 					<Croquis
+						nombre={nombre}
 						cantidadFilas={cantidadFilas}
 						cantidadColumnas={cantidadColumnas}
 						celdasSeleccionadas={celdasSeleccionadas}

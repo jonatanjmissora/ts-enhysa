@@ -63,7 +63,7 @@ const CroquisElement = ({
 	return (
 		<div className="flex flex-col gap-4 items-center justify-center">
 			<div className="flex gap-6 items-end relative">
-				<div className="relative w-max bg-foreground/50">
+				<div className="relative w-max ">
 					<p className="absolute left-0 -top-20 border-b border-white py-1 text-center w-full my-4 text-foreground/50 tracking-widest">
 						Largo {cantidad_columnas}m
 					</p>
@@ -166,8 +166,8 @@ export function CeldasGrid({
 							height: `${cellSize}px`,
 							width: `${cellSize}px`,
 						}}
-						className={`border-none ${
-							celdasSeleccionadas.includes(getKey(row, col)) && "bg-cyan-500"
+						className={`border border-black/50 ${
+							celdasSeleccionadas.includes(getKey(row, col)) && "bg-cyan-500/50"
 						} flex items-center justify-center`}
 					></div>
 				))

@@ -15,6 +15,7 @@ import { DefaultCatchBoundary } from "@/components/DefaultCatchBoundary"
 import { NotFound } from "@/components/NotFound"
 import { getSession } from "server/get-session"
 import { getThemeServerFn } from "server/theme"
+import { TooltipProvider } from "@/components/ui/tooltip"
 
 export type RouterContext = {
 	session: Session | null
@@ -65,7 +66,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body className="w-screen overflow-x-hidden flex flex-col min-h-screen">
-				{children}
+				<TooltipProvider>{children}</TooltipProvider>
 				<Toaster />
 				<TanStackDevtools
 					config={{

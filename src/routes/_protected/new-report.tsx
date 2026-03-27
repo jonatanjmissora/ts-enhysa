@@ -19,6 +19,7 @@ export const Route = createFileRoute("/_protected/new-report")({
 
 function RouteComponent() {
 	const [actualStep, setActualStep] = useState(1)
+	const [nombre, setNombre] = useState("")
 	const [largo, setLargo] = useState<number>(0)
 	const [ancho, setAncho] = useState<number>(0)
 	const [alto, setAlto] = useState<number>(0)
@@ -76,6 +77,8 @@ function RouteComponent() {
 
 			<NewReportPart2
 				actualStep={actualStep}
+				nombre={nombre}
+				setNombre={setNombre}
 				setActualStep={setActualStep}
 				cantidadFilas={largo}
 				cantidadColumnas={ancho}

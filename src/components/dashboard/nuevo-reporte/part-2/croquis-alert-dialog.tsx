@@ -186,10 +186,9 @@ export function CeldasGrid({
 								height: `${cellSize}px`,
 								width: `${cellSize}px`,
 							}}
-							className={`border ${
-								celdasSeleccionadas.includes(getKey(row, col))
-									? "bg-cyan-500"
-									: "border-black/50"
+							className={`border border-black/50 ${
+								celdasSeleccionadas.includes(getKey(row, col)) &&
+								"bg-cyan-500/50"
 							} flex items-center justify-center`}
 						></button>
 					) : (
@@ -199,8 +198,9 @@ export function CeldasGrid({
 								height: `${cellSize}px`,
 								width: `${cellSize}px`,
 							}}
-							className={`border-none ${
-								celdasSeleccionadas.includes(getKey(row, col)) && "bg-cyan-500"
+							className={`border border-black/50 ${
+								celdasSeleccionadas.includes(getKey(row, col)) &&
+								"bg-cyan-500/50"
 							} flex items-center justify-center`}
 						></div>
 					)

@@ -37,7 +37,7 @@ export default function NewReportPart3({
 					</div>
 				</div>
 
-				<div className="flex flex-col gap-10 h-full w-1/2">
+				<div className="flex flex-col gap-10 w-1/2">
 					<NewReportPart3Tags puntos={puntos} />
 
 					<NewReportPart3Plano

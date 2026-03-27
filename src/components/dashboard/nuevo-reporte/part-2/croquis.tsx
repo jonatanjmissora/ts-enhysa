@@ -1,12 +1,18 @@
 import { PuntosType } from "@/routes/_protected/new-report"
 import CroquisAlertDialog from "./croquis-alert-dialog"
-import { Lightbulb, Upload } from "lucide-react"
+import { Lightbulb, RulerDimensionLine, Upload } from "lucide-react"
 import NewReportPart2Observaciones from "./observaciones"
 import NewReportPart2Clima from "./clima"
 import NewReportPart2Locacion from "./locacion"
 import PuntosAlertDialog from "./puntos-alert-dialog"
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 export function Croquis({
+	nombre,
 	cantidadFilas,
 	cantidadColumnas,
 	celdasSeleccionadas,
@@ -15,6 +21,7 @@ export function Croquis({
 	puntos,
 	setPuntos,
 }: {
+	nombre: string
 	cantidadFilas: number
 	cantidadColumnas: number
 	celdasSeleccionadas: string[]
@@ -24,14 +31,14 @@ export function Croquis({
 	setPuntos: (puntos: PuntosType[]) => void
 }) {
 	return (
-		<div className="flex-1 bg-accent rounded-xl p-6 flex flex-col justify-center h-full gap-4 shadow-xl ring ring-foreground/20">
-			<div className="flex justify-between items-center gap-6 w-3/4 mx-auto">
+		<div className="cardAccent flex-col p-10 px-14 gap-6">
+			<div className="flex justify-between items-center gap-6 w-full">
 				<div className="flex items-center gap-3 ">
 					<div className="bg-purple-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
-						2
+						<RulerDimensionLine className="size-6" />
 					</div>
-					<span className="sm:text-lg 2xl:text-xl font-semibold tracking-wider">
-						Croquis del Plano
+					<span className="w-full sm:text-xl 2xl:text-2xl font-semibold tracking-wider py-2">
+						Croquis del {nombre}
 					</span>
 				</div>
 				<CroquisAlertDialog
@@ -43,7 +50,7 @@ export function Croquis({
 				/>
 			</div>
 
-			<div className="relative sm:h-100 2xl:h-120 w-3/4 mx-auto flex items-center justify-center bg-white/5 rounded-lg">
+			<div className="relative sm:h-100 2xl:h-120 sm:w-full 2xl:w-3/4 mx-auto flex items-center justify-center bg-white/5 rounded-lg">
 				{celdasSeleccionadas.length === 0 ? (
 					<div>
 						<span className="bg-background p-4 rounded/xl shadow-xl text-pretty">
@@ -85,15 +92,15 @@ export function Croquis({
 				</div>
 			</div>
 
-			<p className="w-3/4 mx-auto italic text-center tracking-wider text-foreground/50 sm:text-sm 2xl:text-xl text-pretty px-6">
+			<p className="sm:w-full 2xl:w-3/4 py-6 mx-auto italic text-center tracking-wider text-foreground/50 sm:text-sm 2xl:text-xl">
 				El indice del Local (RI) es un valor numerico que representa la
-				geometria del recinto para calculos luminotexnicos.
+				geometria del recinto para calculos luminotécnicos.
 			</p>
 
 			<div className="relative w-3/4 h-30 mx-auto cardBackground flex items-center justify-center">
-				<div className="italic text-foreground/50 tracking-wider text-lg flex items-center gap-4">
+				<div className="w-[90%] h-[60%] italic text-foreground/50 tracking-wider text-lg flex items-center justify-center gap-4 border-3 border-dashed border-foreground/10 rounded-lg">
 					<Upload size={20} />
-					<span>Puede ingresar imagenes del lugar</span>
+					<span>Ingresar imagenes del lugar</span>
 				</div>
 				<input
 					type="file"
@@ -129,7 +136,7 @@ export function CeldasGridWithPuntos({
 	const cellSize = 60
 	return (
 		<div
-			className="grid relative cursor-pointer"
+			className="grid relative"
 			style={{
 				gridTemplateColumns: `repeat(${cantidad_columnas}, ${cellSize}px)`,
 			}}
@@ -142,8 +149,8 @@ export function CeldasGridWithPuntos({
 							height: `${cellSize}px`,
 							width: `${cellSize}px`,
 						}}
-						className={`border-none ${
-							celdasSeleccionadas.includes(getKey(row, col)) && "bg-cyan-500"
+						className={`border border-black/50 ${
+							celdasSeleccionadas.includes(getKey(row, col)) && "bg-cyan-500/50"
 						} flex items-center justify-center`}
 					></div>
 				))
@@ -159,12 +166,22 @@ export function CeldasGridWithPuntos({
 								left: `${punto?.valorX ? punto.valorX - 14 : 0}px`,
 							}}
 						>
-							<div className="relative cardBackground size-10 rounded-full justify-center">
-								<Lightbulb className="absolute top-1 left-1 text-amber-400 rotate-180" />
-								<span className="absolute bottom-1 right-1 text-sm text-amber-400 flex items-center justify-center">
-									{index + 1}
-								</span>
-							</div>
+							<Tooltip>
+								<TooltipTrigger asChild>
+									<div className="relative cardBackground size-10 rounded-full justify-center">
+										<Lightbulb className="absolute top-1 left-1 text-amber-400 rotate-180" />
+										<span className="absolute bottom-1 right-1 text-sm text-amber-400 flex items-center justify-center">
+											{index + 1}
+										</span>
+									</div>
+								</TooltipTrigger>
+								<TooltipContent>
+									<div className="flex flex-col gap-1">
+										<p>nombre: {punto?.nombre}</p>
+										<p>valor: {punto?.valor}</p>
+									</div>
+								</TooltipContent>
+							</Tooltip>
 						</div>
 					))}
 				</div>

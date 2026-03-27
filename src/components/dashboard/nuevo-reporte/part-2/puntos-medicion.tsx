@@ -1,4 +1,4 @@
-import { Trash2 } from "lucide-react"
+import { Database, Trash2 } from "lucide-react"
 import PuntosAlertDialog from "./puntos-alert-dialog"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
@@ -25,14 +25,14 @@ export default function PuntosMedicion({
 	setPuntos: (puntos: PuntosType[]) => void
 }) {
 	return (
-		<div className="flex-1 bg-accent rounded-xl p-6 flex flex-col justify-center gap-8 shadow-xl ring ring-foreground/20">
-			<div className="flex justify-between items-center gap-6 mx-auto">
+		<div className="flex-1 cardAccent flex-col p-10 px-14 gap-6">
+			<div className="flex justify-between items-center gap-6 w-full">
 				<div className="flex items-center gap-3 ">
 					<div className="bg-orange-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
-						3
+						<Database className="size-6" />
 					</div>
-					<span className="sm:text-lg 2xl:text-xl font-semibold tracking-wider">
-						Punto de medición
+					<span className="w-full sm:text-xl 2xl:text-2xl font-semibold tracking-wider py-2">
+						Punto(s) de medición
 					</span>
 				</div>
 
@@ -44,7 +44,7 @@ export default function PuntosMedicion({
 					setPuntos={setPuntos}
 				/>
 			</div>
-			<div className="flex flex-col gap-3 sm:w-full 2xl:w-3/4 mx-auto">
+			<div className="flex flex-col justify-between items-center gap-6 w-full">
 				<div className="w-full grid grid-cols-[1fr_1fr_20px] gap-4 place-items-center sm:text-base 2xl:text-lg sm:font-semibold 2xl:font-bold italic tracking-wider border-b border-foreground/20 pb-2">
 					<span>nombre</span>
 					<span>valor</span>

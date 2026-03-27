@@ -1,4 +1,8 @@
+import { Box } from "lucide-react"
+
 export default function MedidasPlano({
+	nombre,
+	setNombre,
 	cantidadFilas,
 	cantidadColumnas,
 	cantidadAltura,
@@ -8,6 +12,8 @@ export default function MedidasPlano({
 	setComponentStep,
 	setCeldasSeleccionadas,
 }: {
+	nombre: string
+	setNombre: (nombre: string) => void
 	cantidadFilas: number
 	cantidadColumnas: number
 	cantidadAltura: number
@@ -18,16 +24,31 @@ export default function MedidasPlano({
 	setCeldasSeleccionadas: (value: string[]) => void
 }) {
 	return (
-		<div className="flex-1 bg-accent rounded-xl p-6 flex flex-col justify-center gap-8 shadow-xl ring ring-foreground/20">
-			<div className="flex items-center gap-3 w-full mx-auto">
+		<div className="cardAccent flex-col p-10 px-14 gap-6">
+			<div className="flex items-center gap-3 w-full">
 				<div className="bg-blue-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
-					1
+					<Box className="size-6" />
 				</div>
-				<span className="sm:text-lg 2xl:text-xl font-semibold tracking-wider">
-					Dimensiones del Local (m)
+				<span className="w-full sm:text-xl 2xl:text-2xl font-semibold tracking-wider py-2">
+					Dimensiones de {nombre || "Depósito"} (m)
 				</span>
 			</div>
 			<div className="flex flex-col gap-3 w-full mx-auto">
+				<div className="flex gap-6">
+					<div className="font-semibold bg-blue-500/70 rounded-full py-1 px-3 w-8 flex items-center justify-center">
+						N
+					</div>
+					<span className="w-30">Nombre</span>
+					<input
+						type="text"
+						className="w-80 bg-background py-1 px-4 rounded-lg text-center"
+						placeholder="Ej. Depósito"
+						value={nombre}
+						onChange={e => {
+							setNombre(e.target.value)
+						}}
+					/>
+				</div>
 				<div className="flex gap-6">
 					<div className="font-semibold bg-blue-500/70 rounded-full py-1 px-3 w-8 flex items-center justify-center">
 						L

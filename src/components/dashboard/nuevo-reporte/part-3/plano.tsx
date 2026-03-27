@@ -1,5 +1,10 @@
 import { PuntosType } from "@/routes/_protected/new-report"
-import { Lightbulb } from "lucide-react"
+import { Lightbulb, RulerDimensionLine } from "lucide-react"
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 export default function NewReportPart3Plano({
 	puntos,
@@ -13,16 +18,23 @@ export default function NewReportPart3Plano({
 	celdasSeleccionadas: string[]
 }) {
 	return (
-		<div className=" cardAccent flex flex-col items-center justify-center p-10 py-15">
-			<p className="w-full sm:text-xl 2xl:text-2xl font-semibold tracking-wider py-2">
-				Plano de muestreo
-			</p>
-			<CeldasGridWithPuntosFinal
-				cantidad_filas={cantidadFilas}
-				cantidad_columnas={cantidadColumnas}
-				celdasSeleccionadas={celdasSeleccionadas}
-				puntos={puntos}
-			/>
+		<div className="flex-1 cardAccent flex flex-col gap-6 justify-center p-10 py-15">
+			<div className="w-full flex items-center gap-3">
+				<div className="bg-purple-600/75 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
+					<RulerDimensionLine className="size-6" />
+				</div>
+				<span className="sm:text-xl 2xl:text-2xl font-semibold tracking-wider py-2">
+					Detalle de las mediciones
+				</span>
+			</div>
+			<div className="flex-1 flex items-center">
+				<CeldasGridWithPuntosFinal
+					cantidad_filas={cantidadFilas}
+					cantidad_columnas={cantidadColumnas}
+					celdasSeleccionadas={celdasSeleccionadas}
+					puntos={puntos}
+				/>
+			</div>
 		</div>
 	)
 }
@@ -42,7 +54,7 @@ export function CeldasGridWithPuntosFinal({
 	const cellSize = 60
 	return (
 		<div
-			className="grid relative cursor-pointer"
+			className="grid relative"
 			style={{
 				gridTemplateColumns: `repeat(${cantidad_columnas}, ${cellSize}px)`,
 			}}
@@ -55,8 +67,8 @@ export function CeldasGridWithPuntosFinal({
 							height: `${cellSize}px`,
 							width: `${cellSize}px`,
 						}}
-						className={`border-none ${
-							celdasSeleccionadas.includes(getKey(row, col)) && "bg-cyan-500"
+						className={`border border-black/50 ${
+							celdasSeleccionadas.includes(getKey(row, col)) && "bg-cyan-500/50"
 						} flex items-center justify-center`}
 					></div>
 				))
@@ -72,16 +84,26 @@ export function CeldasGridWithPuntosFinal({
 								left: `${punto?.valorX ? punto.valorX - 14 : 0}px`,
 							}}
 						>
-							<div
-								className={`relative cardBackground size-10 rounded-full justify-center ${
-									punto?.cumple ? "text-green-600" : "text-red-600"
-								}`}
-							>
-								<Lightbulb className="rotate-180 absolute top-1 left-1" />
-								<span className="absolute bottom-1 right-1 text-sm flex items-center justify-center">
-									{index + 1}
-								</span>
-							</div>
+							<Tooltip>
+								<TooltipTrigger asChild>
+									<div
+										className={`relative cardBackground size-10 rounded-full justify-center ${
+											punto?.cumple ? "text-green-600" : "text-red-600"
+										}`}
+									>
+										<Lightbulb className="rotate-180 absolute top-1 left-1" />
+										<span className="absolute bottom-1 right-1 text-sm flex items-center justify-center">
+											{index + 1}
+										</span>
+									</div>
+								</TooltipTrigger>
+								<TooltipContent>
+									<div className="flex flex-col gap-1">
+										<p>nombre: {punto?.nombre}</p>
+										<p>valor: {punto?.valor}</p>
+									</div>
+								</TooltipContent>
+							</Tooltip>
 						</div>
 					))}
 				</div>
