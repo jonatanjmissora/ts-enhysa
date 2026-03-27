@@ -26,9 +26,9 @@ export default function PuntosAlertDialog({
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild>
-				<button className="cardBackground p-4 py-2 text-center sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75">
-					<Plus size={16} />
-					nuevo punto
+				<button className="cardBackground gap-1 p-3 py-1 text-center sm:text-xs 2xl:text-lg cursor-pointer hover:bg-background/75">
+					<Plus size={12} />
+					inserte punto
 				</button>
 			</AlertDialogTrigger>
 			<AlertDialogContent className="p-30 px-40">

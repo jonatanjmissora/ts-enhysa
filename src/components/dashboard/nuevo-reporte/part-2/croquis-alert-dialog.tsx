@@ -27,7 +27,7 @@ export default function CroquisAlertDialog({
 			<AlertDialogTrigger asChild>
 				<button className="cardBackground p-4 py-2 text-center sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75">
 					{celdasSeleccionadas.length === 0
-						? "Ingresar Plano"
+						? "Dibujar Plano"
 						: "Modificar Plano"}
 				</button>
 			</AlertDialogTrigger>
@@ -100,16 +100,10 @@ const CroquisElement = ({
 					<div className="text-xs size-15 border border-black flex items-center justify-center text-foreground/50">
 						{division} x {division}
 					</div>
-					<button
-						className="cardBackground px-1 py-0  text-2xl font-bold flex items-center justify-center cursor-pointer"
-						onClick={() => modificarDivision("+")}
-					>
+					<button className="cardBackground px-1 py-0  text-2xl font-bold flex items-center justify-center cursor-pointer">
 						+
 					</button>
-					<button
-						className="cardBackground px-1 py-0  text-2xl font-bold flex items-center justify-center cursor-pointer"
-						onClick={() => modificarDivision("-")}
-					>
+					<button className="cardBackground px-1 py-0  text-2xl font-bold flex items-center justify-center cursor-pointer">
 						-
 					</button>
 				</div>

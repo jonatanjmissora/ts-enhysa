@@ -1,6 +1,10 @@
 import { PuntosType } from "@/routes/_protected/new-report"
 import CroquisAlertDialog from "./croquis-alert-dialog"
-import { Lightbulb } from "lucide-react"
+import { Lightbulb, Upload } from "lucide-react"
+import NewReportPart2Observaciones from "./observaciones"
+import NewReportPart2Clima from "./clima"
+import NewReportPart2Locacion from "./locacion"
+import PuntosAlertDialog from "./puntos-alert-dialog"
 
 export function Croquis({
 	cantidadFilas,
@@ -9,6 +13,7 @@ export function Croquis({
 	setCeldasSeleccionadas,
 	setComponentStep,
 	puntos,
+	setPuntos,
 }: {
 	cantidadFilas: number
 	cantidadColumnas: number
@@ -37,7 +42,8 @@ export function Croquis({
 					setComponentStep={setComponentStep}
 				/>
 			</div>
-			<div className="relative sm:h-100 2xl:h-120 w-3/4 mx-auto flex items-center justify-center">
+
+			<div className="relative sm:h-100 2xl:h-120 w-3/4 mx-auto flex items-center justify-center bg-white/5 rounded-lg">
 				{celdasSeleccionadas.length === 0 ? (
 					<div>
 						<span className="bg-background p-4 rounded/xl shadow-xl text-pretty">
@@ -68,11 +74,42 @@ export function Croquis({
 						/>
 					</div>
 				)}
+				<div className="absolute bottom-0 left-0">
+					<PuntosAlertDialog
+						cantidad_filas={cantidadFilas}
+						cantidad_columnas={cantidadColumnas}
+						celdasSeleccionadas={celdasSeleccionadas}
+						puntos={puntos}
+						setPuntos={setPuntos}
+					/>
+				</div>
 			</div>
-			<p className="italic text-center tracking-wider text-foreground/50 sm:text-sm 2xl:text-xl text-pretty px-6">
+
+			<p className="w-3/4 mx-auto italic text-center tracking-wider text-foreground/50 sm:text-sm 2xl:text-xl text-pretty px-6">
 				El indice del Local (RI) es un valor numerico que representa la
 				geometria del recinto para calculos luminotexnicos.
 			</p>
+
+			<div className="relative w-3/4 h-30 mx-auto cardBackground flex items-center justify-center">
+				<div className="italic text-foreground/50 tracking-wider text-lg flex items-center gap-4">
+					<Upload size={20} />
+					<span>Puede ingresar imagenes del lugar</span>
+				</div>
+				<input
+					type="file"
+					className="absolute inset-0 opacity-0 cursor-pointer"
+				/>
+			</div>
+
+			<div className="w-3/4 mx-auto border-b border-foreground/20 flex items-center gap-6">
+				<NewReportPart2Locacion />
+			</div>
+
+			<div className="w-3/4 mx-auto border-b border-foreground/20 flex items-center gap-6">
+				<NewReportPart2Observaciones />
+			</div>
+
+			<NewReportPart2Clima />
 		</div>
 	)
 }
