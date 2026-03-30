@@ -11,7 +11,7 @@ export type PuntosType = {
 	valorX: number
 	valorY: number
 	cumple: boolean
-} | null
+}
 
 export const Route = createFileRoute("/_protected/new-report")({
 	component: RouteComponent,
@@ -24,7 +24,7 @@ function RouteComponent() {
 	const [ancho, setAncho] = useState<number>(0)
 	const [alto, setAlto] = useState<number>(0)
 	const [celdasSeleccionadas, setCeldasSeleccionadas] = useState<string[]>([])
-	const [puntos, setPuntos] = useState<PuntosType[]>([null])
+	const [puntos, setPuntos] = useState<PuntosType[] | null>(null)
 
 	const volverPaso = () => {
 		setActualStep(actualStep - 1)

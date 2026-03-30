@@ -8,7 +8,7 @@ export default function NewReportPart3Formulas({
 	cantidadAltura,
 }: {
 	nombre: string
-	puntos: PuntosType[]
+	puntos: PuntosType[] | null
 	cantidadFilas: number
 	cantidadColumnas: number
 	cantidadAltura: number

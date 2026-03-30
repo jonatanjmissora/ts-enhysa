@@ -18,7 +18,7 @@ export default function NewReportPart3({
 	actualStep: number
 	nombre: string
 	setActualStep: (step: number) => void
-	puntos: PuntosType[]
+	puntos: PuntosType[] | null
 	cantidadFilas: number
 	cantidadColumnas: number
 	cantidadAltura: number

@@ -5,10 +5,10 @@ export default function NewReportResumen({
 	puntos,
 	nombre,
 }: {
-	puntos: PuntosType[]
+	puntos: PuntosType[] | null
 	nombre: string
 }) {
-	if (!puntos || puntos[0] === null) return null
+	if (!puntos) return null
 
 	return (
 		<div className="cardAccent flex-col p-10 px-14 gap-6">

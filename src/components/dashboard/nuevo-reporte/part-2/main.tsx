@@ -25,8 +25,8 @@ export default function NewReportPart2({
 	setActualStep: (step: number) => void
 	nombre: string
 	setNombre: (nombre: string) => void
-	puntos: PuntosType[]
-	setPuntos: (puntos: PuntosType[]) => void
+	puntos: PuntosType[] | null
+	setPuntos: (puntos: PuntosType[] | null) => void
 	cantidadFilas: number
 	setCantidadFilas: (cantidad: number) => void
 	cantidadColumnas: number
@@ -38,6 +38,7 @@ export default function NewReportPart2({
 }) {
 	const pasarAlPaso3 = () => {
 		let completos = true
+		if (!puntos) return
 		puntos.forEach(punto => {
 			if (!punto?.valor) {
 				completos = false

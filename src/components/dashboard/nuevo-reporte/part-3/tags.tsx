@@ -4,8 +4,10 @@ import { Check, X } from "lucide-react"
 export default function NewReportPart3Tags({
 	puntos,
 }: {
-	puntos: PuntosType[]
+	puntos: PuntosType[] | null
 }) {
+	if (!puntos) return null
+
 	const puntosQueCumple = puntos.filter(punto => punto?.cumple === true)
 	const puntosQueNoCumple = puntos.filter(punto => punto?.cumple === false)
 

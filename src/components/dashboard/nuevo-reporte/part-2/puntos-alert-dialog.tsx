@@ -5,7 +5,7 @@ import {
 	AlertDialogContent,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
-import { Lightbulb, Trash, Trash2 } from "lucide-react"
+import { Lightbulb, Trash2 } from "lucide-react"
 import type { PuntosType } from "@/routes/_protected/new-report"
 
 export default function PuntosAlertDialog({
@@ -19,8 +19,8 @@ export default function PuntosAlertDialog({
 	cantidad_filas: number
 	cantidad_columnas: number
 	celdasSeleccionadas: string[]
-	puntos: PuntosType[]
-	setPuntos: (puntos: PuntosType[]) => void
+	puntos: PuntosType[] | null
+	setPuntos: (puntos: PuntosType[] | null) => void
 	isCroquis: boolean
 }) {
 	const [open, setOpen] = useState(false)
@@ -63,8 +63,8 @@ const CroquisElement = ({
 	cantidad_columnas: number
 	setOpen: (value: boolean) => void
 	celdasSeleccionadas: string[]
-	puntos: PuntosType[]
-	setPuntos: (puntos: PuntosType[]) => void
+	puntos: PuntosType[] | null
+	setPuntos: (puntos: PuntosType[] | null) => void
 }) => {
 	return (
 		<div className="flex flex-col gap-4 items-center justify-center">
@@ -90,8 +90,9 @@ const CroquisElement = ({
 				<PuntosList puntos={puntos} setPuntos={setPuntos} />
 			</div>
 			<p>
-				Seleccione el punto-{puntos[0] === null ? "1" : puntos.length + 1} de
-				medicion dentro del plano.
+				Seleccione el punto-
+				{puntos !== null ? puntos.length + 1 : "1"} de medicion dentro del
+				plano.
 			</p>
 			<Button
 				variant="theme"
@@ -116,8 +117,8 @@ export function CeldasGrid({
 	cantidad_filas: number
 	cantidad_columnas: number
 	celdasSeleccionadas: string[]
-	puntos: PuntosType[]
-	setPuntos: (puntos: PuntosType[]) => void
+	puntos: PuntosType[] | null
+	setPuntos: (puntos: PuntosType[] | null) => void
 }) {
 	const gridRef = useRef<HTMLButtonElement | null>(null)
 	const getKey = (row: number, col: number) => `${row}-${col}`
@@ -134,13 +135,13 @@ export function CeldasGrid({
 
 		// Add punto to puntos array
 		const newPunto = {
-			nombre: `punto-${puntos[0] === null ? 1 : puntos.length + 1}`,
+			nombre: `punto-${puntos === null ? 1 : puntos.length + 1}`,
 			valor: 0,
 			valorX: x,
 			valorY: y,
 			cumple: false,
 		}
-		if (puntos[0] === null) {
+		if (!puntos) {
 			setPuntos([newPunto])
 		} else {
 			setPuntos([...puntos, newPunto])
@@ -159,7 +160,7 @@ export function CeldasGrid({
 			{Array.from({ length: cantidad_filas }).map((_, row) =>
 				Array.from({ length: cantidad_columnas }).map((_, col) => (
 					<div
-						key={col * row}
+						key={Math.random()}
 						style={{
 							height: `${cellSize}px`,
 							width: `${cellSize}px`,
@@ -171,27 +172,25 @@ export function CeldasGrid({
 				))
 			)}
 
-			{puntos[0] !== null && (
-				<div>
-					{puntos.map((punto, index) => (
-						<div
-							key={punto?.nombre || index}
-							className="absolute"
-							style={{
-								top: `${punto?.valorY ? punto.valorY - 14 : 0}px`,
-								left: `${punto?.valorX ? punto.valorX - 14 : 0}px`,
-							}}
-						>
-							<div className="relative cardBackground size-10 rounded-full justify-center">
-								<Lightbulb className="absolute top-1 left-1 text-amber-400 rotate-180" />
-								<span className="absolute bottom-1 right-1 text-sm text-amber-400 flex items-center justify-center">
-									{index + 1}
-								</span>
-							</div>
+			<div>
+				{puntos?.map((punto, index) => (
+					<div
+						key={punto?.nombre || index}
+						className="absolute"
+						style={{
+							top: `${punto?.valorY ? punto.valorY - 14 : 0}px`,
+							left: `${punto?.valorX ? punto.valorX - 14 : 0}px`,
+						}}
+					>
+						<div className="relative cardBackground size-10 rounded-full justify-center">
+							<Lightbulb className="absolute top-1 left-1 text-amber-400 rotate-180" />
+							<span className="absolute bottom-1 right-1 text-sm text-amber-400 flex items-center justify-center">
+								{index + 1}
+							</span>
 						</div>
-					))}
-				</div>
-			)}
+					</div>
+				))}
+			</div>
 		</button>
 	)
 }
@@ -200,37 +199,36 @@ const PuntosList = ({
 	puntos,
 	setPuntos,
 }: {
-	puntos: PuntosType[]
-	setPuntos: (puntos: PuntosType[]) => void
+	puntos: PuntosType[] | null
+	setPuntos: (puntos: PuntosType[] | null) => void
 }) => {
 	return (
 		<div className="flex flex-col gap-2">
 			<p className="text-lg tracking-wide text-foreground/50 italic border-b border-foreground/50 px-1">
 				puntos
 			</p>
-			{puntos[0] !== null &&
-				puntos.map((punto, index) => (
-					<div className="flex items-center gap-2" key={`punto-${index}`}>
-						<label htmlFor={`punto-${index}`}>p{index + 1}</label>
-						<input
-							id={`punto-${index}`}
-							type="number"
-							className="px-2 py-1 bg-background rounded-sm  w-20 text-center"
-							onChange={e => {
-								const newPuntos = [...puntos]
-								const actualPunto = newPuntos.find(
-									p => p.nombre === punto?.nombre
-								)
-								if (actualPunto) {
-									actualPunto.valor = Number(e.target.value)
-									console.log(actualPunto)
-								}
-								setPuntos(newPuntos)
-							}}
-						/>
-						<Trash2 size={16} className="text-red-700/50" />
-					</div>
-				))}
+			{puntos?.map((punto, index) => (
+				<div className="flex items-center gap-2" key={Math.random()}>
+					<label htmlFor={`punto-${index}`}>p{index + 1}</label>
+					<input
+						id={`punto-${index}`}
+						type="number"
+						className="px-2 py-1 bg-background rounded-sm  w-20 text-center"
+						onChange={e => {
+							const newPuntos = [...puntos]
+							const actualPunto = newPuntos.find(
+								p => p.nombre === punto?.nombre
+							)
+							if (actualPunto) {
+								actualPunto.valor = Number(e.target.value)
+								console.log(actualPunto)
+							}
+							setPuntos(newPuntos)
+						}}
+					/>
+					<Trash2 size={16} className="text-red-700/50" />
+				</div>
+			))}
 		</div>
 	)
 }

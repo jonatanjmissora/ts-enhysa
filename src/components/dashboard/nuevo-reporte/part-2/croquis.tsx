@@ -34,8 +34,8 @@ export function Croquis({
 	cantidadAltura: number
 	celdasSeleccionadas: string[]
 	setCeldasSeleccionadas: (value: string[]) => void
-	puntos: PuntosType[]
-	setPuntos: (puntos: PuntosType[]) => void
+	puntos: PuntosType[] | null
+	setPuntos: (puntos: PuntosType[] | null) => void
 }) {
 	const valoresValidos =
 		cantidadFilas !== 0 && cantidadColumnas !== 0 && cantidadAltura !== 0
@@ -150,7 +150,7 @@ export function Croquis({
 					<span>valor</span>
 					<span></span>
 				</div>
-				{puntos[0] === null ? (
+				{!puntos ? (
 					<div className="w-full grid grid-cols-[1fr_1fr_0.5fr] gap-4 place-items-center">
 						<span className="text-amber-400">no hay puntos. . .</span>
 						<span></span>
@@ -181,7 +181,7 @@ export function CeldasGridWithPuntos({
 	cantidad_filas: number
 	cantidad_columnas: number
 	celdasSeleccionadas: string[]
-	puntos: PuntosType[]
+	puntos: PuntosType[] | null
 }) {
 	const getKey = (row: number, col: number) => `${row}-${col}`
 	const cellSize = 40
@@ -195,7 +195,7 @@ export function CeldasGridWithPuntos({
 			{Array.from({ length: cantidad_filas }).map((_, row) =>
 				Array.from({ length: cantidad_columnas }).map((_, col) => (
 					<div
-						key={col * row}
+						key={Math.random()}
 						style={{
 							height: `${cellSize}px`,
 							width: `${cellSize}px`,
@@ -206,37 +206,33 @@ export function CeldasGridWithPuntos({
 					></div>
 				))
 			)}
-			{puntos[0] !== null && (
-				<div>
-					{puntos.map((punto, index) => (
-						<div
-							key={punto?.nombre || index}
-							className="absolute"
-							style={{
-								top: `${punto?.valorY ? punto.valorY - 14 : 0}px`,
-								left: `${punto?.valorX ? punto.valorX - 14 : 0}px`,
-							}}
-						>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<div className="relative cardBackground size-10 rounded-full justify-center">
-										<Lightbulb className="absolute top-1 left-1 text-amber-400 rotate-180" />
-										<span className="absolute bottom-1 right-1 text-sm text-amber-400 flex items-center justify-center">
-											{index + 1}
-										</span>
-									</div>
-								</TooltipTrigger>
-								<TooltipContent>
-									<div className="flex flex-col gap-1">
-										<p>nombre: {punto?.nombre}</p>
-										<p>valor: {punto?.valor}</p>
-									</div>
-								</TooltipContent>
-							</Tooltip>
-						</div>
-					))}
+			{puntos?.map((punto, index) => (
+				<div
+					key={Math.random()}
+					className="absolute"
+					style={{
+						top: `${punto?.valorY ? punto.valorY - 14 : 0}px`,
+						left: `${punto?.valorX ? punto.valorX - 14 : 0}px`,
+					}}
+				>
+					<Tooltip>
+						<TooltipTrigger asChild>
+							<div className="relative cardBackground size-10 rounded-full justify-center">
+								<Lightbulb className="absolute top-1 left-1 text-amber-400 rotate-180" />
+								<span className="absolute bottom-1 right-1 text-sm text-amber-400 flex items-center justify-center">
+									{index + 1}
+								</span>
+							</div>
+						</TooltipTrigger>
+						<TooltipContent>
+							<div className="flex flex-col gap-1">
+								<p>nombre: {punto?.nombre}</p>
+								<p>valor: {punto?.valor}</p>
+							</div>
+						</TooltipContent>
+					</Tooltip>
 				</div>
-			)}
+			))}
 		</div>
 	)
 }
@@ -249,8 +245,8 @@ const Punto = ({
 }: {
 	nombre: string
 	valor: number
-	puntos: PuntosType[]
-	setPuntos: (puntos: PuntosType[]) => void
+	puntos: PuntosType[] | null
+	setPuntos: (puntos: PuntosType[] | null) => void
 }) => {
 	const [inputValue, setInputValue] = useState(valor)
 
@@ -265,6 +261,7 @@ const Punto = ({
 				value={inputValue || ""}
 				placeholder="Ej. 1,23"
 				onChange={e => {
+					if (!puntos) return
 					setInputValue(Number(e.target.value))
 					const nuevosPuntos = puntos.map(punto => {
 						if (punto?.nombre === nombre) {
@@ -294,12 +291,13 @@ export function DeletePuntoAlertDialog({
 	setPuntos,
 }: {
 	nombre: string
-	puntos: PuntosType[]
-	setPuntos: (puntos: PuntosType[]) => void
+	puntos: PuntosType[] | null
+	setPuntos: (puntos: PuntosType[] | null) => void
 }) {
 	const [open, setOpen] = useState(false)
 
 	const eliminarPunto = () => {
+		if (!puntos) return
 		const nuevosPuntos = puntos.filter(punto => punto?.nombre !== nombre)
 		setPuntos(nuevosPuntos)
 		setOpen(false)
