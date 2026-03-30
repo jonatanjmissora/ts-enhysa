@@ -74,13 +74,13 @@ const CroquisElement = ({
 	return (
 		<div className="flex flex-col gap-4 items-center justify-center">
 			<div className="flex gap-6 items-end relative">
-				<div className="border-4 border-foreground/50 relative w-max">
+				<div className="border-4 border-foreground/50 relative w-full">
 					<p className="absolute left-0 -top-20 border-b border-white py-1 text-center w-full my-4 text-foreground/50 tracking-widest">
-						Largo {cantidad_columnas}m
+						Ancho {cantidad_columnas}m
 					</p>
 					<div className="absolute -left-30 top-0 h-full w-max px-2 border-r border-white py-1 text-center mx-4 flex items-center text-foreground/50  tracking-widest">
 						<div className="flex flex-col">
-							<span>Ancho</span>
+							<span>Largo</span>
 							<span>{cantidad_filas}m</span>
 						</div>
 					</div>
@@ -176,9 +176,9 @@ export function CeldasGrid({
 
 	return (
 		<div
-			className="grid"
+			className="grid relative"
 			style={{
-				gridTemplateColumns: `repeat(${gridObj[division].columns}, ${cellSize}px)`,
+				gridTemplateColumns: `repeat(${cantidad_columnas}, ${cellSize}px)`,
 			}}
 		>
 			{Array.from({ length: gridObj[division].rows }).map((_, row) =>

@@ -11,7 +11,9 @@ export default function NewReportPart2Observaciones() {
 		<Accordion type="single" collapsible defaultValue="" className="w-full">
 			<AccordionItem value="shipping">
 				<AccordionTrigger>
-					<span className="font-semibold tracking-wider">Observaciones</span>
+					<span className="font-semibold tracking-wider 2xl:text-lg">
+						Observaciones
+					</span>
 				</AccordionTrigger>
 				<AccordionContent>
 					<Textarea

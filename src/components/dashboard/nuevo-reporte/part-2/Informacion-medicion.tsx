@@ -20,7 +20,7 @@ export default function InformacionMedicion({ nombre }: { nombre: string }) {
 				</p>
 			</div>
 
-			<div className="sm:w-full 2xl:w-3/4 relative py-4 mx-auto cardBackground flex items-center justify-center">
+			<div className="w-full relative py-4 mx-auto cardBackground flex items-center justify-center">
 				<div className="w-[90%] p-4 italic text-foreground/50 tracking-wider text-sm flex items-center justify-center border-3 border-dashed border-foreground/10 rounded-lg">
 					<Upload size={16} />
 					<span>Ingresar imagenes del lugar</span>
@@ -31,11 +31,11 @@ export default function InformacionMedicion({ nombre }: { nombre: string }) {
 				/>
 			</div>
 
-			<div className="sm:w-full 2xl:w-3/4 mx-auto border-b border-foreground/20 flex items-center gap-6">
+			<div className="sm:w-full w-full mx-auto border-b border-foreground/20 flex items-center gap-6">
 				<NewReportPart2Locacion />
 			</div>
 
-			<div className="sm:w-full 2xl:w-3/4 mx-auto border-b border-foreground/20 flex items-center gap-6">
+			<div className="sm:w-full w-full mx-auto border-b border-foreground/20 flex items-center gap-6">
 				<NewReportPart2Observaciones />
 			</div>
 

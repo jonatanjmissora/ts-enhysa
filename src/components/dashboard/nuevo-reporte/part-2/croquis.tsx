@@ -78,7 +78,7 @@ export function Croquis({
 					/>
 				</div>
 
-				<div className="relative sm:h-100 2xl:h-120 sm:w-full 2xl:w-3/4 mx-auto flex items-center justify-center bg-white/5">
+				<div className="relative h-120 w-full flex items-center justify-center bg-white/5 p-10">
 					{!valoresValidos ? (
 						<div>
 							<span className="bg-background p-4 rounded/xl shadow-xl text-pretty">
@@ -92,26 +92,29 @@ export function Croquis({
 						</div>
 					) : (
 						<div className="relative">
-							<p className="absolute left-0 -top-16 border-b border-foreground/40 py-1 text-center w-full my-4 text-foreground/40 tracking-widest">
-								Largo {cantidadColumnas}m
+							<p className="absolute left-6 right-0 -top-13 border-b border-foreground/40 py-1 text-center my-4 text-foreground/40 tracking-widest">
+								Ancho {cantidadColumnas}m
 							</p>
-							<div className="absolute -left-26 top-0 h-full w-max px-2 border-r border-foreground/40 py-1 text-center mx-4 flex items-center text-foreground/40  tracking-widest">
+							<div className="absolute -left-20 top-6 bottom-10 px-2 border-r border-foreground/40 py-1 text-center mx-4 flex items-center text-foreground/40  tracking-widest">
 								<div className="flex flex-col">
-									<span>Ancho</span>
+									<span>Largo</span>
 									<span>{cantidadFilas}m</span>
 								</div>
 							</div>
-							<CeldasGridWithPuntos
-								cantidad_filas={cantidadFilas}
-								cantidad_columnas={cantidadColumnas}
-								celdasSeleccionadas={celdasSeleccionadas}
-								puntos={puntos}
-							/>
+							<div className="sm:w-[20dvw] 2xl:w-[25dvw] h-100 overflow-auto flex items-center justify-center">
+								<CeldasGridWithPuntos
+									cantidad_filas={cantidadFilas}
+									cantidad_columnas={cantidadColumnas}
+									celdasSeleccionadas={celdasSeleccionadas}
+									puntos={puntos}
+								/>
+							</div>
 						</div>
 					)}
 				</div>
 			</div>
-			<p className="sm:w-full 2xl:w-3/4 py-6 mx-auto italic text-center tracking-wider text-foreground/50 sm:text-sm 2xl:text-xl">
+
+			<p className="sm:w-full 2xl:w-3/4 py-6 mx-auto italic text-center tracking-wider text-foreground/50 sm:text-sm 2xl:text-base">
 				El indice del Local (RI) es un valor numerico que representa la
 				geometria del recinto para calculos luminotécnicos.
 			</p>
@@ -142,13 +145,13 @@ export function Croquis({
 			</div>
 
 			<div className="flex flex-col justify-between items-center gap-6 w-full">
-				<div className="w-full grid grid-cols-[1fr_1fr_20px] gap-4 place-items-center sm:text-base 2xl:text-lg sm:font-semibold 2xl:font-bold italic tracking-wider border-b border-foreground/20 pb-2">
+				<div className="w-full grid grid-cols-[1fr_1fr_0.5fr] gap-4 place-items-center sm:text-base 2xl:text-lg sm:font-semibold 2xl:font-bold italic tracking-wider border-b border-foreground/20 pb-2">
 					<span>nombre</span>
 					<span>valor</span>
 					<span></span>
 				</div>
 				{puntos[0] === null ? (
-					<div className="w-full grid grid-cols-[1fr_1fr_20px] gap-4 place-items-center">
+					<div className="w-full grid grid-cols-[1fr_1fr_0.5fr] gap-4 place-items-center">
 						<span className="text-amber-400">no hay puntos. . .</span>
 						<span></span>
 						<span></span>
@@ -181,7 +184,7 @@ export function CeldasGridWithPuntos({
 	puntos: PuntosType[]
 }) {
 	const getKey = (row: number, col: number) => `${row}-${col}`
-	const cellSize = 60
+	const cellSize = 40
 	return (
 		<div
 			className="grid relative"
@@ -252,7 +255,7 @@ const Punto = ({
 	const [inputValue, setInputValue] = useState(valor)
 
 	return (
-		<div className="w-full grid grid-cols-[1fr_1fr_20px] gap-4 place-items-center">
+		<div className="w-full grid grid-cols-[1fr_1fr_0.5fr] gap-4 place-items-center">
 			<span className="rounded-lg bg-background py-1 w-full text-center">
 				{nombre}
 			</span>
@@ -307,7 +310,7 @@ export function DeletePuntoAlertDialog({
 			<AlertDialogTrigger asChild>
 				<Trash2
 					size={20}
-					className="text-red-600/40 cursor-pointer hover:text-red-600"
+					className="text-red-600/40 cursor-pointer hover:text-red-600 ml-auto"
 				/>
 			</AlertDialogTrigger>
 			<AlertDialogContent className="py-20 px-10 bg-red-900/10 backdrop-blur-xl">

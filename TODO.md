@@ -24,3 +24,7 @@ zustand
 cuando borro un punto, cambiar el nombre de los restantes
 
 que se coloquen valores, en el alert donde inserto puntos
+
+cambiar el tamaño de las celdas
+
+escalar croquis cuando medidas sean grandes

@@ -34,6 +34,8 @@ export default function MedidasPlano({
 		(cantidadFilas * cantidadColumnas) /
 		(cantidadAltura * (cantidadFilas + cantidadColumnas))
 
+	const hayValores =
+		cantidadFilas !== 0 && cantidadColumnas !== 0 && cantidadAltura !== 0
 	const indiceRedondeo =
 		Math.abs(indiceDeLocal % 1) > 0
 			? Math.trunc(indiceDeLocal) + 1
@@ -46,8 +48,7 @@ export default function MedidasPlano({
 				: indiceRedondeo === 3
 					? "entre 23 y 30"
 					: "entre 30 y 40"
-	const hayValores = !Number.isNaN(indiceDeLocal) && cantidadAltura !== 0
-
+	console
 	return (
 		<div className="cardAccent flex-col p-10 px-14 gap-6">
 			<div className="flex items-end w-full border-b border-foreground/20">
@@ -153,7 +154,7 @@ export default function MedidasPlano({
 							Minimo numero de celdas
 						</span>
 						<span className="text-2xl bg-pink-500/50 px-4 py-1 rounded-lg">
-							{(indiceRedondeo + 2) ** 2}
+							{indiceRedondeo >= 4 ? "36" : (indiceRedondeo + 2) ** 2}
 						</span>
 					</div>
 				</div>

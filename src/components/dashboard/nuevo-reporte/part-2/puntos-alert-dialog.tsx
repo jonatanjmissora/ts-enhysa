@@ -5,7 +5,7 @@ import {
 	AlertDialogContent,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
-import { Lightbulb } from "lucide-react"
+import { Lightbulb, Trash, Trash2 } from "lucide-react"
 import type { PuntosType } from "@/routes/_protected/new-report"
 
 export default function PuntosAlertDialog({
@@ -68,14 +68,14 @@ const CroquisElement = ({
 }) => {
 	return (
 		<div className="flex flex-col gap-4 items-center justify-center">
-			<div className="flex gap-6 items-end relative">
-				<div className="relative w-max ">
-					<p className="absolute left-0 -top-20 border-b border-white py-1 text-center w-full my-4 text-foreground/50 tracking-widest">
-						Largo {cantidad_columnas}m
+			<div className="flex gap-10 items-center relative">
+				<div className="relative flex-1">
+					<p className="absolute left-0 -top-20 border-b border-foreground/50 py-1 text-center w-full my-4 text-foreground/50 tracking-widest">
+						Ancho {cantidad_columnas}m
 					</p>
-					<div className="absolute -left-30 top-0 h-full w-max px-2 border-r border-white/50 py-1 text-center mx-4 flex items-center text-foreground/50  tracking-widest">
+					<div className="absolute -left-30 top-0 h-full w-max px-2 border-r border-foreground/50 py-1 text-center mx-4 flex items-center text-foreground/50  tracking-widest">
 						<div className="flex flex-col">
-							<span>Ancho</span>
+							<span>Largo</span>
 							<span>{cantidad_filas}m</span>
 						</div>
 					</div>
@@ -87,15 +87,7 @@ const CroquisElement = ({
 						setPuntos={setPuntos}
 					/>
 				</div>
-				<div className="absolute top-0 -right-24 flex flex-col gap-2">
-					<p className="text-lg tracking-wide text-foreground/50 italic">
-						puntos
-					</p>
-					{puntos[0] !== null &&
-						puntos.map((punto, index) => (
-							<p key={`punto-${index}`}>{punto?.nombre}</p>
-						))}
-				</div>
+				<PuntosList puntos={puntos} setPuntos={setPuntos} />
 			</div>
 			<p>
 				Seleccione el punto-{puntos[0] === null ? "1" : puntos.length + 1} de
@@ -201,5 +193,44 @@ export function CeldasGrid({
 				</div>
 			)}
 		</button>
+	)
+}
+
+const PuntosList = ({
+	puntos,
+	setPuntos,
+}: {
+	puntos: PuntosType[]
+	setPuntos: (puntos: PuntosType[]) => void
+}) => {
+	return (
+		<div className="flex flex-col gap-2">
+			<p className="text-lg tracking-wide text-foreground/50 italic border-b border-foreground/50 px-1">
+				puntos
+			</p>
+			{puntos[0] !== null &&
+				puntos.map((punto, index) => (
+					<div className="flex items-center gap-2" key={`punto-${index}`}>
+						<label htmlFor={`punto-${index}`}>p{index + 1}</label>
+						<input
+							id={`punto-${index}`}
+							type="number"
+							className="px-2 py-1 bg-background rounded-sm  w-20 text-center"
+							onChange={e => {
+								const newPuntos = [...puntos]
+								const actualPunto = newPuntos.find(
+									p => p.nombre === punto?.nombre
+								)
+								if (actualPunto) {
+									actualPunto.valor = Number(e.target.value)
+									console.log(actualPunto)
+								}
+								setPuntos(newPuntos)
+							}}
+						/>
+						<Trash2 size={16} className="text-red-700/50" />
+					</div>
+				))}
+		</div>
 	)
 }
