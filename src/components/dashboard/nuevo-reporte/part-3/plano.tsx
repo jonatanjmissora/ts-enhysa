@@ -1,4 +1,4 @@
-import { PuntosType } from "@/routes/_protected/new-report"
+import type { PuntosType } from "@/routes/_protected/new-report"
 import { Lightbulb, RulerDimensionLine } from "lucide-react"
 import {
 	Tooltip,
@@ -25,7 +25,7 @@ export default function NewReportPart3Plano({
 				<div className="bg-purple-600/75 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
 					<RulerDimensionLine className="size-6" />
 				</div>
-				<span className="sm:text-xl 2xl:text-2xl font-semibold tracking-wider py-2">
+				<span className="sm:text-lg 2xl:text-xl font-semibold tracking-wider py-2">
 					Plano de {nombre}
 				</span>
 			</div>

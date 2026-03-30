@@ -1,4 +1,4 @@
-import { PuntosType } from "@/routes/_protected/new-report"
+import type { PuntosType } from "@/routes/_protected/new-report"
 import { Check, X } from "lucide-react"
 
 export default function NewReportPart3Tags({

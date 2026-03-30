@@ -10,7 +10,7 @@ export default function NewReportPart2Locacion() {
 		<Accordion type="single" collapsible defaultValue="" className="w-full">
 			<AccordionItem value="shipping">
 				<AccordionTrigger>
-					<span className="text-lg font-semibold">Locación</span>
+					<span className="font-semibold tracking-wider">Locación</span>
 				</AccordionTrigger>
 				<AccordionContent>
 					<iframe

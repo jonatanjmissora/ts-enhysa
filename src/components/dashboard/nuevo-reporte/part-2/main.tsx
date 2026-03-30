@@ -1,10 +1,9 @@
 import MedidasPlano from "./medidas-plano"
-import PuntosMedicion from "./puntos-medicion"
 import { Croquis } from "./croquis"
-import { useState } from "react"
 import { Save } from "lucide-react"
-import { PuntosType } from "@/routes/_protected/new-report"
+import type { PuntosType } from "@/routes/_protected/new-report"
 import { toast } from "sonner"
+import InformacionMedicion from "./Informacion-medicion"
 
 export default function NewReportPart2({
 	actualStep,
@@ -37,7 +36,6 @@ export default function NewReportPart2({
 	celdasSeleccionadas: string[]
 	setCeldasSeleccionadas: (celdas: string[]) => void
 }) {
-	const [componentStep, setComponentStep] = useState<number>(1)
 	const pasarAlPaso3 = () => {
 		let completos = true
 		puntos.forEach(punto => {
@@ -46,15 +44,18 @@ export default function NewReportPart2({
 			}
 		})
 		if (completos) {
+			window.scrollTo(0, 0)
 			setActualStep(3)
 		} else toast.error("Por favor, complete los valores de la tabla")
 	}
+	const valoresValidos =
+		cantidadFilas !== 0 && cantidadColumnas !== 0 && cantidadAltura !== 0
 
 	return (
 		<main
 			className={`${actualStep === 2 ? "flex-1" : "hidden"} p-20 sm:py-10 2xl:py-20 flex flex-col sm:gap-6 2xl:gap-10 justify-center`}
 		>
-			<div className="flex gap-10">
+			<div className="flex gap-10 items-stretch">
 				<div className="flex flex-col gap-10 sm:w-[40%] 2xl:w-1/2">
 					<MedidasPlano
 						nombre={nombre}
@@ -65,31 +66,26 @@ export default function NewReportPart2({
 						setCantidadFilas={setCantidadFilas}
 						setCantidadColumnas={setCantidadColumnas}
 						setCantidadAltura={setCantidadAltura}
-						setComponentStep={setComponentStep}
 						setCeldasSeleccionadas={setCeldasSeleccionadas}
 					/>
 
 					<div
-						className={`flex-1 flex flex-col ${componentStep < 3 && "opacity-50 blur"}`}
+						className={`flex-1 flex flex-col ${!valoresValidos && "opacity-50 blur-[2px]"}`}
 					>
-						<PuntosMedicion
-							cantidadFilas={cantidadFilas}
-							cantidadColumnas={cantidadColumnas}
-							celdasSeleccionadas={celdasSeleccionadas}
-							puntos={puntos}
-							setPuntos={setPuntos}
-						/>
+						<InformacionMedicion nombre={nombre} />
 					</div>
 				</div>
 
-				<div className={`${componentStep < 2 && "opacity-50 blur"}`}>
+				<div
+					className={`flex flex-col ${!valoresValidos && "opacity-50 blur-[2px]"}`}
+				>
 					<Croquis
 						nombre={nombre}
 						cantidadFilas={cantidadFilas}
 						cantidadColumnas={cantidadColumnas}
+						cantidadAltura={cantidadAltura}
 						celdasSeleccionadas={celdasSeleccionadas}
 						setCeldasSeleccionadas={setCeldasSeleccionadas}
-						setComponentStep={setComponentStep}
 						puntos={puntos}
 						setPuntos={setPuntos}
 					/>

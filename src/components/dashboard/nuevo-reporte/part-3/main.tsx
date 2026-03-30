@@ -1,8 +1,9 @@
 import { BookmarkCheck } from "lucide-react"
 import Resumen from "./resumen"
-import { PuntosType } from "@/routes/_protected/new-report"
+import type { PuntosType } from "@/routes/_protected/new-report"
 import NewReportPart3Tags from "./tags"
 import NewReportPart3Plano from "./plano"
+import NewReportPart3Formulas from "./formulas"
 
 export default function NewReportPart3({
 	actualStep,
@@ -11,6 +12,7 @@ export default function NewReportPart3({
 	puntos,
 	cantidadFilas,
 	cantidadColumnas,
+	cantidadAltura,
 	celdasSeleccionadas,
 }: {
 	actualStep: number
@@ -19,6 +21,7 @@ export default function NewReportPart3({
 	puntos: PuntosType[]
 	cantidadFilas: number
 	cantidadColumnas: number
+	cantidadAltura: number
 	celdasSeleccionadas: string[]
 }) {
 	const finalizarProyecto = () => {
@@ -34,9 +37,13 @@ export default function NewReportPart3({
 				<div className="flex-1 flex flex-col gap-10 sm:w-[40%] 2xl:w-1/2">
 					<Resumen puntos={puntos} nombre={nombre} />
 
-					<div className={`flex-1 cardAccent p-20 items-center justify-center`}>
-						AQUI VA LA FORMULA
-					</div>
+					<NewReportPart3Formulas
+						nombre={nombre}
+						puntos={puntos}
+						cantidadFilas={cantidadFilas}
+						cantidadColumnas={cantidadColumnas}
+						cantidadAltura={cantidadAltura}
+					/>
 				</div>
 
 				<div className="flex flex-col gap-10 w-1/2">

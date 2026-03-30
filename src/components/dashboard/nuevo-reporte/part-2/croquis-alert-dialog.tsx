@@ -12,23 +12,23 @@ export default function CroquisAlertDialog({
 	cantidad_columnas,
 	celdasSeleccionadas,
 	setCeldasSeleccionadas,
-	setComponentStep,
+	setIsCroquis,
 }: {
 	cantidad_filas: number
 	cantidad_columnas: number
 	celdasSeleccionadas: string[]
 	setCeldasSeleccionadas: (value: string[]) => void
-	setComponentStep: (value: number) => void
+	setIsCroquis: (value: boolean) => void
 }) {
 	const [open, setOpen] = useState(false)
 
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild>
-				<button className="cardBackground p-4 py-2 text-center sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75">
+				<button className="w-full py-1 bg-background border border-foreground/20 text-center sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75">
 					{celdasSeleccionadas.length === 0
-						? "Dibujar Plano"
-						: "Modificar Plano"}
+						? "Dibujar Croquis"
+						: "Modificar Croquis"}
 				</button>
 			</AlertDialogTrigger>
 			<AlertDialogContent className="p-30 px-40">
@@ -38,7 +38,7 @@ export default function CroquisAlertDialog({
 					setOpen={setOpen}
 					celdasSeleccionadas={celdasSeleccionadas}
 					setCeldasSeleccionadas={setCeldasSeleccionadas}
-					setComponentStep={setComponentStep}
+					setIsCroquis={setIsCroquis}
 				/>
 			</AlertDialogContent>
 		</AlertDialog>
@@ -51,14 +51,14 @@ const CroquisElement = ({
 	setOpen,
 	celdasSeleccionadas,
 	setCeldasSeleccionadas,
-	setComponentStep,
+	setIsCroquis,
 }: {
 	cantidad_filas: number
 	cantidad_columnas: number
 	setOpen: (value: boolean) => void
 	celdasSeleccionadas: string[]
 	setCeldasSeleccionadas: (value: string[]) => void
-	setComponentStep: (value: number) => void
+	setIsCroquis: (value: boolean) => void
 }) => {
 	const [division, setDivision] = useState<0.5 | 1>(1)
 	const modificarDivision = (signo: "+" | "-") => {
@@ -91,6 +91,7 @@ const CroquisElement = ({
 						setCeldasSeleccionadas={setCeldasSeleccionadas}
 						celdasSeleccionadas={celdasSeleccionadas}
 						division={division}
+						setIsCroquis={setIsCroquis}
 					/>
 				</div>
 				<div className="absolute bottom-0 -right-24 flex flex-col gap-2">
@@ -100,10 +101,16 @@ const CroquisElement = ({
 					<div className="text-xs size-15 border border-black flex items-center justify-center text-foreground/50">
 						{division} x {division}
 					</div>
-					<button className="cardBackground px-1 py-0  text-2xl font-bold flex items-center justify-center cursor-pointer">
+					<button
+						className="cardBackground px-1 py-0  text-2xl font-bold flex items-center justify-center cursor-pointer"
+						onClick={() => modificarDivision("+")}
+					>
 						+
 					</button>
-					<button className="cardBackground px-1 py-0  text-2xl font-bold flex items-center justify-center cursor-pointer">
+					<button
+						className="cardBackground px-1 py-0  text-2xl font-bold flex items-center justify-center cursor-pointer"
+						onClick={() => modificarDivision("-")}
+					>
 						-
 					</button>
 				</div>
@@ -114,7 +121,6 @@ const CroquisElement = ({
 				className="bg-background px-20"
 				onClick={() => {
 					setOpen(false)
-					setComponentStep(3)
 				}}
 			>
 				Listo
@@ -130,6 +136,7 @@ export function CeldasGrid({
 	setCeldasSeleccionadas,
 	celdasSeleccionadas,
 	division,
+	setIsCroquis,
 }: {
 	activeCroquis: boolean
 	cantidad_filas: number
@@ -137,6 +144,7 @@ export function CeldasGrid({
 	setCeldasSeleccionadas: (value: string[]) => void
 	celdasSeleccionadas: string[]
 	division: 0.5 | 1
+	setIsCroquis: (value: boolean) => void
 }) {
 	const [isMouseDown, setIsMouseDown] = useState(false)
 	const getKey = (row: number, col: number) => `${row}-${col}`
@@ -145,7 +153,12 @@ export function CeldasGrid({
 		const key = getKey(row, col)
 
 		setCeldasSeleccionadas(prev => {
-			if (prev.includes(key)) return prev.filter(celda => celda !== key)
+			if (prev.includes(key)) {
+				if (prev[0] !== null) setIsCroquis(false)
+				else setIsCroquis(true)
+				return prev.filter(celda => celda !== key)
+			}
+			setIsCroquis(true)
 			return [...prev, key]
 		})
 	}

@@ -5,8 +5,8 @@ import {
 	AlertDialogContent,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
-import { Lightbulb, Plus } from "lucide-react"
-import { PuntosType } from "@/routes/_protected/new-report"
+import { Lightbulb } from "lucide-react"
+import type { PuntosType } from "@/routes/_protected/new-report"
 
 export default function PuntosAlertDialog({
 	cantidad_filas,
@@ -14,12 +14,14 @@ export default function PuntosAlertDialog({
 	celdasSeleccionadas,
 	puntos,
 	setPuntos,
+	isCroquis,
 }: {
 	cantidad_filas: number
 	cantidad_columnas: number
 	celdasSeleccionadas: string[]
 	puntos: PuntosType[]
 	setPuntos: (puntos: PuntosType[]) => void
+	isCroquis: boolean
 }) {
 	const [open, setOpen] = useState(false)
 
@@ -27,9 +29,11 @@ export default function PuntosAlertDialog({
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild>
 				<div className="w-full flex justify-end">
-					<button className="cardBackground gap-1 p-3 py-1 text-center sm:text-xs 2xl:text-lg cursor-pointer hover:bg-background/75">
-						<Plus size={12} />
-						inserte punto
+					<button
+						className={`w-full py-1 bg-background border border-foreground/20 text-center sm:text-base 2xl:text-lg  hover:bg-background/75 ${!isCroquis ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+						disabled={!isCroquis}
+					>
+						Inserte Punto
 					</button>
 				</div>
 			</AlertDialogTrigger>

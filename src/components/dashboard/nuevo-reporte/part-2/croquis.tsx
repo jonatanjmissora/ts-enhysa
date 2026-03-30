@@ -1,9 +1,6 @@
-import { PuntosType } from "@/routes/_protected/new-report"
+import type { PuntosType } from "@/routes/_protected/new-report"
 import CroquisAlertDialog from "./croquis-alert-dialog"
-import { Lightbulb, RulerDimensionLine, Upload } from "lucide-react"
-import NewReportPart2Observaciones from "./observaciones"
-import NewReportPart2Clima from "./clima"
-import NewReportPart2Locacion from "./locacion"
+import { Database, Lightbulb, RulerDimensionLine, Trash2 } from "lucide-react"
 import PuntosAlertDialog from "./puntos-alert-dialog"
 import {
 	Tooltip,
@@ -11,112 +8,163 @@ import {
 	TooltipTrigger,
 } from "@/components/ui/tooltip"
 
+import { useState } from "react"
+import {
+	AlertDialog,
+	AlertDialogTrigger,
+	AlertDialogContent,
+	AlertDialogTitle,
+	AlertDialogDescription,
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
+
 export function Croquis({
 	nombre,
 	cantidadFilas,
 	cantidadColumnas,
+	cantidadAltura,
 	celdasSeleccionadas,
 	setCeldasSeleccionadas,
-	setComponentStep,
 	puntos,
 	setPuntos,
 }: {
 	nombre: string
 	cantidadFilas: number
 	cantidadColumnas: number
+	cantidadAltura: number
 	celdasSeleccionadas: string[]
 	setCeldasSeleccionadas: (value: string[]) => void
-	setComponentStep: (value: number) => void
 	puntos: PuntosType[]
 	setPuntos: (puntos: PuntosType[]) => void
 }) {
+	const valoresValidos =
+		cantidadFilas !== 0 && cantidadColumnas !== 0 && cantidadAltura !== 0
+	const [isCroquis, setIsCroquis] = useState<boolean>(false)
+
 	return (
-		<div className="cardAccent flex-col p-10 px-14 gap-6">
-			<div className="flex justify-between items-center gap-6 w-full">
-				<div className="flex items-center gap-3 ">
+		<div className="cardAccent flex-col p-10 px-14 gap-6 flex-1">
+			<div className="flex w-full items-end border-b border-foreground/20">
+				<div className="flex items-center gap-3 w-full">
 					<div className="bg-purple-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
 						<RulerDimensionLine className="size-6" />
 					</div>
-					<span className="w-full sm:text-xl 2xl:text-2xl font-semibold tracking-wider py-2">
-						Croquis del {nombre}
+					<span className="w-full sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2">
+						Croquis del plano
 					</span>
 				</div>
-				<CroquisAlertDialog
-					cantidad_filas={cantidadFilas}
-					cantidad_columnas={cantidadColumnas}
-					celdasSeleccionadas={celdasSeleccionadas}
-					setCeldasSeleccionadas={setCeldasSeleccionadas}
-					setComponentStep={setComponentStep}
-				/>
+				<p className="ml-auto text-sm text-foreground/70 py-1">
+					{nombre || "Depósito"}
+				</p>
 			</div>
 
-			<div className="relative sm:h-100 2xl:h-120 sm:w-full 2xl:w-3/4 mx-auto flex items-center justify-center bg-white/5 rounded-lg">
-				{celdasSeleccionadas.length === 0 ? (
-					<div>
-						<span className="bg-background p-4 rounded/xl shadow-xl text-pretty">
-							Aqui se coloca el croquis del plano a medir
-						</span>
-						<img
-							src="/plano.webp"
-							alt="plano"
-							className="absolute inset-0 z-1 h-full w-full object-cover opacity-40"
-						/>
-					</div>
-				) : (
-					<div className="relative">
-						<p className="absolute left-0 -top-20 border-b border-white py-1 text-center w-full my-4 text-foreground/50 tracking-widest">
-							Largo {cantidadColumnas}m
-						</p>
-						<div className="absolute -left-30 top-0 h-full w-max px-2 border-r border-white py-1 text-center mx-4 flex items-center text-foreground/50  tracking-widest">
-							<div className="flex flex-col">
-								<span>Ancho</span>
-								<span>{cantidadFilas}m</span>
-							</div>
-						</div>
-						<CeldasGridWithPuntos
+			<div className="flex flex-col w-full">
+				<div className="flex justify-between items-center w-full">
+					<div className="w-full flex items-center gap-2">
+						<CroquisAlertDialog
 							cantidad_filas={cantidadFilas}
 							cantidad_columnas={cantidadColumnas}
 							celdasSeleccionadas={celdasSeleccionadas}
-							puntos={puntos}
+							setCeldasSeleccionadas={setCeldasSeleccionadas}
+							setIsCroquis={setIsCroquis}
 						/>
 					</div>
-				)}
-				<div className="absolute bottom-0 left-0">
 					<PuntosAlertDialog
 						cantidad_filas={cantidadFilas}
 						cantidad_columnas={cantidadColumnas}
 						celdasSeleccionadas={celdasSeleccionadas}
 						puntos={puntos}
 						setPuntos={setPuntos}
+						isCroquis={isCroquis}
 					/>
 				</div>
-			</div>
 
+				<div className="relative sm:h-100 2xl:h-120 sm:w-full 2xl:w-3/4 mx-auto flex items-center justify-center bg-white/5">
+					{!valoresValidos ? (
+						<div>
+							<span className="bg-background p-4 rounded/xl shadow-xl text-pretty">
+								Aqui se coloca el croquis del plano a medir
+							</span>
+							<img
+								src="/plano.webp"
+								alt="plano"
+								className="absolute inset-0 z-1 h-full w-full object-cover opacity-25"
+							/>
+						</div>
+					) : (
+						<div className="relative">
+							<p className="absolute left-0 -top-16 border-b border-foreground/40 py-1 text-center w-full my-4 text-foreground/40 tracking-widest">
+								Largo {cantidadColumnas}m
+							</p>
+							<div className="absolute -left-26 top-0 h-full w-max px-2 border-r border-foreground/40 py-1 text-center mx-4 flex items-center text-foreground/40  tracking-widest">
+								<div className="flex flex-col">
+									<span>Ancho</span>
+									<span>{cantidadFilas}m</span>
+								</div>
+							</div>
+							<CeldasGridWithPuntos
+								cantidad_filas={cantidadFilas}
+								cantidad_columnas={cantidadColumnas}
+								celdasSeleccionadas={celdasSeleccionadas}
+								puntos={puntos}
+							/>
+						</div>
+					)}
+				</div>
+			</div>
 			<p className="sm:w-full 2xl:w-3/4 py-6 mx-auto italic text-center tracking-wider text-foreground/50 sm:text-sm 2xl:text-xl">
 				El indice del Local (RI) es un valor numerico que representa la
 				geometria del recinto para calculos luminotécnicos.
 			</p>
 
-			<div className="sm:w-full 2xl:w-3/4 relative h-30 mx-auto cardBackground flex items-center justify-center">
-				<div className="w-[90%] h-[60%] italic text-foreground/50 tracking-wider text-lg flex items-center justify-center gap-4 border-3 border-dashed border-foreground/10 rounded-lg">
-					<Upload size={20} />
-					<span>Ingresar imagenes del lugar</span>
+			<div className="flex flex-col justify-between items-center gap-3 w-full">
+				<div className="flex w-full items-end border-b border-foreground/20">
+					<div className="flex items-center gap-3 w-full">
+						<div className="bg-orange-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
+							<Database className="size-6" />
+						</div>
+						<span className="w-full sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2">
+							Punto(s) de medición
+						</span>
+					</div>
+					<p className="ml-auto text-sm text-foreground/70 py-1">
+						{nombre || "Depósito"}
+					</p>
 				</div>
-				<input
-					type="file"
-					className="absolute inset-0 opacity-0 cursor-pointer"
+
+				<PuntosAlertDialog
+					cantidad_filas={cantidadFilas}
+					cantidad_columnas={cantidadColumnas}
+					celdasSeleccionadas={celdasSeleccionadas}
+					puntos={puntos}
+					setPuntos={setPuntos}
+					isCroquis={isCroquis}
 				/>
 			</div>
 
-			<div className="sm:w-full 2xl:w-3/4 mx-auto border-b border-foreground/20 flex items-center gap-6">
-				<NewReportPart2Locacion />
+			<div className="flex flex-col justify-between items-center gap-6 w-full">
+				<div className="w-full grid grid-cols-[1fr_1fr_20px] gap-4 place-items-center sm:text-base 2xl:text-lg sm:font-semibold 2xl:font-bold italic tracking-wider border-b border-foreground/20 pb-2">
+					<span>nombre</span>
+					<span>valor</span>
+					<span></span>
+				</div>
+				{puntos[0] === null ? (
+					<div className="w-full grid grid-cols-[1fr_1fr_20px] gap-4 place-items-center">
+						<span className="text-amber-400">no hay puntos. . .</span>
+						<span></span>
+						<span></span>
+					</div>
+				) : (
+					puntos.map(punto => (
+						<Punto
+							key={punto?.nombre}
+							nombre={punto?.nombre || ""}
+							valor={punto?.valor || 0}
+							puntos={puntos}
+							setPuntos={setPuntos}
+						/>
+					))
+				)}
 			</div>
-
-			<div className="sm:w-full 2xl:w-3/4 mx-auto border-b border-foreground/20 flex items-center gap-6">
-				<NewReportPart2Observaciones />
-			</div>
-
-			<NewReportPart2Clima />
 		</div>
 	)
 }
@@ -187,5 +235,101 @@ export function CeldasGridWithPuntos({
 				</div>
 			)}
 		</div>
+	)
+}
+
+const Punto = ({
+	nombre,
+	valor,
+	puntos,
+	setPuntos,
+}: {
+	nombre: string
+	valor: number
+	puntos: PuntosType[]
+	setPuntos: (puntos: PuntosType[]) => void
+}) => {
+	const [inputValue, setInputValue] = useState(valor)
+
+	return (
+		<div className="w-full grid grid-cols-[1fr_1fr_20px] gap-4 place-items-center">
+			<span className="rounded-lg bg-background py-1 w-full text-center">
+				{nombre}
+			</span>
+			<input
+				type="number"
+				className={`rounded-lg py-1 w-full text-center ${inputValue === 0 ? "bg-amber-400/25" : "bg-background"}`}
+				value={inputValue || ""}
+				placeholder="Ej. 1,23"
+				onChange={e => {
+					setInputValue(Number(e.target.value))
+					const nuevosPuntos = puntos.map(punto => {
+						if (punto?.nombre === nombre) {
+							return {
+								...punto,
+								valor: Number(e.target.value),
+								cumple: Number(e.target.value) >= 1,
+							}
+						}
+						return punto
+					})
+					setPuntos(nuevosPuntos)
+				}}
+			/>
+			<DeletePuntoAlertDialog
+				nombre={nombre}
+				puntos={puntos}
+				setPuntos={setPuntos}
+			/>
+		</div>
+	)
+}
+
+export function DeletePuntoAlertDialog({
+	nombre,
+	puntos,
+	setPuntos,
+}: {
+	nombre: string
+	puntos: PuntosType[]
+	setPuntos: (puntos: PuntosType[]) => void
+}) {
+	const [open, setOpen] = useState(false)
+
+	const eliminarPunto = () => {
+		const nuevosPuntos = puntos.filter(punto => punto?.nombre !== nombre)
+		setPuntos(nuevosPuntos)
+		setOpen(false)
+	}
+
+	return (
+		<AlertDialog open={open} onOpenChange={setOpen}>
+			<AlertDialogTrigger asChild>
+				<Trash2
+					size={20}
+					className="text-red-600/40 cursor-pointer hover:text-red-600"
+				/>
+			</AlertDialogTrigger>
+			<AlertDialogContent className="py-20 px-10 bg-red-900/10 backdrop-blur-xl">
+				<AlertDialogTitle className="text-center">
+					¿Estás seguro de que quieres eliminar {nombre} ?
+				</AlertDialogTitle>
+				<AlertDialogDescription className="text-center"></AlertDialogDescription>
+				<div className="flex justify-end gap-4">
+					<Button
+						variant="outline"
+						className="cursor-pointer"
+						onClick={() => {
+							setOpen(false)
+						}}
+					>
+						Cancelar
+					</Button>
+					<Button className="cursor-pointer" onClick={eliminarPunto}>
+						Confirmar
+					</Button>
+				</div>
+			</AlertDialogContent>
+		</AlertDialog>
 	)
 }
