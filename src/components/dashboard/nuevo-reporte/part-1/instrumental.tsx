@@ -1,6 +1,11 @@
-import { Cpu, Upload } from "lucide-react"
+import { InputFiles } from "@/components/layout/input-files"
+import { Cpu } from "lucide-react"
+import { useState } from "react"
 
 export default function NuevoReporteInstrumental() {
+
+const [instrumentoFiles, setInstrumentoFiles] = useState<File[]>([])
+
 	return (
 		<div className="flex flex-col gap-2">
 			<div className="flex items-center gap-2">
@@ -35,16 +40,8 @@ export default function NuevoReporteInstrumental() {
 						/>
 					</div>
 				</div>
-				<div className="relative w-full h-30 mx-auto cardBackground flex items-center justify-center">
-					<div className="w-[90%] h-[60%] italic text-foreground/50 tracking-wider text-lg flex items-center justify-center gap-4 border-3 border-dashed border-foreground/10 rounded-lg">
-						<Upload size={20} />
-						<span>Ingresar certificado digital</span>
-					</div>
-					<input
-						name="certificado"
-						type="file"
-						className="absolute inset-0 opacity-0 cursor-pointer"
-					/>
+				<div className="relative w-full min-h-30 mx-auto cardBackground flex items-center justify-center">
+					<InputFiles text="del certificado del instrumental." files={instrumentoFiles} setFiles={setInstrumentoFiles} />
 				</div>
 			</article>
 		</div>

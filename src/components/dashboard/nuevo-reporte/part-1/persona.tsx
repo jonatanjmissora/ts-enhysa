@@ -1,7 +1,12 @@
+import { InputFiles } from "@/components/layout/input-files"
 import { USER } from "@/lib/mock/user"
 import { UserRound } from "lucide-react"
+import { useState } from "react"
 
 export default function NuevoReportePersona() {
+
+	const [personaFiles, setPersonaFiles] = useState<File[]>([])
+
 	return (
 		<div className="flex flex-col gap-2 flex-1">
 			<div className="flex items-center gap-2">
@@ -46,10 +51,8 @@ export default function NuevoReportePersona() {
 						/>
 					</div>
 				</div>
-				<div className="bg-background h-20 py-2 px-4 rounded-lg flex items-center justify-center">
-					<p className="text-center text-foreground/50 italic">
-						Foto de la matricula
-					</p>
+				<div className="bg-background min-h-20 py-2 px-4 rounded-lg flex items-center justify-center">
+					<InputFiles files={personaFiles} setFiles={setPersonaFiles} text="de la matrícula y firma digital." maxFiles={2} />
 				</div>
 			</article>
 		</div>

@@ -1,9 +1,14 @@
-import { Info, Upload } from "lucide-react"
+import { Info } from "lucide-react"
 import NewReportPart2Observaciones from "./observaciones"
 import NewReportPart2Clima from "./clima"
 import NewReportPart2Locacion from "./locacion"
+import { useState } from "react";
+import { InputFiles } from "@/components/layout/input-files";
 
 export default function InformacionMedicion({ nombre }: { nombre: string }) {
+
+const [planoFiles, setPlanoFiles] = useState<File[]>([]);
+
 	return (
 		<div className="flex-1 cardAccent flex-col p-10 px-14 gap-6">
 			<div className="flex w-full items-end border-b border-foreground/20">
@@ -20,15 +25,8 @@ export default function InformacionMedicion({ nombre }: { nombre: string }) {
 				</p>
 			</div>
 
-			<div className="w-full relative py-4 mx-auto cardBackground flex items-center justify-center">
-				<div className="w-[90%] p-4 italic text-foreground/50 tracking-wider text-sm flex items-center justify-center border-3 border-dashed border-foreground/10 rounded-lg">
-					<Upload size={16} />
-					<span>Ingresar imagenes del lugar</span>
-				</div>
-				<input
-					type="file"
-					className="absolute inset-0 opacity-0 cursor-pointer"
-				/>
+			<div className="w-full py-4 cardBackground flex items-center justify-center flex-col">
+				<InputFiles text="del plano a medir." files={planoFiles} setFiles={setPlanoFiles} />
 			</div>
 
 			<div className="sm:w-full w-full mx-auto border-b border-foreground/20 flex items-center gap-6">
