@@ -13,3 +13,7 @@ export const getUserInfo = (session: any) => {
 	const LastName = lastName.charAt(0).toUpperCase() + lastName.slice(1)
 	return { avatar, fullName: `${Name} ${LastName}` }
 }
+
+export async function delay(ms=3000) {
+	return new Promise(resolve => setTimeout(resolve, ms))
+}
