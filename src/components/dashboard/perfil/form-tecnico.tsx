@@ -15,9 +15,8 @@ export default function FormTecnico() {
 	return (
 		<div className="flex justify-center items-center min-h-screen p-20">
 			<div className="flex flex-col gap-2 relative w-1/2">
-				<div className="flex justify-between items-center">
-					<div></div>
-					<div className="absolute -top-10 -left-10">
+				<div className="flex justify-end items-center p-2">
+					<div className="absolute -top-14 -left-10">
 						{avatar ? (
 							<img
 								src={avatar}
@@ -30,25 +29,7 @@ export default function FormTecnico() {
 							</div>
 						)}
 					</div>
-					<div>
-						<p>{fullName.toUpperCase()}</p>
-					</div>
-					<button
-						className="text-foreground/50 px-4 py-2 rounded-lg cursor-pointer themeBtnAccent"
-						onClick={() => setEditMode(prev => !prev)}
-					>
-						{editMode ? (
-							<div className="flex items-center gap-2 w-20">
-								<Save className="size-5" />
-								Guardar
-							</div>
-						) : (
-							<div className="flex items-center gap-2 w-20">
-								<Pencil className="size-5" />
-								Editar
-							</div>
-						)}
-					</button>
+					<p>{fullName.toUpperCase()}</p>
 				</div>
 				<article className="flex flex-col items-stretch gap-6 text-lg p-10 cardAccent">
 					<div className="grid grid-cols-2 gap-4">
@@ -61,7 +42,7 @@ export default function FormTecnico() {
 							</label>
 							<input
 								id="nombre-completo"
-								className={`bg-background py-2 px-4 rounded-lg text-center ${isLoading ? "animate-pulse" : ""}`}
+								className={`bg-background py-2 px-4 rounded-lg text-center sm:text-sm 2xl:text-base ${isLoading ? "animate-pulse" : "animate-none"}`}
 								placeholder="Ingrese el nombre y apellido"
 								defaultValue={isLoading ? ". . ." : (tecnico?.nombre ?? "")}
 								readOnly={!editMode}
@@ -76,7 +57,7 @@ export default function FormTecnico() {
 							</label>
 							<input
 								id="telefono"
-								className={`bg-background py-2 px-4 rounded-lg text-center ${isLoading ? "animate-pulse" : ""}`}
+								className={`bg-background py-2 px-4 rounded-lg text-center sm:text-sm 2xl:text-base ${isLoading ? "animate-pulse" : "animate-none"}`}
 								placeholder="Ej. 000-0000000"
 								defaultValue={isLoading ? ". . ." : (tecnico?.telefono ?? "")}
 								readOnly={!editMode}
@@ -94,7 +75,7 @@ export default function FormTecnico() {
 							</label>
 							<input
 								id="matricula"
-								className={`bg-background py-2 px-4 rounded-lg text-center ${isLoading ? "animate-pulse" : ""}`}
+								className={`bg-background py-2 px-4 rounded-lg text-center sm:text-sm 2xl:text-base ${isLoading ? "animate-pulse" : "animate-none"}`}
 								placeholder="N° Matrícula "
 								defaultValue={isLoading ? ". . ." : (tecnico?.id ?? "")}
 								readOnly={!editMode}
@@ -109,7 +90,7 @@ export default function FormTecnico() {
 							</label>
 							<input
 								id="cargo"
-								className={`bg-background py-2 px-4 rounded-lg text-center ${isLoading ? "animate-pulse" : ""}`}
+								className={`bg-background py-2 px-4 rounded-lg text-center sm:text-sm 2xl:text-base ${isLoading ? "animate-pulse" : "animate-none"}`}
 								placeholder="Ej. Seguridad e Higiene"
 								defaultValue={isLoading ? ". . ." : (tecnico?.cargo ?? "")}
 								readOnly={!editMode}
@@ -117,7 +98,7 @@ export default function FormTecnico() {
 						</div>
 					</div>
 					<div className="relative w-full h-30 mx-auto cardBackground flex items-center justify-center">
-						<div className="w-[90%] h-[60%] italic text-foreground/50 tracking-wider text-lg flex items-center justify-center gap-4 border-3 border-dashed border-foreground/10 rounded-lg">
+						<div className="w-[90%] h-[60%] italic text-foreground/50 tracking-wider text-sm 2xl:text-base flex items-center justify-center gap-4 border-3 border-dashed border-foreground/10 rounded-lg">
 							<Upload size={20} />
 							<span>Ingresar foto de matricula</span>
 						</div>
@@ -136,7 +117,7 @@ export default function FormTecnico() {
 							Firma
 						</label>
 						<div className="relative w-full h-30 mx-auto cardBackground flex items-center justify-center">
-							<div className="w-[90%] h-[60%] italic text-foreground/50 tracking-wider text-lg flex items-center justify-center gap-4 border-3 border-dashed border-foreground/10 rounded-lg">
+							<div className="w-[90%] h-[60%] italic text-foreground/50 tracking-wider text-sm 2xl:text-base flex items-center justify-center gap-4 border-3 border-dashed border-foreground/10 rounded-lg">
 								<Upload size={20} />
 								<span>Ingresar firma digital</span>
 							</div>
@@ -157,11 +138,29 @@ export default function FormTecnico() {
 						</label>
 						<Textarea
 							name="footer"
-							className={`bg-background py-2 px-4 rounded-lg text-center ${isLoading ? "animate-pulse" : ""}`}
+							className={`bg-background py-2 px-4 rounded-lg text-center sm:text-sm 2xl:text-base ${isLoading ? "animate-pulse" : "animate-none"}`}
 							placeholder="Ingrese el pied de pagina"
 							defaultValue={isLoading ? ". . ." : (tecnico?.membrete ?? "")}
 							readOnly={!editMode}
 						/>
+					</div>
+					<div className="flex items-center justify-end w-full">
+						<button
+							className="text-foreground px-4 py-2 rounded-lg cursor-pointer themeBtnAccent"
+							onClick={() => setEditMode(prev => !prev)}
+						>
+							{editMode ? (
+								<div className="flex items-center justify-center gap-2 w-40">
+									<Save className="size-5" />
+									Guardar
+								</div>
+							) : (
+								<div className="flex items-center gap-2 w-20">
+									<Pencil className="size-5" />
+									Editar
+								</div>
+							)}
+						</button>
 					</div>
 				</article>
 			</div>
