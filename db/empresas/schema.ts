@@ -14,9 +14,9 @@ export const empresas = pgTable("empresas", {
 
 	codigoPostal: text("codigoPostal").notNull(),
 
-	cuit: text("cuit").notNull(),
+	horarios: text("horarios").notNull(),
 
-	horarios: text("horarios"),
+	logo: text("logo").notNull(),
 
 	tecnicoId: text("tecnico_id")
 		.notNull()

@@ -22,6 +22,60 @@ export const InputFiles = ({
 	setFiles: (files: File[]) => void
 	maxFiles?: number
 }) => {
+	if (maxFiles === 1) {
+		return (
+			<article className="w-full">
+				{files.length < maxFiles && (
+					<FileUpload
+						maxFiles={maxFiles}
+						maxSize={5 * 1024 * 1024}
+						className="w-full"
+						value={files}
+						onValueChange={setFiles}
+						multiple
+					>
+						<FileUploadDropzone className="p-0 border-none">
+							<FileUploadTrigger asChild>
+								<div className="flex items-center justify-center flex-wrap gap-0 w-full cursor-pointer">
+									<CloudUpload className="size-6 mx-2 text-foreground/50" />
+									<span className="text-foreground/50 sm:text-sm 2xl:text-lg">
+										{text}
+									</span>
+								</div>
+							</FileUploadTrigger>
+						</FileUploadDropzone>
+					</FileUpload>
+				)}
+				<FileUpload
+					maxFiles={maxFiles}
+					maxSize={5 * 1024 * 1024}
+					className="w-full"
+					value={files}
+					onValueChange={setFiles}
+					multiple
+				>
+					<FileUploadList className="w-full flex flex-row flex-wrap">
+						{files.map(file => (
+							<FileUploadItem
+								key={Math.random()}
+								value={file}
+								className="w-full p-0 m-0 mx-1"
+							>
+								<FileUploadItemPreview />
+								<FileUploadItemMetadata className="w-5 font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl cursor-pointer" />
+								<FileUploadItemDelete asChild>
+									<Button variant="ghost" size="icon" className="size-7">
+										<X className="size-4" />
+									</Button>
+								</FileUploadItemDelete>
+							</FileUploadItem>
+						))}
+					</FileUploadList>
+				</FileUpload>
+			</article>
+		)
+	}
+
 	return (
 		<article className="w-full">
 			{files.length < maxFiles && (
