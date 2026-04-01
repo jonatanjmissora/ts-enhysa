@@ -67,13 +67,13 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
 							return (
-								<Field data-invalid={isInvalid}>
+								<Field data-invalid={isInvalid} className="relative">
 									<FieldLabel
 										htmlFor={field.name}
 										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
 									>
 										Razón Social
-										<Asterisk className="text-destructive size-4" />
+										<Asterisk className="text-destructive size-3" />
 									</FieldLabel>
 									<Input
 										id={field.name}
@@ -85,7 +85,12 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										placeholder="Ej. Teléfonica"
 										className={`bg-background py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
 									/>
-									{isInvalid && <FieldError errors={field.state.meta.errors} />}
+									{isInvalid && (
+										<FieldError
+											errors={field.state.meta.errors}
+											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+										/>
+									)}
 								</Field>
 							)
 						}}
@@ -97,13 +102,13 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
 							return (
-								<Field data-invalid={isInvalid}>
+								<Field data-invalid={isInvalid} className="relative">
 									<FieldLabel
 										htmlFor={field.name}
 										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
 									>
 										CUIT
-										<Asterisk className="text-destructive size-4" />
+										<Asterisk className="text-destructive size-3" />
 									</FieldLabel>
 									<Input
 										id={field.name}
@@ -115,7 +120,12 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										placeholder="Ej. 00-00000000-0"
 										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
 									/>
-									{isInvalid && <FieldError errors={field.state.meta.errors} />}
+									{isInvalid && (
+										<FieldError
+											errors={field.state.meta.errors}
+											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+										/>
+									)}
 								</Field>
 							)
 						}}
@@ -129,7 +139,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
 							return (
-								<Field data-invalid={isInvalid}>
+								<Field data-invalid={isInvalid} className="relative">
 									<FieldLabel
 										htmlFor={field.name}
 										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
@@ -146,7 +156,12 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										placeholder="Ej. Villa Verde"
 										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
 									/>
-									{isInvalid && <FieldError errors={field.state.meta.errors} />}
+									{isInvalid && (
+										<FieldError
+											errors={field.state.meta.errors}
+											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+										/>
+									)}
 								</Field>
 							)
 						}}
@@ -158,7 +173,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
 							return (
-								<Field data-invalid={isInvalid}>
+								<Field data-invalid={isInvalid} className="relative">
 									<FieldLabel
 										htmlFor={field.name}
 										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
@@ -175,7 +190,12 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										placeholder="Ej. Andorra"
 										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
 									/>
-									{isInvalid && <FieldError errors={field.state.meta.errors} />}
+									{isInvalid && (
+										<FieldError
+											errors={field.state.meta.errors}
+											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+										/>
+									)}
 								</Field>
 							)
 						}}
@@ -189,7 +209,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
 							return (
-								<Field data-invalid={isInvalid}>
+								<Field data-invalid={isInvalid} className="relative">
 									<FieldLabel
 										htmlFor={field.name}
 										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
@@ -206,7 +226,12 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										placeholder="Ej. 5000"
 										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
 									/>
-									{isInvalid && <FieldError errors={field.state.meta.errors} />}
+									{isInvalid && (
+										<FieldError
+											errors={field.state.meta.errors}
+											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+										/>
+									)}
 								</Field>
 							)
 						}}
@@ -218,7 +243,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
 							return (
-								<Field data-invalid={isInvalid}>
+								<Field data-invalid={isInvalid} className="relative">
 									<FieldLabel
 										htmlFor={field.name}
 										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
@@ -235,7 +260,12 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										placeholder="Ej. Pr. Andorra"
 										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
 									/>
-									{isInvalid && <FieldError errors={field.state.meta.errors} />}
+									{isInvalid && (
+										<FieldError
+											errors={field.state.meta.errors}
+											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+										/>
+									)}
 								</Field>
 							)
 						}}
@@ -249,7 +279,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
 							return (
-								<Field data-invalid={isInvalid}>
+								<Field data-invalid={isInvalid} className="relative">
 									<FieldLabel
 										htmlFor={field.name}
 										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
@@ -266,7 +296,12 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										placeholder="Ej. Lun a Vie de 08:00 a 18:00"
 										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
 									/>
-									{isInvalid && <FieldError errors={field.state.meta.errors} />}
+									{isInvalid && (
+										<FieldError
+											errors={field.state.meta.errors}
+											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+										/>
+									)}
 								</Field>
 							)
 						}}
@@ -278,7 +313,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
 							return (
-								<Field data-invalid={isInvalid}>
+								<Field data-invalid={isInvalid} className="relative">
 									<FieldLabel
 										htmlFor={field.name}
 										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
@@ -293,7 +328,12 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 											maxFiles={1}
 										/>
 									</div>
-									{isInvalid && <FieldError errors={field.state.meta.errors} />}
+									{isInvalid && (
+										<FieldError
+											errors={field.state.meta.errors}
+											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+										/>
+									)}
 								</Field>
 							)
 						}}
@@ -301,7 +341,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 				</div>
 
 				<div className="flex justify-end items-center gap-2 w-full text-destructive">
-					<Asterisk className="text-destructive size-4" />
+					<Asterisk className="text-destructive size-3" />
 					<span className="text-xs 2xl:text-sm italic tracking-wide">
 						campo obligatorio
 					</span>

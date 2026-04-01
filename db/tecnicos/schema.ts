@@ -12,8 +12,6 @@ export const tecnicos = pgTable("tecnicos", {
 
 	id: text("id").primaryKey(),
 
-	imagen: text("imagen").notNull(),
-
 	firma: text("firma").notNull(),
 
 	membrete: text("membrete").notNull(),

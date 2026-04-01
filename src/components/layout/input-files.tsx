@@ -37,8 +37,8 @@ export const InputFiles = ({
 						<FileUploadDropzone className="p-0 border-none">
 							<FileUploadTrigger asChild>
 								<div className="flex items-center justify-center flex-wrap gap-0 w-full cursor-pointer">
-									<CloudUpload className="size-6 mx-2 text-foreground/50" />
-									<span className="text-foreground/50 sm:text-sm 2xl:text-lg">
+									<CloudUpload className="size-6 mx-2 text-foreground/20" />
+									<span className="text-foreground/20 sm:text-sm 2xl:text-lg">
 										{text}
 									</span>
 								</div>
@@ -89,9 +89,11 @@ export const InputFiles = ({
 				>
 					<FileUploadDropzone className="flex flex-col items-center justify-center border-dotted-2 text-center gap-0 py-2 w-full">
 						<FileUploadTrigger asChild>
-							<div className="flex items-center justify-center flex-wrap gap-0 w-full">
-								<CloudUpload className="size-6 m-2" />
-								<span className="text-base 2xl:text-lg">{text}</span>
+							<div className="flex items-center justify-center flex-wrap gap-0 w-full cursor-pointer">
+								<CloudUpload className="size-6 mx-2 text-foreground/20" />
+								<span className="text-foreground/20 sm:text-sm 2xl:text-lg">
+									{text}
+								</span>
 							</div>
 						</FileUploadTrigger>
 						<p className="text-sm tracking-wide text-foreground/50 italic">

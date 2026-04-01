@@ -3,7 +3,7 @@ import { useForm } from "@tanstack/react-form"
 // import { useQuery } from "@tanstack/react-query"
 import { useLoaderData } from "@tanstack/react-router"
 import { tecnicoFormValidator } from "db/tecnicos/tecnico-validator"
-import { Asterisk, Loader } from "lucide-react"
+import { Asterisk, CircleAlert, Loader } from "lucide-react"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { useState } from "react"
 import { toast } from "sonner"
@@ -35,24 +35,30 @@ export default function FormTecnico() {
 
 	const form = useForm({
 		defaultValues: {
-			id: "",
-			nombre: "",
-			cargo: "",
-			localidad: "",
-			telefono: "",
-			imagen: "",
-			membrete: "",
-			firma: "",
+			id: tecnico?.id || "",
+			nombre: tecnico?.nombre || "",
+			cargo: tecnico?.cargo || "",
+			localidad: tecnico?.localidad || "",
+			telefono: tecnico?.telefono || "",
+			membrete: tecnico?.membrete || "",
+			firma: tecnico?.firma || "",
 		},
 		validators: {
 			onSubmit: tecnicoFormValidator,
 		},
 		onSubmit: async ({ value }) => {
-			const result = await createTecnicoMutation({ data: value })
-			if (!result) {
-				console.error("Error al crear el técnico", error)
-				toast.error("Error al crear el técnico")
+			// const result = await createTecnicoMutation({ data: value })
+			// if (!result) {
+			// 	console.error("Error al crear el técnico", error)
+			// 	toast.error("Error al crear el técnico")
+			// }
+			if (!editMode) {
+				setEditMode(true)
+				return
 			}
+			if (!tecnico) console.log("Creando con: ", value)
+			else if (editMode) console.log("Editando", tecnico, "con", value)
+
 			toast.success("Técnico creado exitosamente")
 		},
 	})
@@ -79,7 +85,7 @@ export default function FormTecnico() {
 			</div>
 			<article className="flex flex-col items-stretch gap-6 text-lg p-10 cardAccent">
 				<form
-					className="flex flex-col gap-4"
+					className="flex flex-col gap-6"
 					id="create-form"
 					onSubmit={e => {
 						e.preventDefault()
@@ -94,26 +100,30 @@ export default function FormTecnico() {
 									const isInvalid =
 										field.state.meta.isTouched && !field.state.meta.isValid
 									return (
-										<Field data-invalid={isInvalid}>
+										<Field data-invalid={isInvalid} className="relative">
 											<FieldLabel
 												htmlFor={field.name}
 												className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
 											>
 												Nombre
-												<Asterisk className="text-destructive size-4" />
+												<Asterisk className="text-destructive size-3" />
 											</FieldLabel>
 											<Input
 												id={field.name}
 												name={field.name}
-												value={field.state.value}
+												value={isLoading ? ". . . " : field.state.value}
 												onBlur={field.handleBlur}
 												onChange={e => field.handleChange(e.target.value)}
 												aria-invalid={isInvalid}
 												placeholder="Nombre Completo"
 												className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
+												readOnly={!editMode}
 											/>
 											{isInvalid && (
-												<FieldError errors={field.state.meta.errors} />
+												<FieldError
+													errors={field.state.meta.errors}
+													className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+												/>
 											)}
 										</Field>
 									)
@@ -126,7 +136,7 @@ export default function FormTecnico() {
 									const isInvalid =
 										field.state.meta.isTouched && !field.state.meta.isValid
 									return (
-										<Field data-invalid={isInvalid}>
+										<Field data-invalid={isInvalid} className="relative">
 											<FieldLabel
 												htmlFor={field.name}
 												className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
@@ -136,15 +146,19 @@ export default function FormTecnico() {
 											<Input
 												id={field.name}
 												name={field.name}
-												value={field.state.value}
+												value={isLoading ? ". . . " : field.state.value}
 												onBlur={field.handleBlur}
 												onChange={e => field.handleChange(e.target.value)}
 												aria-invalid={isInvalid}
 												placeholder="000-0000000"
 												className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
+												readOnly={!editMode}
 											/>
 											{isInvalid && (
-												<FieldError errors={field.state.meta.errors} />
+												<FieldError
+													errors={field.state.meta.errors}
+													className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+												/>
 											)}
 										</Field>
 									)
@@ -159,26 +173,30 @@ export default function FormTecnico() {
 									const isInvalid =
 										field.state.meta.isTouched && !field.state.meta.isValid
 									return (
-										<Field data-invalid={isInvalid}>
+										<Field data-invalid={isInvalid} className="relative">
 											<FieldLabel
 												htmlFor={field.name}
 												className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
 											>
 												Cargo
-												<Asterisk className="text-destructive size-4" />
+												<Asterisk className="text-destructive size-3" />
 											</FieldLabel>
 											<Input
 												id={field.name}
 												name={field.name}
-												value={field.state.value}
+												value={isLoading ? ". . . " : field.state.value}
 												onBlur={field.handleBlur}
 												onChange={e => field.handleChange(e.target.value)}
 												aria-invalid={isInvalid}
 												placeholder="Ej. Seguridad e Higiene"
 												className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
+												readOnly={!editMode}
 											/>
 											{isInvalid && (
-												<FieldError errors={field.state.meta.errors} />
+												<FieldError
+													errors={field.state.meta.errors}
+													className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+												/>
 											)}
 										</Field>
 									)
@@ -191,7 +209,7 @@ export default function FormTecnico() {
 									const isInvalid =
 										field.state.meta.isTouched && !field.state.meta.isValid
 									return (
-										<Field data-invalid={isInvalid}>
+										<Field data-invalid={isInvalid} className="relative">
 											<FieldLabel
 												htmlFor={field.name}
 												className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
@@ -201,15 +219,19 @@ export default function FormTecnico() {
 											<Input
 												id={field.name}
 												name={field.name}
-												value={field.state.value}
+												value={isLoading ? ". . . " : field.state.value}
 												onBlur={field.handleBlur}
 												onChange={e => field.handleChange(e.target.value)}
 												aria-invalid={isInvalid}
 												placeholder="Ej. Andorra"
 												className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
+												readOnly={!editMode}
 											/>
 											{isInvalid && (
-												<FieldError errors={field.state.meta.errors} />
+												<FieldError
+													errors={field.state.meta.errors}
+													className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+												/>
 											)}
 										</Field>
 									)
@@ -224,29 +246,38 @@ export default function FormTecnico() {
 									const isInvalid =
 										field.state.meta.isTouched && !field.state.meta.isValid
 									return (
-										<Field data-invalid={isInvalid}>
+										<Field data-invalid={isInvalid} className="relative">
 											<FieldLabel
 												htmlFor={field.name}
 												className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
 											>
 												Matricula
-												<Asterisk className="text-destructive size-4" />
+												<Asterisk className="text-destructive size-3" />
 											</FieldLabel>
 											<Input
 												id={field.name}
 												name={field.name}
-												value={field.state.value}
+												value={isLoading ? ". . . " : field.state.value}
 												onBlur={field.handleBlur}
 												onChange={e => field.handleChange(e.target.value)}
 												aria-invalid={isInvalid}
 												placeholder="N° Matrícula"
 												className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
+												readOnly={!editMode}
 											/>
+											{isInvalid && (
+												<FieldError
+													errors={field.state.meta.errors}
+													className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+												/>
+											)}
 										</Field>
 									)
 								}}
 							/>
-							<div className="w-full bg-foreground/5 h-max sm:py-[5px] 2xl:py-[4px] rounded-lg border border-foreground/7">
+							<div
+								className={`w-full bg-foreground/5 h-max sm:py-[5px] 2xl:py-[4px] rounded-lg border border-foreground/7 ${isLoading ? "animate-pulse" : ""}`}
+							>
 								<InputFiles
 									files={matriculaFiles}
 									setFiles={setMatriculaFiles}
@@ -262,14 +293,16 @@ export default function FormTecnico() {
 								const isInvalid =
 									field.state.meta.isTouched && !field.state.meta.isValid
 								return (
-									<Field data-invalid={isInvalid}>
+									<Field data-invalid={isInvalid} className="relative">
 										<FieldLabel
 											htmlFor={field.name}
 											className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
 										>
 											Firma
 										</FieldLabel>
-										<div className="w-full bg-foreground/5 h-max sm:py-[5px] 2xl:py-[4px] rounded-lg border border-foreground/7">
+										<div
+											className={`w-full bg-foreground/5 h-max sm:py-[5px] 2xl:py-[4px] rounded-lg border border-foreground/7 ${isLoading ? "animate-pulse" : ""}`}
+										>
 											<InputFiles
 												files={firmaFiles}
 												setFiles={setFirmaFiles}
@@ -278,7 +311,10 @@ export default function FormTecnico() {
 											/>
 										</div>
 										{isInvalid && (
-											<FieldError errors={field.state.meta.errors} />
+											<FieldError
+												errors={field.state.meta.errors}
+												className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+											/>
 										)}
 									</Field>
 								)
@@ -301,12 +337,13 @@ export default function FormTecnico() {
 										<Textarea
 											id={field.name}
 											name={field.name}
-											value={field.state.value}
+											value={isLoading ? ". . . " : field.state.value}
 											onBlur={field.handleBlur}
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="Estos datos se adjuntaran en el pie de cada pagina del reporte"
 											className={`min-h-[80px] py-2 px-4 rounded-lg text-center text-pretty sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
+											readOnly={!editMode}
 										/>
 										{isInvalid && (
 											<FieldError errors={field.state.meta.errors} />
@@ -317,9 +354,16 @@ export default function FormTecnico() {
 						/>
 
 						<div className="flex justify-end items-center gap-2 w-full text-destructive">
-							<Asterisk className="text-destructive size-4" />
+							<Asterisk className="text-destructive size-3" />
 							<span className="text-xs 2xl:text-sm italic tracking-wide">
 								campo obligatorio
+							</span>
+						</div>
+
+						<div className="flex items-center gap-2 sm:text-sm 2xl:text-base">
+							<CircleAlert className="size-5 text-amber-500/50" />
+							<span className="italic text-foreground/25 tracking-wider">
+								Completa tus datos para registrarlos en los reportes.
 							</span>
 						</div>
 
@@ -327,14 +371,17 @@ export default function FormTecnico() {
 							<button
 								type="submit"
 								disabled={isPending}
-								className="themeBtnBackground py-2 rounded-lg tracking-wider mt-10"
+								className="themeBtnBackground py-2 rounded-lg tracking-wider mt-10 cursor-pointer"
 							>
 								{isPending ? (
-									<div className="flex gap-2">
-										Creando... <Loader className="animate-spin"></Loader>
+									<div className="w-full flex items-center justify-center gap-2">
+										<span>{editMode ? "Guardando..." : "Editando..."}</span>
+										<Loader className="animate-spin"></Loader>
 									</div>
 								) : (
-									"Crear"
+									<span>
+										{!tecnico ? "Guardar" : editMode ? "Guardar" : "Editar"}
+									</span>
 								)}
 							</button>
 						</Field>
