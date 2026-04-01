@@ -1,0 +1,22 @@
+import { protectedServerFn } from "@/lib/protected-serverFn"
+import { createServerFn } from "@tanstack/react-start"
+import { getRequest } from "@tanstack/react-start/server"
+import { createTecnicoDB } from "db/tecnicos/create-tecnico-db"
+import { tecnicoFormValidator } from "db/tecnicos/tecnico-validator"
+
+export const createTecnicoServer = createServerFn({ method: "POST" })
+	.inputValidator(tecnicoFormValidator)
+	.handler(async ({ data }) => {
+		const request = getRequest()
+		const session = await protectedServerFn(request)
+		const newTecnico = {
+			...data,
+			userId: session.user.id,
+		}
+
+		const result = await createTecnicoDB(newTecnico)
+		if (!result) {
+			throw new Error("Failed to create técnico")
+		}
+		return result[0]
+	})

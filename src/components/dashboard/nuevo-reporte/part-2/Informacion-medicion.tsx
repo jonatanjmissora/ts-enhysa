@@ -2,12 +2,11 @@ import { Info } from "lucide-react"
 import NewReportPart2Observaciones from "./observaciones"
 import NewReportPart2Clima from "./clima"
 import NewReportPart2Locacion from "./locacion"
-import { useState } from "react";
-import { InputFiles } from "@/components/layout/input-files";
+import { useState } from "react"
+import { InputFiles } from "@/components/layout/input-files"
 
 export default function InformacionMedicion({ nombre }: { nombre: string }) {
-
-const [planoFiles, setPlanoFiles] = useState<File[]>([]);
+	const [planoFiles, setPlanoFiles] = useState<File[]>([])
 
 	return (
 		<div className="flex-1 cardAccent flex-col p-10 px-14 gap-6">
@@ -26,7 +25,11 @@ const [planoFiles, setPlanoFiles] = useState<File[]>([]);
 			</div>
 
 			<div className="w-full py-4 cardBackground flex items-center justify-center flex-col">
-				<InputFiles text="del plano a medir." files={planoFiles} setFiles={setPlanoFiles} />
+				<InputFiles
+					text="Imágenes del plano a medir."
+					files={planoFiles}
+					setFiles={setPlanoFiles}
+				/>
 			</div>
 
 			<div className="sm:w-full w-full mx-auto border-b border-foreground/20 flex items-center gap-6">

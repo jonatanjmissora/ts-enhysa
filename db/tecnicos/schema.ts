@@ -8,13 +8,13 @@ export const tecnicos = pgTable("tecnicos", {
 
 	cargo: text("cargo").notNull(),
 
-	telefono: text("telefono"),
+	telefono: text("telefono").notNull(),
 
-	imagen: text("imagen"),
+	imagen: text("imagen").notNull(),
 
-	membrete: text("membrete"),
+	membrete: text("membrete").notNull(),
 
-	firma: text("firma"),
+	firma: text("firma").notNull(),
 
 	userId: text("user_id")
 		.notNull()

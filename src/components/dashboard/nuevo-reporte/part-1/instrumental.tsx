@@ -3,8 +3,7 @@ import { Cpu } from "lucide-react"
 import { useState } from "react"
 
 export default function NuevoReporteInstrumental() {
-
-const [instrumentoFiles, setInstrumentoFiles] = useState<File[]>([])
+	const [instrumentoFiles, setInstrumentoFiles] = useState<File[]>([])
 
 	return (
 		<div className="flex flex-col gap-2">
@@ -41,7 +40,11 @@ const [instrumentoFiles, setInstrumentoFiles] = useState<File[]>([])
 					</div>
 				</div>
 				<div className="relative w-full min-h-30 mx-auto cardBackground flex items-center justify-center">
-					<InputFiles text="del certificado del instrumental." files={instrumentoFiles} setFiles={setInstrumentoFiles} />
+					<InputFiles
+						text="Imágenes del certificado del instrumental."
+						files={instrumentoFiles}
+						setFiles={setInstrumentoFiles}
+					/>
 				</div>
 			</article>
 		</div>

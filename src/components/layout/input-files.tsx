@@ -34,16 +34,12 @@ export const InputFiles = ({
 					multiple
 				>
 					<FileUploadDropzone className="flex flex-col items-center justify-center border-dotted-2 text-center gap-0 py-2 w-full">
-						<div className="flex items-center justify-center gap-2 w-full">
-							<CloudUpload className="size-6" />
-							<span className="text-lg">Ingresa</span>
-							<FileUploadTrigger asChild>
-								<Button variant="link" className="h-auto p-0 text-lg">
-									imágenes
-								</Button>
-							</FileUploadTrigger>
-							<span className="text-lg">{text}</span>
-						</div>
+						<FileUploadTrigger asChild>
+							<div className="flex items-center justify-center flex-wrap gap-0 w-full">
+								<CloudUpload className="size-6 m-2" />
+								<span className="text-base 2xl:text-lg">{text}</span>
+							</div>
+						</FileUploadTrigger>
 						<p className="text-sm tracking-wide text-foreground/50 italic">
 							hasta {maxFiles} archivos de menos de 5MB
 						</p>

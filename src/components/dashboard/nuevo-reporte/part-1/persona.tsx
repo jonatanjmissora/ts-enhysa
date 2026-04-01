@@ -4,7 +4,6 @@ import { UserRound } from "lucide-react"
 import { useState } from "react"
 
 export default function NuevoReportePersona() {
-
 	const [personaFiles, setPersonaFiles] = useState<File[]>([])
 
 	return (
@@ -52,7 +51,12 @@ export default function NuevoReportePersona() {
 					</div>
 				</div>
 				<div className="bg-background min-h-20 py-2 px-4 rounded-lg flex items-center justify-center">
-					<InputFiles files={personaFiles} setFiles={setPersonaFiles} text="de la matrícula y firma digital." maxFiles={2} />
+					<InputFiles
+						files={personaFiles}
+						setFiles={setPersonaFiles}
+						text="Imágenes de matrícula y firma digital."
+						maxFiles={2}
+					/>
 				</div>
 			</article>
 		</div>
