@@ -16,11 +16,13 @@ export const InputFiles = ({
 	files,
 	setFiles,
 	maxFiles = 4,
+	editMode,
 }: {
 	text: string
 	files: File[]
 	setFiles: (files: File[]) => void
 	maxFiles?: number
+	editMode?: boolean
 }) => {
 	if (maxFiles === 1) {
 		return (
@@ -35,7 +37,7 @@ export const InputFiles = ({
 						multiple
 					>
 						<FileUploadDropzone className="p-0 border-none">
-							<FileUploadTrigger asChild>
+							<FileUploadTrigger asChild disabled={!editMode}>
 								<div className="flex items-center justify-center flex-wrap gap-0 w-full cursor-pointer">
 									<CloudUpload className="size-6 mx-2 text-foreground/20" />
 									<span className="text-foreground/20 sm:text-sm 2xl:text-lg">
@@ -88,7 +90,7 @@ export const InputFiles = ({
 					multiple
 				>
 					<FileUploadDropzone className="flex flex-col items-center justify-center border-dotted-2 text-center gap-0 py-2 w-full">
-						<FileUploadTrigger asChild>
+						<FileUploadTrigger asChild disabled={!editMode}>
 							<div className="flex items-center justify-center flex-wrap gap-0 w-full cursor-pointer">
 								<CloudUpload className="size-6 mx-2 text-foreground/20" />
 								<span className="text-foreground/20 sm:text-sm 2xl:text-lg">

@@ -1,9 +1,11 @@
 import { db } from "db"
 import { tecnicos } from "./schema"
 import { eq } from "drizzle-orm"
+import { delay } from "@/lib/utils"
 
 export async function getTecnicoDB(userId: string) {
 	try {
+		await delay()
 		return await db
 			.select()
 			.from(tecnicos)

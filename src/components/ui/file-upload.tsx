@@ -885,9 +885,15 @@ interface FileUploadTriggerProps extends React.ComponentProps<"button"> {
 }
 
 function FileUploadTrigger(props: FileUploadTriggerProps) {
-	const { asChild, onClick: onClickProp, ...triggerProps } = props
+	const {
+		asChild,
+		onClick: onClickProp,
+		disabled: disabledProp,
+		...triggerProps
+	} = props
 
 	const context = useFileUploadContext(TRIGGER_NAME)
+	const isDisabled = disabledProp ?? context.disabled
 
 	const propsRef = useAsRef({
 		onClick: onClickProp,
@@ -897,11 +903,11 @@ function FileUploadTrigger(props: FileUploadTriggerProps) {
 		(event: React.MouseEvent<HTMLButtonElement>) => {
 			propsRef.current.onClick?.(event)
 
-			if (event.defaultPrevented) return
+			if (event.defaultPrevented || isDisabled) return
 
 			context.inputRef.current?.click()
 		},
-		[context.inputRef, propsRef]
+		[context.inputRef, propsRef, isDisabled]
 	)
 
 	const TriggerPrimitive = asChild ? SlotPrimitive.Slot : "button"
@@ -910,10 +916,10 @@ function FileUploadTrigger(props: FileUploadTriggerProps) {
 		<TriggerPrimitive
 			type="button"
 			aria-controls={context.inputId}
-			data-disabled={context.disabled ? "" : undefined}
+			data-disabled={isDisabled ? "" : undefined}
 			data-slot="file-upload-trigger"
 			{...triggerProps}
-			disabled={context.disabled}
+			disabled={isDisabled}
 			onClick={onClick}
 		/>
 	)
