@@ -1,5 +1,5 @@
 import { useForm } from "@tanstack/react-form"
-import { tecnicoFormValidator } from "db/tecnicos/tecnico-validator"
+import { updateTecnicoValidator } from "db/tecnicos/tecnico-validator"
 import { Asterisk, CircleAlert, Loader } from "lucide-react"
 import { useState } from "react"
 import { toast } from "sonner"
@@ -13,19 +13,18 @@ import { Input } from "@/components/ui/input"
 import { InputFiles } from "@/components/layout/input-files"
 import { Textarea } from "@/components/ui/textarea"
 import { TecnicoType } from "db/schema"
+import { useUpdateTecnico } from "queries/tecnico/use-update-tecnico"
 
 export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 	const [editMode, setEditMode] = useState<boolean>(false)
 	const [matriculaFiles, setMatriculaFiles] = useState<File[]>([])
 	const [firmaFiles, setFirmaFiles] = useState<File[]>([])
 
-	// const {
-	// 	mutateAsync: editTecnicoMutation,
-	// 	isPending,
-	// 	error,
-	// } = useEditTecnico()
-	const isPending = false
-	const error = ""
+	const {
+		mutateAsync: editTecnicoMutation,
+		isPending,
+		error,
+	} = useUpdateTecnico()
 
 	const form = useForm({
 		defaultValues: {
@@ -36,16 +35,17 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 			telefono: tecnico.telefono,
 			membrete: tecnico.membrete,
 			firma: tecnico.firma,
+			userId: tecnico.userId,
 		},
 		validators: {
-			onSubmit: tecnicoFormValidator,
+			onSubmit: updateTecnicoValidator,
 		},
 		onSubmit: async ({ value }) => {
-			// const result = await editTecnicoMutation({ data: value })
-			// if (!result) {
-			// 	console.error("Error al editar técnico", error)
-			// 	toast.error("Error al editar técnico")
-			// }
+			const result = await editTecnicoMutation({ data: value })
+			if (!result) {
+				console.error("Error al editar técnico", error)
+				toast.error("Error al editar técnico")
+			}
 
 			setEditMode(false)
 			toast.success("Técnico editado exitosamente")
@@ -350,14 +350,21 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 							</Field>
 						</div>
 					) : (
-						<div className="flex justify-start item-center w-full mt-10">
+						<div className="flex justify-end item-center w-full mt-10">
 							<Field className="w-1/2">
 								<button
 									type="submit"
 									disabled={isPending}
 									className="themeBtnBackground py-2 rounded-lg tracking-wider cursor-pointer w-full"
 								>
-									Guardar
+									{isPending ? (
+										<div className="w-full flex items-center justify-center gap-2">
+											<span>Guardando...</span>
+											<Loader className="animate-spin size-5"></Loader>
+										</div>
+									) : (
+										<span>Guardar</span>
+									)}
 								</button>
 							</Field>
 						</div>
