@@ -1,13 +1,13 @@
-import { useQuery } from "@tanstack/react-query"
+import { useSuspenseQuery } from "@tanstack/react-query"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import CreateTecnicoForm from "./create-tecnico-form"
 import EditTecnicoForm from "./edit-tecnico-form"
 import { useLoaderData } from "@tanstack/react-router"
 import { getUserInfo } from "@/lib/utils"
 import SkeltonTecnicoForm from "./skelton-tecnico-form"
+import { Suspense } from "react"
 
-export default function FormTecnico() {
-	const { data: tecnico, isLoading } = useQuery(tecnicoQueryOptions)
+export default function Tecnico() {
 	const { session } = useLoaderData({ from: "__root__" })
 	const { avatar, fullName } = getUserInfo(session)
 
@@ -31,13 +31,15 @@ export default function FormTecnico() {
 					{fullName.toUpperCase()}
 				</p>
 			</div>
-			{isLoading ? (
-				<SkeltonTecnicoForm />
-			) : tecnico ? (
-				<EditTecnicoForm tecnico={tecnico} />
-			) : (
-				<CreateTecnicoForm />
-			)}
+
+			<Suspense fallback={<SkeltonTecnicoForm />}>
+				<TecnicoForm />
+			</Suspense>
 		</div>
 	)
+}
+
+const TecnicoForm = () => {
+	const { data: tecnico } = useSuspenseQuery(tecnicoQueryOptions)
+	return tecnico ? <EditTecnicoForm tecnico={tecnico} /> : <CreateTecnicoForm />
 }

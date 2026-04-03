@@ -1,31 +1,55 @@
 import { Button } from "@/components/ui/button"
-import { EmpresaFormAlertDialog } from "./create-empresa-form"
+import { CreateEmpresaForm } from "./create-empresa-form"
+import { TecnicoType } from "db/tecnicos/schema"
+import { toast } from "sonner"
+import { empresasQueryOptions } from "queries/empresas/empresas-query"
+import { useQuery } from "@tanstack/react-query"
 
-export default function EmpresasList() {
-	const empresas = []
+export default function EmpresasList({
+	tecnico,
+}: {
+	tecnico: TecnicoType | null
+}) {
+	const { data: empresas, isLoading } = useQuery(empresasQueryOptions)
 
-	if (empresas.length === 0) {
-		return <NoEmpresas />
+	if (isLoading) {
+		return <article>loading...</article>
 	}
 
-	return <div>empresas-list</div>
+	if (!empresas) {
+		return <NoEmpresas tecnico={tecnico} />
+	}
+
+	return <article>{JSON.stringify(empresas, null, 2)}</article>
 }
 
-const NoEmpresas = () => {
+const NoEmpresas = ({ tecnico }: { tecnico: TecnicoType | null }) => {
 	return (
-		<div className="flex flex-col gap-4 text-foreground/50 sm:text-lg 2xl:text-xl tracking-wide py-20">
+		<article className="flex flex-col gap-4 text-foreground/50 sm:text-lg 2xl:text-xl tracking-wide py-20">
 			<p>No tiene ninguna empresa asociada a su cuenta.</p>
 			<div className="flex items-center justify-center gap-2">
 				<span>Por favor ingrese una nueva</span>
-				<EmpresaFormAlertDialog>
+				{tecnico ? (
+					<CreateEmpresaForm>
+						<Button
+							className="text-foreground/50 sm:text-lg 2xl:text-xl tracking-wide cursor-pointer"
+							variant="outline"
+						>
+							empresa
+						</Button>
+					</CreateEmpresaForm>
+				) : (
 					<Button
+						onClick={() =>
+							toast.info("Completa los datos del técnico primero.")
+						}
 						className="text-foreground/50 sm:text-lg 2xl:text-xl tracking-wide cursor-pointer"
 						variant="outline"
 					>
 						empresa
 					</Button>
-				</EmpresaFormAlertDialog>
+				)}
 			</div>
-		</div>
+		</article>
 	)
 }

@@ -16,7 +16,7 @@ export const tecnicos = pgTable("tecnicos", {
 
 	membrete: text("membrete").notNull(),
 
-	userId: text("user_id")
+	userId: text("userId")
 		.notNull()
 		.references(() => user.id, { onDelete: "cascade" }),
 })

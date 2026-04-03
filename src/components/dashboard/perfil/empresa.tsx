@@ -2,8 +2,13 @@ import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import EmpresasList from "./empresas-list"
 import { CreateEmpresaForm } from "./create-empresa-form"
+import { useQuery } from "@tanstack/react-query"
+import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
+import { toast } from "sonner"
 
 export default function Empresas() {
+	const { data: tecnico } = useQuery(tecnicoQueryOptions)
+
 	return (
 		<article className="w-3/4 flex flex-col gap-8 items-center">
 			<div className="w-full flex flex-col items-end">
@@ -11,15 +16,28 @@ export default function Empresas() {
 					<span className="sm:text-lg 2xl:text-2xl font-semibold tracking-wider">
 						Empresas
 					</span>
-					<CreateEmpresaForm>
+					{tecnico ? (
+						<CreateEmpresaForm>
+							<Button
+								type="button"
+								variant="outline"
+								className="flex items-center justify-center cursor-pointer"
+							>
+								<Plus />
+							</Button>
+						</CreateEmpresaForm>
+					) : (
 						<Button
+							onClick={() =>
+								toast.info("Completa los datos del técnico primero.")
+							}
 							type="button"
 							variant="outline"
 							className="flex items-center justify-center cursor-pointer"
 						>
 							<Plus />
 						</Button>
-					</CreateEmpresaForm>
+					)}
 				</div>
 				<span className="sm:text-sm 2xl:text-base text-foreground/50 tracking-widest">
 					empresa
@@ -33,7 +51,7 @@ export default function Empresas() {
 				<span>CP</span>
 				<span>CUIT</span>
 			</div>
-			<EmpresasList />
+			<EmpresasList tecnico={tecnico ?? null} />
 		</article>
 	)
 }

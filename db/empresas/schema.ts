@@ -18,7 +18,7 @@ export const empresas = pgTable("empresas", {
 
 	logo: text("logo").notNull(),
 
-	tecnicoId: text("tecnico_id")
+	tecnicoId: text("tecnicoId")
 		.notNull()
 		.references(() => tecnicos.id, { onDelete: "cascade" }),
 })

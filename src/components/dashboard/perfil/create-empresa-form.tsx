@@ -19,6 +19,8 @@ import { InputFiles } from "@/components/layout/input-files"
 import { toast } from "sonner"
 import { empresaFormValidator } from "db/empresas/empresa-validator"
 import { useCreateEmpresa } from "queries/empresas/use-create-empresa"
+import { useQuery } from "@tanstack/react-query"
+import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 
 export function CreateEmpresaForm({ children }: { children: React.ReactNode }) {
 	const [open, setOpen] = useState(false)
@@ -41,6 +43,7 @@ export function CreateEmpresaForm({ children }: { children: React.ReactNode }) {
 }
 
 const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
+	const { data: tecnico } = useQuery(tecnicoQueryOptions)
 	const [logoFiles, setLogoFiles] = useState<File[]>([])
 	const {
 		mutateAsync: createEmpresaMutation,
@@ -58,19 +61,22 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 			codigoPostal: "",
 			horarios: "",
 			logo: "",
-			tecnicoId: "",
+			tecnicoId: tecnico?.id || "",
 		},
 		validators: {
 			onSubmit: empresaFormValidator,
 		},
 		onSubmit: async ({ value }) => {
+			if (!tecnico) {
+				toast.info("Completa los datos del técnico primero.")
+				return
+			}
 			const result = await createEmpresaMutation({ data: value })
 			if (!result) {
 				console.error("Error al crear el técnico", error)
 				toast.error("Error al crear el técnico")
 			}
-
-			toast.success("Técnico creado exitosamente")
+			toast.success("Empresa creada exitosamente")
 		},
 	})
 

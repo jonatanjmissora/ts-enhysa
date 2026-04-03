@@ -33,3 +33,5 @@ que se coloquen valores, en el alert donde inserto puntos
 cambiar el tamaño de las celdas
 
 escalar croquis cuando medidas sean grandes
+
+CREO QUE ES MEJOR QUE LAS EMPRESAS, GUARDEN CON USER.ID, Y NO CON TECNICO.ID
