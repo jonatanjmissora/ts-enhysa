@@ -11,6 +11,11 @@ dashboard
 
 * mis informes
 
+* mi perfil
+    el id de cada empresa es su numero de cuit, para editar o borrar una empresa, tiene que tener el mismo id, y tecnicoId
+    pero puede pasar que el mismo id(cuit) lo esten utilizando varios tecnicos.
+    Seria mejor que se cree un id general, y el cuit este en otro campo
+
 styles
 ===============
 hacer cards con foco radial

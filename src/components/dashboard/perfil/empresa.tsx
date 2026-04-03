@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import EmpresasList from "./empresas-list"
-import { EmpresaFormAlertDialog } from "./empresas-form"
+import { CreateEmpresaForm } from "./create-empresa-form"
 
 export default function Empresas() {
 	return (
@@ -11,7 +11,7 @@ export default function Empresas() {
 					<span className="sm:text-lg 2xl:text-2xl font-semibold tracking-wider">
 						Empresas
 					</span>
-					<EmpresaFormAlertDialog>
+					<CreateEmpresaForm>
 						<Button
 							type="button"
 							variant="outline"
@@ -19,7 +19,7 @@ export default function Empresas() {
 						>
 							<Plus />
 						</Button>
-					</EmpresaFormAlertDialog>
+					</CreateEmpresaForm>
 				</div>
 				<span className="sm:text-sm 2xl:text-base text-foreground/50 tracking-widest">
 					empresa

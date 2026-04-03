@@ -1,16 +1,16 @@
 import { delay } from "@/lib/utils"
-import { UpdateTecnicoType } from "./tecnico-validator"
+import { UpdateEmpresaType } from "./empresa-validator"
 import { db } from "db"
-import { tecnicos } from "../tecnicos/schema"
+import { empresas } from "./schema"
 import { eq } from "drizzle-orm"
 
-export async function updateTecnicoDB(updatedTecnico: UpdateTecnicoType) {
+export async function updateEmpresaDB(updatedEmpresa: UpdateEmpresaType) {
 	try {
 		await delay()
 		const result = await db
-			.update(tecnicos)
-			.set(updatedTecnico)
-			.where(eq(tecnicos.userId, updatedTecnico.userId))
+			.update(empresas)
+			.set(updatedEmpresa)
+			.where(eq(empresas.tecnicoId, updatedEmpresa.tecnicoId))
 			.returning()
 
 		return result[0]

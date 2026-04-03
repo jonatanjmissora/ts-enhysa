@@ -6,7 +6,6 @@ import {
 	AlertDialogTitle,
 	AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { Button } from "@/components/ui/button"
 import {
 	Field,
 	FieldError,
@@ -14,16 +13,14 @@ import {
 	FieldLabel,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Asterisk, Loader } from "lucide-react"
 import { useForm } from "@tanstack/react-form"
 import { InputFiles } from "@/components/layout/input-files"
+import { toast } from "sonner"
+import { empresaFormValidator } from "db/empresas/empresa-validator"
+import { useCreateEmpresa } from "queries/empresas/use-create-empresa"
 
-export function EmpresaFormAlertDialog({
-	children,
-}: {
-	children: React.ReactNode
-}) {
+export function CreateEmpresaForm({ children }: { children: React.ReactNode }) {
 	const [open, setOpen] = useState(false)
 
 	return (
@@ -44,11 +41,38 @@ export function EmpresaFormAlertDialog({
 }
 
 const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
-	const form = useForm()
-	const isLoading = false
-	const isPending = false
-	const error = ""
 	const [logoFiles, setLogoFiles] = useState<File[]>([])
+	const {
+		mutateAsync: createEmpresaMutation,
+		isPending,
+		error,
+	} = useCreateEmpresa()
+
+	const form = useForm({
+		defaultValues: {
+			id: "",
+			razonSocial: "",
+			direccion: "",
+			localidad: "",
+			provincia: "",
+			codigoPostal: "",
+			horarios: "",
+			logo: "",
+			tecnicoId: "",
+		},
+		validators: {
+			onSubmit: empresaFormValidator,
+		},
+		onSubmit: async ({ value }) => {
+			const result = await createEmpresaMutation({ data: value })
+			if (!result) {
+				console.error("Error al crear el técnico", error)
+				toast.error("Error al crear el técnico")
+			}
+
+			toast.success("Técnico creado exitosamente")
+		},
+	})
 
 	return (
 		<form
@@ -62,7 +86,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 			<FieldGroup className="gap-5">
 				<div className="flex gap-10">
 					<form.Field
-						name="razon"
+						name="razonSocial"
 						children={field => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
@@ -83,7 +107,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. Teléfonica"
-										className={`bg-background py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
+										className={`bg-background py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -97,7 +121,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 					/>
 
 					<form.Field
-						name="cuit"
+						name="id"
 						children={field => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
@@ -118,7 +142,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. 00-00000000-0"
-										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
+										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -154,7 +178,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. Villa Verde"
-										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
+										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -188,7 +212,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. Andorra"
-										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
+										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -204,7 +228,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 
 				<div className="flex gap-10">
 					<form.Field
-						name="cp"
+						name="codigoPostal"
 						children={field => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
@@ -224,7 +248,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. 5000"
-										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
+										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -258,7 +282,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. Pr. Andorra"
-										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
+										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -294,7 +318,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. Lun a Vie de 08:00 a 18:00"
-										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg ${isLoading ? "animate-pulse" : ""}`}
+										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError

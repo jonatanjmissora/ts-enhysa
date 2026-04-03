@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { EmpresaFormAlertDialog } from "./empresas-form"
+import { EmpresaFormAlertDialog } from "./create-empresa-form"
 
 export default function EmpresasList() {
 	const empresas = []
