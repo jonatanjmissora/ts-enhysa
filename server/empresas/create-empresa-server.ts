@@ -8,9 +8,15 @@ export const createEmpresaServer = createServerFn({ method: "POST" })
 	.inputValidator(empresaFormValidator)
 	.handler(async ({ data }) => {
 		const request = getRequest()
-		await protectedServerFn(request)
+		const session = await protectedServerFn(request)
 
-		const result = await createEmpresaDB(data)
+		const newEmpresa = {
+			...data,
+			id: crypto.randomUUID(),
+			userId: session.user.id,
+		}
+
+		const result = await createEmpresaDB(newEmpresa)
 		if (!result) {
 			throw new Error("Failed to create empresa")
 		}

@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from "clsx"
+import { EmpresaType } from "db/empresas/schema"
 import { TecnicoType } from "db/tecnicos/schema"
 import { twMerge } from "tailwind-merge"
 
@@ -33,4 +34,8 @@ export const checkTecnicoDiference = (
 		formValues.firmaImg === tecnico.firmaImg &&
 		formValues.membrete === tecnico.membrete
 	)
+}
+
+export const sortedByRazonSocial = (empresas: EmpresaType[]) => {
+	return empresas.sort((a, b) => a.razonSocial.localeCompare(b.razonSocial))
 }

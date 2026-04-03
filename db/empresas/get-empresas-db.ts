@@ -5,13 +5,12 @@ import { delay } from "@/lib/utils"
 
 export async function getEmpresasDB(userId: string) {
 	try {
-		await delay()
+		await delay(5000)
 		return await db
 			.select()
 			.from(empresas)
 			.where(eq(empresas.userId, userId))
-			.limit(1)
-			.then(rows => rows[0] ?? null)
+			.orderBy(empresas.razonSocial)
 	} catch (error) {
 		console.error(
 			"ERROR obteniendo empresas:",

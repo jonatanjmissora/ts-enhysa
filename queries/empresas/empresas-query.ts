@@ -5,8 +5,7 @@ import { getEmpresasServer } from "server/empresas/get-empresas-server"
 
 export const empresasQueryOptions = queryOptions({
 	queryKey: ["empresas"],
-	queryFn: ({ queryKey: [, tecnicoId] }) =>
-		getEmpresasServer({ data: { tecnicoId } }),
+	queryFn: () => getEmpresasServer(),
 	refetchInterval: 60 * 1000, // refrescar cada 60 segundos
 })
 

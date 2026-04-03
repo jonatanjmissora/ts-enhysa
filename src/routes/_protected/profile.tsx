@@ -4,10 +4,12 @@ import { createFileRoute } from "@tanstack/react-router"
 import { UserRound, Warehouse } from "lucide-react"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { useState } from "react"
+import { empresasQueryOptions } from "queries/empresas/empresas-query"
 
 export const Route = createFileRoute("/_protected/profile")({
 	loader: ({ context }) => {
 		context.queryClient.ensureQueryData(tecnicoQueryOptions)
+		context.queryClient.ensureQueryData(empresasQueryOptions)
 		return null
 	},
 	component: RouteComponent,

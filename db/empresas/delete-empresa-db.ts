@@ -3,12 +3,12 @@ import { db } from "db"
 import { empresas } from "./schema"
 import { and, eq } from "drizzle-orm"
 
-export async function deleteEmpresaDB(id: string, tecnicoId: string) {
+export async function deleteEmpresaDB(id: string, userId: string) {
 	try {
 		await delay()
 		return await db
 			.delete(empresas)
-			.where(and(eq(empresas.id, id), eq(empresas.tecnicoId, tecnicoId)))
+			.where(and(eq(empresas.id, id), eq(empresas.userId, userId)))
 			.returning()
 	} catch (error) {
 		console.error(

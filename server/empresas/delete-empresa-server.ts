@@ -8,13 +8,13 @@ export const deleteEmpresaServer = createServerFn({ method: "POST" })
 	.inputValidator(empresaIdValidator)
 	.handler(async ({ data }) => {
 		const request = getRequest()
-		await protectedServerFn(request)
+		const session = await protectedServerFn(request)
 
-		const result = await deleteEmpresaDB(data.id, data.tecnicoId)
+		const result = await deleteEmpresaDB(data.id, session.user.id)
 
-		if (!result || result.length === 0) {
+		if (!result) {
 			throw new Error("Empresa not found or could not be deleted")
 		}
 
-		return result[0]
+		return result
 	})

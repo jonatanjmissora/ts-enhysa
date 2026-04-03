@@ -3,24 +3,59 @@ import { CreateEmpresaForm } from "./create-empresa-form"
 import { TecnicoType } from "db/tecnicos/schema"
 import { toast } from "sonner"
 import { empresasQueryOptions } from "queries/empresas/empresas-query"
-import { useQuery } from "@tanstack/react-query"
+import { useSuspenseQuery } from "@tanstack/react-query"
+import { EmpresaType } from "db/schema"
+import { Ellipsis } from "lucide-react"
+import { useState } from "react"
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuGroup,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Pencil, Trash2 } from "lucide-react"
+import {
+	AlertDialog,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import DeleteEmpresaForm from "./delete-empresa-form"
 
 export default function EmpresasList({
 	tecnico,
 }: {
 	tecnico: TecnicoType | null
 }) {
-	const { data: empresas, isLoading } = useQuery(empresasQueryOptions)
-
-	if (isLoading) {
-		return <article>loading...</article>
-	}
+	const { data: empresas } = useSuspenseQuery(empresasQueryOptions)
 
 	if (!empresas) {
 		return <NoEmpresas tecnico={tecnico} />
 	}
 
-	return <article>{JSON.stringify(empresas, null, 2)}</article>
+	return (
+		<article className="flex flex-col gap-2 w-full">
+			{empresas.map(empresa => (
+				<Empresa key={empresa.id} empresa={empresa} />
+			))}
+		</article>
+	)
+}
+
+const Empresa = ({ empresa }: { empresa: EmpresaType }) => {
+	return (
+		<div className="w-full grid grid-cols-[1.5fr_1.5fr_1fr_1fr_1.5fr] gap-2 p-3 text-center tracking-widest text-foreground/75 cardAccent">
+			<span>{empresa.razonSocial}</span>
+			<span>{empresa.direccion}</span>
+			<span>{empresa.localidad}</span>
+			<span>{empresa.provincia}</span>
+			<div className="w-full flex justify-end px-4 cursor-pointer">
+				<EmpresaDropdownMenu empresa={empresa} />
+			</div>
+		</div>
+	)
 }
 
 const NoEmpresas = ({ tecnico }: { tecnico: TecnicoType | null }) => {
@@ -51,5 +86,61 @@ const NoEmpresas = ({ tecnico }: { tecnico: TecnicoType | null }) => {
 				)}
 			</div>
 		</article>
+	)
+}
+
+const EmpresaDropdownMenu = ({ empresa }: { empresa: EmpresaType }) => {
+	const [isMenuOpen, setIsMenuOpen] = useState(false)
+	return (
+		<DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+			<DropdownMenuTrigger asChild>
+				<Button variant="ghost" className="cursor-pointer">
+					<Ellipsis size={14} />
+				</Button>
+			</DropdownMenuTrigger>
+			<DropdownMenuContent
+				className="w-28 2xl:w-40 p-4 text-xs 2xl:text-base"
+				align="end"
+			>
+				<DropdownMenuGroup>
+					{/* <Link to={`/admin/pagos/edit-pago`} search={{ id: item.id }}>
+						<Button variant="ghost">
+							<Pencil size={14} />
+							Editar
+						</Button>
+					</Link> */}
+					Editar
+					<DropdownMenuSeparator />
+					<DeleteEmpresaAlertDialog
+						empresa={empresa}
+						setIsMenuOpen={setIsMenuOpen}
+					/>
+				</DropdownMenuGroup>
+			</DropdownMenuContent>
+		</DropdownMenu>
+	)
+}
+
+export function DeleteEmpresaAlertDialog({
+	empresa,
+	setIsMenuOpen,
+}: {
+	empresa: EmpresaType
+	setIsMenuOpen: (open: boolean) => void
+}) {
+	return (
+		<AlertDialog>
+			<AlertDialogTrigger asChild>
+				<Button variant="ghost">
+					<Trash2 size={14} />
+					Borrar
+				</Button>
+			</AlertDialogTrigger>
+			<AlertDialogContent>
+				<AlertDialogTitle></AlertDialogTitle>
+				<AlertDialogDescription></AlertDialogDescription>
+				<DeleteEmpresaForm empresa={empresa} setIsMenuOpen={setIsMenuOpen} />
+			</AlertDialogContent>
+		</AlertDialog>
 	)
 }

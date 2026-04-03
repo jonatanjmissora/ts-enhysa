@@ -53,7 +53,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 
 	const form = useForm({
 		defaultValues: {
-			id: "",
+			cuit: "",
 			razonSocial: "",
 			direccion: "",
 			localidad: "",
@@ -61,7 +61,6 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 			codigoPostal: "",
 			horarios: "",
 			logo: "",
-			tecnicoId: tecnico?.id || "",
 		},
 		validators: {
 			onSubmit: empresaFormValidator,
@@ -76,6 +75,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 				console.error("Error al crear el técnico", error)
 				toast.error("Error al crear el técnico")
 			}
+			setOpen(false)
 			toast.success("Empresa creada exitosamente")
 		},
 	})
@@ -127,7 +127,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 					/>
 
 					<form.Field
-						name="id"
+						name="cuit"
 						children={field => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
@@ -392,7 +392,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 						className="themeBtnBackground py-2 rounded-lg tracking-wider sm:text-lg 2xl:text-xl font-semibold flex-1"
 					>
 						{isPending ? (
-							<div className="flex gap-2">
+							<div className="flex gap-2 w-full justify-center">
 								Guardando... <Loader className="animate-spin"></Loader>
 							</div>
 						) : (

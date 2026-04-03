@@ -13,6 +13,12 @@ export const empresaFormValidator = z.object({
 
 export type EmpresaFormType = z.infer<typeof empresaFormValidator>
 
+export const empresaIdValidator = z.object({
+	id: z.string().min(1, "Id requerido"),
+})
+
+export type EmpresaIdType = z.infer<typeof empresaIdValidator>
+
 export const updateEmpresasValidator = z.object({
 	userId: z.string().min(1, "UserId requerido"),
 })
