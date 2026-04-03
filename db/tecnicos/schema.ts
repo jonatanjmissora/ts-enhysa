@@ -2,6 +2,8 @@ import { user } from "db/users/schema"
 import { pgTable, text } from "drizzle-orm/pg-core"
 
 export const tecnicos = pgTable("tecnicos", {
+	id: text("id").primaryKey(),
+
 	nombre: text("nombre").notNull(),
 
 	telefono: text("telefono").notNull(),
@@ -10,9 +12,11 @@ export const tecnicos = pgTable("tecnicos", {
 
 	cargo: text("cargo").notNull(),
 
-	id: text("id").primaryKey(),
+	matricula: text("matricula").notNull(),
 
-	firma: text("firma").notNull(),
+	matriculaImg: text("matriculaImg").notNull(),
+
+	firmaImg: text("firmaImg").notNull(),
 
 	membrete: text("membrete").notNull(),
 

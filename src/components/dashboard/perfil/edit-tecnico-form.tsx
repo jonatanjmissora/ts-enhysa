@@ -14,6 +14,7 @@ import { InputFiles } from "@/components/layout/input-files"
 import { Textarea } from "@/components/ui/textarea"
 import { TecnicoType } from "db/schema"
 import { useUpdateTecnico } from "queries/tecnico/use-update-tecnico"
+import { checkTecnicoDiference } from "@/lib/utils"
 
 export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 	const [editMode, setEditMode] = useState<boolean>(false)
@@ -28,19 +29,25 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 
 	const form = useForm({
 		defaultValues: {
-			id: tecnico.id,
 			nombre: tecnico.nombre,
-			cargo: tecnico.cargo,
-			localidad: tecnico.localidad,
 			telefono: tecnico.telefono,
+			localidad: tecnico.localidad,
+			cargo: tecnico.cargo,
+			matricula: tecnico.matricula,
+			matriculaImg: tecnico.matriculaImg,
+			firmaImg: tecnico.firmaImg,
 			membrete: tecnico.membrete,
-			firma: tecnico.firma,
 			userId: tecnico.userId,
 		},
 		validators: {
 			onSubmit: updateTecnicoValidator,
 		},
 		onSubmit: async ({ value }) => {
+			if (checkTecnicoDiference(value, tecnico)) {
+				toast.info("SON IGUALES")
+				setEditMode(false)
+				return
+			}
 			const result = await editTecnicoMutation({ data: value })
 			if (!result) {
 				console.error("Error al editar técnico", error)
@@ -211,7 +218,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 
 					<div className="flex items-end gap-10">
 						<form.Field
-							name="id"
+							name="matricula"
 							children={field => {
 								const isInvalid =
 									field.state.meta.isTouched && !field.state.meta.isValid
@@ -257,7 +264,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 					</div>
 
 					<form.Field
-						name="firma"
+						name="firmaImg"
 						children={field => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid

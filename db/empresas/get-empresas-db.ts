@@ -3,13 +3,13 @@ import { empresas } from "./schema"
 import { eq } from "drizzle-orm"
 import { delay } from "@/lib/utils"
 
-export async function getEmpresasDB(tecnicoId: string) {
+export async function getEmpresasDB(userId: string) {
 	try {
 		await delay()
 		return await db
 			.select()
 			.from(empresas)
-			.where(eq(empresas.tecnicoId, tecnicoId))
+			.where(eq(empresas.userId, userId))
 			.limit(1)
 			.then(rows => rows[0] ?? null)
 	} catch (error) {

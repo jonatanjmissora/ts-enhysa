@@ -26,13 +26,14 @@ export default function CreateTecnicoForm() {
 
 	const form = useForm({
 		defaultValues: {
-			id: "",
 			nombre: "",
-			cargo: "",
-			localidad: "",
 			telefono: "",
+			localidad: "",
+			cargo: "",
+			matricula: "",
+			matriculaImg: "",
+			firmaImg: "",
 			membrete: "",
-			firma: "",
 		},
 		validators: {
 			onSubmit: tecnicoFormValidator,
@@ -203,7 +204,7 @@ export default function CreateTecnicoForm() {
 
 					<div className="flex items-end gap-10">
 						<form.Field
-							name="id"
+							name="matricula"
 							children={field => {
 								const isInvalid =
 									field.state.meta.isTouched && !field.state.meta.isValid
@@ -247,7 +248,7 @@ export default function CreateTecnicoForm() {
 					</div>
 
 					<form.Field
-						name="firma"
+						name="firmaImg"
 						children={field => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid

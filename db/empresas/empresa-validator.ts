@@ -1,7 +1,7 @@
 import { z } from "zod"
 
 export const empresaFormValidator = z.object({
-	id: z.string().min(3, "Mínimo 3 caracteres"),
+	cuit: z.string().min(11, "Mínimo 11 caracteres"),
 	razonSocial: z.string().min(3, "Mínimo 3 caracteres"),
 	direccion: z.string(),
 	localidad: z.string(),
@@ -9,18 +9,12 @@ export const empresaFormValidator = z.object({
 	codigoPostal: z.string(),
 	horarios: z.string(),
 	logo: z.string(),
-	tecnicoId: z.string(),
 })
 
 export type EmpresaFormType = z.infer<typeof empresaFormValidator>
 
-export const empresaIdValidator = z.object({
-	id: z.string().min(1, "ID inválido"),
-	tecnicoId: z.string().min(1, "TécnicoId requerido"),
+export const updateEmpresasValidator = z.object({
+	userId: z.string().min(1, "UserId requerido"),
 })
 
-export const updateEmpresaValidator = empresaFormValidator.extend({
-	tecnicoId: z.string().min(1, "TécnicoId requerido"),
-})
-
-export type UpdateEmpresaType = z.infer<typeof updateEmpresaValidator>
+export type UpdateEmpresaType = z.infer<typeof updateEmpresasValidator>

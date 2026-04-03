@@ -1,26 +1,34 @@
-import { tecnicos } from "db/tecnicos/schema"
-import { pgTable, text } from "drizzle-orm/pg-core"
+import { user } from "db/users/schema"
+import { pgTable, text, index } from "drizzle-orm/pg-core"
 
-export const empresas = pgTable("empresas", {
-	id: text("id").primaryKey(),
+export const empresas = pgTable(
+	"empresas",
+	{
+		id: text("id").primaryKey(),
 
-	razonSocial: text("razonSocial").notNull(),
+		cuit: text("cuit").notNull(),
 
-	direccion: text("direccion").notNull(),
+		razonSocial: text("razonSocial").notNull(),
 
-	localidad: text("localidad").notNull(),
+		direccion: text("direccion").notNull(),
 
-	provincia: text("provincia").notNull(),
+		localidad: text("localidad").notNull(),
 
-	codigoPostal: text("codigoPostal").notNull(),
+		provincia: text("provincia").notNull(),
 
-	horarios: text("horarios").notNull(),
+		codigoPostal: text("codigoPostal").notNull(),
 
-	logo: text("logo").notNull(),
+		horarios: text("horarios").notNull(),
 
-	tecnicoId: text("tecnicoId")
-		.notNull()
-		.references(() => tecnicos.id, { onDelete: "cascade" }),
-})
+		logo: text("logo").notNull(),
+
+		userId: text("userId")
+			.notNull()
+			.references(() => user.id, { onDelete: "cascade" }),
+	},
+	table => ({
+		userIdx: index("items_user_idx").on(table.userId, table.userId),
+	})
+)
 
 export type EmpresaType = typeof empresas.$inferSelect
