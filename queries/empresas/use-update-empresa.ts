@@ -1,14 +1,18 @@
+import { sortedByRazonSocial } from "@/lib/utils"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { TecnicoType } from "db/tecnicos/schema"
-import { updateTecnicoServer } from "server/tecnico/update-tecnico-server"
+import { EmpresaType } from "db/empresas/schema"
+import { updateEmpresaServer } from "server/empresas/update-empresas-server"
 
-export function useUpdateTecnico() {
+export function useUpdateEmpresa() {
 	const queryClient = useQueryClient()
 
 	return useMutation({
-		mutationFn: updateTecnicoServer,
+		mutationFn: updateEmpresaServer,
 		onSuccess: data => {
-			queryClient.setQueryData<TecnicoType>(["tecnico"], data)
+			queryClient.setQueryData<EmpresaType[]>(["empresas"], oldData => {
+				if (!oldData) return oldData
+				return sortedByRazonSocial([data, ...oldData])
+			})
 		},
 	})
 }

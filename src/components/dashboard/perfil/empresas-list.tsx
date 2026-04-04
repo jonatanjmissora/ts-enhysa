@@ -23,6 +23,7 @@ import {
 	AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import DeleteEmpresaForm from "./delete-empresa-form"
+import { EditEmpresaForm } from "./edit-empresa-form"
 
 export default function EmpresasList({
 	tecnico,
@@ -104,13 +105,10 @@ const EmpresaDropdownMenu = ({ empresa }: { empresa: EmpresaType }) => {
 				align="end"
 			>
 				<DropdownMenuGroup>
-					{/* <Link to={`/admin/pagos/edit-pago`} search={{ id: item.id }}>
-						<Button variant="ghost">
-							<Pencil size={14} />
-							Editar
-						</Button>
-					</Link> */}
-					Editar
+					<EditEmpresaAlertDialog
+						empresa={empresa}
+						setIsMenuOpen={setIsMenuOpen}
+					/>
 					<DropdownMenuSeparator />
 					<DeleteEmpresaAlertDialog
 						empresa={empresa}
@@ -141,6 +139,30 @@ export function DeleteEmpresaAlertDialog({
 				<AlertDialogTitle></AlertDialogTitle>
 				<AlertDialogDescription></AlertDialogDescription>
 				<DeleteEmpresaForm empresa={empresa} setIsMenuOpen={setIsMenuOpen} />
+			</AlertDialogContent>
+		</AlertDialog>
+	)
+}
+
+export function EditEmpresaAlertDialog({
+	empresa,
+	setIsMenuOpen,
+}: {
+	empresa: EmpresaType
+	setIsMenuOpen: (open: boolean) => void
+}) {
+	return (
+		<AlertDialog>
+			<AlertDialogTrigger asChild>
+				<Button variant="ghost">
+					<Pencil size={14} />
+					Edit
+				</Button>
+			</AlertDialogTrigger>
+			<AlertDialogContent className="p-20 bg-accent/40 backdrop-blur-xl w-1/2 min-h-[50dvh]">
+				<AlertDialogTitle></AlertDialogTitle>
+				<AlertDialogDescription></AlertDialogDescription>
+				<EditEmpresaForm empresa={empresa} setIsMenuOpen={setIsMenuOpen} />
 			</AlertDialogContent>
 		</AlertDialog>
 	)
