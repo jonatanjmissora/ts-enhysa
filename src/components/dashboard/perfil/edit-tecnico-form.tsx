@@ -1,6 +1,6 @@
 import { useForm } from "@tanstack/react-form"
 import { updateTecnicoValidator } from "db/tecnicos/tecnico-validator"
-import { Asterisk, CircleAlert, Loader } from "lucide-react"
+import { Asterisk, CircleAlert, Loader, Pencil } from "lucide-react"
 import { useState } from "react"
 import { toast } from "sonner"
 import {
@@ -15,6 +15,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { TecnicoType } from "db/schema"
 import { useUpdateTecnico } from "queries/tecnico/use-update-tecnico"
 import { checkTecnicoDiference } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 
 export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 	const [editMode, setEditMode] = useState<boolean>(false)
@@ -343,18 +344,20 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 
 					{!editMode ? (
 						<div className="flex justify-end item-center w-full mt-10">
-							<Field className="w-1/2">
-								<button
+							<Field className="w-max">
+								<Button
 									onClick={e => {
 										e.preventDefault()
 										setEditMode(true)
 									}}
 									type="button"
+									variant="outline"
 									disabled={isPending}
-									className="themeBtnBackground py-2 rounded-lg tracking-wider sm:text-lg 2xl:text-xl font-semibold flex-1"
+									className="py-2 rounded-lg tracking-wider sm:text-base 2xl:text-lg font-semibold flex-1 cursor-pointer flex items-center justify-end gap-3 border border-white px-4"
 								>
+									<Pencil size={20} className="text-foreground/75" />
 									Editar
-								</button>
+								</Button>
 							</Field>
 						</div>
 					) : (

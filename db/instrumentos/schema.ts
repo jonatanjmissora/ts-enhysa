@@ -1,22 +1,24 @@
-import { tecnicos } from "db/tecnicos/schema"
+import { user } from "db/users/schema"
 import { pgTable, text } from "drizzle-orm/pg-core"
 
 export const instrumentos = pgTable("instrumentos", {
 	id: text("id").primaryKey(),
 
+	nombre: text("nombre").notNull(),
+
 	marca: text("marca").notNull(),
 
 	modelo: text("modelo").notNull(),
 
+	serie: text("serie").notNull(),
+
 	fechaCalibracion: text("fechaCalibracion").notNull(),
 
-	certificado: text("certificado").array().notNull(),
+	imagenes: text("imagenes").array().notNull(),
 
-	imagenes: text("imagenes").array(),
-
-	tecnicoId: text("tecnico_id")
+	userId: text("userId")
 		.notNull()
-		.references(() => tecnicos.id, { onDelete: "cascade" }),
+		.references(() => user.id, { onDelete: "cascade" }),
 })
 
 export type InstrumentoType = typeof instrumentos.$inferSelect

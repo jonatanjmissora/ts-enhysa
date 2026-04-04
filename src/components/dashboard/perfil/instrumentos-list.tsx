@@ -1,10 +1,7 @@
 import { Button } from "@/components/ui/button"
-import { CreateEmpresaForm } from "./create-empresa-form"
 import { TecnicoType } from "db/tecnicos/schema"
 import { toast } from "sonner"
-import { empresasQueryOptions } from "queries/empresas/empresas-query"
 import { useSuspenseQuery } from "@tanstack/react-query"
-import { EmpresaType } from "db/schema"
 import { Ellipsis } from "lucide-react"
 import { useState } from "react"
 import {
@@ -22,58 +19,60 @@ import {
 	AlertDialogTitle,
 	AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import DeleteEmpresaForm from "./delete-empresa-form"
-import { EditEmpresaForm } from "./edit-empresa-form"
+import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
+import { InstrumentoType } from "db/instrumentos/schema"
+import { CreateInstrumentoForm } from "./create-instrumento-form"
 
-export default function EmpresasList({
+export default function InstrumentosList({
 	tecnico,
 }: {
 	tecnico: TecnicoType | null
 }) {
-	const { data: empresas } = useSuspenseQuery(empresasQueryOptions)
+	const { data: instrumentos } = useSuspenseQuery(instrumentosQueryOptions)
 
-	if (!empresas || empresas.length === 0) {
-		return <NoEmpresas tecnico={tecnico} />
+	if (!instrumentos || instrumentos.length === 0) {
+		return <NoInstrumental tecnico={tecnico} />
 	}
 
 	return (
 		<article className="flex flex-col gap-2 w-full">
-			{empresas.map(empresa => (
-				<Empresa key={empresa.id} empresa={empresa} />
+			{instrumentos.map(instrumento => (
+				<Instrumento key={instrumento.id} instrumento={instrumento} />
 			))}
 		</article>
 	)
 }
 
-const Empresa = ({ empresa }: { empresa: EmpresaType }) => {
+const Instrumento = ({ instrumento }: { instrumento: InstrumentoType }) => {
 	return (
-		<div className="w-full grid grid-cols-[1.5fr_1.5fr_1fr_1fr_1.5fr] gap-2 p-3 text-center tracking-widest text-foreground/75 cardAccent">
-			<span>{empresa.razonSocial}</span>
-			<span>{empresa.direccion}</span>
-			<span>{empresa.localidad}</span>
-			<span>{empresa.provincia}</span>
+		<div className="w-full grid grid-cols-[1.5fr_1fr_1fr_1fr_1.5fr] gap-2 p-3 text-center tracking-widest text-foreground/75 cardAccent">
+			<span>{instrumento.nombre}</span>
+			<span>{instrumento.marca}</span>
+			<span>{instrumento.modelo}</span>
+			<span>{instrumento.serie}</span>
+
 			<div className="w-full flex justify-end px-4 cursor-pointer">
-				<EmpresaDropdownMenu empresa={empresa} />
+				<InstrumentoDropdownMenu instrumento={instrumento} />
 			</div>
 		</div>
 	)
 }
 
-const NoEmpresas = ({ tecnico }: { tecnico: TecnicoType | null }) => {
+const NoInstrumental = ({ tecnico }: { tecnico: TecnicoType | null }) => {
 	return (
 		<article className="flex flex-col gap-4 text-foreground/50 sm:text-lg 2xl:text-xl tracking-wide py-20">
 			<p>No tiene ninguna empresa asociada a su cuenta.</p>
 			<div className="flex items-center justify-center gap-2">
 				<span>Por favor ingrese una nueva</span>
 				{tecnico ? (
-					<CreateEmpresaForm>
+					<CreateInstrumentoForm>
 						<Button
 							className="text-foreground/50 sm:text-lg 2xl:text-xl tracking-wide cursor-pointer"
 							variant="outline"
 						>
-							empresa
+							instrumento
 						</Button>
-					</CreateEmpresaForm>
+					</CreateInstrumentoForm>
 				) : (
 					<Button
 						onClick={() =>
@@ -82,7 +81,7 @@ const NoEmpresas = ({ tecnico }: { tecnico: TecnicoType | null }) => {
 						className="text-foreground/50 sm:text-lg 2xl:text-xl tracking-wide cursor-pointer"
 						variant="outline"
 					>
-						empresa
+						instrumento
 					</Button>
 				)}
 			</div>
@@ -90,7 +89,11 @@ const NoEmpresas = ({ tecnico }: { tecnico: TecnicoType | null }) => {
 	)
 }
 
-const EmpresaDropdownMenu = ({ empresa }: { empresa: EmpresaType }) => {
+const InstrumentoDropdownMenu = ({
+	instrumento,
+}: {
+	instrumento: InstrumentoType
+}) => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	return (
 		<DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
@@ -104,13 +107,13 @@ const EmpresaDropdownMenu = ({ empresa }: { empresa: EmpresaType }) => {
 				align="end"
 			>
 				<DropdownMenuGroup>
-					<EditEmpresaAlertDialog
-						empresa={empresa}
+					<EditInstrumentoAlertDialog
+						instrumento={instrumento}
 						setIsMenuOpen={setIsMenuOpen}
 					/>
 					<DropdownMenuSeparator />
-					<DeleteEmpresaAlertDialog
-						empresa={empresa}
+					<DeleteInstrumentoAlertDialog
+						instrumento={instrumento}
 						setIsMenuOpen={setIsMenuOpen}
 					/>
 				</DropdownMenuGroup>
@@ -119,11 +122,11 @@ const EmpresaDropdownMenu = ({ empresa }: { empresa: EmpresaType }) => {
 	)
 }
 
-export function DeleteEmpresaAlertDialog({
-	empresa,
+export function DeleteInstrumentoAlertDialog({
+	instrumento,
 	setIsMenuOpen,
 }: {
-	empresa: EmpresaType
+	instrumento: InstrumentoType
 	setIsMenuOpen: (open: boolean) => void
 }) {
 	return (
@@ -137,17 +140,20 @@ export function DeleteEmpresaAlertDialog({
 			<AlertDialogContent className="py-20 px-10 bg-accent/50 backdrop-blur-xl">
 				<AlertDialogTitle></AlertDialogTitle>
 				<AlertDialogDescription></AlertDialogDescription>
-				<DeleteEmpresaForm empresa={empresa} setIsMenuOpen={setIsMenuOpen} />
+				<DeleteInstrumentoForm
+					instrumento={instrumento}
+					setIsMenuOpen={setIsMenuOpen}
+				/>
 			</AlertDialogContent>
 		</AlertDialog>
 	)
 }
 
-export function EditEmpresaAlertDialog({
-	empresa,
+export function EditInstrumentoAlertDialog({
+	instrumento,
 	setIsMenuOpen,
 }: {
-	empresa: EmpresaType
+	instrumento: InstrumentoType
 	setIsMenuOpen: (open: boolean) => void
 }) {
 	return (
@@ -161,7 +167,10 @@ export function EditEmpresaAlertDialog({
 			<AlertDialogContent className="p-20 bg-accent/40 backdrop-blur-xl w-1/2 min-h-[50dvh]">
 				<AlertDialogTitle></AlertDialogTitle>
 				<AlertDialogDescription></AlertDialogDescription>
-				<EditEmpresaForm empresa={empresa} setIsMenuOpen={setIsMenuOpen} />
+				<EditInstrumentoForm
+					instrumento={instrumento}
+					setIsMenuOpen={setIsMenuOpen}
+				/>
 			</AlertDialogContent>
 		</AlertDialog>
 	)

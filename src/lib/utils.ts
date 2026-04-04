@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx"
 import { EmpresaType } from "db/empresas/schema"
+import { InstrumentoType } from "db/instrumentos/schema"
 import { TecnicoType } from "db/tecnicos/schema"
 import { twMerge } from "tailwind-merge"
 
@@ -38,4 +39,8 @@ export const checkTecnicoDiference = (
 
 export const sortedByRazonSocial = (empresas: EmpresaType[]) => {
 	return empresas.sort((a, b) => a.razonSocial.localeCompare(b.razonSocial))
+}
+
+export const sortedByNombre = (instrumentos: InstrumentoType[]) => {
+	return instrumentos.sort((a, b) => a.nombre.localeCompare(b.nombre))
 }

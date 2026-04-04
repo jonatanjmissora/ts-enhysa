@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { EmpresaType } from "db/empresas/schema"
-import { updateEmpresaServer } from "server/empresas/update-empresas-server"
+import { updateEmpresaServer } from "server/empresas/update-empresa-server"
 
 export function useUpdateEmpresa() {
 	const queryClient = useQueryClient()
