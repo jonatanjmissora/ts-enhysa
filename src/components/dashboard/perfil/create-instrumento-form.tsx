@@ -21,8 +21,14 @@ import { empresaFormValidator } from "db/empresas/empresa-validator"
 import { useCreateEmpresa } from "queries/empresas/use-create-empresa"
 import { useQuery } from "@tanstack/react-query"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
+import { useCreateInstrumento } from "queries/instrumentos/use-create-empresa"
+import { instrumentoFormValidator } from "db/instrumentos/instrumento-validator"
 
-export function CreateEmpresaForm({ children }: { children: React.ReactNode }) {
+export function CreateInstrumentoForm({
+	children,
+}: {
+	children: React.ReactNode
+}) {
 	const [open, setOpen] = useState(false)
 
 	return (
@@ -32,51 +38,49 @@ export function CreateEmpresaForm({ children }: { children: React.ReactNode }) {
 			</AlertDialogTrigger>
 			<AlertDialogContent className="p-20 bg-accent/40 backdrop-blur-xl w-1/2 min-h-[50dvh]">
 				<AlertDialogTitle className="h-max sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2 border-b border-foreground/20 w-full mb-10">
-					Empresa Nueva
+					Instrumento Nueva
 				</AlertDialogTitle>
 				<AlertDialogDescription className="text-center">
-					<EmpresaForm setOpen={setOpen} />
+					<InstrumentoForm setOpen={setOpen} />
 				</AlertDialogDescription>
 			</AlertDialogContent>
 		</AlertDialog>
 	)
 }
 
-const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
+const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 	const { data: tecnico } = useQuery(tecnicoQueryOptions)
-	const [logoFiles, setLogoFiles] = useState<File[]>([])
+	const [instrumentoFiles, setInstrumentoFiles] = useState<File[]>([])
 	const {
-		mutateAsync: createEmpresaMutation,
+		mutateAsync: createInstrumentoMutation,
 		isPending,
 		error,
-	} = useCreateEmpresa()
+	} = useCreateInstrumento()
 
 	const form = useForm({
 		defaultValues: {
-			cuit: "",
-			razonSocial: "",
-			direccion: "",
-			localidad: "",
-			provincia: "",
-			codigoPostal: "",
-			horarios: "",
-			logo: "",
+			nombre: "",
+			marca: "",
+			modelo: "",
+			serie: "",
+			fechaCalibracion: "",
+			imagenes: [],
 		},
 		validators: {
-			onSubmit: empresaFormValidator,
+			onSubmit: instrumentoFormValidator,
 		},
 		onSubmit: async ({ value }) => {
 			if (!tecnico) {
 				toast.info("Completa los datos del técnico primero.")
 				return
 			}
-			const result = await createEmpresaMutation({ data: value })
+			const result = await createInstrumentoMutation({ data: value })
 			if (!result) {
-				console.error("Error al crear el técnico", error)
-				toast.error("Error al crear el técnico")
+				console.error("Error al crear el instrumento", error)
+				toast.error("Error al crear el instrumento")
 			}
 			setOpen(false)
-			toast.success("Empresa creada exitosamente")
+			toast.success("Instrumento creada exitosamente")
 		},
 	})
 
@@ -92,7 +96,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 			<FieldGroup className="gap-5">
 				<div className="flex gap-10">
 					<form.Field
-						name="razonSocial"
+						name="nombre"
 						children={field => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
@@ -102,7 +106,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										htmlFor={field.name}
 										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
 									>
-										Razón Social
+										Nombre
 										<Asterisk className="text-destructive size-3" />
 									</FieldLabel>
 									<Input
@@ -112,7 +116,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										onBlur={field.handleBlur}
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
-										placeholder="Ej. Teléfonica"
+										placeholder="Ej. Luxómetro"
 										className={`bg-background py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
@@ -127,7 +131,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 					/>
 
 					<form.Field
-						name="cuit"
+						name="marca"
 						children={field => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
@@ -137,7 +141,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										htmlFor={field.name}
 										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
 									>
-										CUIT
+										Marca
 										<Asterisk className="text-destructive size-3" />
 									</FieldLabel>
 									<Input
@@ -147,7 +151,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										onBlur={field.handleBlur}
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
-										placeholder="Ej. 00-00000000-0"
+										placeholder="Ej. DataLogger"
 										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
@@ -164,7 +168,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 
 				<div className="flex gap-10">
 					<form.Field
-						name="direccion"
+						name="modelo"
 						children={field => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
@@ -174,7 +178,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										htmlFor={field.name}
 										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
 									>
-										Dirección
+										Modelo
 									</FieldLabel>
 									<Input
 										id={field.name}
@@ -183,7 +187,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										onBlur={field.handleBlur}
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
-										placeholder="Ej. Villa Verde"
+										placeholder="Ej. DT-8809A"
 										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
@@ -198,7 +202,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 					/>
 
 					<form.Field
-						name="localidad"
+						name="serie"
 						children={field => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
@@ -208,7 +212,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										htmlFor={field.name}
 										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
 									>
-										Localidad
+										Nro de serie
 									</FieldLabel>
 									<Input
 										id={field.name}
@@ -217,77 +221,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										onBlur={field.handleBlur}
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
-										placeholder="Ej. Andorra"
-										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
-									/>
-									{isInvalid && (
-										<FieldError
-											errors={field.state.meta.errors}
-											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
-										/>
-									)}
-								</Field>
-							)
-						}}
-					/>
-				</div>
-
-				<div className="flex gap-10">
-					<form.Field
-						name="codigoPostal"
-						children={field => {
-							const isInvalid =
-								field.state.meta.isTouched && !field.state.meta.isValid
-							return (
-								<Field data-invalid={isInvalid} className="relative">
-									<FieldLabel
-										htmlFor={field.name}
-										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
-									>
-										Código Postal
-									</FieldLabel>
-									<Input
-										id={field.name}
-										name={field.name}
-										value={field.state.value}
-										onBlur={field.handleBlur}
-										onChange={e => field.handleChange(e.target.value)}
-										aria-invalid={isInvalid}
-										placeholder="Ej. 5000"
-										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
-									/>
-									{isInvalid && (
-										<FieldError
-											errors={field.state.meta.errors}
-											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
-										/>
-									)}
-								</Field>
-							)
-						}}
-					/>
-
-					<form.Field
-						name="provincia"
-						children={field => {
-							const isInvalid =
-								field.state.meta.isTouched && !field.state.meta.isValid
-							return (
-								<Field data-invalid={isInvalid} className="relative">
-									<FieldLabel
-										htmlFor={field.name}
-										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
-									>
-										Provincia
-									</FieldLabel>
-									<Input
-										id={field.name}
-										name={field.name}
-										value={field.state.value}
-										onBlur={field.handleBlur}
-										onChange={e => field.handleChange(e.target.value)}
-										aria-invalid={isInvalid}
-										placeholder="Ej. Pr. Andorra"
+										placeholder="Ej. 32451"
 										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
@@ -302,73 +236,71 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 					/>
 				</div>
 
-				<div className="flex gap-10">
-					<form.Field
-						name="horarios"
-						children={field => {
-							const isInvalid =
-								field.state.meta.isTouched && !field.state.meta.isValid
-							return (
-								<Field data-invalid={isInvalid} className="relative">
-									<FieldLabel
-										htmlFor={field.name}
-										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
-									>
-										Horarios de trabajo
-									</FieldLabel>
-									<Input
-										id={field.name}
-										name={field.name}
-										value={field.state.value}
-										onBlur={field.handleBlur}
-										onChange={e => field.handleChange(e.target.value)}
-										aria-invalid={isInvalid}
-										placeholder="Ej. Lun a Vie de 08:00 a 18:00"
-										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
+				<form.Field
+					name="fechaCalibracion"
+					children={field => {
+						const isInvalid =
+							field.state.meta.isTouched && !field.state.meta.isValid
+						return (
+							<Field data-invalid={isInvalid} className="relative">
+								<FieldLabel
+									htmlFor={field.name}
+									className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
+								>
+									Fecha de calibración
+								</FieldLabel>
+								<Input
+									id={field.name}
+									name={field.name}
+									value={field.state.value}
+									onBlur={field.handleBlur}
+									onChange={e => field.handleChange(e.target.value)}
+									aria-invalid={isInvalid}
+									placeholder="Ej. 12-10-2025"
+									className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
+								/>
+								{isInvalid && (
+									<FieldError
+										errors={field.state.meta.errors}
+										className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
 									/>
-									{isInvalid && (
-										<FieldError
-											errors={field.state.meta.errors}
-											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
-										/>
-									)}
-								</Field>
-							)
-						}}
-					/>
+								)}
+							</Field>
+						)
+					}}
+				/>
 
-					<form.Field
-						name="logo"
-						children={field => {
-							const isInvalid =
-								field.state.meta.isTouched && !field.state.meta.isValid
-							return (
-								<Field data-invalid={isInvalid} className="relative">
-									<FieldLabel
-										htmlFor={field.name}
-										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
-									>
-										Logo Empresarial
-									</FieldLabel>
-									<div className="w-full bg-foreground/5 h-max sm:py-[5px] 2xl:py-[4px] rounded-lg border border-foreground/7">
-										<InputFiles
-											files={logoFiles}
-											setFiles={setLogoFiles}
-											text="Imágen Logo digital"
-											maxFiles={1}
-										/>
-									</div>
-									{isInvalid && (
-										<FieldError
-											errors={field.state.meta.errors}
-											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
-										/>
-									)}
-								</Field>
-							)
-						}}
-					/>
-				</div>
+				<form.Field
+					name="imagenes"
+					children={field => {
+						const isInvalid =
+							field.state.meta.isTouched && !field.state.meta.isValid
+						return (
+							<Field data-invalid={isInvalid} className="relative">
+								<FieldLabel
+									htmlFor={field.name}
+									className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
+								>
+									Imagenes
+								</FieldLabel>
+								<div className="w-full bg-foreground/5 h-max sm:py-[5px] 2xl:py-[4px] rounded-lg border border-foreground/7">
+									<InputFiles
+										files={instrumentoFiles}
+										setFiles={setInstrumentoFiles}
+										text="Imágen del instrumento"
+										maxFiles={3}
+									/>
+								</div>
+								{isInvalid && (
+									<FieldError
+										errors={field.state.meta.errors}
+										className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+									/>
+								)}
+							</Field>
+						)
+					}}
+				/>
 
 				<div className="flex justify-end items-center gap-2 w-full text-destructive">
 					<Asterisk className="text-destructive size-3" />
