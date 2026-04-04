@@ -130,8 +130,8 @@ export function DeleteEmpresaAlertDialog({
 	return (
 		<AlertDialog>
 			<AlertDialogTrigger asChild>
-				<Button variant="ghost">
-					<Trash2 size={14} />
+				<Button variant="ghost" className="w-full">
+					<Trash2 size={14} className="text-destructive-foreground" />
 					Borrar
 				</Button>
 			</AlertDialogTrigger>
@@ -154,8 +154,8 @@ export function EditEmpresaAlertDialog({
 	return (
 		<AlertDialog>
 			<AlertDialogTrigger asChild>
-				<Button variant="ghost">
-					<Pencil size={14} />
+				<Button variant="ghost" className="w-full gap-4">
+					<Pencil size={14} className="text-amber-500" />
 					Edit
 				</Button>
 			</AlertDialogTrigger>

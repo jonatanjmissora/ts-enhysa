@@ -21,10 +21,10 @@ export default function Empresas() {
 						<CreateEmpresaForm>
 							<Button
 								type="button"
-								variant="outline"
-								className="flex items-center justify-center cursor-pointer"
+								variant="ghost"
+								className="flex items-center justify-center cursor-pointer bg-teal-500/50 dark:bg-teal-500/75 hover:bg-teal-500/75  dark:hover:bg-teal-500"
 							>
-								<Plus />
+								<Plus className="size-6" />
 							</Button>
 						</CreateEmpresaForm>
 					) : (

@@ -66,8 +66,8 @@ export function LogoutAlertDialog() {
 					<LogOut size={14} className="text-muted-foreground" /> Cerrar sesion
 				</span>
 			</AlertDialogTrigger>
-			<AlertDialogContent className="py-20 px-10 bg-red-900/10 backdrop-blur-xl">
-				<AlertDialogTitle className="text-center">
+			<AlertDialogContent className="p-20 bg-red-900/10 backdrop-blur-xl">
+				<AlertDialogTitle className="text-center sm:text-lg 2xl:text-xl">
 					¿Estás seguro de que quieres cerrar sesión?
 				</AlertDialogTitle>
 				<AlertDialogDescription className="text-center">
@@ -76,14 +76,14 @@ export function LogoutAlertDialog() {
 				<div className="flex justify-end gap-4">
 					<Button
 						variant="outline"
-						className="cursor-pointer"
+						className="cursor-pointer w-1/2"
 						onClick={() => {
 							setOpen(false)
 						}}
 					>
 						Cancelar
 					</Button>
-					<Button className="cursor-pointer" onClick={logout}>
+					<Button className="cursor-pointer w-1/2" onClick={logout}>
 						Confirmar
 					</Button>
 				</div>

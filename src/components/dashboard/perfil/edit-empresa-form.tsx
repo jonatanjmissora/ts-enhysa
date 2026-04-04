@@ -98,7 +98,7 @@ export function EditEmpresaForm({
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. Teléfonica"
-										className={`bg-background py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
+										className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -133,7 +133,7 @@ export function EditEmpresaForm({
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. 00-00000000-0"
-										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
+										className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -169,7 +169,7 @@ export function EditEmpresaForm({
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. Villa Verde"
-										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
+										className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -203,7 +203,7 @@ export function EditEmpresaForm({
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. Andorra"
-										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
+										className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -239,7 +239,7 @@ export function EditEmpresaForm({
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. 5000"
-										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
+										className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -273,7 +273,7 @@ export function EditEmpresaForm({
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. Pr. Andorra"
-										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
+										className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -309,7 +309,7 @@ export function EditEmpresaForm({
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. Lun a Vie de 08:00 a 18:00"
-										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
+										className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -378,10 +378,10 @@ export function EditEmpresaForm({
 					>
 						{isPending ? (
 							<div className="flex gap-2 w-full justify-center">
-								Guardando... <Loader className="animate-spin"></Loader>
+								Editando... <Loader className="animate-spin"></Loader>
 							</div>
 						) : (
-							"Editar"
+							"Guardar"
 						)}
 					</button>
 				</Field>

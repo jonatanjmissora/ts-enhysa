@@ -49,7 +49,7 @@ export default function DeleteEmpresaForm({
 				form.handleSubmit()
 			}}
 		>
-			<p className="text-xl font-semibold text-center">
+			<p className="text-center sm:text-lg 2xl:text-2xl font-semibold">
 				¿Estás seguro de borrar {empresa.razonSocial}?
 			</p>
 

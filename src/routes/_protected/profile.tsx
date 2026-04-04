@@ -30,7 +30,7 @@ function RouteComponent() {
 					<span></span>
 					<span>Tecnico</span>
 					<UserRound
-						className={`${toggleProfile === "tecnico" ? "" : "text-transparent"}`}
+						className={`bg-blue-500/50 size-9 p-1 rounded-lg text-foreground ${toggleProfile === "tecnico" ? "" : "text-transparent bg-transparent"}`}
 					/>
 				</button>
 				<button
@@ -38,7 +38,7 @@ function RouteComponent() {
 					onClick={() => setToggleProfile("empresas")}
 				>
 					<Warehouse
-						className={`${toggleProfile === "empresas" ? "" : "text-transparent"}`}
+						className={`bg-teal-500/50 size-9 p-1 rounded-lg text-foreground ${toggleProfile === "empresas" ? "" : "text-transparent bg-transparent"}`}
 					/>
 					<span>Empresa</span>
 					<span></span>

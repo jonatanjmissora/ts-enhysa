@@ -94,7 +94,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="Nombre Completo"
-											className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
+											className={`${editMode ? "bg-green-700/10 dark:bg-green-700/20" : "bg-background"} py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 											readOnly={!editMode}
 										/>
 										{isInvalid && (
@@ -129,7 +129,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="000-0000000"
-											className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
+											className={`${editMode ? "bg-green-700/10 dark:bg-green-700/20" : "bg-background"} py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 											readOnly={!editMode}
 										/>
 										{isInvalid && (
@@ -167,7 +167,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="Ej. Seguridad e Higiene"
-											className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
+											className={`${editMode ? "bg-green-700/10 dark:bg-green-700/20" : "bg-background"} py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 											readOnly={!editMode}
 										/>
 										{isInvalid && (
@@ -202,7 +202,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="Ej. Andorra"
-											className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
+											className={`${editMode ? "bg-green-700/10 dark:bg-green-700/20" : "bg-background"} py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 											readOnly={!editMode}
 										/>
 										{isInvalid && (
@@ -240,7 +240,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="N° Matrícula"
-											className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
+											className={`${editMode ? "bg-green-700/10 dark:bg-green-700/20" : "bg-background"} py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 											readOnly={!editMode}
 										/>
 										{isInvalid && (
@@ -318,7 +318,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Estos datos se adjuntaran en el pie de cada pagina del reporte"
-										className="min-h-[80px] py-2 px-4 rounded-lg text-center text-pretty sm:text-base 2xl:text-lg"
+										className={`${editMode ? "bg-green-700/10 dark:bg-green-700/20" : "bg-background"} min-h-[80px] py-2 px-4 rounded-lg text-center text-pretty sm:text-base 2xl:text-lg`}
 										readOnly={!editMode}
 									/>
 									{isInvalid && <FieldError errors={field.state.meta.errors} />}
@@ -351,27 +351,34 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 									}}
 									type="button"
 									disabled={isPending}
-									className="themeBtnBackground py-2 rounded-lg tracking-wider cursor-pointer w-full"
+									className="themeBtnBackground py-2 rounded-lg tracking-wider sm:text-lg 2xl:text-xl font-semibold flex-1"
 								>
 									Editar
 								</button>
 							</Field>
 						</div>
 					) : (
-						<div className="flex justify-end item-center w-full mt-10">
-							<Field className="w-1/2">
+						<div className="flex item-center w-full">
+							<Field className="flex flex-row justify-center gap-10 items-center w-full mt-10">
+								<button
+									onClick={() => setEditMode(false)}
+									type="button"
+									disabled={isPending}
+									className="ring ring-foreground/5 shadow bg-background  h-full py-2 rounded-lg tracking-wider sm:text-lg 2xl:text-xl font-semibold flex-1 hover:bg-background/75 cursor-pointer"
+								>
+									Cancelar
+								</button>
 								<button
 									type="submit"
 									disabled={isPending}
-									className="themeBtnBackground py-2 rounded-lg tracking-wider cursor-pointer w-full"
+									className="themeBtnBackground py-2 rounded-lg tracking-wider sm:text-lg 2xl:text-xl font-semibold flex-1"
 								>
 									{isPending ? (
-										<div className="w-full flex items-center justify-center gap-2">
-											<span>Guardando...</span>
-											<Loader className="animate-spin size-5"></Loader>
+										<div className="flex gap-2 w-full justify-center">
+											Editando... <Loader className="animate-spin"></Loader>
 										</div>
 									) : (
-										<span>Guardar</span>
+										"Guardar"
 									)}
 								</button>
 							</Field>
