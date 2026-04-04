@@ -29,6 +29,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 
 	const form = useForm({
 		defaultValues: {
+			id: tecnico.id,
 			nombre: tecnico.nombre,
 			telefono: tecnico.telefono,
 			localidad: tecnico.localidad,

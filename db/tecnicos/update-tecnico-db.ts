@@ -10,7 +10,7 @@ export async function updateTecnicoDB(updatedTecnico: UpdateTecnicoType) {
 		const result = await db
 			.update(tecnicos)
 			.set(updatedTecnico)
-			.where(eq(tecnicos.userId, updatedTecnico.userId))
+			.where(eq(tecnicos.id, updatedTecnico.id))
 			.returning()
 
 		return result[0]

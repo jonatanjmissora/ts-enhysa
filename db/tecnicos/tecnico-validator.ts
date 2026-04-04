@@ -14,6 +14,7 @@ export const tecnicoFormValidator = z.object({
 export type TecnicoFormType = z.infer<typeof tecnicoFormValidator>
 
 export const updateTecnicoValidator = tecnicoFormValidator.extend({
+	id: z.string().min(1, "Id requerido"),
 	userId: z.string().min(1, "UserId requerido"),
 })
 

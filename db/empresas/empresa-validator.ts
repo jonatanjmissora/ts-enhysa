@@ -19,8 +19,9 @@ export const empresaIdValidator = z.object({
 
 export type EmpresaIdType = z.infer<typeof empresaIdValidator>
 
-export const updateEmpresasValidator = z.object({
+export const updateEmpresaValidator = empresaFormValidator.extend({
+	id: z.string().min(1, "Id requerido"),
 	userId: z.string().min(1, "UserId requerido"),
 })
 
-export type UpdateEmpresaType = z.infer<typeof updateEmpresasValidator>
+export type UpdateEmpresaType = z.infer<typeof updateEmpresaValidator>

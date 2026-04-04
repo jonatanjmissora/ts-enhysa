@@ -8,7 +8,10 @@ export const updateTecnicoServer = createServerFn({ method: "POST" })
 	.inputValidator(updateTecnicoValidator)
 	.handler(async ({ data }) => {
 		const request = getRequest()
-		await protectedServerFn(request)
+		const session = await protectedServerFn(request)
+		if (session.user.id !== data.userId) {
+			throw new Response("Unauthorized", { status: 401 })
+		}
 
 		return await updateTecnicoDB(data)
 	})

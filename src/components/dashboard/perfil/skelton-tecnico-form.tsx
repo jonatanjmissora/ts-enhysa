@@ -83,7 +83,7 @@ export default function SkeltonTecnicoForm() {
 						<Textarea className="min-h-[80px] py-2 px-4 rounded-lg text-center text-pretty sm:text-base 2xl:text-lg animate-pulse" />
 					</Field>
 
-					<div className="h-55 w-full"></div>
+					<div className="sm:h-55 2xl:h-42 w-full"></div>
 				</FieldGroup>
 			</form>
 		</article>

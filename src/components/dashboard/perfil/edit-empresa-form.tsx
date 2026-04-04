@@ -50,7 +50,12 @@ export function EditEmpresaForm({
 				toast.info("Completa los datos del técnico primero.")
 				return
 			}
-			const result = await updateEmpresaMutation({ data: value })
+			const updateEmpresa = {
+				...value,
+				id: empresa.id,
+				userId: empresa.userId,
+			}
+			const result = await updateEmpresaMutation({ data: updateEmpresa })
 			if (!result) {
 				console.error("Error al actualizar la empresa", error)
 				toast.error("Error al actualizar la empresa")

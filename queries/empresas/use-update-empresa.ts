@@ -1,4 +1,3 @@
-import { sortedByRazonSocial } from "@/lib/utils"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { EmpresaType } from "db/empresas/schema"
 import { updateEmpresaServer } from "server/empresas/update-empresas-server"
@@ -9,9 +8,14 @@ export function useUpdateEmpresa() {
 	return useMutation({
 		mutationFn: updateEmpresaServer,
 		onSuccess: data => {
+			if (!data) return
 			queryClient.setQueryData<EmpresaType[]>(["empresas"], oldData => {
 				if (!oldData) return oldData
-				return sortedByRazonSocial([data, ...oldData])
+				const oldEmpresa = oldData.find(oldEmpresa => oldEmpresa.id === data.id)
+				if (!oldEmpresa) return oldData
+				return oldData.map(oldEmpresa =>
+					oldEmpresa.id === data.id ? data : oldEmpresa
+				)
 			})
 		},
 	})

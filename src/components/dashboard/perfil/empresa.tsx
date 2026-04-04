@@ -46,7 +46,7 @@ export default function Empresas() {
 			</div>
 			<div className="pt-10 w-full grid grid-cols-[1.5fr_1.5fr_1fr_1fr_1.5fr] gap-2 p-3 text-center tracking-widest font-semibold italic">
 				<span>Razón social</span>
-				<span>Direccion</span>
+				<span>Dirección</span>
 				<span>Localidad</span>
 				<span>Provincia</span>
 				<span></span>
