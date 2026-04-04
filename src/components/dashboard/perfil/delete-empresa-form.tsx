@@ -43,7 +43,7 @@ export default function DeleteEmpresaForm({
 	return (
 		<form
 			id="create-form"
-			className="flex flex-col items-center justify-center gap-2"
+			className="flex flex-col items-center justify-center gap-6"
 			onSubmit={e => {
 				e.preventDefault()
 				form.handleSubmit()
@@ -53,20 +53,25 @@ export default function DeleteEmpresaForm({
 				¿Estás seguro de borrar {empresa.razonSocial}?
 			</p>
 
-			<p className="text-center opacity-50 text-xs balance">
+			<p className="text-center opacity-50 sm:text-sm 2xl:text-base text-pretty w-3/4">
 				Esta acción no se puede deshacer. Esto eliminará permanentemente el dato
 				de nuestros servidores.
 			</p>
 
-			<div className="flex justify-center items-center gap-2">
+			<div className="flex justify-center items-center gap-2 w-full">
 				<Button
 					type="button"
-					variant="ghost"
+					variant="outline"
 					onClick={() => setIsMenuOpen(false)}
+					className="w-1/2 cursor-pointer"
 				>
 					Cancelar
 				</Button>
-				<Button type="submit" disabled={isPending}>
+				<Button
+					type="submit"
+					disabled={isPending}
+					className="w-1/2 cursor-pointer"
+				>
 					{isPending ? (
 						<div className="flex gap-2">
 							Eliminando... <Loader className="animate-spin"></Loader>

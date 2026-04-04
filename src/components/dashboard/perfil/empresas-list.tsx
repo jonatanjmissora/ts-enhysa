@@ -30,8 +30,9 @@ export default function EmpresasList({
 	tecnico: TecnicoType | null
 }) {
 	const { data: empresas } = useSuspenseQuery(empresasQueryOptions)
+	console.log("EMPRESAS", empresas)
 
-	if (!empresas) {
+	if (!empresas || empresas.length === 0) {
 		return <NoEmpresas tecnico={tecnico} />
 	}
 
@@ -136,7 +137,7 @@ export function DeleteEmpresaAlertDialog({
 					Borrar
 				</Button>
 			</AlertDialogTrigger>
-			<AlertDialogContent>
+			<AlertDialogContent className="py-20 px-10 bg-accent/50 backdrop-blur-xl">
 				<AlertDialogTitle></AlertDialogTitle>
 				<AlertDialogDescription></AlertDialogDescription>
 				<DeleteEmpresaForm empresa={empresa} setIsMenuOpen={setIsMenuOpen} />
