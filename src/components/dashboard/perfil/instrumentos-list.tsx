@@ -47,7 +47,7 @@ export default function InstrumentosList({
 
 const Instrumento = ({ instrumento }: { instrumento: InstrumentoType }) => {
 	return (
-		<div className="w-full grid grid-cols-[1.5fr_1fr_1fr_1fr_1.5fr] gap-2 p-3 text-center tracking-widest text-foreground/75 cardAccent">
+		<div className="w-full grid grid-cols-[1.5fr_1fr_1fr_1fr_1.5fr] gap-2 p-3 text-center tracking-widest text-foreground/75 cardAccent dark:bg-(--dark-orange-opa) bg-(--orange-opa)">
 			<span>{instrumento.nombre}</span>
 			<span>{instrumento.marca}</span>
 			<span>{instrumento.modelo}</span>

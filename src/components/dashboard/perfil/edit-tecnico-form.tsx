@@ -62,7 +62,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 	})
 
 	return (
-		<article className="flex flex-col items-stretch gap-6 text-lg p-10 cardAccent">
+		<article className="flex flex-col items-stretch gap-6 text-lg p-10 cardAccent dark:bg-(--dark-blue-opa) bg-(--blue-opa)">
 			<form
 				className="flex flex-col gap-6"
 				id="create-form"

@@ -209,6 +209,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
 									>
 										Nro de serie
+										<Asterisk className="text-destructive size-3" />
 									</FieldLabel>
 									<Input
 										id={field.name}

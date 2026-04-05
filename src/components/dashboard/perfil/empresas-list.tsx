@@ -47,7 +47,7 @@ export default function EmpresasList({
 
 const Empresa = ({ empresa }: { empresa: EmpresaType }) => {
 	return (
-		<div className="w-full grid grid-cols-[1.5fr_1.5fr_1fr_1fr_1.5fr] gap-2 p-3 text-center tracking-widest text-foreground/75 cardAccent">
+		<div className="w-full grid grid-cols-[1.5fr_1.5fr_1fr_1fr_1.5fr] gap-2 p-3 text-center tracking-widest text-foreground/75 cardAccent dark:bg-(--dark-teal-opa) bg-(--teal-opa)">
 			<span>{empresa.razonSocial}</span>
 			<span>{empresa.direccion}</span>
 			<span>{empresa.localidad}</span>
