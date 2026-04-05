@@ -17,8 +17,6 @@ import { Asterisk, Loader } from "lucide-react"
 import { useForm } from "@tanstack/react-form"
 import { InputFiles } from "@/components/layout/input-files"
 import { toast } from "sonner"
-import { empresaFormValidator } from "db/empresas/empresa-validator"
-import { useCreateEmpresa } from "queries/empresas/use-create-empresa"
 import { useQuery } from "@tanstack/react-query"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { useCreateInstrumento } from "queries/instrumentos/use-create-empresa"
@@ -38,7 +36,7 @@ export function CreateInstrumentoForm({
 			</AlertDialogTrigger>
 			<AlertDialogContent className="p-20 bg-accent/40 backdrop-blur-xl w-1/2 min-h-[50dvh]">
 				<AlertDialogTitle className="h-max sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2 border-b border-foreground/20 w-full mb-10">
-					Instrumento Nueva
+					Instrumento Nuevo
 				</AlertDialogTitle>
 				<AlertDialogDescription className="text-center">
 					<InstrumentoForm setOpen={setOpen} />
@@ -80,7 +78,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 				toast.error("Error al crear el instrumento")
 			}
 			setOpen(false)
-			toast.success("Instrumento creada exitosamente")
+			toast.success("Instrumento creado exitosamente")
 		},
 	})
 
@@ -94,42 +92,41 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 			}}
 		>
 			<FieldGroup className="gap-5">
-				<div className="flex gap-10">
-					<form.Field
-						name="nombre"
-						children={field => {
-							const isInvalid =
-								field.state.meta.isTouched && !field.state.meta.isValid
-							return (
-								<Field data-invalid={isInvalid} className="relative">
-									<FieldLabel
-										htmlFor={field.name}
-										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
-									>
-										Nombre
-										<Asterisk className="text-destructive size-3" />
-									</FieldLabel>
-									<Input
-										id={field.name}
-										name={field.name}
-										value={field.state.value}
-										onBlur={field.handleBlur}
-										onChange={e => field.handleChange(e.target.value)}
-										aria-invalid={isInvalid}
-										placeholder="Ej. Luxómetro"
-										className={`bg-background py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
+				<form.Field
+					name="nombre"
+					children={field => {
+						const isInvalid =
+							field.state.meta.isTouched && !field.state.meta.isValid
+						return (
+							<Field data-invalid={isInvalid} className="relative">
+								<FieldLabel
+									htmlFor={field.name}
+									className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
+								>
+									Nombre
+									<Asterisk className="text-destructive size-3" />
+								</FieldLabel>
+								<Input
+									id={field.name}
+									name={field.name}
+									value={field.state.value}
+									onBlur={field.handleBlur}
+									onChange={e => field.handleChange(e.target.value)}
+									aria-invalid={isInvalid}
+									placeholder="Ej. Luxómetro"
+									className={`bg-background py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
+								/>
+								{isInvalid && (
+									<FieldError
+										errors={field.state.meta.errors}
+										className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
 									/>
-									{isInvalid && (
-										<FieldError
-											errors={field.state.meta.errors}
-											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
-										/>
-									)}
-								</Field>
-							)
-						}}
-					/>
-
+								)}
+							</Field>
+						)
+					}}
+				/>
+				<div className="flex gap-10">
 					<form.Field
 						name="marca"
 						children={field => {
@@ -164,9 +161,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 							)
 						}}
 					/>
-				</div>
 
-				<div className="flex gap-10">
 					<form.Field
 						name="modelo"
 						children={field => {
@@ -200,7 +195,8 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 							)
 						}}
 					/>
-
+				</div>
+				<div className="flex gap-10">
 					<form.Field
 						name="serie"
 						children={field => {
@@ -234,42 +230,41 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 							)
 						}}
 					/>
-				</div>
 
-				<form.Field
-					name="fechaCalibracion"
-					children={field => {
-						const isInvalid =
-							field.state.meta.isTouched && !field.state.meta.isValid
-						return (
-							<Field data-invalid={isInvalid} className="relative">
-								<FieldLabel
-									htmlFor={field.name}
-									className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
-								>
-									Fecha de calibración
-								</FieldLabel>
-								<Input
-									id={field.name}
-									name={field.name}
-									value={field.state.value}
-									onBlur={field.handleBlur}
-									onChange={e => field.handleChange(e.target.value)}
-									aria-invalid={isInvalid}
-									placeholder="Ej. 12-10-2025"
-									className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
-								/>
-								{isInvalid && (
-									<FieldError
-										errors={field.state.meta.errors}
-										className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+					<form.Field
+						name="fechaCalibracion"
+						children={field => {
+							const isInvalid =
+								field.state.meta.isTouched && !field.state.meta.isValid
+							return (
+								<Field data-invalid={isInvalid} className="relative">
+									<FieldLabel
+										htmlFor={field.name}
+										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
+									>
+										Fecha de calibración
+									</FieldLabel>
+									<Input
+										id={field.name}
+										name={field.name}
+										value={field.state.value}
+										onBlur={field.handleBlur}
+										onChange={e => field.handleChange(e.target.value)}
+										aria-invalid={isInvalid}
+										placeholder="Ej. 12-10-2025"
+										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 									/>
-								)}
-							</Field>
-						)
-					}}
-				/>
-
+									{isInvalid && (
+										<FieldError
+											errors={field.state.meta.errors}
+											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+										/>
+									)}
+								</Field>
+							)
+						}}
+					/>
+				</div>
 				<form.Field
 					name="imagenes"
 					children={field => {
@@ -314,14 +309,14 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 						onClick={() => setOpen(false)}
 						type="button"
 						disabled={isPending}
-						className="ring ring-foreground/5 shadow bg-background  h-full py-2 rounded-lg tracking-wider sm:text-lg 2xl:text-xl font-semibold flex-1 hover:bg-background/75 cursor-pointer"
+						className="ring ring-foreground/5 shadow bg-background  h-full py-2 rounded-lg tracking-wider 2xl:text-lg font-semibold flex-1 hover:bg-background/75 cursor-pointer"
 					>
 						Cancelar
 					</button>
 					<button
 						type="submit"
 						disabled={isPending}
-						className="themeBtnBackground py-2 rounded-lg tracking-wider sm:text-lg 2xl:text-xl font-semibold flex-1"
+						className="themeBtnBackground py-2 rounded-lg tracking-wider 2xl:text-lg font-semibold flex-1"
 					>
 						{isPending ? (
 							<div className="flex gap-2 w-full justify-center">

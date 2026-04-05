@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import InstrumentalList from "./instrumentos-list"
-import { CreateEmpresaForm } from "./create-empresa-form"
 import { useQuery } from "@tanstack/react-query"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { toast } from "sonner"
 import { Suspense } from "react"
+import { CreateInstrumentoForm } from "./create-instrumento-form"
 
 export default function Instrumentos() {
 	const { data: tecnico } = useQuery(tecnicoQueryOptions)
@@ -18,7 +18,7 @@ export default function Instrumentos() {
 						Instrumental
 					</span>
 					{tecnico ? (
-						<CreateEmpresaForm>
+						<CreateInstrumentoForm>
 							<Button
 								type="button"
 								variant="ghost"
@@ -26,7 +26,7 @@ export default function Instrumentos() {
 							>
 								<Plus className="size-6" />
 							</Button>
-						</CreateEmpresaForm>
+						</CreateInstrumentoForm>
 					) : (
 						<Button
 							onClick={() =>
@@ -48,17 +48,17 @@ export default function Instrumentos() {
 				<span>Nombre</span>
 				<span>Marca</span>
 				<span>Modelo</span>
-				<span>Fecha certificación</span>
+				<span>Certificación</span>
 				<span></span>
 			</div>
-			<Suspense fallback={<InstrumentalSkelton />}>
+			<Suspense fallback={<InstrumentosSkelton />}>
 				<InstrumentalList tecnico={tecnico ?? null} />
 			</Suspense>
 		</article>
 	)
 }
 
-const InstrumentalSkelton = () => {
+const InstrumentosSkelton = () => {
 	return (
 		<div className="flex flex-col gap-2 w-full">
 			<div className="w-full h-15 cardAccent animate-pulse">

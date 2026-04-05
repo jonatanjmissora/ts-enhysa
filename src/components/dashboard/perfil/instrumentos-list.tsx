@@ -22,6 +22,8 @@ import {
 import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
 import { InstrumentoType } from "db/instrumentos/schema"
 import { CreateInstrumentoForm } from "./create-instrumento-form"
+import DeleteInstrumentoForm from "./delete-instrumento-form"
+import { EditInstrumentoForm } from "./edit-instrumento-form"
 
 export default function InstrumentosList({
 	tecnico,
@@ -61,9 +63,9 @@ const Instrumento = ({ instrumento }: { instrumento: InstrumentoType }) => {
 const NoInstrumental = ({ tecnico }: { tecnico: TecnicoType | null }) => {
 	return (
 		<article className="flex flex-col gap-4 text-foreground/50 sm:text-lg 2xl:text-xl tracking-wide py-20">
-			<p>No tiene ninguna empresa asociada a su cuenta.</p>
+			<p>No tiene ninguna instrumento asociado a su cuenta.</p>
 			<div className="flex items-center justify-center gap-2">
-				<span>Por favor ingrese una nueva</span>
+				<span>Por favor ingrese un nuevo</span>
 				{tecnico ? (
 					<CreateInstrumentoForm>
 						<Button

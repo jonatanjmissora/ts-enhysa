@@ -1,0 +1,89 @@
+import { Button } from "@/components/ui/button"
+import { useForm } from "@tanstack/react-form"
+import { useRouter } from "@tanstack/react-router"
+import { instrumentoIdValidator } from "db/instrumentos/instrumento-validator"
+import { InstrumentoType } from "db/instrumentos/schema"
+import { Loader } from "lucide-react"
+import { useDeleteInstrumento } from "queries/instrumentos/use-delete-empresa"
+import { toast } from "sonner"
+
+export default function DeleteInstrumentoForm({
+	instrumento,
+	setIsMenuOpen,
+}: {
+	instrumento: InstrumentoType
+	setIsMenuOpen: (open: boolean) => void
+}) {
+	const {
+		mutateAsync: deleteInstrumentoMutation,
+		error,
+		isPending,
+	} = useDeleteInstrumento(instrumento.id)
+
+	const router = useRouter()
+	const form = useForm({
+		defaultValues: {
+			id: instrumento.id,
+		},
+		validators: {
+			onSubmit: instrumentoIdValidator,
+		},
+		onSubmit: async ({ value }) => {
+			const result = await deleteInstrumentoMutation({ data: { id: value.id } })
+
+			if (!result) {
+				console.error("Error al eliminar el instrumento", error)
+				toast.error("Error al eliminar el instrumento")
+			}
+			toast.success("Instrumento eliminado exitosamente")
+			router.invalidate()
+		},
+	})
+
+	return (
+		<form
+			id="create-form"
+			className="flex flex-col items-center justify-center gap-6"
+			onSubmit={e => {
+				e.preventDefault()
+				form.handleSubmit()
+			}}
+		>
+			<p className="text-center sm:text-lg 2xl:text-2xl font-semibold">
+				¿Estás seguro de borrar {instrumento.nombre}?
+			</p>
+
+			<p className="text-center opacity-50 sm:text-sm 2xl:text-base text-pretty w-3/4">
+				Esta acción no se puede deshacer. Esto eliminará permanentemente el dato
+				de nuestros servidores.
+			</p>
+
+			<div className="flex justify-center items-center gap-2 w-full">
+				<Button
+					type="button"
+					variant="outline"
+					onClick={() => setIsMenuOpen(false)}
+					className="w-1/2 cursor-pointer"
+				>
+					Cancelar
+				</Button>
+				<Button
+					type="submit"
+					disabled={isPending}
+					className="w-1/2 cursor-pointer"
+				>
+					{isPending ? (
+						<div className="flex gap-2">
+							Eliminando... <Loader className="animate-spin"></Loader>
+						</div>
+					) : (
+						"Eliminar"
+					)}
+				</Button>
+			</div>
+			{error && (
+				<p className="text-red-500 text-xs">Error al eliminar el pago</p>
+			)}
+		</form>
+	)
+}

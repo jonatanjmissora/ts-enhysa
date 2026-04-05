@@ -382,14 +382,14 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 						onClick={() => setOpen(false)}
 						type="button"
 						disabled={isPending}
-						className="ring ring-foreground/5 shadow bg-background  h-full py-2 rounded-lg tracking-wider sm:text-lg 2xl:text-xl font-semibold flex-1 hover:bg-background/75 cursor-pointer"
+						className="ring ring-foreground/5 shadow bg-background  h-full py-2 rounded-lg tracking-wider 2xl:text-lg font-semibold flex-1 hover:bg-background/75 cursor-pointer"
 					>
 						Cancelar
 					</button>
 					<button
 						type="submit"
 						disabled={isPending}
-						className="themeBtnBackground py-2 rounded-lg tracking-wider sm:text-lg 2xl:text-xl font-semibold flex-1"
+						className="themeBtnBackground py-2 rounded-lg tracking-wider 2xl:text-lg font-semibold flex-1"
 					>
 						{isPending ? (
 							<div className="flex gap-2 w-full justify-center">

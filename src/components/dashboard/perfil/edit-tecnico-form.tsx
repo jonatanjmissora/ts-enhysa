@@ -362,19 +362,19 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 						</div>
 					) : (
 						<div className="flex item-center w-full">
-							<Field className="flex flex-row justify-center gap-10 items-center w-full mt-10">
+							<Field className="flex flex-row justify-center gap-10 items-center w-full mt-11">
 								<button
 									onClick={() => setEditMode(false)}
 									type="button"
 									disabled={isPending}
-									className="ring ring-foreground/5 shadow bg-background  h-full py-2 rounded-lg tracking-wider sm:text-lg 2xl:text-xl font-semibold flex-1 hover:bg-background/75 cursor-pointer"
+									className="ring ring-foreground/5 shadow bg-background  h-full py-2 rounded-lg tracking-wider sm:text-sm 2xl:text-base font-semibold flex-1 hover:bg-background/75 cursor-pointer"
 								>
 									Cancelar
 								</button>
 								<button
 									type="submit"
 									disabled={isPending}
-									className="themeBtnBackground py-2 rounded-lg tracking-wider sm:text-lg 2xl:text-xl font-semibold flex-1"
+									className="themeBtnBackground py-2 rounded-lg tracking-wider sm:text-sm 2xl:text-base font-semibold flex-1"
 								>
 									{isPending ? (
 										<div className="flex gap-2 w-full justify-center">

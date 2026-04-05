@@ -327,7 +327,7 @@ export default function CreateTecnicoForm() {
 							<button
 								type="submit"
 								disabled={isPending}
-								className="themeBtnBackground py-2 rounded-lg tracking-wider cursor-pointer w-full"
+								className="themeBtnBackground py-2 rounded-lg sm:text-sm 2xl:text-base tracking-wider cursor-pointer w-full"
 							>
 								{isPending ? (
 									<div className="w-full flex items-center justify-center gap-2">
