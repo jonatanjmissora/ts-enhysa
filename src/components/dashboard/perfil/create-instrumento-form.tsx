@@ -321,7 +321,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 					>
 						{isPending ? (
 							<div className="flex gap-2 w-full justify-center">
-								Guardando... <Loader className="animate-spin"></Loader>
+								Guardando... <Loader className="animate-spin size-4"></Loader>
 							</div>
 						) : (
 							"Guardar"

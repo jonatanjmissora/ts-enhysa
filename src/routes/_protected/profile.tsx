@@ -6,11 +6,13 @@ import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { useState } from "react"
 import { empresasQueryOptions } from "queries/empresas/empresas-query"
 import Instrumental from "@/components/dashboard/perfil/instrumentos"
+import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
 
 export const Route = createFileRoute("/_protected/profile")({
 	loader: ({ context }) => {
 		context.queryClient.ensureQueryData(tecnicoQueryOptions)
 		context.queryClient.ensureQueryData(empresasQueryOptions)
+		context.queryClient.ensureQueryData(instrumentosQueryOptions)
 		return null
 	},
 	component: RouteComponent,

@@ -15,6 +15,7 @@ import { useQuery } from "@tanstack/react-query"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { EmpresaType } from "db/empresas/schema"
 import { useUpdateEmpresa } from "queries/empresas/use-update-empresa"
+import { checkEmpresaDiference } from "@/lib/utils"
 
 export function EditEmpresaForm({
 	empresa,
@@ -50,6 +51,12 @@ export function EditEmpresaForm({
 				toast.info("Completa los datos del técnico primero.")
 				return
 			}
+
+			if (checkEmpresaDiference(value, empresa)) {
+				setIsMenuOpen(false)
+				return
+			}
+
 			const updateEmpresa = {
 				...value,
 				id: empresa.id,
@@ -378,7 +385,7 @@ export function EditEmpresaForm({
 					>
 						{isPending ? (
 							<div className="flex gap-2 w-full justify-center">
-								Editando... <Loader className="animate-spin"></Loader>
+								Editando... <Loader className="animate-spin size-4"></Loader>
 							</div>
 						) : (
 							"Guardar"

@@ -74,7 +74,7 @@ export default function DeleteInstrumentoForm({
 				>
 					{isPending ? (
 						<div className="flex gap-2">
-							Eliminando... <Loader className="animate-spin"></Loader>
+							Eliminando... <Loader className="animate-spin size-4"></Loader>
 						</div>
 					) : (
 						"Eliminar"

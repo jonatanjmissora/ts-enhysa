@@ -15,6 +15,7 @@ import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { instrumentoFormValidator } from "db/instrumentos/instrumento-validator"
 import { useUpdateInstrumento } from "queries/instrumentos/use-update-empresa"
 import { InstrumentoType } from "db/instrumentos/schema"
+import { checkInstrumentoDiference } from "@/lib/utils"
 
 export function EditInstrumentoForm({
 	instrumento,
@@ -48,6 +49,12 @@ export function EditInstrumentoForm({
 				toast.info("Completa los datos del técnico primero.")
 				return
 			}
+
+			if (checkInstrumentoDiference(value, instrumento)) {
+				setIsMenuOpen(false)
+				return
+			}
+
 			const updateInstrumento = {
 				...value,
 				id: instrumento.id,
@@ -307,7 +314,7 @@ export function EditInstrumentoForm({
 					>
 						{isPending ? (
 							<div className="flex gap-2 w-full justify-center">
-								Guardando... <Loader className="animate-spin"></Loader>
+								Guardando... <Loader className="animate-spin size-4"></Loader>
 							</div>
 						) : (
 							"Guardar"

@@ -46,7 +46,6 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 		},
 		onSubmit: async ({ value }) => {
 			if (checkTecnicoDiference(value, tecnico)) {
-				toast.info("SON IGUALES")
 				setEditMode(false)
 				return
 			}
@@ -378,7 +377,8 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 								>
 									{isPending ? (
 										<div className="flex gap-2 w-full justify-center">
-											Editando... <Loader className="animate-spin"></Loader>
+											Editando...{" "}
+											<Loader className="animate-spin size-4"></Loader>
 										</div>
 									) : (
 										"Guardar"

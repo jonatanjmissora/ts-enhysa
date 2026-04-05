@@ -332,7 +332,7 @@ export default function CreateTecnicoForm() {
 								{isPending ? (
 									<div className="w-full flex items-center justify-center gap-2">
 										<span>Guardando...</span>
-										<Loader className="animate-spin size-5"></Loader>
+										<Loader className="animate-spin size-4"></Loader>
 									</div>
 								) : (
 									<span>Guardar</span>
