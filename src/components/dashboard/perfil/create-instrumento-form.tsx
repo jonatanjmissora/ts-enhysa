@@ -19,7 +19,7 @@ import { InputFiles } from "@/components/layout/input-files"
 import { toast } from "sonner"
 import { useQuery } from "@tanstack/react-query"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
-import { useCreateInstrumento } from "queries/instrumentos/use-create-empresa"
+import { useCreateInstrumento } from "queries/instrumentos/use-create-instrumento"
 import { instrumentoFormValidator } from "db/instrumentos/instrumento-validator"
 
 export function CreateInstrumentoForm({
@@ -34,10 +34,12 @@ export function CreateInstrumentoForm({
 			<AlertDialogTrigger asChild className="hover:bg-accent">
 				{children}
 			</AlertDialogTrigger>
+
 			<AlertDialogContent className="p-20 bg-accent/40 backdrop-blur-xl w-1/2 min-h-[50dvh]">
 				<AlertDialogTitle className="h-max sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2 border-b border-foreground/20 w-full mb-10">
 					Instrumento Nuevo
 				</AlertDialogTitle>
+
 				<AlertDialogDescription className="text-center">
 					<InstrumentoForm setOpen={setOpen} />
 				</AlertDialogDescription>
@@ -49,6 +51,7 @@ export function CreateInstrumentoForm({
 const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 	const { data: tecnico } = useQuery(tecnicoQueryOptions)
 	const [instrumentoFiles, setInstrumentoFiles] = useState<File[]>([])
+
 	const {
 		mutateAsync: createInstrumentoMutation,
 		isPending,
@@ -62,21 +65,27 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 			modelo: "",
 			serie: "",
 			fechaCalibracion: "",
-			imagenes: [],
+			imagenes: [] as string[],
 		},
+
 		validators: {
 			onSubmit: instrumentoFormValidator,
 		},
+
 		onSubmit: async ({ value }) => {
 			if (!tecnico) {
 				toast.info("Completa los datos del técnico primero.")
+
 				return
 			}
+
 			const result = await createInstrumentoMutation({ data: value })
+
 			if (!result) {
 				console.error("Error al crear el instrumento", error)
 				toast.error("Error al crear el instrumento")
 			}
+
 			setOpen(false)
 			toast.success("Instrumento creado exitosamente")
 		},
@@ -88,6 +97,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 			id="create-form"
 			onSubmit={e => {
 				e.preventDefault()
+
 				form.handleSubmit()
 			}}
 		>
@@ -97,6 +107,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 					children={field => {
 						const isInvalid =
 							field.state.meta.isTouched && !field.state.meta.isValid
+
 						return (
 							<Field data-invalid={isInvalid} className="relative">
 								<FieldLabel
@@ -106,6 +117,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 									Nombre
 									<Asterisk className="text-destructive size-3" />
 								</FieldLabel>
+
 								<Input
 									id={field.name}
 									name={field.name}
@@ -116,6 +128,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 									placeholder="Ej. Luxómetro"
 									className={`bg-background py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 								/>
+
 								{isInvalid && (
 									<FieldError
 										errors={field.state.meta.errors}
@@ -126,12 +139,14 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 						)
 					}}
 				/>
+
 				<div className="flex gap-10">
 					<form.Field
 						name="marca"
 						children={field => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
+
 							return (
 								<Field data-invalid={isInvalid} className="relative">
 									<FieldLabel
@@ -141,6 +156,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										Marca
 										<Asterisk className="text-destructive size-3" />
 									</FieldLabel>
+
 									<Input
 										id={field.name}
 										name={field.name}
@@ -151,6 +167,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										placeholder="Ej. DataLogger"
 										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 									/>
+
 									{isInvalid && (
 										<FieldError
 											errors={field.state.meta.errors}
@@ -167,6 +184,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 						children={field => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
+
 							return (
 								<Field data-invalid={isInvalid} className="relative">
 									<FieldLabel
@@ -175,6 +193,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 									>
 										Modelo
 									</FieldLabel>
+
 									<Input
 										id={field.name}
 										name={field.name}
@@ -185,6 +204,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										placeholder="Ej. DT-8809A"
 										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 									/>
+
 									{isInvalid && (
 										<FieldError
 											errors={field.state.meta.errors}
@@ -196,12 +216,14 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 						}}
 					/>
 				</div>
+
 				<div className="flex gap-10">
 					<form.Field
 						name="serie"
 						children={field => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
+
 							return (
 								<Field data-invalid={isInvalid} className="relative">
 									<FieldLabel
@@ -209,8 +231,8 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
 									>
 										Nro de serie
-										<Asterisk className="text-destructive size-3" />
 									</FieldLabel>
+
 									<Input
 										id={field.name}
 										name={field.name}
@@ -221,6 +243,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										placeholder="Ej. 32451"
 										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 									/>
+
 									{isInvalid && (
 										<FieldError
 											errors={field.state.meta.errors}
@@ -237,6 +260,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 						children={field => {
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
+
 							return (
 								<Field data-invalid={isInvalid} className="relative">
 									<FieldLabel
@@ -245,6 +269,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 									>
 										Fecha de calibración
 									</FieldLabel>
+
 									<Input
 										id={field.name}
 										name={field.name}
@@ -255,6 +280,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										placeholder="Ej. 12-10-2025"
 										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 									/>
+
 									{isInvalid && (
 										<FieldError
 											errors={field.state.meta.errors}
@@ -266,11 +292,13 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 						}}
 					/>
 				</div>
+
 				<form.Field
 					name="imagenes"
 					children={field => {
 						const isInvalid =
 							field.state.meta.isTouched && !field.state.meta.isValid
+
 						return (
 							<Field data-invalid={isInvalid} className="relative">
 								<FieldLabel
@@ -279,6 +307,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 								>
 									Imagenes
 								</FieldLabel>
+
 								<div className="w-full bg-foreground/5 h-max sm:py-[5px] 2xl:py-[4px] rounded-lg border border-foreground/7">
 									<InputFiles
 										files={instrumentoFiles}
@@ -287,6 +316,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										maxFiles={3}
 									/>
 								</div>
+
 								{isInvalid && (
 									<FieldError
 										errors={field.state.meta.errors}
@@ -300,6 +330,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 
 				<div className="flex justify-end items-center gap-2 w-full text-destructive">
 					<Asterisk className="text-destructive size-3" />
+
 					<span className="text-xs 2xl:text-sm italic tracking-wide">
 						campo obligatorio
 					</span>
@@ -310,14 +341,15 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 						onClick={() => setOpen(false)}
 						type="button"
 						disabled={isPending}
-						className="ring ring-foreground/5 shadow bg-background  h-full py-2 rounded-lg tracking-wider 2xl:text-lg font-semibold flex-1 hover:bg-background/75 cursor-pointer"
+						className="ring ring-foreground/5 shadow bg-background  h-full py-2 rounded-lg tracking-wider sm:text-lg 2xl:text-xl font-semibold flex-1 hover:bg-background/75 cursor-pointer"
 					>
 						Cancelar
 					</button>
+
 					<button
 						type="submit"
 						disabled={isPending}
-						className="themeBtnBackground py-2 rounded-lg tracking-wider 2xl:text-lg font-semibold flex-1"
+						className="themeBtnBackground py-2 rounded-lg tracking-wider sm:text-lg 2xl:text-xl font-semibold flex-1"
 					>
 						{isPending ? (
 							<div className="flex gap-2 w-full justify-center">

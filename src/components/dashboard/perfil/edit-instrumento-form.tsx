@@ -13,7 +13,7 @@ import { toast } from "sonner"
 import { useQuery } from "@tanstack/react-query"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { instrumentoFormValidator } from "db/instrumentos/instrumento-validator"
-import { useUpdateInstrumento } from "queries/instrumentos/use-update-empresa"
+import { useUpdateInstrumento } from "queries/instrumentos/use-update-instrumento"
 import { InstrumentoType } from "db/instrumentos/schema"
 import { checkInstrumentoDiference } from "@/lib/utils"
 

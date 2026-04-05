@@ -4,7 +4,7 @@ import { useRouter } from "@tanstack/react-router"
 import { instrumentoIdValidator } from "db/instrumentos/instrumento-validator"
 import { InstrumentoType } from "db/instrumentos/schema"
 import { Loader } from "lucide-react"
-import { useDeleteInstrumento } from "queries/instrumentos/use-delete-empresa"
+import { useDeleteInstrumento } from "queries/instrumentos/use-delete-instrumento"
 import { toast } from "sonner"
 
 export default function DeleteInstrumentoForm({
