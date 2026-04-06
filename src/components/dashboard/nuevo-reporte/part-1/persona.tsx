@@ -1,10 +1,21 @@
-import { InputFiles } from "@/components/layout/input-files"
-import { USER } from "@/lib/mock/user"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Field, FieldGroup } from "@/components/ui/field"
+import { Label } from "@/components/ui/label"
+import { useSuspenseQuery } from "@tanstack/react-query"
 import { UserRound } from "lucide-react"
-import { useState } from "react"
+import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
+import { Suspense } from "react"
 
 export default function NuevoReportePersona() {
-	const [personaFiles, setPersonaFiles] = useState<File[]>([])
+	return (
+		<Suspense fallback={<Skelton />}>
+			<NuevoReportePersonaContent />
+		</Suspense>
+	)
+}
+
+function NuevoReportePersonaContent() {
+	const { data: tecnico } = useSuspenseQuery(tecnicoQueryOptions)
 
 	return (
 		<div className="flex flex-col gap-2 flex-1">
@@ -21,9 +32,10 @@ export default function NuevoReportePersona() {
 					</label>
 					<input
 						id="nombre-completo"
-						className="bg-background py-2 px-4 rounded-lg"
+						className="bg-background py-2 px-4 rounded-lg text-center"
 						placeholder="Ingrese el nombre y apellido"
-						defaultValue={USER.name}
+						defaultValue={tecnico?.nombre || ""}
+						readOnly
 					/>
 				</div>
 				<div className="grid grid-cols-2 gap-4">
@@ -33,9 +45,10 @@ export default function NuevoReportePersona() {
 						</label>
 						<input
 							id="matricula"
-							className="bg-background py-2 px-4 rounded-lg"
+							className="bg-background py-2 px-4 rounded-lg text-center"
 							placeholder="N° Matrícula "
-							defaultValue={USER.matricula}
+							defaultValue={tecnico?.matricula || ""}
+							readOnly
 						/>
 					</div>
 					<div className="flex flex-col gap-2">
@@ -44,20 +57,101 @@ export default function NuevoReportePersona() {
 						</label>
 						<input
 							id="cargo"
-							className="bg-background py-2 px-4 rounded-lg"
+							className="bg-background py-2 px-4 rounded-lg text-center"
 							placeholder="Ej. Seguridad e Higiene"
-							defaultValue={USER.cargo}
+							defaultValue={tecnico?.cargo || ""}
+							readOnly
 						/>
 					</div>
 				</div>
-				<div className="bg-background min-h-20 py-2 px-4 rounded-lg flex items-center justify-center">
-					<InputFiles
-						files={personaFiles}
-						setFiles={setPersonaFiles}
-						text="Imágenes de matrícula y firma digital."
-						maxFiles={2}
+				<FieldGroup className="flex flex-row items-center justify-center gap-4 w-full pt-4">
+					<Field orientation="horizontal" className="flex justify-center">
+						<Checkbox
+							id="terms-checkbox"
+							name="terms-checkbox"
+							className="dark:bg-background"
+							checked={tecnico?.firmaImg !== ""}
+						/>
+						<Label htmlFor="terms-checkbox">firma digital</Label>
+					</Field>
+					<Field orientation="horizontal" className="flex justify-center">
+						<Checkbox
+							id="terms-checkbox"
+							name="terms-checkbox"
+							className="dark:bg-background"
+							checked={tecnico?.membrete !== ""}
+						/>
+						<Label htmlFor="terms-checkbox">pie de página</Label>
+					</Field>
+				</FieldGroup>
+			</article>
+		</div>
+	)
+}
+
+const Skelton = () => {
+	return (
+		<div className="flex flex-col gap-2 flex-1">
+			<div className="flex items-center gap-2">
+				<div className="bg-blue-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
+					<UserRound className="size-6" />
+				</div>
+				<span className="text-xl font-semibold tracking-wider">Persona</span>
+			</div>
+			<article className="dark:bg-(--dark-blue-opa) bg-(--blue-opa) rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg shadow-xl ring ring-foreground/20">
+				<div className="flex flex-col gap-2">
+					<label className="font-semibold" htmlFor="nombre-completo">
+						Nombre Completo
+					</label>
+					<input
+						id="nombre-completo"
+						defaultValue=". . ."
+						className="bg-background py-2 px-4 rounded-lg animate-pulse text-center"
+						readOnly
 					/>
 				</div>
+				<div className="grid grid-cols-2 gap-4">
+					<div className="flex flex-col gap-2">
+						<label className="font-semibold" htmlFor="matricula">
+							Matrícula
+						</label>
+						<input
+							id="matricula"
+							defaultValue=". . ."
+							className="bg-background py-2 px-4 rounded-lg animate-pulse text-center"
+							readOnly
+						/>
+					</div>
+					<div className="flex flex-col gap-2">
+						<label className="font-semibold" htmlFor="cargo">
+							Cargo
+						</label>
+						<input
+							id="cargo"
+							defaultValue=". . ."
+							className="bg-background py-2 px-4 rounded-lg animate-pulse text-center"
+							readOnly
+						/>
+					</div>
+				</div>
+				<FieldGroup className="flex flex-row items-center justify-around gap-4 w-full">
+					<Field orientation="horizontal">
+						<Checkbox
+							id="terms-checkbox"
+							name="terms-checkbox"
+							className="dark:bg-background"
+						/>
+						<Label htmlFor="terms-checkbox">firma digital</Label>
+					</Field>
+					<Field orientation="horizontal">
+						<Checkbox
+							id="terms-checkbox"
+							name="terms-checkbox"
+							className="dark:bg-background"
+						/>
+						<Label htmlFor="terms-checkbox">pie de página</Label>
+					</Field>
+				</FieldGroup>
 			</article>
 		</div>
 	)

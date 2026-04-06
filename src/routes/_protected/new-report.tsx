@@ -3,6 +3,9 @@ import NewReportPart2 from "@/components/dashboard/nuevo-reporte/part-2/main"
 import NewReportPart3 from "@/components/dashboard/nuevo-reporte/part-3/main"
 import { createFileRoute, Link } from "@tanstack/react-router"
 import { ChevronLeft, ChevronRight, Trash2 } from "lucide-react"
+import { empresasQueryOptions } from "queries/empresas/empresas-query"
+import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
+import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { useState } from "react"
 
 export type PuntosType = {
@@ -14,6 +17,12 @@ export type PuntosType = {
 }
 
 export const Route = createFileRoute("/_protected/new-report")({
+	loader: ({ context }) => {
+		context.queryClient.ensureQueryData(tecnicoQueryOptions)
+		context.queryClient.ensureQueryData(empresasQueryOptions)
+		context.queryClient.ensureQueryData(instrumentosQueryOptions)
+		return null
+	},
 	component: RouteComponent,
 })
 

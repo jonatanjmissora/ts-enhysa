@@ -1,5 +1,5 @@
 import NuevoReporteEmpresa from "./empresa"
-import NuevoReporteInstrumental from "./instrumental"
+import NuevoReporteInstrumento from "./instrumental"
 import NuevoReportePersona from "./persona"
 import { Save } from "lucide-react"
 
@@ -12,13 +12,13 @@ export default function NewReportPart1({
 }) {
 	return (
 		<main
-			className={`${actualStep === 1 ? "flex-1" : "hidden"} p-20 sm:py-10 2xl:py-20 flex flex-col gap-10 justify-center`}
+			className={`${actualStep === 1 ? "flex-1" : "hidden"} p-20 sm:py-15 2xl:py-20 flex flex-col gap-10 justify-center`}
 		>
 			<div className="flex items-stretch gap-10">
 				<NuevoReportePersona />
 				<NuevoReporteEmpresa />
 			</div>
-			<NuevoReporteInstrumental />
+			<NuevoReporteInstrumento />
 			<button
 				onClick={() => {
 					setActualStep(2)
