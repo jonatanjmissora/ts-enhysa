@@ -21,6 +21,13 @@ import { useQuery } from "@tanstack/react-query"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { useCreateInstrumento } from "queries/instrumentos/use-create-instrumento"
 import { instrumentoFormValidator } from "db/instrumentos/instrumento-validator"
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from "@/components/ui/popover"
+import { Calendar } from "@/components/ui/calendar"
+import { format } from "date-fns"
 
 export function CreateInstrumentoForm({
 	children,
@@ -51,6 +58,8 @@ export function CreateInstrumentoForm({
 const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 	const { data: tecnico } = useQuery(tecnicoQueryOptions)
 	const [instrumentoFiles, setInstrumentoFiles] = useState<File[]>([])
+	const [calibrationDate, setCalibrationDate] = useState<Date>()
+	const [openPopover, setOpenPopover] = useState(false)
 
 	const {
 		mutateAsync: createInstrumentoMutation,
@@ -79,7 +88,14 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 				return
 			}
 
-			const result = await createInstrumentoMutation({ data: value })
+			const newInstrimento = {
+				...value,
+				fechaCalibracion: calibrationDate
+					? format(calibrationDate, "dd-MM-yyyy")
+					: "",
+			}
+
+			const result = await createInstrumentoMutation({ data: newInstrimento })
 
 			if (!result) {
 				console.error("Error al crear el instrumento", error)
@@ -264,22 +280,38 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 							return (
 								<Field data-invalid={isInvalid} className="relative">
 									<FieldLabel
-										htmlFor={field.name}
+										htmlFor="date-picker-simple"
 										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
 									>
 										Fecha de calibración
 									</FieldLabel>
-
-									<Input
-										id={field.name}
-										name={field.name}
-										value={field.state.value}
-										onBlur={field.handleBlur}
-										onChange={e => field.handleChange(e.target.value)}
-										aria-invalid={isInvalid}
-										placeholder="Ej. 12-10-2025"
-										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
-									/>
+									<Popover open={openPopover} onOpenChange={setOpenPopover}>
+										<PopoverTrigger asChild>
+											<button
+												id="date-picker-simple"
+												className="shadow ring ring-foreground/15 dark:ring-foreground/10 bg-foreground/15 dark:bg-foreground/5 h-9 w-full min-w-0 rounded-md px-3 py-1 text-foreground sm:text-base 2xl:text-lg"
+											>
+												{calibrationDate ? (
+													format(calibrationDate, "dd-MM-yyyy")
+												) : (
+													<span className="text-foreground/30">
+														Ej. 12-10-2025
+													</span>
+												)}
+											</button>
+										</PopoverTrigger>
+										<PopoverContent className="w-auto p-0" align="start">
+											<Calendar
+												mode="single"
+												selected={calibrationDate}
+												onSelect={date => {
+													setCalibrationDate(date)
+													setOpenPopover(false)
+												}}
+												defaultMonth={calibrationDate}
+											/>
+										</PopoverContent>
+									</Popover>
 
 									{isInvalid && (
 										<FieldError
@@ -312,7 +344,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 									<InputFiles
 										files={instrumentoFiles}
 										setFiles={setInstrumentoFiles}
-										text="Imágen del instrumento"
+										text="Imágen del certificado de calibración y del instrumento"
 										maxFiles={3}
 										editMode={true}
 									/>
