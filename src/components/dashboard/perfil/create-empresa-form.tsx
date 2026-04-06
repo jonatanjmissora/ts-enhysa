@@ -356,6 +356,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 											setFiles={setLogoFiles}
 											text="Imágen Logo digital"
 											maxFiles={1}
+											editMode={true}
 										/>
 									</div>
 									{isInvalid && (

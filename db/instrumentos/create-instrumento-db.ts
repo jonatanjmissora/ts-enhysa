@@ -1,10 +1,10 @@
-import { delay } from "@/lib/utils"
+// import { delay } from "@/lib/utils"
 import { db } from "db"
 import { instrumentos, InstrumentoType } from "./schema"
 
 export async function createInstrumentoDB(newInstrumento: InstrumentoType) {
 	try {
-		await delay()
+		//await delay()
 		return await db.insert(instrumentos).values(newInstrumento).returning()
 	} catch (error) {
 		console.error(

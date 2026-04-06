@@ -21,13 +21,18 @@ export default function NewReportPart3Plano({
 }) {
 	return (
 		<div className="flex-1 cardAccent flex flex-col gap-6 justify-center p-10 py-15">
-			<div className="w-full flex items-center gap-3">
-				<div className="bg-purple-600/75 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
-					<RulerDimensionLine className="size-6" />
+			<div className="flex items-center w-full border-b border-foreground/20">
+				<div className="flex items-center gap-3 flex-1">
+					<div className="bg-purple-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
+						<RulerDimensionLine className="size-6" />
+					</div>
+					<span className="w-full sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2">
+						Plano
+					</span>
 				</div>
-				<span className="sm:text-lg 2xl:text-xl font-semibold tracking-wider py-2">
-					Plano de {nombre}
-				</span>
+				<p className="flex-1 text-right text-sm text-foreground/70 py-1">
+					{nombre || "Depósito"}
+				</p>
 			</div>
 			<div className="flex-1 flex items-center">
 				<CeldasGridWithPuntosFinal

@@ -13,6 +13,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select"
 import { TextTooltip } from "@/components/layout/text-tooltip"
+import { sortedByRazonSocial } from "@/lib/utils"
 
 export default function NuevoReporteEmpresa() {
 	return (
@@ -24,8 +25,9 @@ export default function NuevoReporteEmpresa() {
 
 function NuevoReporteEmpresaContent() {
 	const { data: empresas } = useSuspenseQuery(empresasQueryOptions)
+	const sortedEmpresas = sortedByRazonSocial(empresas ?? [])
 	const [actualEmpresa, setActualEmpresa] = useState<EmpresaType | null>(
-		empresas?.[0] ?? null
+		sortedEmpresas[0] ?? null
 	)
 	return (
 		<div className="flex flex-col gap-2 flex-1">
@@ -40,7 +42,7 @@ function NuevoReporteEmpresaContent() {
 					defaultValue={actualEmpresa?.id.toString() ?? ""}
 					onValueChange={value =>
 						setActualEmpresa(
-							empresas?.find(e => e.id.toString() === value) ?? null
+							sortedEmpresas.find(e => e.id.toString() === value) ?? null
 						)
 					}
 				>
@@ -50,9 +52,9 @@ function NuevoReporteEmpresaContent() {
 					<SelectContent position="popper">
 						<SelectGroup>
 							<SelectLabel>Empresas</SelectLabel>
-							{empresas?.map(empresa => (
+							{sortedEmpresas.map(empresa => (
 								<SelectItem key={empresa.id} value={empresa.id.toString()}>
-									{empresa.razonSocial}
+									{empresa.razonSocial.toUpperCase()}
 								</SelectItem>
 							))}
 						</SelectGroup>
@@ -70,7 +72,7 @@ function NuevoReporteEmpresaContent() {
 							id="razon-social"
 							placeholder="Nombre de la empresa"
 							className="bg-background py-2 px-4 rounded-lg text-center"
-							defaultValue={actualEmpresa?.razonSocial ?? ""}
+							value={actualEmpresa?.razonSocial.toUpperCase() ?? ""}
 							readOnly
 						/>
 					</div>
@@ -82,7 +84,7 @@ function NuevoReporteEmpresaContent() {
 							id="cuit"
 							className="bg-background py-2 px-4 rounded-lg text-center"
 							placeholder="00-00000000-0"
-							defaultValue={actualEmpresa?.cuit ?? ""}
+							value={actualEmpresa?.cuit ?? ""}
 							readOnly
 						/>
 					</div>
@@ -95,7 +97,7 @@ function NuevoReporteEmpresaContent() {
 						id="direccion"
 						className="bg-background py-2 px-4 rounded-lg text-center"
 						placeholder="Calle, Altura"
-						defaultValue={actualEmpresa?.direccion ?? ""}
+						value={actualEmpresa?.direccion ?? ""}
 						readOnly
 					/>
 				</div>
@@ -107,7 +109,7 @@ function NuevoReporteEmpresaContent() {
 						id="localidad"
 						placeholder="Ciudad, Provincia, Pais"
 						className="bg-background py-2 px-4 rounded-lg text-center"
-						defaultValue={actualEmpresa?.localidad ?? ""}
+						value={actualEmpresa?.localidad ?? ""}
 						readOnly
 					/>
 				</div>

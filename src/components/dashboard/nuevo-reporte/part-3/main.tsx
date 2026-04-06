@@ -3,7 +3,6 @@ import Resumen from "./resumen"
 import type { PuntosType } from "@/routes/_protected/new-report"
 import NewReportPart3Tags from "./tags"
 import NewReportPart3Plano from "./plano"
-import NewReportPart3Formulas from "./formulas"
 
 export default function NewReportPart3({
 	actualStep,
@@ -12,7 +11,6 @@ export default function NewReportPart3({
 	puntos,
 	cantidadFilas,
 	cantidadColumnas,
-	cantidadAltura,
 	celdasSeleccionadas,
 }: {
 	actualStep: number
@@ -35,20 +33,12 @@ export default function NewReportPart3({
 		>
 			<div className="flex items-stretch gap-10">
 				<div className="flex-1 flex flex-col gap-10 sm:w-[40%] 2xl:w-1/2">
-					<Resumen puntos={puntos} nombre={nombre} />
+					<NewReportPart3Tags puntos={puntos} />
 
-					<NewReportPart3Formulas
-						nombre={nombre}
-						puntos={puntos}
-						cantidadFilas={cantidadFilas}
-						cantidadColumnas={cantidadColumnas}
-						cantidadAltura={cantidadAltura}
-					/>
+					<Resumen puntos={puntos} nombre={nombre} />
 				</div>
 
 				<div className="flex flex-col gap-10 w-1/2">
-					<NewReportPart3Tags puntos={puntos} />
-
 					<NewReportPart3Plano
 						puntos={puntos}
 						nombre={nombre}

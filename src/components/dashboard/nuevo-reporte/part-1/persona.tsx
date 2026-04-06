@@ -36,7 +36,7 @@ function NuevoReportePersonaContent() {
 						id="nombre-completo"
 						className="bg-background py-2 px-4 rounded-lg text-center"
 						placeholder="Ingrese el nombre y apellido"
-						defaultValue={tecnico?.nombre || ""}
+						defaultValue={tecnico?.nombre.toUpperCase() || ""}
 						readOnly
 					/>
 				</div>

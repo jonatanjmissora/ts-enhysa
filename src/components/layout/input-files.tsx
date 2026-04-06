@@ -39,7 +39,7 @@ export const InputFiles = ({
 						<FileUploadDropzone className="p-0 border-none">
 							<FileUploadTrigger asChild disabled={!editMode}>
 								<div className="flex items-center justify-center flex-wrap gap-0 w-full cursor-pointer">
-									<CloudUpload className="size-6 mx-2 text-foreground/20" />
+									<CloudUpload className="size-6 mx-2 text-foreground/20 pointer-events-none" />
 									<span className="text-foreground/20 sm:text-sm 2xl:text-lg">
 										{text}
 									</span>
@@ -92,7 +92,7 @@ export const InputFiles = ({
 					<FileUploadDropzone className="flex flex-col items-center justify-center border-dotted-2 text-center gap-0 py-2 w-full">
 						<FileUploadTrigger asChild disabled={!editMode}>
 							<div className="flex items-center justify-center flex-wrap gap-0 w-full cursor-pointer">
-								<CloudUpload className="size-6 mx-2 text-foreground/20" />
+								<CloudUpload className="size-6 mx-2 text-foreground/20 pointer-events-none" />
 								<span className="text-foreground/20 sm:text-sm 2xl:text-lg">
 									{text}
 								</span>
@@ -112,9 +112,13 @@ export const InputFiles = ({
 				onValueChange={setFiles}
 				multiple
 			>
-				<FileUploadList className="flex flex-row flex-wrap">
+				<FileUploadList className="w-full flex flex-row gap-0 flex-wrap">
 					{files.map(file => (
-						<FileUploadItem key={Math.random()} value={file}>
+						<FileUploadItem
+							key={Math.random()}
+							value={file}
+							className="w-full p-0 m-0 mx-4 my-1"
+						>
 							<FileUploadItemPreview />
 							<FileUploadItemMetadata />
 							<FileUploadItemDelete asChild>

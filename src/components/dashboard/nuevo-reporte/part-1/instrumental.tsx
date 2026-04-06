@@ -16,6 +16,7 @@ import { Field, FieldGroup } from "@/components/ui/field"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { TextTooltip } from "@/components/layout/text-tooltip"
+import { sortedByNombre } from "@/lib/utils"
 
 export default function NuevoReporteInstrumento() {
 	return (
@@ -27,8 +28,9 @@ export default function NuevoReporteInstrumento() {
 
 function NuevoReporteInstrumentoContent() {
 	const { data: instrumentos } = useSuspenseQuery(instrumentosQueryOptions)
+	const sortedInstrumentos = sortedByNombre(instrumentos || [])
 	const [actualInstrumento, setActualInstrumento] =
-		useState<InstrumentoType | null>(instrumentos?.[0] ?? null)
+		useState<InstrumentoType | null>(sortedInstrumentos[0] ?? null)
 
 	return (
 		<div className="flex flex-col gap-2">
@@ -45,7 +47,7 @@ function NuevoReporteInstrumentoContent() {
 					defaultValue={actualInstrumento?.id.toString() ?? ""}
 					onValueChange={value =>
 						setActualInstrumento(
-							instrumentos?.find(i => i.id.toString() === value) ?? null
+							sortedInstrumentos.find(i => i.id.toString() === value) ?? null
 						)
 					}
 				>
@@ -60,7 +62,7 @@ function NuevoReporteInstrumentoContent() {
 									key={instrumento.id}
 									value={instrumento.id.toString()}
 								>
-									{instrumento.nombre} - {instrumento.marca} -{" "}
+									{instrumento.nombre.toUpperCase()} - {instrumento.marca} -{" "}
 									{instrumento.modelo}
 								</SelectItem>
 							))}
@@ -78,7 +80,7 @@ function NuevoReporteInstrumentoContent() {
 						<input
 							id="nombre"
 							className="bg-background py-2 px-4 rounded-lg text-center"
-							defaultValue={actualInstrumento?.nombre ?? ""}
+							value={actualInstrumento?.nombre.toUpperCase() ?? ""}
 							readOnly
 							placeholder="Ej. Luxometro"
 						/>
@@ -90,7 +92,7 @@ function NuevoReporteInstrumentoContent() {
 						<input
 							id="marca"
 							className="bg-background py-2 px-4 rounded-lg text-center"
-							defaultValue={actualInstrumento?.marca ?? ""}
+							value={actualInstrumento?.marca ?? ""}
 							readOnly
 							placeholder="Ej. Extech"
 						/>
@@ -102,7 +104,7 @@ function NuevoReporteInstrumentoContent() {
 						<input
 							id="modelo"
 							className="bg-background py-2 px-4 rounded-lg text-center"
-							defaultValue={actualInstrumento?.modelo ?? ""}
+							value={actualInstrumento?.modelo ?? ""}
 							readOnly
 							placeholder="LT3000"
 						/>
@@ -114,7 +116,7 @@ function NuevoReporteInstrumentoContent() {
 						<input
 							id="fechaCalibracion"
 							className="bg-background py-2 px-4 rounded-lg text-center"
-							defaultValue={actualInstrumento?.fechaCalibracion ?? ""}
+							value={actualInstrumento?.fechaCalibracion ?? ""}
 							readOnly
 							placeholder="12-10-2025"
 						/>

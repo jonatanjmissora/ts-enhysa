@@ -82,42 +82,42 @@ export function EditInstrumentoForm({
 			}}
 		>
 			<FieldGroup className="gap-5">
-				<div className="flex gap-10">
-					<form.Field
-						name="nombre"
-						children={field => {
-							const isInvalid =
-								field.state.meta.isTouched && !field.state.meta.isValid
-							return (
-								<Field data-invalid={isInvalid} className="relative">
-									<FieldLabel
-										htmlFor={field.name}
-										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
-									>
-										Nombre
-										<Asterisk className="text-destructive size-3" />
-									</FieldLabel>
-									<Input
-										id={field.name}
-										name={field.name}
-										value={field.state.value}
-										onBlur={field.handleBlur}
-										onChange={e => field.handleChange(e.target.value)}
-										aria-invalid={isInvalid}
-										placeholder="Ej. Luxómetro"
-										className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
+				<form.Field
+					name="nombre"
+					children={field => {
+						const isInvalid =
+							field.state.meta.isTouched && !field.state.meta.isValid
+						return (
+							<Field data-invalid={isInvalid} className="relative">
+								<FieldLabel
+									htmlFor={field.name}
+									className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
+								>
+									Nombre
+									<Asterisk className="text-destructive size-3" />
+								</FieldLabel>
+								<Input
+									id={field.name}
+									name={field.name}
+									value={field.state.value}
+									onBlur={field.handleBlur}
+									onChange={e => field.handleChange(e.target.value)}
+									aria-invalid={isInvalid}
+									placeholder="Ej. Luxómetro"
+									className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
+								/>
+								{isInvalid && (
+									<FieldError
+										errors={field.state.meta.errors}
+										className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
 									/>
-									{isInvalid && (
-										<FieldError
-											errors={field.state.meta.errors}
-											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
-										/>
-									)}
-								</Field>
-							)
-						}}
-					/>
+								)}
+							</Field>
+						)
+					}}
+				/>
 
+				<div className="flex gap-10">
 					<form.Field
 						name="marca"
 						children={field => {
@@ -152,9 +152,7 @@ export function EditInstrumentoForm({
 							)
 						}}
 					/>
-				</div>
 
-				<div className="flex gap-10">
 					<form.Field
 						name="modelo"
 						children={field => {
@@ -188,7 +186,8 @@ export function EditInstrumentoForm({
 							)
 						}}
 					/>
-
+				</div>
+				<div className="flex gap-10">
 					<form.Field
 						name="serie"
 						children={field => {
@@ -223,9 +222,7 @@ export function EditInstrumentoForm({
 							)
 						}}
 					/>
-				</div>
 
-				<div className="flex gap-10">
 					<form.Field
 						name="fechaCalibracion"
 						children={field => {
@@ -259,37 +256,37 @@ export function EditInstrumentoForm({
 							)
 						}}
 					/>
-
-					<form.Field
-						name="imagenes"
-						children={field => {
-							const isInvalid =
-								field.state.meta.isTouched && !field.state.meta.isValid
-							return (
-								<Field data-invalid={isInvalid} className="relative">
-									<FieldLabel
-										htmlFor={field.name}
-										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
-									>
-										Imagenes
-									</FieldLabel>
-									<InputFiles
-										files={instrumentoFiles}
-										setFiles={setInstrumentoFiles}
-										text="Imágen del instrumento"
-										maxFiles={3}
-									/>
-									{isInvalid && (
-										<FieldError
-											errors={field.state.meta.errors}
-											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
-										/>
-									)}
-								</Field>
-							)
-						}}
-					/>
 				</div>
+				<form.Field
+					name="imagenes"
+					children={field => {
+						const isInvalid =
+							field.state.meta.isTouched && !field.state.meta.isValid
+						return (
+							<Field data-invalid={isInvalid} className="relative">
+								<FieldLabel
+									htmlFor={field.name}
+									className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
+								>
+									Imagenes
+								</FieldLabel>
+								<InputFiles
+									files={instrumentoFiles}
+									setFiles={setInstrumentoFiles}
+									text="Imágen del instrumento"
+									maxFiles={3}
+									editMode={true}
+								/>
+								{isInvalid && (
+									<FieldError
+										errors={field.state.meta.errors}
+										className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+									/>
+								)}
+							</Field>
+						)
+					}}
+				/>
 
 				<div className="flex justify-end items-center gap-2 w-full text-destructive">
 					<Asterisk className="text-destructive size-3" />

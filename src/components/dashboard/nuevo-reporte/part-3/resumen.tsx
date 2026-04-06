@@ -12,13 +12,18 @@ export default function NewReportResumen({
 
 	return (
 		<div className="cardAccent flex-col p-10 px-14 gap-6">
-			<div className="w-full flex items-center gap-2">
-				<div className="bg-amber-600/75 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
-					<Info className="size-6" />
+			<div className="flex items-center w-full border-b border-foreground/20">
+				<div className="flex items-center gap-3 flex-1">
+					<div className="bg-amber-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
+						<Info className="size-6" />
+					</div>
+					<span className="w-full sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2">
+						Mediciones
+					</span>
 				</div>
-				<span className="sm:text-lg 2xl:text-xl font-semibold tracking-wider py-2">
-					Detalle de las mediciones - {nombre}
-				</span>
+				<p className="flex-1 text-right text-sm text-foreground/70 py-1">
+					{nombre || "Depósito"}
+				</p>
 			</div>
 
 			<div className="flex flex-col gap-3 w-full">

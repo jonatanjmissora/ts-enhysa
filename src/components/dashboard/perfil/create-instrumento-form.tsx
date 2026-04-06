@@ -314,6 +314,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										setFiles={setInstrumentoFiles}
 										text="Imágen del instrumento"
 										maxFiles={3}
+										editMode={true}
 									/>
 								</div>
 

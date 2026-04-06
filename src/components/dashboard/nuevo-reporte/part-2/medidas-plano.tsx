@@ -1,4 +1,4 @@
-import { Box, Info } from "lucide-react"
+import { Box, Info, X } from "lucide-react"
 import {
 	AlertDialog,
 	AlertDialogTrigger,
@@ -51,8 +51,8 @@ export default function MedidasPlano({
 	console
 	return (
 		<div className="cardAccent flex-col p-10 px-14 gap-6">
-			<div className="flex items-end w-full border-b border-foreground/20">
-				<div className="flex items-center gap-3 w-full">
+			<div className="flex items-center w-full border-b border-foreground/20">
+				<div className="flex items-center gap-3 flex-1">
 					<div className="bg-blue-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
 						<Box className="size-6" />
 					</div>
@@ -60,7 +60,7 @@ export default function MedidasPlano({
 						Dimensiones
 					</span>
 				</div>
-				<p className="ml-auto text-sm text-foreground/70 py-1">
+				<p className="flex-1 text-right text-sm text-foreground/70 py-1">
 					{nombre || "Depósito"}
 				</p>
 			</div>
@@ -185,10 +185,17 @@ export function FormulaAlertDialog({
 			<AlertDialogTrigger asChild className="hover:bg-accent/50 rounded-full">
 				<Info
 					size={14}
-					className="absolute top-2 right-2 cursor-pointer text-foreground/50"
+					className="absolute top-3 right-3 cursor-pointer text-foreground/50"
 				/>
 			</AlertDialogTrigger>
 			<AlertDialogContent className="p-20 bg-background/50 backdrop-blur-xl">
+				<Button
+					className="cursor-pointer absolute top-4 right-4"
+					variant="ghost"
+					onClick={() => setOpen(false)}
+				>
+					<X className="size-8" />
+				</Button>
 				<AlertDialogTitle className="text-center flex flex-col gap-6">
 					<div className="flex gap-2 justify-center items-center">
 						<span className="italic font-semibold text-lg tracking-widest">
@@ -206,20 +213,24 @@ export function FormulaAlertDialog({
 							= {indiceDeLocal.toFixed(2)}
 						</span>
 					</div>
-					<span>Indice Redondeado (IR) = {indiceRedondeo}</span>
+					<span className=" bg-teal-500/50 p-4 rounded-lg">
+						Indice Redondeado (IR) = {indiceRedondeo}
+					</span>
 				</AlertDialogTitle>
 				<AlertDialogDescription className="text-center">
-					<div className="flex flex-col gap-2 items-center justify-center">
-						<span>Número mínimo de puntos de medición</span>
-						<span>
-							N = (IR + 2)² = {(indiceRedondeo + 2) ** 2} = {minimoNumeroCeldas}
+					<div className="flex flex-col gap-10">
+						<div className="flex flex-col p-4 gap-2 items-center justify-center pt-6 text-sm bg-pink-500/50 rounded-lg">
+							<span>Número mínimo de puntos de medición</span>
+							<span>
+								N = (IR + 2)² = {(indiceRedondeo + 2) ** 2} ={" "}
+								{minimoNumeroCeldas}
+							</span>
+						</div>
+						<span className="tracking-widest italic font semibold text-foreground/50 border-t border-foreground/10 pt-2 w-full text-right">
+							Res. 84/2012 S.R.T.
 						</span>
 					</div>
 				</AlertDialogDescription>
-
-				<Button className="cursor-pointer" onClick={() => setOpen(false)}>
-					Volver
-				</Button>
 			</AlertDialogContent>
 		</AlertDialog>
 	)

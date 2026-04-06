@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import DeleteEmpresaForm from "./delete-empresa-form"
 import { EditEmpresaForm } from "./edit-empresa-form"
+import { sortedByRazonSocial } from "@/lib/utils"
 
 export default function EmpresasList({
 	tecnico,
@@ -31,6 +32,7 @@ export default function EmpresasList({
 	tecnico: TecnicoType | null
 }) {
 	const { data: empresas } = useSuspenseQuery(empresasQueryOptions)
+	const sortedEmpresas = sortedByRazonSocial(empresas ?? [])
 
 	if (!empresas || empresas.length === 0) {
 		return <NoEmpresas tecnico={tecnico} />
@@ -38,7 +40,7 @@ export default function EmpresasList({
 
 	return (
 		<article className="flex flex-col gap-2 w-full">
-			{empresas.map(empresa => (
+			{sortedEmpresas.map(empresa => (
 				<Empresa key={empresa.id} empresa={empresa} />
 			))}
 		</article>
@@ -48,7 +50,7 @@ export default function EmpresasList({
 const Empresa = ({ empresa }: { empresa: EmpresaType }) => {
 	return (
 		<div className="w-full grid grid-cols-[1.5fr_1.5fr_1fr_1fr_1.5fr] gap-2 p-3 text-center tracking-widest text-foreground/75 cardAccent dark:bg-(--dark-teal-opa) bg-(--teal-opa)">
-			<span>{empresa.razonSocial}</span>
+			<span>{empresa.razonSocial.toUpperCase()}</span>
 			<span>{empresa.direccion}</span>
 			<span>{empresa.localidad}</span>
 			<span>{empresa.provincia}</span>

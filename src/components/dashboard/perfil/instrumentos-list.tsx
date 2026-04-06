@@ -24,6 +24,7 @@ import { InstrumentoType } from "db/instrumentos/schema"
 import { CreateInstrumentoForm } from "./create-instrumento-form"
 import DeleteInstrumentoForm from "./delete-instrumento-form"
 import { EditInstrumentoForm } from "./edit-instrumento-form"
+import { sortedByNombre } from "@/lib/utils"
 
 export default function InstrumentosList({
 	tecnico,
@@ -31,6 +32,7 @@ export default function InstrumentosList({
 	tecnico: TecnicoType | null
 }) {
 	const { data: instrumentos } = useSuspenseQuery(instrumentosQueryOptions)
+	const sortedInstrumentos = sortedByNombre(instrumentos ?? [])
 
 	if (!instrumentos || instrumentos.length === 0) {
 		return <NoInstrumental tecnico={tecnico} />
@@ -38,7 +40,7 @@ export default function InstrumentosList({
 
 	return (
 		<article className="flex flex-col gap-2 w-full">
-			{instrumentos.map(instrumento => (
+			{sortedInstrumentos.map(instrumento => (
 				<Instrumento key={instrumento.id} instrumento={instrumento} />
 			))}
 		</article>
@@ -48,7 +50,7 @@ export default function InstrumentosList({
 const Instrumento = ({ instrumento }: { instrumento: InstrumentoType }) => {
 	return (
 		<div className="w-full grid grid-cols-[1.5fr_1fr_1fr_1fr_1.5fr] gap-2 p-3 text-center tracking-widest text-foreground/75 cardAccent dark:bg-(--dark-orange-opa) bg-(--orange-opa)">
-			<span>{instrumento.nombre}</span>
+			<span>{instrumento.nombre.toUpperCase()}</span>
 			<span>{instrumento.marca}</span>
 			<span>{instrumento.modelo}</span>
 			<span>{instrumento.serie}</span>

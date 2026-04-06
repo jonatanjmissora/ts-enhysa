@@ -43,8 +43,8 @@ export function Croquis({
 
 	return (
 		<div className="cardAccent flex-col p-10 px-14 gap-6 flex-1">
-			<div className="flex w-full items-end border-b border-foreground/20">
-				<div className="flex items-center gap-3 w-full">
+			<div className="flex w-full items-center border-b border-foreground/20">
+				<div className="flex items-center gap-3 flex-1">
 					<div className="bg-purple-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
 						<RulerDimensionLine className="size-6" />
 					</div>
@@ -52,7 +52,7 @@ export function Croquis({
 						Croquis del plano
 					</span>
 				</div>
-				<p className="ml-auto text-sm text-foreground/70 py-1">
+				<p className="flex-1 text-right text-sm text-foreground/70 py-1">
 					{nombre || "Depósito"}
 				</p>
 			</div>

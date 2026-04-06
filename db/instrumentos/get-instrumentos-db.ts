@@ -1,11 +1,11 @@
 import { db } from "db"
 import { instrumentos } from "./schema"
 import { eq, desc } from "drizzle-orm"
-import { delay } from "@/lib/utils"
+// import { delay } from "@/lib/utils"
 
 export async function getInstrumentosDB(userId: string) {
 	try {
-		await delay(5000)
+		// await delay(5000)
 		return await db
 			.select()
 			.from(instrumentos)

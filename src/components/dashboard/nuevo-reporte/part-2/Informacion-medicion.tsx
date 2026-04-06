@@ -10,8 +10,8 @@ export default function InformacionMedicion({ nombre }: { nombre: string }) {
 
 	return (
 		<div className="flex-1 cardAccent flex-col p-10 px-14 gap-6">
-			<div className="flex w-full items-end border-b border-foreground/20">
-				<div className="flex items-center gap-3 w-full">
+			<div className="flex w-full items-center border-b border-foreground/20">
+				<div className="flex items-center gap-3 flex-1">
 					<div className="bg-teal-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
 						<Info className="size-6" />
 					</div>
@@ -19,7 +19,7 @@ export default function InformacionMedicion({ nombre }: { nombre: string }) {
 						Información
 					</span>
 				</div>
-				<p className="ml-auto text-sm text-foreground/70 py-1">
+				<p className="flex-1 text-right text-sm text-foreground/70 py-1">
 					{nombre || "Depósito"}
 				</p>
 			</div>
@@ -29,6 +29,7 @@ export default function InformacionMedicion({ nombre }: { nombre: string }) {
 					text="Imágenes del plano a medir."
 					files={planoFiles}
 					setFiles={setPlanoFiles}
+					editMode={true}
 				/>
 			</div>
 

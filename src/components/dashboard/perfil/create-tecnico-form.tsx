@@ -72,7 +72,7 @@ export default function CreateTecnicoForm() {
 											htmlFor={field.name}
 											className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
 										>
-											Nombre
+											Nombre completo
 											<Asterisk className="text-destructive size-3" />
 										</FieldLabel>
 										<Input
@@ -243,6 +243,7 @@ export default function CreateTecnicoForm() {
 								setFiles={setMatriculaFiles}
 								text="Imágen matrícula"
 								maxFiles={1}
+								editMode={true}
 							/>
 						</div>
 					</div>
@@ -266,6 +267,7 @@ export default function CreateTecnicoForm() {
 											setFiles={setFirmaFiles}
 											text="Imágen firma digital"
 											maxFiles={1}
+											editMode={true}
 										/>
 									</div>
 									{isInvalid && (

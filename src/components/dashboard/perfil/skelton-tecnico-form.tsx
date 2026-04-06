@@ -10,7 +10,7 @@ export default function SkeltonTecnicoForm() {
 					<div className="flex gap-10">
 						<Field className="relative">
 							<FieldLabel className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl">
-								Nombre
+								Nombre completo
 							</FieldLabel>
 							<Input
 								placeholder=". . ."

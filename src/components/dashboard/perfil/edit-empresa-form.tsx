@@ -348,6 +348,7 @@ export function EditEmpresaForm({
 											setFiles={setLogoFiles}
 											text="Imágen Logo digital"
 											maxFiles={1}
+											editMode={true}
 										/>
 									</div>
 									{isInvalid && (
