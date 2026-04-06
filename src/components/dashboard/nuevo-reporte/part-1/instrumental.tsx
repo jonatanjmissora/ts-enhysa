@@ -15,6 +15,7 @@ import {
 import { Field, FieldGroup } from "@/components/ui/field"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
+import { TextTooltip } from "@/components/layout/text-tooltip"
 
 export default function NuevoReporteInstrumento() {
 	return (
@@ -67,7 +68,8 @@ function NuevoReporteInstrumentoContent() {
 					</SelectContent>
 				</Select>
 			</div>
-			<article className="dark:bg-(--dark-orange-opa) bg-(--orange-opa) rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg shadow-xl ring ring-foreground/20">
+			<article className="dark:bg-(--dark-orange-opa) bg-(--orange-opa) rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg shadow-xl ring ring-foreground/20 relative">
+				<TextTooltip text={"Datos obtenidos a través del perfil."} />
 				<div className="grid grid-cols-2 gap-4">
 					<div className="flex flex-col gap-2">
 						<label className="font-semibold" htmlFor="nombre">

@@ -14,7 +14,7 @@ export default function Tecnico() {
 	return (
 		<div className="flex flex-col gap-2 relative w-1/2">
 			<div className="flex justify-end items-center p-2 w-full">
-				<div className="absolute sm:-top-10 2xl:-top-14 -left-10">
+				<div className="absolute z-10 sm:-top-10 2xl:-top-14 -left-10">
 					{avatar ? (
 						<img
 							src={avatar}

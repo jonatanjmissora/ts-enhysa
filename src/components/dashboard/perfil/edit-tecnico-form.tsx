@@ -16,6 +16,7 @@ import { TecnicoType } from "db/schema"
 import { useUpdateTecnico } from "queries/tecnico/use-update-tecnico"
 import { checkTecnicoDiference } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { TextTooltip } from "@/components/layout/text-tooltip"
 
 export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 	const [editMode, setEditMode] = useState<boolean>(false)
@@ -61,7 +62,12 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 	})
 
 	return (
-		<article className="flex flex-col items-stretch gap-6 text-lg p-10 cardAccent dark:bg-(--dark-blue-opa) bg-(--blue-opa)">
+		<article className="flex flex-col items-stretch gap-6 text-lg p-10 cardAccent dark:bg-(--dark-blue-opa) bg-(--blue-opa) relative">
+			<TextTooltip
+				text={
+					"Complete los datos del técnico encargado de realizar los informes. Seran pre cargados en todos los reportes nuevos."
+				}
+			/>
 			<form
 				className="flex flex-col gap-6"
 				id="create-form"

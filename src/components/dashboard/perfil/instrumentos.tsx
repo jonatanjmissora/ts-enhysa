@@ -6,6 +6,7 @@ import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { toast } from "sonner"
 import { Suspense } from "react"
 import { CreateInstrumentoForm } from "./create-instrumento-form"
+import { TextTooltip } from "@/components/layout/text-tooltip"
 
 export default function Instrumentos() {
 	const { data: tecnico } = useQuery(tecnicoQueryOptions)
@@ -44,12 +45,17 @@ export default function Instrumentos() {
 					instrumento
 				</span>
 			</div>
-			<div className="pt-10 w-full grid grid-cols-[1.5fr_1fr_1fr_1fr_1.5fr] gap-2 p-3 text-center tracking-widest font-semibold italic">
+			<div className="pt-10 w-full grid grid-cols-[1.5fr_1fr_1fr_1fr_1.5fr] gap-2 p-3 text-center tracking-widest font-semibold italic relative">
 				<span>Nombre</span>
 				<span>Marca</span>
 				<span>Modelo</span>
 				<span>Certificación</span>
-				<span></span>
+				<TextTooltip
+					text={
+						"Complete los datos del instrumento utilizado para el informe. Estará accesible en todos los reportes nuevos."
+					}
+					className="top-10"
+				/>
 			</div>
 			<Suspense fallback={<InstrumentosSkelton />}>
 				<InstrumentalList tecnico={tecnico ?? null} />

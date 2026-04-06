@@ -12,6 +12,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select"
+import { TextTooltip } from "@/components/layout/text-tooltip"
 
 export default function NuevoReporteEmpresa() {
 	return (
@@ -58,7 +59,8 @@ function NuevoReporteEmpresaContent() {
 					</SelectContent>
 				</Select>
 			</div>
-			<article className="dark:bg-(--dark-teal-opa) bg-(--teal-opa) rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg shadow-xl ring ring-foreground/20">
+			<article className="dark:bg-(--dark-teal-opa) bg-(--teal-opa) rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg shadow-xl ring ring-foreground/20 relative">
+				<TextTooltip text={"Datos obtenidos a través del perfil."} />
 				<div className="grid grid-cols-2 gap-4">
 					<div className="flex flex-col gap-2">
 						<label className="font-semibold" htmlFor="razon-social">

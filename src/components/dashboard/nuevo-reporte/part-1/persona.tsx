@@ -1,3 +1,4 @@
+import { TextTooltip } from "@/components/layout/text-tooltip"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Field, FieldGroup } from "@/components/ui/field"
 import { Label } from "@/components/ui/label"
@@ -25,7 +26,8 @@ function NuevoReportePersonaContent() {
 				</div>
 				<span className="text-xl font-semibold tracking-wider">Persona</span>
 			</div>
-			<article className="dark:bg-(--dark-blue-opa) bg-(--blue-opa) rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg shadow-xl ring ring-foreground/20">
+			<article className="dark:bg-(--dark-blue-opa) bg-(--blue-opa) rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg shadow-xl ring ring-foreground/20 relative">
+				<TextTooltip text={"Datos obtenidos a través del perfil."} />
 				<div className="flex flex-col gap-2">
 					<label className="font-semibold" htmlFor="nombre-completo">
 						Nombre Completo

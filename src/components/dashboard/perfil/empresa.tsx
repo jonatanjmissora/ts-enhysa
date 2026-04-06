@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { toast } from "sonner"
 import { Suspense } from "react"
+import { TextTooltip } from "@/components/layout/text-tooltip"
 
 export default function Empresas() {
 	const { data: tecnico } = useQuery(tecnicoQueryOptions)
@@ -44,12 +45,17 @@ export default function Empresas() {
 					empresa
 				</span>
 			</div>
-			<div className="pt-10 w-full grid grid-cols-[1.5fr_1.5fr_1fr_1fr_1.5fr] gap-2 p-3 text-center tracking-widest font-semibold italic">
+			<div className="pt-10 w-full grid grid-cols-[1.5fr_1.5fr_1fr_1fr_1.5fr] gap-2 p-3 text-center tracking-widest font-semibold italic relative">
 				<span>Razón social</span>
 				<span>Dirección</span>
 				<span>Localidad</span>
 				<span>Provincia</span>
-				<span></span>
+				<TextTooltip
+					text={
+						"Complete los datos de la empresa destino del informe. Estará accesible en todos los reportes nuevos."
+					}
+					className="top-10"
+				/>
 			</div>
 			<Suspense fallback={<EmpresaSkelton />}>
 				<EmpresasList tecnico={tecnico ?? null} />
