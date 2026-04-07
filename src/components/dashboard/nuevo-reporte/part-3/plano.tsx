@@ -17,7 +17,7 @@ export default function NewReportPart3Plano({
 	nombre: string
 	cantidadFilas: number
 	cantidadColumnas: number
-	celdasSeleccionadas: string[]
+	celdasSeleccionadas: number[]
 }) {
 	return (
 		<div className="flex-1 cardAccent flex flex-col gap-6 justify-center p-10 py-15">
@@ -54,7 +54,7 @@ export function CeldasGridWithPuntosFinal({
 }: {
 	cantidad_filas: number
 	cantidad_columnas: number
-	celdasSeleccionadas: string[]
+	celdasSeleccionadas: number[]
 	puntos: PuntosType[] | null
 }) {
 	if (!puntos) return null

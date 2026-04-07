@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
+import { PuntosType } from "./croquis"
 
 export default function MedidasPlano({
 	nombre,
@@ -19,6 +20,7 @@ export default function MedidasPlano({
 	setCantidadColumnas,
 	setCantidadAltura,
 	setCeldasSeleccionadas,
+	setPuntos,
 }: {
 	nombre: string
 	setNombre: (nombre: string) => void
@@ -28,7 +30,8 @@ export default function MedidasPlano({
 	setCantidadFilas: (value: number) => void
 	setCantidadColumnas: (value: number) => void
 	setCantidadAltura: (value: number) => void
-	setCeldasSeleccionadas: (value: string[]) => void
+	setCeldasSeleccionadas: (value: number[]) => void
+	setPuntos: (puntos: PuntosType[]) => void
 }) {
 	const indiceDeLocal =
 		(cantidadFilas * cantidadColumnas) /
@@ -93,6 +96,7 @@ export default function MedidasPlano({
 						onChange={e => {
 							setCantidadFilas(Number(e.target.value))
 							setCeldasSeleccionadas([])
+							setPuntos([])
 						}}
 					/>
 				</div>
@@ -109,6 +113,7 @@ export default function MedidasPlano({
 						onChange={e => {
 							setCantidadColumnas(Number(e.target.value))
 							setCeldasSeleccionadas([])
+							setPuntos([])
 						}}
 					/>
 				</div>

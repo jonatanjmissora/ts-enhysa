@@ -1,127 +1,396 @@
-import { useForm } from "@tanstack/react-form"
-import { tecnicoFormValidator } from "db/tecnicos/tecnico-validator"
-import { toast } from "sonner"
+import { useRef, useState } from "react"
 import {
-	Field,
-	FieldError,
-	FieldGroup,
-	FieldLabel,
-} from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import { z } from "zod"
+	AlertDialog,
+	AlertDialogTrigger,
+	AlertDialogContent,
+} from "../ui/alert-dialog"
+import {
+	Lightbulb,
+	MousePointer,
+	Paintbrush,
+	RulerDimensionLine,
+	ThumbsUp,
+} from "lucide-react"
+import { toast } from "sonner"
 
-export const testFormValidator = z.object({
-	nombre: z.string().min(3, "Mínimo 3 caracteres"),
-	apellido: z.string(),
-})
+export type PuntosType = {
+	nombre: string
+	valor: number
+	valorX: number
+	valorY: number
+	cumple: boolean
+}
 
-export type TestFormType = z.infer<typeof testFormValidator>
-
-export default function Test() {
-	const form = useForm({
-		defaultValues: {
-			nombre: "",
-			apellido: "",
-		},
-		validators: {
-			onSubmit: testFormValidator,
-		},
-		onSubmit: async ({ value }) => {
-			// TODO : logic
-			console.log("VALUE", value)
-			toast.success("Técnico creado exitosamente")
-		},
-	})
+export default function CroquisComponent({
+	nombre,
+	cantidadFilas,
+	cantidadColumnas,
+	celdasSeleccionadas,
+	setCeldasSeleccionadas,
+	puntos,
+	setPuntos,
+}: {
+	nombre: string
+	cantidadFilas: number
+	cantidadColumnas: number
+	cantidadAltura: number
+	celdasSeleccionadas: number[]
+	setCeldasSeleccionadas: (celdas: number[]) => void
+	puntos: PuntosType[]
+	setPuntos: (puntos: PuntosType[]) => void
+}) {
+	// const [cantidadColumnas, setCantidadColumnas] = useState(0)
+	// const [cantidadFilas, setCantidadFilas] = useState(0)
+	// const [celdasSeleccionadas, setCeldasSeleccionadas] = useState<number[]>([])
+	// const [puntos, setPuntos] = useState<PuntosType[] | null>(null)
+	const totalCeldas = cantidadColumnas * cantidadFilas
 
 	return (
-		<article className="flex flex-col items-stretch gap-6 text-lg p-10 cardAccent">
-			<form
-				className="flex flex-col gap-6"
-				id="create-form"
-				onSubmit={e => {
-					e.preventDefault()
-					form.handleSubmit()
-				}}
-			>
-				<FieldGroup className="gap-5">
-					<form.Field
-						name="nombre"
-						children={field => {
-							const isInvalid =
-								field.state.meta.isTouched && !field.state.meta.isValid
-							return (
-								<Field data-invalid={isInvalid} className="relative">
-									<FieldLabel
-										htmlFor={field.name}
-										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
-									>
-										Nombre
-									</FieldLabel>
-									<Input
-										id={field.name}
-										name={field.name}
-										value={field.state.value}
-										onBlur={field.handleBlur}
-										onChange={e => field.handleChange(e.target.value)}
-										aria-invalid={isInvalid}
-										placeholder="Nombre Completo"
-										className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
-									/>
-									{isInvalid && (
-										<FieldError
-											errors={field.state.meta.errors}
-											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
-										/>
-									)}
-								</Field>
-							)
-						}}
-					/>
+		<article className="cardAccent flex-col p-10 px-14 gap-6 flex-1">
+			<div className="flex w-full items-center border-b border-foreground/20">
+				<div className="flex items-center gap-3 flex-1">
+					<div className="bg-purple-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
+						<RulerDimensionLine className="size-6" />
+					</div>
+					<span className="w-full sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2">
+						Croquis del plano
+					</span>
+				</div>
+				<p className="flex-1 text-right text-sm text-foreground/70 py-1">
+					{nombre || "Depósito"}
+				</p>
+			</div>
+			<div className="flex flex-col gap-4 sm:w-[440px] 2xl:w-[600px]">
+				<div className="min-h-[400px] h-max w-full overflow-auto bg-background shadow rounded-lg ring ring-foreground/5 py-10">
+					<div className="w-max h-max p-20 m-auto">
+						<CroquisGrid
+							cantidadFilas={cantidadFilas}
+							cantidadColumnas={cantidadColumnas}
+							celdasSeleccionadas={celdasSeleccionadas}
+							puntos={puntos || []}
+						/>
+					</div>
+				</div>
 
-					<form.Field
-						name="apellido"
-						children={field => {
-							const isInvalid =
-								field.state.meta.isTouched && !field.state.meta.isValid
-							return (
-								<Field data-invalid={isInvalid} className="relative">
-									<FieldLabel
-										htmlFor={field.name}
-										className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
-									>
-										Apellido
-									</FieldLabel>
-									<Input
-										id={field.name}
-										name={field.name}
-										value={field.state.value}
-										onBlur={field.handleBlur}
-										onChange={e => field.handleChange(e.target.value)}
-										aria-invalid={isInvalid}
-										placeholder="Nombre Completo"
-										className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
-									/>
-									{isInvalid && (
-										<FieldError
-											errors={field.state.meta.errors}
-											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
-										/>
-									)}
-								</Field>
-							)
-						}}
-					/>
-
-					<Field className="w-1/2">
-						<button
-							type="submit"
-							className="themeBtnBackground py-2 rounded-lg tracking-wider cursor-pointer w-full"
-						>
-							Guardar
-						</button>
-					</Field>
-				</FieldGroup>
-			</form>
+				<div className="flex gap-4 items-center w-full">
+					<div className="flex-1">
+						{totalCeldas === 0 ? (
+							<button
+								className="w-full py-1 bg-background border border-foreground/20 sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75 text-center"
+								onClick={() =>
+									toast.warning("Establece las medidas del plano primero.")
+								}
+							>
+								<span className="flex items-center gap-2 w-full justify-center">
+									Dibujar Croquis <Paintbrush size={16} />
+								</span>
+							</button>
+						) : (
+							<AlertPaintCroquis
+								cantidadFilas={cantidadFilas}
+								cantidadColumnas={cantidadColumnas}
+								celdasSeleccionadas={celdasSeleccionadas}
+								setCeldasSeleccionadas={setCeldasSeleccionadas}
+							/>
+						)}
+					</div>
+					<div className="flex-1">
+						{celdasSeleccionadas.length === 0 ? (
+							<button
+								className="py-1 bg-background border border-foreground/20 sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75 w-full"
+								onClick={() => toast.warning("Dibuja el croquis primero.")}
+							>
+								<span className="flex items-center gap-2 w-full justify-center">
+									Colocar Puntos <MousePointer size={16} />
+								</span>
+							</button>
+						) : (
+							<AlertPointsCroquis
+								cantidadFilas={cantidadFilas}
+								cantidadColumnas={cantidadColumnas}
+								celdasSeleccionadas={celdasSeleccionadas}
+								puntos={puntos}
+								setPuntos={setPuntos}
+							/>
+						)}
+					</div>
+				</div>
+			</div>
 		</article>
+	)
+}
+
+function CroquisGrid({
+	cantidadFilas,
+	cantidadColumnas,
+	celdasSeleccionadas,
+	puntos,
+}: {
+	cantidadFilas: number
+	cantidadColumnas: number
+	celdasSeleccionadas: number[]
+	puntos: PuntosType[]
+}) {
+	const totalCeldas = cantidadColumnas * cantidadFilas
+	return (
+		<div
+			className="grid relative"
+			style={{
+				gridTemplateColumns: `repeat(${cantidadColumnas}, minmax(0, 1fr))`,
+				gridTemplateRows: `repeat(${cantidadFilas}, minmax(0, 1fr))`,
+			}}
+		>
+			{totalCeldas !== 0 && (
+				<>
+					<span className="absolute -top-14 left-0 right-0 border-b-[1.5px] border-foreground/30 flex justify-center py-1 text-semibold tracking-widest italic text-foreground/50">
+						Largo {cantidadColumnas}m
+					</span>
+					<div className="absolute top-0 bottom-0 -left-16 border-r-[1.5px] border-foreground/30 flex flex-col justify-center items-center px-1 text-semibold tracking-widest italic text-foreground/50">
+						Alto <span>{cantidadColumnas}m</span>
+					</div>
+				</>
+			)}
+			{Array.from({ length: totalCeldas }).map((_, i) => {
+				return (
+					<div
+						key={Math.random()}
+						className={`border border-gray-400 size-20 ${celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
+					/>
+				)
+			})}
+			{puntos?.map((punto, index) => (
+				<Punto key={punto.nombre ?? index} punto={punto} index={index} />
+			))}
+		</div>
+	)
+}
+
+export function AlertPaintCroquis({
+	cantidadFilas,
+	cantidadColumnas,
+	celdasSeleccionadas,
+	setCeldasSeleccionadas,
+}: {
+	cantidadFilas: number
+	cantidadColumnas: number
+	celdasSeleccionadas: number[]
+	setCeldasSeleccionadas: (value: number[]) => void
+}) {
+	const [open, setOpen] = useState(false)
+
+	return (
+		<AlertDialog open={open} onOpenChange={setOpen}>
+			<AlertDialogTrigger asChild>
+				<button className="w-full py-1 bg-background border border-foreground/20 sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75 text-center">
+					{celdasSeleccionadas.length === 0 ? (
+						<span className="flex items-center gap-2 w-full justify-center">
+							Dibujar Croquis <Paintbrush size={16} />
+						</span>
+					) : (
+						<span className="flex items-center gap-2 w-full justify-center">
+							Modificar Croquis <Paintbrush size={16} />
+						</span>
+					)}
+				</button>
+			</AlertDialogTrigger>
+			<AlertDialogContent className="p-30 px-40">
+				<CroquisGridToPaint
+					cantidadFilas={cantidadFilas}
+					cantidadColumnas={cantidadColumnas}
+					celdasSeleccionadas={celdasSeleccionadas}
+					setCeldasSeleccionadas={setCeldasSeleccionadas}
+					setOpen={setOpen}
+				/>
+			</AlertDialogContent>
+		</AlertDialog>
+	)
+}
+
+function CroquisGridToPaint({
+	cantidadFilas,
+	cantidadColumnas,
+	celdasSeleccionadas,
+	setCeldasSeleccionadas,
+	setOpen,
+}: {
+	cantidadFilas: number
+	cantidadColumnas: number
+	celdasSeleccionadas: number[]
+	setCeldasSeleccionadas: (value: number[]) => void
+	setOpen: (value: boolean) => void
+}) {
+	const totalCeldas = cantidadColumnas * cantidadFilas
+	return (
+		<>
+			<div className="h-max w-[800px] overflow-auto bg-accent shadow rounded-lg ring ring-foreground/10">
+				<div className="w-max h-max p-20 mx-auto">
+					<div
+						className="grid"
+						style={{
+							gridTemplateColumns: `repeat(${cantidadColumnas}, minmax(0, 1fr))`,
+							gridTemplateRows: `repeat(${cantidadFilas}, minmax(0, 1fr))`,
+						}}
+					>
+						{Array.from({ length: totalCeldas }).map((_, i) => {
+							return (
+								<button
+									key={Math.random()}
+									onClick={() => {
+										if (celdasSeleccionadas.includes(i)) {
+											setCeldasSeleccionadas(prev =>
+												prev.filter(celda => celda !== i)
+											)
+										} else {
+											setCeldasSeleccionadas(prev => [...prev, i])
+										}
+									}}
+									className={`border border-gray-400 size-20 cursor-pointer ${celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
+								/>
+							)
+						})}
+					</div>
+				</div>
+			</div>
+			<button
+				onClick={() => setOpen(false)}
+				className="cardBackground px-4 py-3 cursor-pointer w-1/2 mx-auto justify-center tracking-widest font-semibold gap-4 mt-10"
+			>
+				Listo
+				<ThumbsUp size={16} />
+			</button>
+		</>
+	)
+}
+
+function AlertPointsCroquis({
+	cantidadFilas,
+	cantidadColumnas,
+	celdasSeleccionadas,
+	puntos,
+	setPuntos,
+}: {
+	cantidadFilas: number
+	cantidadColumnas: number
+	celdasSeleccionadas: number[]
+	puntos: PuntosType[]
+	setPuntos: (puntos: PuntosType[]) => void
+}) {
+	const [open, setOpen] = useState(false)
+	return (
+		<AlertDialog open={open} onOpenChange={setOpen}>
+			<AlertDialogTrigger asChild>
+				<button className="w-full py-1 bg-background border border-foreground/20 sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75 text-center">
+					<span className="flex items-center gap-2 w-full justify-center">
+						Colocar Puntos <MousePointer size={16} />
+					</span>
+				</button>
+			</AlertDialogTrigger>
+			<AlertDialogContent className="p-30 px-40">
+				<CroquisGridToPoint
+					cantidadFilas={cantidadFilas}
+					cantidadColumnas={cantidadColumnas}
+					celdasSeleccionadas={celdasSeleccionadas}
+					setOpen={setOpen}
+					puntos={puntos}
+					setPuntos={setPuntos}
+				/>
+			</AlertDialogContent>
+		</AlertDialog>
+	)
+}
+
+function CroquisGridToPoint({
+	cantidadFilas,
+	cantidadColumnas,
+	celdasSeleccionadas,
+	setOpen,
+	puntos,
+	setPuntos,
+}: {
+	cantidadFilas: number
+	cantidadColumnas: number
+	celdasSeleccionadas: number[]
+	setOpen: (value: boolean) => void
+	puntos: PuntosType[]
+	setPuntos: (puntos: PuntosType[]) => void
+}) {
+	const gridRef = useRef<HTMLButtonElement>(null)
+	const totalCeldas = cantidadFilas * cantidadColumnas
+	const setXYPoint = (e: React.MouseEvent<HTMLButtonElement>) => {
+		if (!gridRef.current) return
+		const rect = gridRef.current.getBoundingClientRect()
+		const x = e.clientX - rect.left
+		const y = e.clientY - rect.top
+
+		// Add punto to puntos array
+		const newPunto = {
+			nombre: `punto-${puntos === null ? 1 : puntos.length + 1}`,
+			valor: 0,
+			valorX: x,
+			valorY: y,
+			cumple: false,
+		}
+		if (!puntos) {
+			setPuntos([newPunto])
+		} else {
+			setPuntos([...puntos, newPunto])
+		}
+	}
+	return (
+		<>
+			<div className="h-max w-[800px] overflow-auto bg-accent shadow rounded-lg ring ring-foreground/10">
+				<div className="w-max h-max p-20 mx-auto">
+					<button
+						className="grid relative cursor-pointer"
+						ref={gridRef}
+						style={{
+							gridTemplateColumns: `repeat(${cantidadColumnas}, minmax(0, 1fr))`,
+							gridTemplateRows: `repeat(${cantidadFilas}, minmax(0, 1fr))`,
+						}}
+						onClick={e => {
+							setXYPoint(e)
+						}}
+					>
+						{Array.from({ length: totalCeldas }).map((_, i) => {
+							return (
+								<div
+									key={Math.random()}
+									className={`border border-gray-400 size-20 ${celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
+								/>
+							)
+						})}
+						{puntos?.map((punto, index) => (
+							<Punto key={punto.nombre ?? index} punto={punto} index={index} />
+						))}
+					</button>
+				</div>
+			</div>
+			<button
+				onClick={() => setOpen(false)}
+				className="cardBackground px-4 py-3 cursor-pointer w-1/2 mx-auto justify-center tracking-widest font-semibold gap-4 mt-10"
+			>
+				Listo
+				<ThumbsUp size={16} />
+			</button>
+		</>
+	)
+}
+
+const Punto = ({ punto, index }: { punto: PuntosType; index: number }) => {
+	return (
+		<div
+			className="absolute"
+			style={{
+				top: `${punto?.valorY ? punto.valorY - 14 : 0}px`,
+				left: `${punto?.valorX ? punto.valorX - 14 : 0}px`,
+			}}
+		>
+			<div className="relative cardBackground size-10 rounded-full justify-center">
+				<Lightbulb className="size-6 absolute top-1 left-1 text-amber-400 rotate-180" />
+				<span className="absolute bottom-1 w-4 right-1 text-sm text-amber-400 flex items-center justify-center">
+					{index + 1}
+				</span>
+			</div>
+		</div>
 	)
 }

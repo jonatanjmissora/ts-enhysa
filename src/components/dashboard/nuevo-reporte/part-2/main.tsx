@@ -1,9 +1,9 @@
 import MedidasPlano from "./medidas-plano"
-import { Croquis } from "./croquis"
 import { Save } from "lucide-react"
 import type { PuntosType } from "@/routes/_protected/new-report"
 import { toast } from "sonner"
 import InformacionMedicion from "./Informacion-medicion"
+import CroquisComponent from "./croquis"
 
 export default function NewReportPart2({
 	actualStep,
@@ -25,16 +25,16 @@ export default function NewReportPart2({
 	setActualStep: (step: number) => void
 	nombre: string
 	setNombre: (nombre: string) => void
-	puntos: PuntosType[] | null
-	setPuntos: (puntos: PuntosType[] | null) => void
+	puntos: PuntosType[]
+	setPuntos: (puntos: PuntosType[]) => void
 	cantidadFilas: number
 	setCantidadFilas: (cantidad: number) => void
 	cantidadColumnas: number
 	setCantidadColumnas: (cantidad: number) => void
 	cantidadAltura: number
 	setCantidadAltura: (cantidad: number) => void
-	celdasSeleccionadas: string[]
-	setCeldasSeleccionadas: (celdas: string[]) => void
+	celdasSeleccionadas: number[]
+	setCeldasSeleccionadas: (celdas: number[]) => void
 }) {
 	const pasarAlPaso3 = () => {
 		let completos = true
@@ -68,6 +68,7 @@ export default function NewReportPart2({
 						setCantidadColumnas={setCantidadColumnas}
 						setCantidadAltura={setCantidadAltura}
 						setCeldasSeleccionadas={setCeldasSeleccionadas}
+						setPuntos={setPuntos}
 					/>
 
 					<div
@@ -78,9 +79,9 @@ export default function NewReportPart2({
 				</div>
 
 				<div
-					className={`flex flex-col ${!valoresValidos && "opacity-50 blur-[2px]"}`}
+					className={`flex-1 flex flex-col ${!valoresValidos && "opacity-50 blur-[2px]"}`}
 				>
-					<Croquis
+					<CroquisComponent
 						nombre={nombre}
 						cantidadFilas={cantidadFilas}
 						cantidadColumnas={cantidadColumnas}

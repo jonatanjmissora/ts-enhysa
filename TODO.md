@@ -34,12 +34,8 @@ cambiar el tamaño de las celdas
 
 escalar croquis cuando medidas sean grandes
 
-CREO QUE ES MEJOR QUE LAS EMPRESAS, GUARDEN CON USER.ID, Y NO CON TECNICO.ID
-
 ordenar empresas e instrumentos por nombre cuando creo, o edito
 
 verificar q en empresas, tengo imagenes como string, y en instrumentos, lo tengo como string[]
 
 el check para ver si cambian los valores en edit, agregar la comparacion de imagenes
-
-colocar un date picker para la fecha del certificado de calibracion

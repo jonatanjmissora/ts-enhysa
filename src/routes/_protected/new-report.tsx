@@ -32,8 +32,8 @@ function RouteComponent() {
 	const [largo, setLargo] = useState<number>(0)
 	const [ancho, setAncho] = useState<number>(0)
 	const [alto, setAlto] = useState<number>(0)
-	const [celdasSeleccionadas, setCeldasSeleccionadas] = useState<string[]>([])
-	const [puntos, setPuntos] = useState<PuntosType[] | null>(null)
+	const [celdasSeleccionadas, setCeldasSeleccionadas] = useState<number[]>([])
+	const [puntos, setPuntos] = useState<PuntosType[]>([])
 
 	const volverPaso = () => {
 		setActualStep(actualStep - 1)

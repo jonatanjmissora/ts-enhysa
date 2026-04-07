@@ -20,7 +20,7 @@ export default function NewReportPart3({
 	cantidadFilas: number
 	cantidadColumnas: number
 	cantidadAltura: number
-	celdasSeleccionadas: string[]
+	celdasSeleccionadas: number[]
 }) {
 	const finalizarProyecto = () => {
 		// TODO: implementar
