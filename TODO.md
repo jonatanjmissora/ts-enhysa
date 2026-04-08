@@ -1,41 +1,39 @@
 login/register
 ===============
-idioma
+    idioma
 
 dashboard
 ===============
 * nuevo proyecto
-    ver los pasos
-    croquis
-    colocar puntos de medicion
+    cuando borro un punto, cambiar el nombre de los restantes
+    
 
 * mis informes
 
 * mi perfil
-    el id de cada empresa es su numero de cuit, para editar o borrar una empresa, tiene que tener el mismo id, y tecnicoId
-    pero puede pasar que el mismo id(cuit) lo esten utilizando varios tecnicos.
-    Seria mejor que se cree un id general, y el cuit este en otro campo
+    ordenar empresas e instrumentos por nombre cuando creo, o edito
+
+    verificar q en empresas, tengo imagenes como string, y en instrumentos, lo tengo como string[]
+
+    el check para ver si cambian los valores en edit, agregar la comparacion de imagenes
+
+* planes
+    pestania de planes
 
 styles
 ===============
-hacer cards con foco radial
+    hacer cards con foco radial
 
 TODO
-modificar puntos del croquis
-quitar puntos[0] === null
 
 zustand
 
-cuando borro un punto, cambiar el nombre de los restantes
+uploadThing
 
-que se coloquen valores, en el alert donde inserto puntos
+polar
 
-cambiar el tamaño de las celdas
 
-escalar croquis cuando medidas sean grandes
 
-ordenar empresas e instrumentos por nombre cuando creo, o edito
 
-verificar q en empresas, tengo imagenes como string, y en instrumentos, lo tengo como string[]
 
-el check para ver si cambian los valores en edit, agregar la comparacion de imagenes
+

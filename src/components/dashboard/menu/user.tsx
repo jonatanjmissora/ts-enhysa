@@ -8,8 +8,8 @@ import {
 import { Button } from "@/components/ui/button"
 import { authClient } from "@/lib/auth-client"
 import { getUserInfo } from "@/lib/utils"
-import { useLoaderData, useNavigate } from "@tanstack/react-router"
-import { LogOut } from "lucide-react"
+import { Link, useLoaderData, useNavigate } from "@tanstack/react-router"
+import { LogOut, Shield } from "lucide-react"
 import { useState } from "react"
 
 export default function User() {
@@ -17,7 +17,7 @@ export default function User() {
 	const { avatar, fullName } = getUserInfo(session)
 	return (
 		<div className="flex flex-col sm:gap-2 2xl:gap-4 m-6">
-			<div className="gap-4 p-4 cardBackground">
+			<div className="gap-4 p-8 py-4 cardBackground">
 				<div className="bg-accent rounded-full flex justify-center items-center">
 					{avatar ? (
 						<img
@@ -31,13 +31,17 @@ export default function User() {
 						</div>
 					)}
 				</div>
-				<div className="flex flex-col items-end">
-					<p className="sm:text-base 2xl:text-lg font-semibold tracking-wider">
+				<div className="flex flex-col items-end w-full">
+					<p className="sm:text-base 2xl:text-lg font-semibold tracking-wider text-left w-full">
 						{fullName || "Usuario"}
 					</p>
-					<p className="sm:text-sm 2xl:text-base text-foreground/40">
-						Plan profesional
-					</p>
+					<Link
+						to="/pricing"
+						className="sm:text-sm 2xl:text-base text-foreground/40 tracking-wider w-full flex items-end justify-end gap-1"
+					>
+						<Shield className="size-5 text-amber-500/50" />
+						<span className="font-semibold">Plan Profesional</span>
+					</Link>
 				</div>
 			</div>
 			<LogoutAlertDialog />
