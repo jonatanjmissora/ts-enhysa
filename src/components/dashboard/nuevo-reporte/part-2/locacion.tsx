@@ -4,14 +4,15 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion"
+import { MapPin } from "lucide-react"
 
 export default function NewReportPart2Locacion() {
 	return (
 		<Accordion type="single" collapsible defaultValue="" className="w-full">
 			<AccordionItem value="shipping">
 				<AccordionTrigger>
-					<span className="font-semibold tracking-wider 2xl:text-lg">
-						Locación
+					<span className="font-semibold tracking-wider 2xl:text-lg flex items-center gap-3">
+						<MapPin size={16} color="orange" /> Locación
 					</span>
 				</AccordionTrigger>
 				<AccordionContent>

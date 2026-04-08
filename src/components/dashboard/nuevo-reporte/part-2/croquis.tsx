@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import {
 	AlertDialog,
 	AlertDialogTrigger,
@@ -224,6 +224,23 @@ function CroquisGridToPaint({
 	setOpen: (value: boolean) => void
 }) {
 	const totalCeldas = cantidadColumnas * cantidadFilas
+	const [isMouseDown, setIsMouseDown] = useState(false)
+	const agregarCelda = (index: number) => {
+		if (celdasSeleccionadas.includes(index)) {
+			setCeldasSeleccionadas(
+				celdasSeleccionadas.filter(celda => celda !== index)
+			)
+		} else {
+			setCeldasSeleccionadas([...celdasSeleccionadas, index])
+		}
+	}
+	useEffect(() => {
+		const handleMouseUp = () => setIsMouseDown(false)
+
+		window.addEventListener("mouseup", handleMouseUp)
+		return () => window.removeEventListener("mouseup", handleMouseUp)
+	}, [])
+
 	return (
 		<>
 			<div className="max-h-[500px] h-max sm:w-[600px] 2xl:w-[800px] overflow-auto bg-accent shadow rounded-lg ring ring-foreground/10">
@@ -239,20 +256,20 @@ function CroquisGridToPaint({
 							cantidadColumnas={cantidadColumnas}
 							cantidadFilas={cantidadFilas}
 						/>
-						{Array.from({ length: totalCeldas }).map((_, i) => {
+						{Array.from({ length: totalCeldas }).map((_, index) => {
 							return (
 								<button
 									key={Math.random()}
-									onClick={() => {
-										if (celdasSeleccionadas.includes(i)) {
-											setCeldasSeleccionadas(prev =>
-												prev.filter(celda => celda !== i)
-											)
-										} else {
-											setCeldasSeleccionadas(prev => [...prev, i])
+									onMouseDown={() => {
+										setIsMouseDown(true)
+										agregarCelda(index)
+									}}
+									onMouseEnter={() => {
+										if (isMouseDown) {
+											agregarCelda(index)
 										}
 									}}
-									className={`border border-gray-400 size-20 cursor-pointer ${celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
+									className={`border border-gray-400 size-20 cursor-pointer ${celdasSeleccionadas.includes(index) ? "bg-blue-500" : ""}`}
 								/>
 							)
 						})}
