@@ -3,6 +3,7 @@ import {
 	TooltipContent,
 	TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { getHalfMedia } from "@/lib/utils"
 import type { PuntosType } from "@/routes/_protected/new-report"
 import { Lightbulb, RulerDimensionLine } from "lucide-react"
 
@@ -58,6 +59,7 @@ function CroquisGrid({
 	puntos: PuntosType[]
 }) {
 	const totalCeldas = cantidadColumnas * cantidadFilas
+	const halfMedia = getHalfMedia(puntos)
 	return (
 		<div
 			className="grid relative"
@@ -81,13 +83,26 @@ function CroquisGrid({
 				)
 			})}
 			{puntos?.map((punto, index) => (
-				<Punto key={punto.nombre ?? index} punto={punto} index={index} />
+				<Punto
+					key={punto.nombre ?? index}
+					punto={punto}
+					index={index}
+					halfMedia={halfMedia}
+				/>
 			))}
 		</div>
 	)
 }
 
-const Punto = ({ punto, index }: { punto: PuntosType; index: number }) => {
+const Punto = ({
+	punto,
+	index,
+	halfMedia,
+}: {
+	punto: PuntosType
+	index: number
+	halfMedia: number
+}) => {
 	return (
 		<div
 			key={punto?.nombre || index}
@@ -101,7 +116,7 @@ const Punto = ({ punto, index }: { punto: PuntosType; index: number }) => {
 				<TooltipTrigger asChild>
 					<div
 						className={`relative cardBackground size-10 rounded-full justify-center ${
-							punto?.cumple ? "text-green-600" : "text-red-600"
+							punto?.valor >= halfMedia ? "text-green-600" : "text-red-600"
 						}`}
 					>
 						<Lightbulb className="rotate-180 size-6 absolute top-1 left-1" />
@@ -111,7 +126,11 @@ const Punto = ({ punto, index }: { punto: PuntosType; index: number }) => {
 					</div>
 				</TooltipTrigger>
 				<TooltipContent>
-					<div className="flex flex-col gap-1">
+					<div
+						className={`flex flex-col gap-1 ${
+							punto?.valor >= halfMedia ? "text-green-600" : "text-red-600"
+						}`}
+					>
 						<p>nombre: {punto?.nombre}</p>
 						<p>valor: {punto?.valor}</p>
 					</div>

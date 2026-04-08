@@ -9,6 +9,7 @@ import {
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { PuntosType } from "./croquis"
+import { getIndiceDeLocal, getIndiceRedondeo } from "@/lib/utils"
 
 export default function MedidasPlano({
 	nombre,
@@ -33,16 +34,17 @@ export default function MedidasPlano({
 	setCeldasSeleccionadas: (value: number[]) => void
 	setPuntos: (puntos: PuntosType[]) => void
 }) {
-	const indiceDeLocal =
-		(cantidadFilas * cantidadColumnas) /
-		(cantidadAltura * (cantidadFilas + cantidadColumnas))
-
 	const hayValores =
 		cantidadFilas !== 0 && cantidadColumnas !== 0 && cantidadAltura !== 0
-	const indiceRedondeo =
-		Math.abs(indiceDeLocal % 1) > 0
-			? Math.trunc(indiceDeLocal) + 1
-			: Math.trunc(indiceDeLocal)
+
+	const indiceDeLocal = getIndiceDeLocal(
+		cantidadFilas,
+		cantidadColumnas,
+		cantidadAltura
+	)
+
+	const indiceRedondeo = getIndiceRedondeo(indiceDeLocal)
+
 	const minimoNumeroCeldas =
 		indiceRedondeo === 1
 			? "entre 7 y 10"

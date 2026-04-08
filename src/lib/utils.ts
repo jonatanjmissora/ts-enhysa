@@ -1,3 +1,4 @@
+import { PuntosType } from "@/components/dashboard/nuevo-reporte/part-2/croquis"
 import { clsx, type ClassValue } from "clsx"
 import { EmpresaFormType } from "db/empresas/empresa-validator"
 import { EmpresaType } from "db/empresas/schema"
@@ -76,4 +77,53 @@ export const sortedByRazonSocial = (empresas: EmpresaType[]) => {
 
 export const sortedByNombre = (instrumentos: InstrumentoType[]) => {
 	return instrumentos.sort((a, b) => a.nombre.localeCompare(b.nombre))
+}
+
+export const getIndiceDeLocal = (
+	cantidadFilas: number,
+	cantidadColumnas: number,
+	cantidadAltura: number
+) => {
+	return (
+		(cantidadFilas * cantidadColumnas) /
+		(cantidadAltura * (cantidadFilas + cantidadColumnas))
+	)
+}
+
+export const getIndiceRedondeo = (indiceDeLocal: number) =>
+	Math.abs(indiceDeLocal % 1) > 0
+		? Math.trunc(indiceDeLocal) + 1
+		: Math.trunc(indiceDeLocal)
+
+export const getMinimoMediciones = (indiceRedondeo: number) =>
+	(indiceRedondeo + 2) ** 2
+
+export const getMinimoMedicionesFrom = (
+	cantidadFilas: number,
+	cantidadColumnas: number,
+	cantidadAltura: number
+) => {
+	return getMinimoMediciones(
+		getIndiceRedondeo(
+			getIndiceDeLocal(cantidadFilas, cantidadColumnas, cantidadAltura)
+		)
+	)
+}
+
+export const getHalfMedia = (puntos: PuntosType[]) => {
+	const sumatoria = puntos.reduce((acc, valor) => acc + valor.valor, 0)
+	return sumatoria / puntos.length / 2
+}
+
+export const puntosResult = (puntos: PuntosType[]) => {
+	const puntosQueCumplen: PuntosType[] = []
+	const puntosQueNoCumplen: PuntosType[] = []
+
+	const halfMedia = getHalfMedia(puntos)
+	puntos.map(punto =>
+		punto.valor >= halfMedia
+			? puntosQueCumplen.push(punto)
+			: puntosQueNoCumplen.push(punto)
+	)
+	return { puntosQueCumplen, puntosQueNoCumplen }
 }

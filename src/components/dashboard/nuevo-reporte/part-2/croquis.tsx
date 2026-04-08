@@ -12,6 +12,7 @@ import {
 	ThumbsUp,
 } from "lucide-react"
 import { toast } from "sonner"
+import { getMinimoMedicionesFrom } from "@/lib/utils"
 
 export type PuntosType = {
 	nombre: string
@@ -25,6 +26,7 @@ export default function CroquisComponent({
 	nombre,
 	cantidadFilas,
 	cantidadColumnas,
+	cantidadAltura,
 	celdasSeleccionadas,
 	setCeldasSeleccionadas,
 	puntos,
@@ -40,6 +42,11 @@ export default function CroquisComponent({
 	setPuntos: (puntos: PuntosType[]) => void
 }) {
 	const totalCeldas = cantidadColumnas * cantidadFilas
+	const cantidadMedicionesMinimas = getMinimoMedicionesFrom(
+		cantidadFilas,
+		cantidadColumnas,
+		cantidadAltura
+	)
 
 	return (
 		<article className="cardAccent flex-col p-10 px-14 gap-6 flex-1">
@@ -57,8 +64,12 @@ export default function CroquisComponent({
 				</p>
 			</div>
 			<div className="flex flex-col gap-4 sm:w-[440px] 2xl:w-[600px]">
-				<div className="min-h-[400px] h-max w-full overflow-auto bg-background shadow rounded-lg ring ring-foreground/5 py-10">
-					<div className="w-max h-max p-20 m-auto">
+				<div className="min-h-[400px] h-max w-full overflow-auto bg-background shadow rounded-lg ring ring-foreground/5 py-10  relative">
+					<span className="text-amber-500/50 absolute bottom-2 right-2">
+						Faltan tomar un mínimo de{" "}
+						{cantidadMedicionesMinimas - puntos.length} medición(es)
+					</span>
+					<div className="w-max h-max p-20 m-auto ">
 						<CroquisGrid
 							cantidadFilas={cantidadFilas}
 							cantidadColumnas={cantidadColumnas}
@@ -72,7 +83,7 @@ export default function CroquisComponent({
 					<div className="flex-1">
 						{totalCeldas === 0 ? (
 							<button
-								className="w-full py-1 bg-background border border-foreground/20 sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75 text-center"
+								className="cardBackground w-full py-3  sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75 text-center"
 								onClick={() =>
 									toast.warning("Establece las medidas del plano primero.")
 								}
@@ -93,7 +104,7 @@ export default function CroquisComponent({
 					<div className="flex-1">
 						{celdasSeleccionadas.length === 0 ? (
 							<button
-								className="py-1 bg-background border border-foreground/20 sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75 w-full"
+								className="cardBackground w-full py-3  sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75 text-center"
 								onClick={() => toast.warning("Dibuja el croquis primero.")}
 							>
 								<span className="flex items-center gap-2 w-full justify-center">
@@ -104,6 +115,7 @@ export default function CroquisComponent({
 							<AlertPointsCroquis
 								cantidadFilas={cantidadFilas}
 								cantidadColumnas={cantidadColumnas}
+								cantidadMedicionesMinimas={cantidadMedicionesMinimas}
 								celdasSeleccionadas={celdasSeleccionadas}
 								puntos={puntos}
 								setPuntos={setPuntos}
@@ -157,7 +169,7 @@ function CroquisGrid({
 	)
 }
 
-export function AlertPaintCroquis({
+function AlertPaintCroquis({
 	cantidadFilas,
 	cantidadColumnas,
 	celdasSeleccionadas,
@@ -262,11 +274,13 @@ function AlertPointsCroquis({
 	cantidadFilas,
 	cantidadColumnas,
 	celdasSeleccionadas,
+	cantidadMedicionesMinimas,
 	puntos,
 	setPuntos,
 }: {
 	cantidadFilas: number
 	cantidadColumnas: number
+	cantidadMedicionesMinimas: number
 	celdasSeleccionadas: number[]
 	puntos: PuntosType[]
 	setPuntos: (puntos: PuntosType[]) => void
@@ -285,6 +299,7 @@ function AlertPointsCroquis({
 				<CroquisGridToPoint
 					cantidadFilas={cantidadFilas}
 					cantidadColumnas={cantidadColumnas}
+					cantidadMedicionesMinimas={cantidadMedicionesMinimas}
 					celdasSeleccionadas={celdasSeleccionadas}
 					setOpen={setOpen}
 					puntos={puntos}
@@ -298,6 +313,7 @@ function AlertPointsCroquis({
 function CroquisGridToPoint({
 	cantidadFilas,
 	cantidadColumnas,
+	cantidadMedicionesMinimas,
 	celdasSeleccionadas,
 	setOpen,
 	puntos,
@@ -305,6 +321,7 @@ function CroquisGridToPoint({
 }: {
 	cantidadFilas: number
 	cantidadColumnas: number
+	cantidadMedicionesMinimas: number
 	celdasSeleccionadas: number[]
 	setOpen: (value: boolean) => void
 	puntos: PuntosType[]
@@ -335,7 +352,11 @@ function CroquisGridToPoint({
 	return (
 		<>
 			<div className="max-h-[500px] h-max sm:w-[600px] 2xl:w-[800px] overflow-auto bg-accent shadow rounded-lg ring ring-foreground/10">
-				<div className="w-max h-max p-20 mx-auto">
+				<div className="w-max h-max p-20 mx-auto relative">
+					<span className="text-amber-500/50 absolute bottom-2 right-2">
+						Faltan tomar un mínimo de{" "}
+						{cantidadMedicionesMinimas - puntos.length} medición(es)
+					</span>
 					<button
 						className="grid relative cursor-pointer"
 						ref={gridRef}

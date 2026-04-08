@@ -1,3 +1,4 @@
+import { puntosResult } from "@/lib/utils"
 import type { PuntosType } from "@/routes/_protected/new-report"
 import { Check, X } from "lucide-react"
 
@@ -8,8 +9,7 @@ export default function NewReportPart3Tags({
 }) {
 	if (!puntos) return null
 
-	const puntosQueCumple = puntos.filter(punto => punto?.cumple === true)
-	const puntosQueNoCumple = puntos.filter(punto => punto?.cumple === false)
+	const { puntosQueCumplen, puntosQueNoCumplen } = puntosResult(puntos)
 
 	return (
 		<div className="flex gap-10">
@@ -19,7 +19,7 @@ export default function NewReportPart3Tags({
 					<p className="sm:text-lg 2xl:text-xl text-foreground/70">cumple</p>
 				</div>
 				<p className="sm:text-4xl 2xl:text-2xl font-semibold">
-					{puntosQueCumple.length}
+					{puntosQueCumplen.length}
 				</p>
 			</div>
 			<div className="flex-1 sm:p-2 sm:px-4 2xl:p-6 cardAccent justify-around gap-3">
@@ -28,7 +28,7 @@ export default function NewReportPart3Tags({
 					<p className="sm:text-lg 2xl:text-xl text-foreground/70">no cumple</p>
 				</div>
 				<p className="sm:text-4xl 2xl:text-2xl font-semibold">
-					{puntosQueNoCumple.length}
+					{puntosQueNoCumplen.length}
 				</p>
 			</div>
 		</div>

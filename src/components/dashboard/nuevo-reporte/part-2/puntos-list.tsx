@@ -28,7 +28,7 @@ export default function PuntosList({
 						<Database className="size-6" />
 					</div>
 					<span className="w-full sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2">
-						Punto(s) de medición
+						Puntos de medición ({puntos.length})
 					</span>
 				</div>
 				<p className="ml-auto text-sm text-foreground/70 py-1">

@@ -1,4 +1,3 @@
-import Test from "@/components/test/test"
 import { createFileRoute } from "@tanstack/react-router"
 
 export const Route = createFileRoute("/test/")({
@@ -6,5 +5,5 @@ export const Route = createFileRoute("/test/")({
 })
 
 function RouteComponent() {
-	return <Test />
+	return null
 }

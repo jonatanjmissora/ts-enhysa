@@ -1,3 +1,4 @@
+import { getHalfMedia } from "@/lib/utils"
 import type { PuntosType } from "@/routes/_protected/new-report"
 import { Info, Lightbulb } from "lucide-react"
 
@@ -9,6 +10,7 @@ export default function NewReportResumen({
 	nombre: string
 }) {
 	if (!puntos) return null
+	const halfMedia = getHalfMedia(puntos)
 
 	return (
 		<div className="cardAccent flex-col p-10 px-14 gap-6">
@@ -30,23 +32,28 @@ export default function NewReportResumen({
 				{puntos.map(punto => (
 					<div
 						key={punto?.nombre}
-						className={`cardBackground w-full px-3 py-2 flex items-center gap-4 rounded-lg ${punto?.cumple ? "bg-green-600/10 border border-green-600/30" : "bg-red-600/10 border border-red-600/30"}`}
+						className={`cardBackground w-full px-3 py-2 flex items-center gap-4 rounded-lg ${punto?.valor >= halfMedia ? "bg-green-600/10 border border-green-600/30" : "bg-red-600/10 border border-red-600/30"}`}
 					>
 						<Lightbulb
-							className={`size-6 ${punto?.cumple ? "text-green-600" : "text-red-600"} rotate-181`}
+							className={`size-6 ${punto?.valor >= halfMedia ? "text-green-600" : "text-red-600"} rotate-181`}
 						/>
 						<div className="flex flex-col gap-0">
-							<span className="italic font-semibold text-lg tracking-wider">
-								{punto?.nombre
-									? punto?.nombre?.charAt(0).toUpperCase() +
-										punto?.nombre?.slice(1)
-									: ""}
-							</span>
+							<div className="flex gap-6 items-center">
+								<span className="italic font-semibold text-lg tracking-wider">
+									{punto?.nombre
+										? punto?.nombre?.charAt(0).toUpperCase() +
+											punto?.nombre?.slice(1)
+										: ""}
+								</span>
+								<span className="italic font-semibold text-lg tracking-wider">
+									Valor: {punto?.valor}
+								</span>
+							</div>
 							<span className="text-sm text-foreground/50">
-								Valor: {punto?.valor} / Requerido 1.00
+								Requerido {halfMedia.toFixed(2)}
 							</span>
 						</div>
-						{punto?.cumple ? (
+						{punto?.valor >= halfMedia ? (
 							<span className="ml-auto">cumple</span>
 						) : (
 							<span className="ml-auto">no cumple</span>
