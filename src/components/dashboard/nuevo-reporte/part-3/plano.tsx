@@ -1,10 +1,10 @@
-import type { PuntosType } from "@/routes/_protected/new-report"
-import { Lightbulb, RulerDimensionLine } from "lucide-react"
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipTrigger,
 } from "@/components/ui/tooltip"
+import type { PuntosType } from "@/routes/_protected/new-report"
+import { Lightbulb, RulerDimensionLine } from "lucide-react"
 
 export default function NewReportPart3Plano({
 	puntos,
@@ -13,7 +13,7 @@ export default function NewReportPart3Plano({
 	cantidadColumnas,
 	celdasSeleccionadas,
 }: {
-	puntos: PuntosType[] | null
+	puntos: PuntosType[]
 	nombre: string
 	cantidadFilas: number
 	cantidadColumnas: number
@@ -35,9 +35,9 @@ export default function NewReportPart3Plano({
 				</p>
 			</div>
 			<div className="flex-1 flex items-center">
-				<CeldasGridWithPuntosFinal
-					cantidad_filas={cantidadFilas}
-					cantidad_columnas={cantidadColumnas}
+				<CroquisGrid
+					cantidadFilas={cantidadFilas}
+					cantidadColumnas={cantidadColumnas}
 					celdasSeleccionadas={celdasSeleccionadas}
 					puntos={puntos}
 				/>
@@ -46,75 +46,96 @@ export default function NewReportPart3Plano({
 	)
 }
 
-export function CeldasGridWithPuntosFinal({
-	cantidad_filas,
-	cantidad_columnas,
+function CroquisGrid({
+	cantidadFilas,
+	cantidadColumnas,
 	celdasSeleccionadas,
 	puntos,
 }: {
-	cantidad_filas: number
-	cantidad_columnas: number
+	cantidadFilas: number
+	cantidadColumnas: number
 	celdasSeleccionadas: number[]
-	puntos: PuntosType[] | null
+	puntos: PuntosType[]
 }) {
-	if (!puntos) return null
-	const getKey = (row: number, col: number) => `${row}-${col}`
-	const cellSize = 60
+	const totalCeldas = cantidadColumnas * cantidadFilas
 	return (
 		<div
 			className="grid relative"
 			style={{
-				gridTemplateColumns: `repeat(${cantidad_columnas}, ${cellSize}px)`,
+				gridTemplateColumns: `repeat(${cantidadColumnas}, minmax(0, 1fr))`,
+				gridTemplateRows: `repeat(${cantidadFilas}, minmax(0, 1fr))`,
 			}}
 		>
-			{Array.from({ length: cantidad_filas }).map((_, row) =>
-				Array.from({ length: cantidad_columnas }).map((_, col) => (
+			{totalCeldas !== 0 && (
+				<Cotas
+					cantidadColumnas={cantidadColumnas}
+					cantidadFilas={cantidadFilas}
+				/>
+			)}
+			{Array.from({ length: totalCeldas }).map((_, i) => {
+				return (
 					<div
 						key={Math.random()}
-						style={{
-							height: `${cellSize}px`,
-							width: `${cellSize}px`,
-						}}
-						className={`border border-black/50 ${
-							celdasSeleccionadas.includes(getKey(row, col)) && "bg-cyan-500/50"
-						} flex items-center justify-center`}
-					></div>
-				))
-			)}
-			<div>
-				{puntos?.map((punto, index) => (
-					<div
-						key={punto?.nombre || index}
-						className="absolute"
-						style={{
-							top: `${punto?.valorY ? punto.valorY - 14 : 0}px`,
-							left: `${punto?.valorX ? punto.valorX - 14 : 0}px`,
-						}}
-					>
-						<Tooltip>
-							<TooltipTrigger asChild>
-								<div
-									className={`relative cardBackground size-10 rounded-full justify-center ${
-										punto?.cumple ? "text-green-600" : "text-red-600"
-									}`}
-								>
-									<Lightbulb className="rotate-180 absolute top-1 left-1" />
-									<span className="absolute bottom-1 right-1 text-sm flex items-center justify-center">
-										{index + 1}
-									</span>
-								</div>
-							</TooltipTrigger>
-							<TooltipContent>
-								<div className="flex flex-col gap-1">
-									<p>nombre: {punto?.nombre}</p>
-									<p>valor: {punto?.valor}</p>
-								</div>
-							</TooltipContent>
-						</Tooltip>
-					</div>
-				))}
-			</div>
-			)
+						className={`border border-gray-400 size-20 ${celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
+					/>
+				)
+			})}
+			{puntos?.map((punto, index) => (
+				<Punto key={punto.nombre ?? index} punto={punto} index={index} />
+			))}
 		</div>
+	)
+}
+
+const Punto = ({ punto, index }: { punto: PuntosType; index: number }) => {
+	return (
+		<div
+			key={punto?.nombre || index}
+			className="absolute"
+			style={{
+				top: `${punto?.valorY ? punto.valorY - 14 : 0}px`,
+				left: `${punto?.valorX ? punto.valorX - 14 : 0}px`,
+			}}
+		>
+			<Tooltip>
+				<TooltipTrigger asChild>
+					<div
+						className={`relative cardBackground size-10 rounded-full justify-center ${
+							punto?.cumple ? "text-green-600" : "text-red-600"
+						}`}
+					>
+						<Lightbulb className="rotate-180 size-6 absolute top-1 left-1" />
+						<span className="absolute bottom-1 w-4 right-1 text-sm flex items-center justify-center">
+							{index + 1}
+						</span>
+					</div>
+				</TooltipTrigger>
+				<TooltipContent>
+					<div className="flex flex-col gap-1">
+						<p>nombre: {punto?.nombre}</p>
+						<p>valor: {punto?.valor}</p>
+					</div>
+				</TooltipContent>
+			</Tooltip>
+		</div>
+	)
+}
+
+function Cotas({
+	cantidadColumnas,
+	cantidadFilas,
+}: {
+	cantidadColumnas: number
+	cantidadFilas: number
+}) {
+	return (
+		<>
+			<span className="absolute -top-14 left-0 right-0 border-b-[1.5px] border-foreground/30 flex justify-center py-1 text-semibold tracking-widest italic text-foreground/50">
+				Ancho {cantidadColumnas}m
+			</span>
+			<div className="absolute top-0 bottom-0 -left-18 border-r-[1.5px] border-foreground/30 flex flex-col justify-center items-center px-1 text-semibold tracking-widest italic text-foreground/50">
+				Largo <span>{cantidadFilas}m</span>
+			</div>
+		</>
 	)
 }

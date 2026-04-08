@@ -4,6 +4,7 @@ import type { PuntosType } from "@/routes/_protected/new-report"
 import { toast } from "sonner"
 import InformacionMedicion from "./Informacion-medicion"
 import CroquisComponent from "./croquis"
+import PuntosList from "./puntos-list"
 
 export default function NewReportPart2({
 	actualStep,
@@ -79,7 +80,7 @@ export default function NewReportPart2({
 				</div>
 
 				<div
-					className={`flex-1 flex flex-col ${!valoresValidos && "opacity-50 blur-[2px]"}`}
+					className={`flex-1 flex flex-col gap-10 ${!valoresValidos && "opacity-50 blur-[2px]"}`}
 				>
 					<CroquisComponent
 						nombre={nombre}
@@ -91,6 +92,8 @@ export default function NewReportPart2({
 						puntos={puntos}
 						setPuntos={setPuntos}
 					/>
+
+					<PuntosList nombre={nombre} puntos={puntos} setPuntos={setPuntos} />
 				</div>
 			</div>
 

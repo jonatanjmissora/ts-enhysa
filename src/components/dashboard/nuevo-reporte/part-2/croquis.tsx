@@ -39,10 +39,6 @@ export default function CroquisComponent({
 	puntos: PuntosType[]
 	setPuntos: (puntos: PuntosType[]) => void
 }) {
-	// const [cantidadColumnas, setCantidadColumnas] = useState(0)
-	// const [cantidadFilas, setCantidadFilas] = useState(0)
-	// const [celdasSeleccionadas, setCeldasSeleccionadas] = useState<number[]>([])
-	// const [puntos, setPuntos] = useState<PuntosType[] | null>(null)
 	const totalCeldas = cantidadColumnas * cantidadFilas
 
 	return (
@@ -141,14 +137,10 @@ function CroquisGrid({
 			}}
 		>
 			{totalCeldas !== 0 && (
-				<>
-					<span className="absolute -top-14 left-0 right-0 border-b-[1.5px] border-foreground/30 flex justify-center py-1 text-semibold tracking-widest italic text-foreground/50">
-						Ancho {cantidadColumnas}m
-					</span>
-					<div className="absolute top-0 bottom-0 -left-18 border-r-[1.5px] border-foreground/30 flex flex-col justify-center items-center px-1 text-semibold tracking-widest italic text-foreground/50">
-						Largo <span>{cantidadFilas}m</span>
-					</div>
-				</>
+				<Cotas
+					cantidadColumnas={cantidadColumnas}
+					cantidadFilas={cantidadFilas}
+				/>
 			)}
 			{Array.from({ length: totalCeldas }).map((_, i) => {
 				return (
@@ -181,7 +173,7 @@ export function AlertPaintCroquis({
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild>
-				<button className="w-full py-1 bg-background border border-foreground/20 sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75 text-center">
+				<button className="cardBackground w-full py-3  sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75 text-center">
 					{celdasSeleccionadas.length === 0 ? (
 						<span className="flex items-center gap-2 w-full justify-center">
 							Dibujar Croquis <Paintbrush size={16} />
@@ -222,15 +214,19 @@ function CroquisGridToPaint({
 	const totalCeldas = cantidadColumnas * cantidadFilas
 	return (
 		<>
-			<div className="h-max w-[800px] overflow-auto bg-accent shadow rounded-lg ring ring-foreground/10">
+			<div className="max-h-[500px] h-max sm:w-[600px] 2xl:w-[800px] overflow-auto bg-accent shadow rounded-lg ring ring-foreground/10">
 				<div className="w-max h-max p-20 mx-auto">
 					<div
-						className="grid"
+						className="grid relative"
 						style={{
 							gridTemplateColumns: `repeat(${cantidadColumnas}, minmax(0, 1fr))`,
 							gridTemplateRows: `repeat(${cantidadFilas}, minmax(0, 1fr))`,
 						}}
 					>
+						<Cotas
+							cantidadColumnas={cantidadColumnas}
+							cantidadFilas={cantidadFilas}
+						/>
 						{Array.from({ length: totalCeldas }).map((_, i) => {
 							return (
 								<button
@@ -279,7 +275,7 @@ function AlertPointsCroquis({
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild>
-				<button className="w-full py-1 bg-background border border-foreground/20 sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75 text-center">
+				<button className="cardBackground w-full py-3  sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75 text-center">
 					<span className="flex items-center gap-2 w-full justify-center">
 						Colocar Puntos <MousePointer size={16} />
 					</span>
@@ -338,7 +334,7 @@ function CroquisGridToPoint({
 	}
 	return (
 		<>
-			<div className="h-max w-[800px] overflow-auto bg-accent shadow rounded-lg ring ring-foreground/10">
+			<div className="max-h-[500px] h-max sm:w-[600px] 2xl:w-[800px] overflow-auto bg-accent shadow rounded-lg ring ring-foreground/10">
 				<div className="w-max h-max p-20 mx-auto">
 					<button
 						className="grid relative cursor-pointer"
@@ -351,6 +347,10 @@ function CroquisGridToPoint({
 							setXYPoint(e)
 						}}
 					>
+						<Cotas
+							cantidadColumnas={cantidadColumnas}
+							cantidadFilas={cantidadFilas}
+						/>
 						{Array.from({ length: totalCeldas }).map((_, i) => {
 							return (
 								<div
@@ -392,5 +392,24 @@ const Punto = ({ punto, index }: { punto: PuntosType; index: number }) => {
 				</span>
 			</div>
 		</div>
+	)
+}
+
+function Cotas({
+	cantidadColumnas,
+	cantidadFilas,
+}: {
+	cantidadColumnas: number
+	cantidadFilas: number
+}) {
+	return (
+		<>
+			<span className="absolute -top-14 left-0 right-0 border-b-[1.5px] border-foreground/30 flex justify-center py-1 text-semibold tracking-widest italic text-foreground/50">
+				Ancho {cantidadColumnas}m
+			</span>
+			<div className="absolute top-0 bottom-0 -left-18 border-r-[1.5px] border-foreground/30 flex flex-col justify-center items-center px-1 text-semibold tracking-widest italic text-foreground/50">
+				Largo <span>{cantidadFilas}m</span>
+			</div>
+		</>
 	)
 }
