@@ -1,10 +1,10 @@
-// import { delay } from "@/lib/utils"
+import { delay } from "@/lib/utils"
 import { tecnicos, TecnicoType } from "./schema"
 import { db } from "db"
 
 export async function createTecnicoDB(newTecnico: TecnicoType) {
 	try {
-		// await delay()
+		await delay()
 		return await db.insert(tecnicos).values(newTecnico).returning()
 	} catch (error) {
 		console.error(

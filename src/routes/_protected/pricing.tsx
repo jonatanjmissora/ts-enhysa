@@ -111,13 +111,13 @@ const Plan = ({
 }: PlanProps) => {
 	return (
 		<div
-			className={`overflow-hidden relative sm:w-80 2xl:w-100 cardAccent sm:p-10 2xl:p-20 sm:py-6 2xl:py-10 flex flex-col items-start gap-4 ${actualPlan === index ? "bg-[#1f301f] scale-120" : ""}`}
+			className={`overflow-hidden relative  sm:w-80 2xl:w-100 card flex flex-col items-start gap-4 duration-300 ${actualPlan === index ? "bg-[#1f301f] scale-120 z-10 " : "bg-accent"}`}
 		>
 			{actualPlan === index && (
 				<img
 					src="/EnHySa_logo.webp"
 					alt="logo EnHySa"
-					className="absolute -top-20 -right-20 size-80 -rotate-15 opacity-30"
+					className="absolute -z-10 -top-20 -right-20 sm:size-70 2xl:size-80 -rotate-15 opacity-20"
 				/>
 			)}
 			<span className="sm:text-xl 2xl:text-3xl font-semibold tracking-widest">

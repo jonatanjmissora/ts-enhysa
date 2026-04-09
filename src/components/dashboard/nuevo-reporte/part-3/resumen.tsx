@@ -13,7 +13,7 @@ export default function NewReportResumen({
 	const halfMedia = getHalfMedia(puntos)
 
 	return (
-		<div className="cardAccent flex-col p-10 px-14 gap-6">
+		<div className="card bg-accent flex-col gap-6">
 			<div className="flex items-center w-full border-b border-foreground/20">
 				<div className="flex items-center gap-3 flex-1">
 					<div className="bg-amber-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">

@@ -9,7 +9,7 @@ export default function InformacionMedicion({ nombre }: { nombre: string }) {
 	const [planoFiles, setPlanoFiles] = useState<File[]>([])
 
 	return (
-		<div className="flex-1 cardAccent flex-col p-10 px-14 gap-6">
+		<div className="flex-1 card bg-accent flex-col gap-6">
 			<div className="flex w-full items-center border-b border-foreground/20">
 				<div className="flex items-center gap-3 flex-1">
 					<div className="bg-teal-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">

@@ -26,9 +26,9 @@ function NuevoReportePersonaContent() {
 				</div>
 				<span className="text-xl font-semibold tracking-wider">Persona</span>
 			</div>
-			<article className="dark:bg-(--dark-blue-opa) bg-(--blue-opa) rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg shadow-xl ring ring-foreground/20 relative">
+			<article className="card dark:bg-(--dark-blue-opa) bg-(--blue-opa) flex-col gap-4 text-lg relative flex-1">
 				<TextTooltip text={"Datos obtenidos a través del perfil."} />
-				<div className="flex flex-col gap-2">
+				<div className="flex flex-col gap-2 w-full">
 					<label className="font-semibold" htmlFor="nombre-completo">
 						Nombre Completo
 					</label>
@@ -40,7 +40,7 @@ function NuevoReportePersonaContent() {
 						readOnly
 					/>
 				</div>
-				<div className="grid grid-cols-2 gap-4">
+				<div className="grid grid-cols-2 gap-4 w-full">
 					<div className="flex flex-col gap-2">
 						<label className="font-semibold" htmlFor="matricula">
 							Matrícula
@@ -74,7 +74,9 @@ function NuevoReportePersonaContent() {
 							className="dark:bg-background"
 							checked={tecnico?.firmaImg !== ""}
 						/>
-						<Label htmlFor="terms-checkbox">firma digital</Label>
+						<Label htmlFor="terms-checkbox" className="sm:text-lg 2xl:text-xl">
+							firma digital
+						</Label>
 					</Field>
 					<Field orientation="horizontal" className="flex justify-center">
 						<Checkbox
@@ -83,7 +85,9 @@ function NuevoReportePersonaContent() {
 							className="dark:bg-background"
 							checked={tecnico?.membrete !== ""}
 						/>
-						<Label htmlFor="terms-checkbox">pie de página</Label>
+						<Label htmlFor="terms-checkbox" className="sm:text-lg 2xl:text-xl">
+							pie de página
+						</Label>
 					</Field>
 				</FieldGroup>
 			</article>
@@ -100,27 +104,28 @@ const Skelton = () => {
 				</div>
 				<span className="text-xl font-semibold tracking-wider">Persona</span>
 			</div>
-			<article className="dark:bg-(--dark-blue-opa) bg-(--blue-opa) rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg shadow-xl ring ring-foreground/20">
-				<div className="flex flex-col gap-2">
+			<article className="card dark:bg-(--dark-blue-opa) bg-(--blue-opa) flex-col gap-4 text-lg relative flex-1">
+				<TextTooltip text={"Datos obtenidos a través del perfil."} />
+				<div className="flex flex-col gap-2 w-full">
 					<label className="font-semibold" htmlFor="nombre-completo">
 						Nombre Completo
 					</label>
 					<input
 						id="nombre-completo"
-						defaultValue=". . ."
-						className="bg-background py-2 px-4 rounded-lg animate-pulse text-center"
+						className="bg-background py-2 px-4 rounded-lg text-center"
+						placeholder=". . ."
 						readOnly
 					/>
 				</div>
-				<div className="grid grid-cols-2 gap-4">
+				<div className="grid grid-cols-2 gap-4 w-full">
 					<div className="flex flex-col gap-2">
 						<label className="font-semibold" htmlFor="matricula">
 							Matrícula
 						</label>
 						<input
 							id="matricula"
-							defaultValue=". . ."
-							className="bg-background py-2 px-4 rounded-lg animate-pulse text-center"
+							className="bg-background py-2 px-4 rounded-lg text-center"
+							placeholder=". . ."
 							readOnly
 						/>
 					</div>
@@ -130,28 +135,32 @@ const Skelton = () => {
 						</label>
 						<input
 							id="cargo"
-							defaultValue=". . ."
-							className="bg-background py-2 px-4 rounded-lg animate-pulse text-center"
+							className="bg-background py-2 px-4 rounded-lg text-center"
+							placeholder=". . ."
 							readOnly
 						/>
 					</div>
 				</div>
-				<FieldGroup className="flex flex-row items-center justify-around gap-4 w-full">
-					<Field orientation="horizontal">
+				<FieldGroup className="flex flex-row items-center justify-center gap-4 w-full pt-4">
+					<Field orientation="horizontal" className="flex justify-center">
 						<Checkbox
 							id="terms-checkbox"
 							name="terms-checkbox"
 							className="dark:bg-background"
 						/>
-						<Label htmlFor="terms-checkbox">firma digital</Label>
+						<Label htmlFor="terms-checkbox" className="sm:text-lg 2xl:text-xl">
+							firma digital
+						</Label>
 					</Field>
-					<Field orientation="horizontal">
+					<Field orientation="horizontal" className="flex justify-center">
 						<Checkbox
 							id="terms-checkbox"
 							name="terms-checkbox"
 							className="dark:bg-background"
 						/>
-						<Label htmlFor="terms-checkbox">pie de página</Label>
+						<Label htmlFor="terms-checkbox" className="sm:text-lg 2xl:text-xl">
+							pie de página
+						</Label>
 					</Field>
 				</FieldGroup>
 			</article>

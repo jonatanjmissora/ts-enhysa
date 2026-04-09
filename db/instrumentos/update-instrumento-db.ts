@@ -1,4 +1,4 @@
-// import { delay } from "@/lib/utils"
+import { delay } from "@/lib/utils"
 import { db } from "db"
 import { instrumentos } from "./schema"
 import { eq } from "drizzle-orm"
@@ -8,7 +8,7 @@ export async function updateInstrumentoDB(
 	updatedInstrumento: UpdateInstrumentoType
 ) {
 	try {
-		// await delay()
+		await delay()
 		const result = await db
 			.update(instrumentos)
 			.set(updatedInstrumento)

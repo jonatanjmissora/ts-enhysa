@@ -21,7 +21,7 @@ export default function PuntosList({
 	setPuntos: (puntos: PuntosType[]) => void
 }) {
 	return (
-		<article className="cardAccent flex-col p-10 px-14 gap-6 flex-1">
+		<article className="card bg-accent flex-col p-10 px-14 gap-6 flex-1">
 			<div className="flex w-full items-end border-b border-foreground/20">
 				<div className="flex items-center gap-3 w-full">
 					<div className="bg-orange-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">

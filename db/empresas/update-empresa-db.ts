@@ -1,4 +1,4 @@
-// import { delay } from "@/lib/utils"
+import { delay } from "@/lib/utils"
 import { UpdateEmpresaType } from "./empresa-validator"
 import { db } from "db"
 import { empresas } from "./schema"
@@ -6,7 +6,7 @@ import { eq } from "drizzle-orm"
 
 export async function updateEmpresaDB(updatedEmpresa: UpdateEmpresaType) {
 	try {
-		// await delay()
+		await delay()
 		const result = await db
 			.update(empresas)
 			.set(updatedEmpresa)

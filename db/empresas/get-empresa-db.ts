@@ -1,11 +1,11 @@
-// import { delay } from "@/lib/utils"
+import { delay } from "@/lib/utils"
 import { db } from "db"
 import { eq, and } from "drizzle-orm"
 import { empresas } from "./schema"
 
 export async function getEmpresaDB(id: string, tecnicoId: string) {
 	try {
-		// await delay()
+		await delay()
 		return await db
 			.select()
 			.from(empresas)

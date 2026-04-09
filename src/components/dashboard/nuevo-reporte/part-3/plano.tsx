@@ -21,7 +21,7 @@ export default function NewReportPart3Plano({
 	celdasSeleccionadas: number[]
 }) {
 	return (
-		<div className="flex-1 cardAccent flex flex-col gap-6 justify-center p-10 py-15">
+		<div className="flex-1 card bg-accent flex flex-col gap-6 justify-center">
 			<div className="flex items-center w-full border-b border-foreground/20">
 				<div className="flex items-center gap-3 flex-1">
 					<div className="bg-purple-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">

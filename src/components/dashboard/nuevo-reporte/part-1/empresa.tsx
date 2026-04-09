@@ -61,9 +61,9 @@ function NuevoReporteEmpresaContent() {
 					</SelectContent>
 				</Select>
 			</div>
-			<article className="dark:bg-(--dark-teal-opa) bg-(--teal-opa) rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg shadow-xl ring ring-foreground/20 relative">
+			<article className="card dark:bg-(--dark-teal-opa) bg-(--teal-opa) flex-col gap-4 text-lg relative flex-1">
 				<TextTooltip text={"Datos obtenidos a través del perfil."} />
-				<div className="grid grid-cols-2 gap-4">
+				<div className="grid grid-cols-2 gap-4 w-full">
 					<div className="flex flex-col gap-2">
 						<label className="font-semibold" htmlFor="razon-social">
 							Razón Social
@@ -89,7 +89,7 @@ function NuevoReporteEmpresaContent() {
 						/>
 					</div>
 				</div>
-				<div className="flex flex-col gap-2">
+				<div className="flex flex-col gap-2 w-full">
 					<label className="font-semibold" htmlFor="direccion">
 						Dirección
 					</label>
@@ -101,7 +101,7 @@ function NuevoReporteEmpresaContent() {
 						readOnly
 					/>
 				</div>
-				<div className="flex flex-col gap-2">
+				<div className="flex flex-col gap-2 w-full">
 					<label className="font-semibold" htmlFor="cant-empleados">
 						Localidad
 					</label>
@@ -129,57 +129,62 @@ const Skelton = () => {
 					<span className="text-xl font-semibold tracking-wider">Empresa</span>
 				</div>
 				<Select>
-					<SelectTrigger className="w-full max-w-48 text-center">
-						<SelectValue placeholder=". . ." />
+					<SelectTrigger className="w-full max-w-48">
+						<SelectValue placeholder="Seleccione Empresa" />
 					</SelectTrigger>
-					<SelectContent>
+					<SelectContent position="popper">
 						<SelectGroup>
-							<SelectLabel>Fruits</SelectLabel>
+							<SelectLabel>Empresas</SelectLabel>
 						</SelectGroup>
 					</SelectContent>
 				</Select>
 			</div>
-			<article className="dark:bg-(--dark-teal-opa) bg-(--teal-opa) rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg shadow-xl ring ring-foreground/20">
-				<div className="grid grid-cols-2 gap-4">
-					<div className="flex flex-col gap-2">
-						<label className="font-semibold" htmlFor="cuit">
-							CUIT
-						</label>
-						<input
-							id="cuit"
-							className="bg-background py-2 px-4 rounded-lg text-center animate-pulse"
-							defaultValue=". . ."
-						/>
-					</div>
+			<article className="card dark:bg-(--dark-teal-opa) bg-(--teal-opa) flex-col gap-4 text-lg relative flex-1">
+				<TextTooltip text={"Datos obtenidos a través del perfil."} />
+				<div className="grid grid-cols-2 gap-4 w-full">
 					<div className="flex flex-col gap-2">
 						<label className="font-semibold" htmlFor="razon-social">
 							Razón Social
 						</label>
 						<input
 							id="razon-social"
-							className="bg-background py-2 px-4 rounded-lg text-center animate-pulse"
-							defaultValue=". . ."
+							placeholder=". . ."
+							className="bg-background py-2 px-4 rounded-lg text-center"
+							readOnly
+						/>
+					</div>
+					<div className="flex flex-col gap-2">
+						<label className="font-semibold" htmlFor="cuit">
+							CUIT
+						</label>
+						<input
+							id="cuit"
+							className="bg-background py-2 px-4 rounded-lg text-center"
+							placeholder=". . ."
+							readOnly
 						/>
 					</div>
 				</div>
-				<div className="flex flex-col gap-2">
+				<div className="flex flex-col gap-2 w-full">
 					<label className="font-semibold" htmlFor="direccion">
 						Dirección
 					</label>
 					<input
 						id="direccion"
-						className="bg-background py-2 px-4 rounded-lg text-center animate-pulse"
-						defaultValue=". . ."
+						className="bg-background py-2 px-4 rounded-lg text-center"
+						placeholder=". . ."
+						readOnly
 					/>
 				</div>
-				<div className="flex flex-col gap-2">
+				<div className="flex flex-col gap-2 w-full">
 					<label className="font-semibold" htmlFor="cant-empleados">
 						Localidad
 					</label>
 					<input
 						id="localidad"
-						className="bg-background py-2 px-4 rounded-lg text-center animate-pulse"
-						defaultValue=". . ."
+						placeholder=". . ."
+						className="bg-background py-2 px-4 rounded-lg text-center"
+						readOnly
 					/>
 				</div>
 			</article>

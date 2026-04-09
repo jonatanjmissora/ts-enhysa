@@ -13,7 +13,6 @@ import { getIndiceDeLocal, getIndiceRedondeo } from "@/lib/utils"
 
 export default function MedidasPlano({
 	nombre,
-	setNombre,
 	cantidadFilas,
 	cantidadColumnas,
 	cantidadAltura,
@@ -24,7 +23,6 @@ export default function MedidasPlano({
 	setPuntos,
 }: {
 	nombre: string
-	setNombre: (nombre: string) => void
 	cantidadFilas: number
 	cantidadColumnas: number
 	cantidadAltura: number
@@ -55,7 +53,7 @@ export default function MedidasPlano({
 					: "entre 30 y 40"
 	console
 	return (
-		<div className="cardAccent flex-col p-10 px-14 gap-6">
+		<div className="card bg-accent flex-col gap-6">
 			<div className="flex items-center w-full border-b border-foreground/20">
 				<div className="flex items-center gap-3 flex-1">
 					<div className="bg-blue-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
@@ -69,27 +67,12 @@ export default function MedidasPlano({
 					{nombre || "Depósito"}
 				</p>
 			</div>
-			<div className="flex flex-col gap-3 w-full mx-auto">
-				<div className="flex gap-6">
-					<div className="font-semibold bg-blue-500/70 rounded-full py-1 px-3 w-8 flex items-center justify-center">
-						N
-					</div>
-					<span className="w-30">Nombre</span>
-					<input
-						type="text"
-						className="w-40 bg-background py-1 px-4 rounded-lg text-center"
-						placeholder="Ej. Depósito"
-						value={nombre}
-						onChange={e => {
-							setNombre(e.target.value)
-						}}
-					/>
-				</div>
+			<div className="flex flex-col gap-3 w-full mx-auto sm:text-base 2xl:text-xl">
 				<div className="flex gap-6">
 					<div className="font-semibold bg-blue-500/70 rounded-full py-1 px-3 w-8 flex items-center justify-center">
 						L
 					</div>
-					<span className="w-30">Largo (m)</span>
+					<span className="w-50">Largo (m)</span>
 					<input
 						type="number"
 						className="w-40 bg-background py-1 px-4 rounded-lg text-center"
@@ -104,9 +87,9 @@ export default function MedidasPlano({
 				</div>
 				<div className="flex items-center gap-6">
 					<div className="font-semibold bg-blue-500/70 rounded-full py-1 px-3 w-8 flex items-center justify-center">
-						w
+						W
 					</div>
-					<span className="w-30">Ancho (m)</span>
+					<span className="w-50">Ancho (m)</span>
 					<input
 						type="number"
 						className="w-40 bg-background py-1 px-4 rounded-lg text-center"
@@ -123,7 +106,7 @@ export default function MedidasPlano({
 					<div className="font-semibold bg-blue-500/70 rounded-full py-1 px-3 w-8 flex items-center justify-center">
 						H
 					</div>
-					<span className="w-30">Altura montaje (m)</span>
+					<span className="w-50">Altura montaje (m)</span>
 					<input
 						type="number"
 						className="w-40 bg-background py-1 px-4 rounded-lg text-center"

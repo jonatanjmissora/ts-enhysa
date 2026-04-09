@@ -18,7 +18,7 @@ dashboard
     el check para ver si cambian los valores en edit, agregar la comparacion de imagenes
 
 * planes
-    pestania de planes
+ 
 
 styles
 ===============
@@ -31,6 +31,28 @@ zustand
 uploadThing
 
 polar
+
+cambiar de lugar las recomendaciones
+
+clima opciones
+
++- en croquis
+
+formula
+
+quitar faltan x mediciones
+
+borrar puntos en el croquis
+
+pedir valor de puntos en el croquis
+
+mover puntos en el croquis
+
+mis informes: filtros por fecha, empresa, pendientes
+
+empresa con distintas direcciones
+
+agregar formulario para cargar mas datos en parte2
 
 
 

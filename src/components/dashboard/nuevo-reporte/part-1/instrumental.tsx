@@ -70,10 +70,10 @@ function NuevoReporteInstrumentoContent() {
 					</SelectContent>
 				</Select>
 			</div>
-			<article className="dark:bg-(--dark-orange-opa) bg-(--orange-opa) rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg shadow-xl ring ring-foreground/20 relative">
+			<article className="card dark:bg-(--dark-orange-opa) bg-(--orange-opa) flex-col gap-4 text-lg relative flex-1">
 				<TextTooltip text={"Datos obtenidos a través del perfil."} />
-				<div className="grid grid-cols-2 gap-4">
-					<div className="flex flex-col gap-2">
+				<div className="grid grid-cols-2 gap-4 w-full">
+					<div className="flex flex-col gap-2 w-full">
 						<label className="font-semibold" htmlFor="nombre">
 							Nombre
 						</label>
@@ -85,7 +85,7 @@ function NuevoReporteInstrumentoContent() {
 							placeholder="Ej. Luxometro"
 						/>
 					</div>
-					<div className="flex flex-col gap-2">
+					<div className="flex flex-col gap-2 w-full">
 						<label className="font-semibold" htmlFor="marca">
 							Marca
 						</label>
@@ -97,7 +97,7 @@ function NuevoReporteInstrumentoContent() {
 							placeholder="Ej. Extech"
 						/>
 					</div>
-					<div className="flex flex-col gap-2">
+					<div className="flex flex-col gap-2 w-full">
 						<label className="font-semibold" htmlFor="modelo">
 							Modelo
 						</label>
@@ -109,7 +109,7 @@ function NuevoReporteInstrumentoContent() {
 							placeholder="LT3000"
 						/>
 					</div>
-					<div className="flex flex-col gap-2">
+					<div className="flex flex-col gap-2 w-full">
 						<label className="font-semibold" htmlFor="fechaCalibracion">
 							Fecha de calibración
 						</label>
@@ -124,15 +124,17 @@ function NuevoReporteInstrumentoContent() {
 					<FieldGroup className="flex flex-row items-center justify-center gap-4 w-full pt-4">
 						<Field orientation="horizontal" className="flex justify-center">
 							<Checkbox
-								id="terms-checkbox"
-								name="terms-checkbox"
+								id="cert-checkbox"
+								name="cert-checkbox"
 								className="dark:bg-background"
 								checked={
 									actualInstrumento?.imagenes &&
 									actualInstrumento.imagenes.length > 0
 								}
 							/>
-							<Label htmlFor="terms-checkbox">imagen certificado</Label>
+							<Label htmlFor="cert-checkbox" className="sm:text-lg 2xl:text-xl">
+								imagen certificado
+							</Label>
 						</Field>
 					</FieldGroup>
 				</div>
@@ -154,8 +156,8 @@ const Skelton = () => {
 					</span>
 				</div>
 				<Select>
-					<SelectTrigger className="w-full max-w-48 text-center">
-						<SelectValue placeholder=". . ." />
+					<SelectTrigger className="w-full max-w-48">
+						<SelectValue placeholder="Seleccione Instrumental" />
 					</SelectTrigger>
 					<SelectContent position="popper">
 						<SelectGroup>
@@ -164,52 +166,63 @@ const Skelton = () => {
 					</SelectContent>
 				</Select>
 			</div>
-			<article className="dark:bg-(--dark-orange-opa) bg-(--orange-opa) rounded-xl p-6 flex-1 flex flex-col gap-6 text-lg shadow-xl ring ring-foreground/20">
-				<div className="grid grid-cols-2 gap-4">
-					<div className="flex flex-col gap-2">
+			<article className="card dark:bg-(--dark-orange-opa) bg-(--orange-opa) flex-col gap-4 text-lg relative flex-1">
+				<TextTooltip text={"Datos obtenidos a través del perfil."} />
+				<div className="grid grid-cols-2 gap-4 w-full">
+					<div className="flex flex-col gap-2 w-full">
 						<label className="font-semibold" htmlFor="nombre">
 							Nombre
 						</label>
 						<input
 							id="nombre"
-							className="bg-background py-2 px-4 rounded-lg text-center animate-pulse"
-							defaultValue=". . ."
+							className="bg-background py-2 px-4 rounded-lg text-center"
+							readOnly
+							placeholder=". . ."
 						/>
 					</div>
-					<div className="flex flex-col gap-2">
+					<div className="flex flex-col gap-2 w-full">
 						<label className="font-semibold" htmlFor="marca">
 							Marca
 						</label>
 						<input
 							id="marca"
-							className="bg-background py-2 px-4 rounded-lg text-center animate-pulse"
-							defaultValue=". . ."
+							className="bg-background py-2 px-4 rounded-lg text-center"
+							readOnly
+							placeholder=". . ."
 						/>
 					</div>
-					<div className="flex flex-col gap-2">
+					<div className="flex flex-col gap-2 w-full">
 						<label className="font-semibold" htmlFor="modelo">
 							Modelo
 						</label>
 						<input
 							id="modelo"
-							className="bg-background py-2 px-4 rounded-lg text-center animate-pulse"
-							defaultValue=". . ."
+							className="bg-background py-2 px-4 rounded-lg text-center"
+							readOnly
+							placeholder=". . ."
 						/>
 					</div>
-					<div className="flex flex-col gap-2">
+					<div className="flex flex-col gap-2 w-full">
 						<label className="font-semibold" htmlFor="fechaCalibracion">
 							Fecha de calibración
 						</label>
 						<input
 							id="fechaCalibracion"
-							className="bg-background py-2 px-4 rounded-lg text-center animate-pulse"
-							defaultValue=". . ."
+							className="bg-background py-2 px-4 rounded-lg text-center"
+							readOnly
+							placeholder=". . ."
 						/>
 					</div>
 					<FieldGroup className="flex flex-row items-center justify-center gap-4 w-full pt-4">
 						<Field orientation="horizontal" className="flex justify-center">
-							<Checkbox id="terms-checkbox" name="terms-checkbox" />
-							<Label htmlFor="terms-checkbox">imagen certificado</Label>
+							<Checkbox
+								id="cert-checkbox"
+								name="cert-checkbox"
+								className="dark:bg-background"
+							/>
+							<Label htmlFor="cert-checkbox" className="sm:text-lg 2xl:text-xl">
+								imagen certificado
+							</Label>
 						</Field>
 					</FieldGroup>
 				</div>

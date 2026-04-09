@@ -1,11 +1,11 @@
-// import { delay } from "@/lib/utils"
+import { delay } from "@/lib/utils"
 import { db } from "db"
 import { instrumentos } from "./schema"
 import { and, eq } from "drizzle-orm"
 
 export async function deleteInstrumentoDB(id: string, userId: string) {
 	try {
-		// await delay()
+		await delay()
 		return await db
 			.delete(instrumentos)
 			.where(and(eq(instrumentos.id, id), eq(instrumentos.userId, userId)))

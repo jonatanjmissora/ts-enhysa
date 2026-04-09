@@ -10,7 +10,6 @@ export default function NewReportPart2({
 	actualStep,
 	setActualStep,
 	nombre,
-	setNombre,
 	puntos,
 	setPuntos,
 	cantidadFilas,
@@ -61,7 +60,6 @@ export default function NewReportPart2({
 				<div className="flex flex-col gap-10 sm:w-[40%] 2xl:w-1/2">
 					<MedidasPlano
 						nombre={nombre}
-						setNombre={setNombre}
 						cantidadFilas={cantidadFilas}
 						cantidadColumnas={cantidadColumnas}
 						cantidadAltura={cantidadAltura}
@@ -96,7 +94,6 @@ export default function NewReportPart2({
 					<PuntosList nombre={nombre} puntos={puntos} setPuntos={setPuntos} />
 				</div>
 			</div>
-
 			<button
 				onClick={pasarAlPaso3}
 				type="button"

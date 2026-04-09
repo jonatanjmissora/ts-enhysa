@@ -21,8 +21,10 @@ export const getUserInfo = (session: any) => {
 	return { avatar, fullName: `${Name} ${LastName}` }
 }
 
-export async function delay(ms = 3000) {
-	return new Promise(resolve => setTimeout(resolve, ms))
+export const delay = async (ms = 3000) => {
+	if (!import.meta.env.DEV) return
+
+	await new Promise(r => setTimeout(r, ms))
 }
 
 export const checkTecnicoDiference = (
