@@ -8,8 +8,8 @@ import {
 } from "@/components/ui/alert-dialog"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { PuntosType } from "./croquis"
 import { getIndiceDeLocal, getIndiceRedondeo } from "@/lib/utils"
+import { PuntosType } from "@/routes/_protected/new-report"
 
 export default function MedidasPlano({
 	nombre,

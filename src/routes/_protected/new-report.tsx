@@ -34,6 +34,11 @@ function RouteComponent() {
 	const [alto, setAlto] = useState<number>(0)
 	const [celdasSeleccionadas, setCeldasSeleccionadas] = useState<number[]>([])
 	const [puntos, setPuntos] = useState<PuntosType[]>([])
+	const [sector, setSector] = useState<string>("")
+	const [tipoIluminacion, setTipoIluminacion] = useState<string>("natural")
+	const [tipoFuente, setTipoFuente] = useState<string>("incandescente")
+	const [iluminacion, setIluminacion] = useState<string>("general")
+	const [valorRequerido, setValorRequerido] = useState<string>("100")
 
 	const volverPaso = () => {
 		setActualStep(actualStep - 1)
@@ -99,6 +104,16 @@ function RouteComponent() {
 				setCeldasSeleccionadas={setCeldasSeleccionadas}
 				puntos={puntos}
 				setPuntos={setPuntos}
+				sector={sector}
+				setSector={setSector}
+				tipoIluminacion={tipoIluminacion}
+				setTipoIluminacion={setTipoIluminacion}
+				tipoFuente={tipoFuente}
+				setTipoFuente={setTipoFuente}
+				iluminacion={iluminacion}
+				setIluminacion={setIluminacion}
+				valorRequerido={valorRequerido}
+				setValorRequerido={setValorRequerido}
 			/>
 
 			{/* ==================================================================== */}

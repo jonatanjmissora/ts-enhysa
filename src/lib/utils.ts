@@ -1,4 +1,4 @@
-import { PuntosType } from "@/components/dashboard/nuevo-reporte/part-2/croquis"
+import { PuntosType } from "@/components/dashboard/nuevo-reporte/part-2/croquis/croquis"
 import { clsx, type ClassValue } from "clsx"
 import { EmpresaFormType } from "db/empresas/empresa-validator"
 import { EmpresaType } from "db/empresas/schema"

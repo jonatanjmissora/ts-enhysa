@@ -1,5 +1,4 @@
 import { Info } from "lucide-react"
-import NewReportPart2Observaciones from "./observaciones"
 import NewReportPart2Clima from "./clima"
 import NewReportPart2Locacion from "./locacion"
 import { useState } from "react"
@@ -35,10 +34,6 @@ export default function InformacionMedicion({ nombre }: { nombre: string }) {
 
 			<div className="sm:w-full w-full mx-auto border-b border-foreground/20 flex items-center gap-6">
 				<NewReportPart2Locacion />
-			</div>
-
-			<div className="sm:w-full w-full mx-auto border-b border-foreground/20 flex items-center gap-6">
-				<NewReportPart2Observaciones />
 			</div>
 
 			<NewReportPart2Clima />

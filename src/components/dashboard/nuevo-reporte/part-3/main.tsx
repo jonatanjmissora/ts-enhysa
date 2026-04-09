@@ -3,6 +3,7 @@ import Resumen from "./resumen"
 import type { PuntosType } from "@/routes/_protected/new-report"
 import NewReportPart3Tags from "./tags"
 import NewReportPart3Plano from "./plano"
+import NewReportPart3Observaciones from "./observaciones"
 
 export default function NewReportPart3({
 	actualStep,
@@ -46,6 +47,9 @@ export default function NewReportPart3({
 						cantidadColumnas={cantidadColumnas}
 						celdasSeleccionadas={celdasSeleccionadas}
 					/>
+					<div className="card bg-accent">
+						<NewReportPart3Observaciones />
+					</div>
 				</div>
 			</div>
 

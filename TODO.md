@@ -54,6 +54,8 @@ empresa con distintas direcciones
 
 agregar formulario para cargar mas datos en parte2
 
+optimizar el useEffect de los steps del parte2, con un debounce
+
 
 
 

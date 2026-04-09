@@ -1,5 +1,4 @@
 import { Database } from "lucide-react"
-import { PuntosType } from "./croquis"
 import { useState } from "react"
 import { Trash2 } from "lucide-react"
 import {
@@ -10,6 +9,7 @@ import {
 	AlertDialogDescription,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
+import { PuntosType } from "@/routes/_protected/new-report"
 
 export default function PuntosList({
 	nombre,
