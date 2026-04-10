@@ -65,10 +65,6 @@ export default function CroquisComponent({
 			</div>
 			<div className="flex flex-col gap-4 sm:w-[440px] 2xl:w-[600px]">
 				<div className="min-h-[400px] h-max w-full overflow-auto bg-background shadow rounded-lg ring ring-foreground/5 py-10  relative">
-					<span className="text-amber-500/50 absolute bottom-2 right-2">
-						Faltan tomar un mínimo de{" "}
-						{cantidadMedicionesMinimas - puntos.length} medición(es)
-					</span>
 					<div className="w-max h-max p-20 m-auto ">
 						<CroquisGrid
 							cantidadFilas={cantidadFilas}
@@ -330,7 +326,6 @@ function AlertPointsCroquis({
 function CroquisGridToPoint({
 	cantidadFilas,
 	cantidadColumnas,
-	cantidadMedicionesMinimas,
 	celdasSeleccionadas,
 	setOpen,
 	puntos,
@@ -370,10 +365,6 @@ function CroquisGridToPoint({
 		<>
 			<div className="max-h-[500px] h-max sm:w-[600px] 2xl:w-[800px] overflow-auto bg-accent shadow rounded-lg ring ring-foreground/10">
 				<div className="w-max h-max p-20 mx-auto relative">
-					<span className="text-amber-500/50 absolute bottom-2 right-2">
-						Faltan tomar un mínimo de{" "}
-						{cantidadMedicionesMinimas - puntos.length} medición(es)
-					</span>
 					<button
 						className="grid relative cursor-pointer"
 						ref={gridRef}

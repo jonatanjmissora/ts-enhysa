@@ -1,4 +1,4 @@
-import { Box, Info, X } from "lucide-react"
+import { Box, Equal, EqualApproximately, Info, X } from "lucide-react"
 import {
 	AlertDialog,
 	AlertDialogTrigger,
@@ -43,15 +43,6 @@ export default function MedidasPlano({
 
 	const indiceRedondeo = getIndiceRedondeo(indiceDeLocal)
 
-	const minimoNumeroCeldas =
-		indiceRedondeo === 1
-			? "entre 7 y 10"
-			: indiceRedondeo === 2
-				? "entre 13 y 20"
-				: indiceRedondeo === 3
-					? "entre 23 y 30"
-					: "entre 30 y 40"
-	console
 	return (
 		<div className="card bg-accent flex-col gap-6">
 			<div className="flex items-center w-full border-b border-foreground/20">
@@ -121,32 +112,42 @@ export default function MedidasPlano({
 			</div>
 
 			{hayValores && (
-				<div className="flex flex-col gap-0 w-full p-6 rounded-lg cardBackground bg-background/75 items-start relative">
-					<FormulaAlertDialog
-						cantidadFilas={cantidadFilas}
-						cantidadColumnas={cantidadColumnas}
-						cantidadAltura={cantidadAltura}
-						indiceDeLocal={indiceDeLocal}
-						indiceRedondeo={indiceRedondeo}
-						minimoNumeroCeldas={minimoNumeroCeldas}
-					/>
-
-					<div className="flex gap-2">
-						<span className="text-2xl bg-teal-500/50 px-4 py-1 rounded-lg">
-							{indiceRedondeo}
+				<div className="flex flex-col gap-4 w-full p-6 rounded-lg cardBackground bg-background/75 items-start relative">
+					<div className="flex flex-col gap-2 justify-center items-center w-full">
+						<span className="w-full italic font-semibold text-foreground/50 tracking-widest border-b border-foreground/10">
+							Indice del local{" "}
 						</span>
-						<span className="italic tracking-wilder text-foreground/50">
-							Indice de local
-						</span>
+						<div className="flex justify-end items-center gap-3">
+							<div className="flex flex-col">
+								<span className="p-1 border-b border-foreground/50 w-full text-center px-10">
+									{cantidadFilas} * {cantidadColumnas}
+								</span>
+								<span className="p-1 text-center">
+									{cantidadAltura} * ( {cantidadFilas} + {cantidadColumnas} )
+								</span>
+							</div>
+							<Equal size={16} />
+							<span className="italic font-semibold text-lg tracking-widest">
+								{indiceDeLocal.toFixed(2)}
+							</span>
+							<EqualApproximately size={16} />
+							<span className="text-2xl bg-teal-500/50 px-4 py-1 rounded-lg">
+								{indiceRedondeo}
+							</span>
+						</div>
 					</div>
-					<div className="w-full flex gap-2 items-end justify-end">
-						<span className="italic tracking-wilder text-foreground/50">
-							Minimo numero de celdas
-						</span>
+
+					<div className="w-full flex gap-2 items-center justify-start">
 						<span className="text-2xl bg-pink-500/50 px-4 py-1 rounded-lg">
 							{indiceRedondeo >= 4 ? "36" : (indiceRedondeo + 2) ** 2}
 						</span>
+						<span className="italic tracking-wilder text-foreground/50">
+							Minimo numero de mediciones
+						</span>
 					</div>
+					<span className="tracking-widest italic font semibold text-foreground/50 border-t border-foreground/10 p1-2 w-full text-right sm:text-xs 2xl:text-sm">
+						Res. 84/2012 S.R.T.
+					</span>
 				</div>
 			)}
 		</div>

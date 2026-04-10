@@ -32,15 +32,10 @@ uploadThing
 
 polar
 
-cambiar de lugar las recomendaciones
 
-clima opciones
+
 
 +- en croquis
-
-formula
-
-quitar faltan x mediciones
 
 borrar puntos en el croquis
 
@@ -51,11 +46,6 @@ mover puntos en el croquis
 mis informes: filtros por fecha, empresa, pendientes
 
 empresa con distintas direcciones
-
-agregar formulario para cargar mas datos en parte2
-
-optimizar el useEffect de los steps del parte2, con un debounce
-
 
 
 

@@ -91,7 +91,7 @@ export default function Area({
 							defaultValue={tipoIluminacion}
 							onValueChange={value => setTipoIluminacion(value)}
 						>
-							<SelectTrigger className="w-full justify-center gap-3 sm:text-lg 2xl:text-xl dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
+							<SelectTrigger className="w-full justify-center gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent className="w-full p-2 px4">
@@ -114,7 +114,7 @@ export default function Area({
 							defaultValue={tipoFuente}
 							onValueChange={value => setTipoFuente(value)}
 						>
-							<SelectTrigger className="w-full justify-center gap-3 sm:text-lg 2xl:text-xl dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
+							<SelectTrigger className="w-full justify-center gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent className="w-full p-2 px4">
@@ -137,7 +137,7 @@ export default function Area({
 							defaultValue={iluminacion}
 							onValueChange={value => setIluminacion(value)}
 						>
-							<SelectTrigger className="w-full justify-center gap-3 sm:text-lg 2xl:text-xl dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
+							<SelectTrigger className="w-full justify-center gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent className="w-full p-2 px4">
@@ -160,7 +160,7 @@ export default function Area({
 							defaultValue={valorRequerido}
 							onValueChange={value => setValorRequerido(value)}
 						>
-							<SelectTrigger className="w-full justify-center gap-3 sm:text-lg 2xl:text-xl dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
+							<SelectTrigger className="w-full justify-center gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent className="w-full p-2 px4">
