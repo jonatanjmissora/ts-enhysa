@@ -3,6 +3,7 @@ import {
 	AlertDialog,
 	AlertDialogTrigger,
 	AlertDialogContent,
+	AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import {
 	Lightbulb,
@@ -194,6 +195,7 @@ function AlertPaintCroquis({
 				</button>
 			</AlertDialogTrigger>
 			<AlertDialogContent className="p-30 px-40">
+				<AlertDialogTitle></AlertDialogTitle>
 				<CroquisGridToPaint
 					cantidadFilas={cantidadFilas}
 					cantidadColumnas={cantidadColumnas}
@@ -309,6 +311,7 @@ function AlertPointsCroquis({
 				</button>
 			</AlertDialogTrigger>
 			<AlertDialogContent className="p-30 px-40">
+				<AlertDialogTitle></AlertDialogTitle>
 				<CroquisGridToPoint
 					cantidadFilas={cantidadFilas}
 					cantidadColumnas={cantidadColumnas}
@@ -340,6 +343,7 @@ function CroquisGridToPoint({
 	setPuntos: (puntos: PuntosType[]) => void
 }) {
 	const gridRef = useRef<HTMLButtonElement>(null)
+	const inputRef = useRef<HTMLInputElement>(null)
 	const [openValue, setOpenValue] = useState(false)
 	const totalCeldas = cantidadFilas * cantidadColumnas
 	const celdasSize = 20
@@ -348,6 +352,12 @@ function CroquisGridToPoint({
 		x: number
 		y: number
 	} | null>(null)
+
+	useEffect(() => {
+		if (openValue && inputRef.current) {
+			inputRef.current.focus()
+		}
+	}, [openValue])
 
 	const setXYPoint = (e: React.MouseEvent<HTMLButtonElement>) => {
 		if (!gridRef.current) return
@@ -361,12 +371,13 @@ function CroquisGridToPoint({
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
+		const form = new FormData(e.currentTarget)
 		if (!puntoPosition) return
 
 		// Add punto to puntos array
 		const newPunto = {
 			nombre: `punto-${puntos === null ? 1 : puntos.length + 1}`,
-			valor: 0,
+			valor: Number(form.get("valor")),
 			valorX: puntoPosition.x,
 			valorY: puntoPosition.y,
 			cumple: false,
@@ -433,6 +444,8 @@ function CroquisGridToPoint({
 							VALOR
 						</label>
 						<input
+							ref={inputRef}
+							name="valor"
 							type="number"
 							className="w-full text-6xl font-bold tracking-wildest p-4 card bg-foreground text-background text-center"
 						/>
