@@ -27,7 +27,7 @@ export default function NewReportPart2Clima() {
 	})
 
 	return (
-		<div className="sm:w-full w-full mx-auto flex sm:flex-col 2xl:flex-row gap-2 justify-between items-center font-semibold py-6">
+		<div className="sm:w-full w-full flex sm:flex-col 2xl:flex-row gap-2 justify-between items-center font-semibold py-6">
 			<div className="w-full flex gap-3 items-center">
 				<label htmlFor="clima" className="w-1/2">
 					Clima
@@ -38,7 +38,7 @@ export default function NewReportPart2Clima() {
 						setClima(prev => ({ ...prev, estado: value }))
 					}
 				>
-					<SelectTrigger className="w-full justify-center gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
+					<SelectTrigger className="w-full justify-center gap-3 sm:text-sm 2xl:text-base dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
 						<SelectValue />
 					</SelectTrigger>
 					<SelectContent className="w-full p-2 px4">

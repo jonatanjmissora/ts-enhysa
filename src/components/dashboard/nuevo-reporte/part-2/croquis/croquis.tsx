@@ -340,19 +340,35 @@ function CroquisGridToPoint({
 	setPuntos: (puntos: PuntosType[]) => void
 }) {
 	const gridRef = useRef<HTMLButtonElement>(null)
+	const [openValue, setOpenValue] = useState(false)
 	const totalCeldas = cantidadFilas * cantidadColumnas
+	const celdasSize = 20
+
+	const [puntoPosition, setPuntoPosition] = useState<{
+		x: number
+		y: number
+	} | null>(null)
+
 	const setXYPoint = (e: React.MouseEvent<HTMLButtonElement>) => {
 		if (!gridRef.current) return
 		const rect = gridRef.current.getBoundingClientRect()
 		const x = e.clientX - rect.left
 		const y = e.clientY - rect.top
 
+		setPuntoPosition({ x, y })
+		setOpenValue(true)
+	}
+
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		if (!puntoPosition) return
+
 		// Add punto to puntos array
 		const newPunto = {
 			nombre: `punto-${puntos === null ? 1 : puntos.length + 1}`,
 			valor: 0,
-			valorX: x,
-			valorY: y,
+			valorX: puntoPosition.x,
+			valorY: puntoPosition.y,
 			cumple: false,
 		}
 		if (!puntos) {
@@ -360,10 +376,15 @@ function CroquisGridToPoint({
 		} else {
 			setPuntos([...puntos, newPunto])
 		}
+		setPuntoPosition(null)
+		setOpenValue(false)
 	}
+
 	return (
-		<>
-			<div className="max-h-[500px] h-max sm:w-[600px] 2xl:w-[800px] overflow-auto bg-accent shadow rounded-lg ring ring-foreground/10">
+		<div className="relative">
+			<div
+				className={`max-h-[500px] h-max sm:w-[600px] 2xl:w-[800px] overflow-auto bg-accent shadow rounded-lg ring ring-foreground/10 ${openValue ? "pointer-events-none blur" : ""}`}
+			>
 				<div className="w-max h-max p-20 mx-auto relative">
 					<button
 						className="grid relative cursor-pointer"
@@ -384,7 +405,7 @@ function CroquisGridToPoint({
 							return (
 								<div
 									key={Math.random()}
-									className={`border border-gray-400 size-20 ${celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
+									className={`border border-gray-400 size-${celdasSize} ${celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
 								/>
 							)
 						})}
@@ -394,14 +415,57 @@ function CroquisGridToPoint({
 					</button>
 				</div>
 			</div>
+
+			{openValue && (
+				<form
+					onSubmit={handleSubmit}
+					className="card bg-background absolute top-[10%] left-[20%] w-[60%] h-max py-14 items-start flex-col gap-10"
+				>
+					<p className="border-t border-foreground/20 w-full text-end text-lg font-semibold tracking-widest">
+						punto-{puntos?.length + 1}
+					</p>
+
+					<div className="w-full relative">
+						<label
+							htmlFor=""
+							className="absolute -top-4 -left-2 text-xl tracking-widest bg-background text-foreground/70 px-6 rounded-lg font-bold"
+						>
+							VALOR
+						</label>
+						<input
+							type="number"
+							className="w-full text-6xl font-bold tracking-wildest p-4 card bg-foreground text-background text-center"
+						/>
+					</div>
+					<div className="w-full flex items-center gap-4">
+						<button
+							type="button"
+							className="flex-1 card bg-background py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer"
+							onClick={() => {
+								setOpenValue(false)
+								setPuntoPosition(null)
+							}}
+						>
+							Cancelar
+						</button>
+						<button
+							type="submit"
+							className="flex-1 card bg-accent py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer"
+						>
+							Guardar
+						</button>
+					</div>
+				</form>
+			)}
+
 			<button
 				onClick={() => setOpen(false)}
 				className="cardBackground px-4 py-3 cursor-pointer w-1/2 mx-auto justify-center tracking-widest font-semibold gap-4 mt-10"
 			>
-				Listo
+				Volver
 				<ThumbsUp size={16} />
 			</button>
-		</>
+		</div>
 	)
 }
 

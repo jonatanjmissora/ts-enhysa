@@ -137,12 +137,12 @@ export default function MedidasPlano({
 						</div>
 					</div>
 
-					<div className="w-full flex gap-2 items-center justify-start">
+					<div className="w-full flex gap-2 items-center justify-center">
 						<span className="text-2xl bg-pink-500/50 px-4 py-1 rounded-lg">
 							{indiceRedondeo >= 4 ? "36" : (indiceRedondeo + 2) ** 2}
 						</span>
 						<span className="italic tracking-wilder text-foreground/50">
-							Minimo numero de mediciones
+							Mínimo número de mediciones
 						</span>
 					</div>
 					<span className="tracking-widest italic font semibold text-foreground/50 border-t border-foreground/10 p1-2 w-full text-right sm:text-xs 2xl:text-sm">
