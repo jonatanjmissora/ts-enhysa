@@ -154,13 +154,13 @@ function CroquisGrid({
 			{Array.from({ length: totalCeldas }).map((_, i) => {
 				return (
 					<div
-						key={Math.random()}
+						key={i}
 						className={`border border-gray-400 size-20 ${celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
 					/>
 				)
 			})}
 			{puntos?.map((punto, index) => (
-				<Punto key={punto.nombre ?? index} punto={punto} index={index} />
+				<Punto key={punto.valorX - punto.valorY} punto={punto} index={index} />
 			))}
 		</div>
 	)
@@ -257,7 +257,7 @@ function CroquisGridToPaint({
 						{Array.from({ length: totalCeldas }).map((_, index) => {
 							return (
 								<button
-									key={Math.random()}
+									key={index}
 									onMouseDown={() => {
 										setIsMouseDown(true)
 										agregarCelda(index)
@@ -344,14 +344,19 @@ function CroquisGridToPoint({
 }) {
 	const gridRef = useRef<HTMLButtonElement>(null)
 	const inputRef = useRef<HTMLInputElement>(null)
-	const [openValue, setOpenValue] = useState(false)
+	const [openValue, setOpenValue] = useState<"new" | "edit" | false>(false)
 	const totalCeldas = cantidadFilas * cantidadColumnas
 	const celdasSize = 20
 
-	const [puntoPosition, setPuntoPosition] = useState<{
-		x: number
-		y: number
-	} | null>(null)
+	const defaultPunto = {
+		nombre: "",
+		valor: 0,
+		valorX: 0,
+		valorY: 0,
+		cumple: false,
+	}
+
+	const [actualPunto, setActualPunto] = useState<PuntosType>(defaultPunto)
 
 	useEffect(() => {
 		if (openValue && inputRef.current) {
@@ -365,29 +370,49 @@ function CroquisGridToPoint({
 		const x = e.clientX - rect.left
 		const y = e.clientY - rect.top
 
-		setPuntoPosition({ x, y })
-		setOpenValue(true)
+		setActualPunto(prev => {
+			return {
+				...prev,
+				nombre: `${x}-${y}`,
+				valorX: x,
+				valorY: y,
+			}
+		})
+		setOpenValue("new")
 	}
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleNewSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		const form = new FormData(e.currentTarget)
-		if (!puntoPosition) return
+		const value = Number(form.get("valor"))
+		if (!value || value === actualPunto?.valor) return
 
 		// Add punto to puntos array
-		const newPunto = {
-			nombre: `punto-${puntos === null ? 1 : puntos.length + 1}`,
-			valor: Number(form.get("valor")),
-			valorX: puntoPosition.x,
-			valorY: puntoPosition.y,
-			cumple: false,
+		const newPunto: PuntosType = {
+			...actualPunto,
+			valor: value,
 		}
+
 		if (!puntos) {
 			setPuntos([newPunto])
 		} else {
 			setPuntos([...puntos, newPunto])
 		}
-		setPuntoPosition(null)
+		setActualPunto(defaultPunto)
+		setOpenValue(false)
+	}
+
+	const handleEditSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		const form = new FormData(e.currentTarget)
+		const value = Number(form.get("valor"))
+		if (!value || value === actualPunto?.valor || !puntos) return
+
+		const newPuntos = [...puntos].map(punto =>
+			punto.nombre !== actualPunto?.nombre ? punto : { ...punto, valor: value }
+		)
+		setPuntos(newPuntos)
+		setActualPunto(defaultPunto)
 		setOpenValue(false)
 	}
 
@@ -398,7 +423,7 @@ function CroquisGridToPoint({
 			>
 				<div className="w-max h-max p-20 mx-auto relative">
 					<button
-						className="grid relative cursor-pointer"
+						className="grid relative"
 						ref={gridRef}
 						style={{
 							gridTemplateColumns: `repeat(${cantidadColumnas}, minmax(0, 1fr))`,
@@ -415,21 +440,29 @@ function CroquisGridToPoint({
 						{Array.from({ length: totalCeldas }).map((_, i) => {
 							return (
 								<div
-									key={Math.random()}
+									key={i}
 									className={`border border-gray-400 size-${celdasSize} ${celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
 								/>
 							)
 						})}
 						{puntos?.map((punto, index) => (
-							<Punto key={punto.nombre ?? index} punto={punto} index={index} />
+							<Punto
+								key={punto.valorX - punto.valorY}
+								punto={punto}
+								index={index}
+								onClick={() => {
+									setActualPunto(punto)
+									setOpenValue("edit")
+								}}
+							/>
 						))}
 					</button>
 				</div>
 			</div>
 
-			{openValue && (
+			{openValue === "new" && (
 				<form
-					onSubmit={handleSubmit}
+					onSubmit={handleNewSubmit}
 					className="card bg-background absolute top-[10%] left-[20%] w-[60%] h-max py-14 items-start flex-col gap-10"
 				>
 					<p className="border-t border-foreground/20 w-full text-end text-lg font-semibold tracking-widest">
@@ -447,7 +480,7 @@ function CroquisGridToPoint({
 							ref={inputRef}
 							name="valor"
 							type="number"
-							className="w-full text-6xl font-bold tracking-wildest p-4 card bg-foreground text-background text-center"
+							className="w-full sm:text-4xl 2xl:text-6xl font-bold tracking-wildest p-4 card bg-foreground text-background text-center"
 						/>
 					</div>
 					<div className="w-full flex items-center gap-4">
@@ -456,7 +489,7 @@ function CroquisGridToPoint({
 							className="flex-1 card bg-background py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer"
 							onClick={() => {
 								setOpenValue(false)
-								setPuntoPosition(null)
+								setActualPunto(defaultPunto)
 							}}
 						>
 							Cancelar
@@ -471,6 +504,50 @@ function CroquisGridToPoint({
 				</form>
 			)}
 
+			{openValue === "edit" && actualPunto && (
+				<form
+					onSubmit={handleEditSubmit}
+					className="card bg-background absolute top-[10%] left-[20%] w-[60%] h-max py-14 items-start flex-col gap-10"
+				>
+					<p className="border-t border-foreground/20 w-full text-end text-lg font-semibold tracking-widest">
+						punto-{puntos?.length + 1}
+					</p>
+
+					<div className="w-full relative">
+						<label
+							htmlFor=""
+							className="absolute -top-4 -left-2 text-xl tracking-widest bg-background text-foreground/70 px-6 rounded-lg font-bold"
+						>
+							VALOR
+						</label>
+						<input
+							ref={inputRef}
+							name="valor"
+							type="number"
+							defaultValue={actualPunto.valor}
+							className="w-full sm:text-4xl 2xl:text-6xl font-bold tracking-wildest p-4 card bg-foreground text-background text-center"
+						/>
+					</div>
+					<div className="w-full flex items-center gap-4">
+						<button
+							type="button"
+							className="flex-1 card bg-red-500/50 py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer"
+							onClick={() => {
+								setOpenValue(false)
+								setActualPunto(defaultPunto)
+							}}
+						>
+							Eliminar
+						</button>
+						<button
+							type="submit"
+							className="flex-1 card bg-accent py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer"
+						>
+							Editar
+						</button>
+					</div>
+				</form>
+			)}
 			<button
 				onClick={() => setOpen(false)}
 				className="cardBackground px-4 py-3 cursor-pointer w-1/2 mx-auto justify-center tracking-widest font-semibold gap-4 mt-10"
@@ -482,13 +559,25 @@ function CroquisGridToPoint({
 	)
 }
 
-const Punto = ({ punto, index }: { punto: PuntosType; index: number }) => {
+const Punto = ({
+	punto,
+	index,
+	onClick,
+}: {
+	punto: PuntosType
+	index: number
+	onClick?: (punto: PuntosType) => void
+}) => {
 	return (
-		<div
-			className="absolute"
+		<button
+			className="absolute punto cursor-pointer"
 			style={{
 				top: `${punto?.valorY ? punto.valorY - 14 : 0}px`,
 				left: `${punto?.valorX ? punto.valorX - 14 : 0}px`,
+			}}
+			onClick={e => {
+				e.stopPropagation() // 🔥 clave
+				onClick?.(punto)
 			}}
 		>
 			<div className="relative cardBackground size-10 rounded-full justify-center">
@@ -497,7 +586,7 @@ const Punto = ({ punto, index }: { punto: PuntosType; index: number }) => {
 					{index + 1}
 				</span>
 			</div>
-		</div>
+		</button>
 	)
 }
 

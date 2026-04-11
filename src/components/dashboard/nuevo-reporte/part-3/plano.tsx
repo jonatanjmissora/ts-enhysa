@@ -77,14 +77,14 @@ function CroquisGrid({
 			{Array.from({ length: totalCeldas }).map((_, i) => {
 				return (
 					<div
-						key={Math.random()}
+						key={i}
 						className={`border border-gray-400 size-20 ${celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
 					/>
 				)
 			})}
 			{puntos?.map((punto, index) => (
 				<Punto
-					key={punto.nombre ?? index}
+					key={punto.valorX - punto.valorY}
 					punto={punto}
 					index={index}
 					halfMedia={halfMedia}

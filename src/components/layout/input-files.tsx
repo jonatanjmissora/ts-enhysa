@@ -57,9 +57,9 @@ export const InputFiles = ({
 					multiple
 				>
 					<FileUploadList className="w-full flex flex-row flex-wrap">
-						{files.map(file => (
+						{files.map((file, index) => (
 							<FileUploadItem
-								key={Math.random()}
+								key={index}
 								value={file}
 								className="w-full p-0 m-0 mx-1"
 							>
@@ -113,9 +113,9 @@ export const InputFiles = ({
 				multiple
 			>
 				<FileUploadList className="w-full flex flex-row gap-0 flex-wrap">
-					{files.map(file => (
+					{files.map((file, index) => (
 						<FileUploadItem
-							key={Math.random()}
+							key={index}
 							value={file}
 							className="w-full p-0 m-0 mx-4 my-1"
 						>

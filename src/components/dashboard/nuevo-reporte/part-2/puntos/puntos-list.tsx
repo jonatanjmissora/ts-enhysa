@@ -49,13 +49,12 @@ export default function PuntosList({
 						<span></span>
 					</div>
 				) : (
-					puntos.map(punto => (
+					puntos.map((punto, index) => (
 						<Punto
 							key={punto?.nombre}
-							nombre={punto?.nombre || ""}
-							valor={punto?.valor || 0}
-							puntos={puntos}
+							punto={punto}
 							setPuntos={setPuntos}
+							index={index}
 						/>
 					))
 				)}
@@ -65,68 +64,59 @@ export default function PuntosList({
 }
 
 const Punto = ({
-	nombre,
-	valor,
-	puntos,
+	punto,
 	setPuntos,
+	index,
 }: {
-	nombre: string
-	valor: number
-	puntos: PuntosType[]
+	punto: PuntosType
 	setPuntos: (puntos: PuntosType[]) => void
+	index: number
 }) => {
-	const [inputValue, setInputValue] = useState(valor)
-
 	return (
 		<div className="w-full grid grid-cols-[1fr_1fr_0.5fr] gap-4 place-items-center">
 			<span className="rounded-lg bg-background py-1 w-full text-center">
-				{nombre}
+				punto-{index + 1}
 			</span>
 			<input
 				type="number"
-				className={`rounded-lg py-1 w-full text-center ${inputValue === 0 ? "bg-amber-400/25" : "bg-background"}`}
-				value={inputValue || ""}
+				className={`rounded-lg py-1 w-full text-center ${punto.valor === 0 ? "bg-amber-400/25" : "bg-background"}`}
+				value={punto.valor || ""}
 				placeholder="Ej. 1,23"
 				onChange={e => {
-					if (!puntos) return
-					setInputValue(Number(e.target.value))
-					const nuevosPuntos = puntos.map(punto => {
-						if (punto?.nombre === nombre) {
-							return {
-								...punto,
-								valor: Number(e.target.value),
-								cumple: Number(e.target.value) >= 1,
-							}
-						}
-						return punto
-					})
-					setPuntos(nuevosPuntos)
+					// if (!puntos) return
+					// setInputValue(Number(e.target.value))
+					// const nuevosPuntos = puntos.map(punto => {
+					// 	if (punto?.nombre === nombre) {
+					// 		return {
+					// 			...punto,
+					// 			valor: Number(e.target.value),
+					// 			cumple: Number(e.target.value) >= 1,
+					// 		}
+					// 	}
+					// 	return punto
+					// })
+					// setPuntos(nuevosPuntos)
 				}}
 			/>
-			<DeletePuntoAlertDialog
-				nombre={nombre}
-				puntos={puntos}
-				setPuntos={setPuntos}
-			/>
+			<DeletePuntoAlertDialog punto={punto} setPuntos={setPuntos} />
 		</div>
 	)
 }
 
 export function DeletePuntoAlertDialog({
-	nombre,
-	puntos,
+	punto,
 	setPuntos,
 }: {
-	nombre: string
-	puntos: PuntosType[]
+	punto: PuntosType
 	setPuntos: (puntos: PuntosType[]) => void
 }) {
 	const [open, setOpen] = useState(false)
 
 	const eliminarPunto = () => {
-		if (!puntos) return
-		const nuevosPuntos = puntos.filter(punto => punto?.nombre !== nombre)
-		setPuntos(nuevosPuntos)
+		if (!punto) return
+		setPuntos(prev => {
+			prev.filter(p => p.nombre !== punto.nombre)
+		})
 		setOpen(false)
 	}
 
@@ -140,7 +130,7 @@ export function DeletePuntoAlertDialog({
 			</AlertDialogTrigger>
 			<AlertDialogContent className="py-20 px-10 bg-red-900/10 backdrop-blur-xl">
 				<AlertDialogTitle className="text-center">
-					¿Estás seguro de que quieres eliminar {nombre} ?
+					¿Estás seguro de que quieres eliminar {punto.nombre} ?
 				</AlertDialogTitle>
 				<AlertDialogDescription className="text-center"></AlertDialogDescription>
 				<div className="flex justify-end gap-4">
