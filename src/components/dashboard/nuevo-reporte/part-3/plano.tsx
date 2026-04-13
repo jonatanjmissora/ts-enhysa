@@ -35,13 +35,15 @@ export default function NewReportPart3Plano({
 					{nombre || "Depósito"}
 				</p>
 			</div>
-			<div className="flex-1 flex items-center">
-				<CroquisGrid
-					cantidadFilas={cantidadFilas}
-					cantidadColumnas={cantidadColumnas}
-					celdasSeleccionadas={celdasSeleccionadas}
-					puntos={puntos}
-				/>
+			<div className="flex flex-col gap-4 sm:w-[440px] 2xl:w-[550px] relative scale-100">
+				<div className="min-h-[400px] h-max w-full overflow-auto bg-background shadow rounded-lg ring ring-foreground/5 py-10">
+					<CroquisGrid
+						cantidadFilas={cantidadFilas}
+						cantidadColumnas={cantidadColumnas}
+						celdasSeleccionadas={celdasSeleccionadas}
+						puntos={puntos}
+					/>
+				</div>
 			</div>
 		</div>
 	)
@@ -58,38 +60,39 @@ function CroquisGrid({
 	celdasSeleccionadas: number[]
 	puntos: PuntosType[]
 }) {
+	const celdasSize = 20
 	const totalCeldas = cantidadColumnas * cantidadFilas
 	const halfMedia = getHalfMedia(puntos)
 	return (
-		<div
-			className="grid relative"
-			style={{
-				gridTemplateColumns: `repeat(${cantidadColumnas}, minmax(0, 1fr))`,
-				gridTemplateRows: `repeat(${cantidadFilas}, minmax(0, 1fr))`,
-			}}
-		>
-			{totalCeldas !== 0 && (
+		<div className="w-max h-max p-20 m-auto ">
+			<div
+				className="grid relative"
+				style={{
+					gridTemplateColumns: `repeat(${cantidadColumnas}, minmax(0, 1fr))`,
+					gridTemplateRows: `repeat(${cantidadFilas}, minmax(0, 1fr))`,
+				}}
+			>
 				<Cotas
 					cantidadColumnas={cantidadColumnas}
 					cantidadFilas={cantidadFilas}
 				/>
-			)}
-			{Array.from({ length: totalCeldas }).map((_, i) => {
-				return (
-					<div
-						key={i}
-						className={`border border-gray-400 size-20 ${celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
+				{Array.from({ length: totalCeldas }).map((_, i) => {
+					return (
+						<div
+							key={i}
+							className={`border border-gray-400 size-${celdasSize} ${celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
+						/>
+					)
+				})}
+				{puntos?.map((punto, index) => (
+					<Punto
+						key={punto.valorX - punto.valorY}
+						punto={punto}
+						index={index}
+						halfMedia={halfMedia}
 					/>
-				)
-			})}
-			{puntos?.map((punto, index) => (
-				<Punto
-					key={punto.valorX - punto.valorY}
-					punto={punto}
-					index={index}
-					halfMedia={halfMedia}
-				/>
-			))}
+				))}
+			</div>
 		</div>
 	)
 }
@@ -127,11 +130,11 @@ const Punto = ({
 				</TooltipTrigger>
 				<TooltipContent>
 					<div
-						className={`flex flex-col gap-1 ${
+						className={`flex flex-col gap-1 text-base ${
 							punto?.valor >= halfMedia ? "text-green-600" : "text-red-600"
 						}`}
 					>
-						<p>nombre: {punto?.nombre}</p>
+						<p>punto-{index + 1}</p>
 						<p>valor: {punto?.valor}</p>
 					</div>
 				</TooltipContent>

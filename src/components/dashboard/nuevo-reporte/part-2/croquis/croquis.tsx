@@ -5,16 +5,10 @@ import {
 	AlertDialogContent,
 	AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
-import {
-	Lightbulb,
-	MousePointer,
-	Paintbrush,
-	RulerDimensionLine,
-	ThumbsUp,
-	Trash2,
-} from "lucide-react"
-import { toast } from "sonner"
-import { getMinimoMedicionesFrom } from "@/lib/utils"
+import { Expand, RulerDimensionLine, ThumbsUp } from "lucide-react"
+import CroquisGrid from "./croquis-grid"
+import PuntosList from "./puntos-list"
+import { DeletePuntoAlertDialog } from "./delete-punto-alert"
 
 export type PuntosType = {
 	nombre: string
@@ -65,25 +59,24 @@ export default function CroquisComponent({
 					{nombre || "Depósito"}
 				</p>
 			</div>
-			<div className="flex flex-col gap-4 sm:w-[440px] 2xl:w-[600px]">
-				<div className="min-h-[400px] h-max w-full overflow-auto bg-background shadow rounded-lg ring ring-foreground/5 py-10  relative">
-					<CroquisGrid
+			<div className="flex flex-col gap-4 sm:w-[440px] 2xl:w-[500px] relative scale-100">
+				<div className="min-h-[400px] h-max w-full overflow-auto bg-background shadow rounded-lg ring ring-foreground/5 py-10">
+					<div className="absolute top-4 left-4">
+						<AlertPointsCroquis
+							cantidadFilas={cantidadFilas}
+							cantidadColumnas={cantidadColumnas}
+							cantidadMedicionesMinimas={celdasSeleccionadas.length}
+							celdasSeleccionadas={celdasSeleccionadas}
+							puntos={puntos}
+							setPuntos={setPuntos}
+							actualPunto={actualPunto}
+							setActualPunto={setActualPunto}
+						/>
+					</div>
+					<Croquis
 						cantidadFilas={cantidadFilas}
 						cantidadColumnas={cantidadColumnas}
 						celdasSeleccionadas={celdasSeleccionadas}
-						puntos={puntos}
-						setActualPunto={setActualPunto}
-						setOpenValue={setOpenValue}
-					/>
-					<NewPuntoForm
-						puntos={puntos}
-						setPuntos={setPuntos}
-						actualPunto={actualPunto}
-						setActualPunto={setActualPunto}
-						openValue={openValue}
-						setOpenValue={setOpenValue}
-					/>
-					<EditPuntoForm
 						puntos={puntos}
 						setPuntos={setPuntos}
 						actualPunto={actualPunto}
@@ -93,84 +86,64 @@ export default function CroquisComponent({
 					/>
 				</div>
 			</div>
+			<PuntosList puntos={puntos} setPuntos={setPuntos} />
 		</article>
 	)
 }
 
-function CroquisGrid({
+function Croquis({
 	cantidadFilas,
 	cantidadColumnas,
 	celdasSeleccionadas,
 	puntos,
+	setPuntos,
+	actualPunto,
 	setActualPunto,
+	openValue,
 	setOpenValue,
 }: {
 	cantidadFilas: number
 	cantidadColumnas: number
 	celdasSeleccionadas: number[]
 	puntos: PuntosType[]
-	setActualPunto: (punto: PuntosType) => void
+	setPuntos: (puntos: PuntosType[]) => void
+	actualPunto: PuntosType
+	setActualPunto: (puntos: PuntosType) => void
+	openValue: "new" | "edit" | false
 	setOpenValue: (value: "new" | "edit" | false) => void
 }) {
-	const gridRef = useRef<HTMLButtonElement>(null)
-	const totalCeldas = cantidadFilas * cantidadColumnas
-	const celdasSize = 20
-
-	const setXYPoint = (e: React.MouseEvent<HTMLButtonElement>) => {
-		if (!gridRef.current) return
-		const rect = gridRef.current.getBoundingClientRect()
-		const x = e.clientX - rect.left
-		const y = e.clientY - rect.top
-
-		setActualPunto(prev => {
-			return {
-				...prev,
-				nombre: `${x}-${y}`,
-				valorX: x,
-				valorY: y,
-			}
-		})
-		setOpenValue("new")
-	}
-
 	return (
-		<div className="w-max h-max p-20 m-auto ">
-			<button
-				className="grid relative"
-				ref={gridRef}
-				style={{
-					gridTemplateColumns: `repeat(${cantidadColumnas}, minmax(0, 1fr))`,
-					gridTemplateRows: `repeat(${cantidadFilas}, minmax(0, 1fr))`,
-				}}
-				onClick={e => {
-					setXYPoint(e)
-				}}
-			>
-				<Cotas
-					cantidadColumnas={cantidadColumnas}
+		<>
+			<p className="absolute top-4 right-4 text-sm text-amber-500/50">
+				Click en croquis para agregar puntos
+			</p>
+			<div className={`${openValue ? "blur-lg" : ""}`}>
+				<CroquisGrid
 					cantidadFilas={cantidadFilas}
+					cantidadColumnas={cantidadColumnas}
+					celdasSeleccionadas={celdasSeleccionadas}
+					puntos={puntos}
+					setActualPunto={setActualPunto}
+					setOpenValue={setOpenValue}
 				/>
-				{Array.from({ length: totalCeldas }).map((_, i) => {
-					return (
-						<div
-							key={i}
-							className={`border border-gray-400 size-${celdasSize} ${celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
-						/>
-					)
-				})}
-				{puntos?.map((punto, index) => (
-					<Punto
-						key={punto.valorX - punto.valorY}
-						punto={punto}
-						index={index}
-						onClick={() => {
-							setActualPunto(punto)
-							setOpenValue("edit")
-						}}
-					/>
-				))}
-			</button>
-		</div>
+			</div>
+			<NewPuntoForm
+				puntos={puntos}
+				setPuntos={setPuntos}
+				actualPunto={actualPunto}
+				setActualPunto={setActualPunto}
+				openValue={openValue}
+				setOpenValue={setOpenValue}
+			/>
+			<EditPuntoForm
+				puntos={puntos}
+				setPuntos={setPuntos}
+				actualPunto={actualPunto}
+				setActualPunto={setActualPunto}
+				openValue={openValue}
+				setOpenValue={setOpenValue}
+			/>
+		</>
 	)
 }
 
@@ -213,6 +186,10 @@ function NewPuntoForm({
 
 	useEffect(() => {
 		if (openValue && inputRef.current) {
+			window.scrollTo({
+				top: 0,
+				behavior: "smooth", // Use 'auto' for an instant jump
+			})
 			inputRef.current.focus()
 		}
 	}, [openValue])
@@ -222,16 +199,16 @@ function NewPuntoForm({
 			{openValue === "new" && (
 				<form
 					onSubmit={handleNewSubmit}
-					className="card bg-background absolute inset-0 py-14 items-center justify-center flex-col gap-10"
+					className="card bg-background fixed z-10 max-h-[400px] inset-0 py-14 items-center justify-center flex-col gap-10"
 				>
 					<p className="border-t border-foreground/20 w-full text-end text-lg font-semibold tracking-widest">
 						punto-{puntos?.length + 1}
 					</p>
 
-					<div className="w-full relative">
+					<div className="w-2/3 mx-auto relative">
 						<label
 							htmlFor=""
-							className="absolute -top-4 -left-2 text-xl tracking-widest bg-background text-foreground/70 px-6 rounded-lg font-bold"
+							className="absolute -top-4 -left-2 text-lg tracking-widest bg-background text-foreground/70 px-6 rounded-lg font-bold"
 						>
 							VALOR
 						</label>
@@ -298,17 +275,12 @@ function EditPuntoForm({
 		setOpenValue(false)
 	}
 
-	const handleDeletePunto = () => {
-		const newPuntos = [...puntos].filter(
-			punto => punto.nombre !== actualPunto.nombre
-		)
-		setPuntos(newPuntos)
-		toast.success("Punto eliminado correctamente")
-		setOpenValue(false)
-	}
-
 	useEffect(() => {
 		if (openValue && inputRef.current) {
+			window.scrollTo({
+				top: 0,
+				behavior: "smooth", // Use 'auto' for an instant jump
+			})
 			inputRef.current.focus()
 		}
 	}, [openValue])
@@ -318,21 +290,24 @@ function EditPuntoForm({
 			{openValue === "edit" && actualPunto && (
 				<form
 					onSubmit={handleEditSubmit}
-					className="card bg-background absolute inset-0 py-14 items-center justify-center flex-col gap-10"
+					className="card bg-background fixed z-10 inset-0 max-h-[400px] py-14 items-center justify-center flex-col gap-10"
 				>
 					<div className="w-full flex flex-col items-end gap-1">
-						<button type="button" onClick={handleDeletePunto}>
-							<Trash2 className="size-10 text-red-500/40 cursor-pointer" />
-						</button>
+						<DeletePuntoAlertDialog
+							punto={actualPunto}
+							puntos={puntos}
+							setPuntos={setPuntos}
+							setOpenValue={setOpenValue}
+						/>
 						<p className="border-t border-foreground/20 w-full text-end text-lg font-semibold tracking-widest">
 							punto-{puntos?.length + 1}
 						</p>
 					</div>
 
-					<div className="w-full relative">
+					<div className="w-2/3 mx-auto relative">
 						<label
 							htmlFor=""
-							className="absolute -top-4 -left-2 text-xl tracking-widest bg-background text-foreground/70 px-6 rounded-lg font-bold"
+							className="absolute -top-4 -left-2 text-lg tracking-widest bg-background text-foreground/70 px-6 rounded-lg font-bold"
 						>
 							VALOR
 						</label>
@@ -368,132 +343,15 @@ function EditPuntoForm({
 	)
 }
 
-function AlertPaintCroquis({
-	cantidadFilas,
-	cantidadColumnas,
-	celdasSeleccionadas,
-	setCeldasSeleccionadas,
-}: {
-	cantidadFilas: number
-	cantidadColumnas: number
-	celdasSeleccionadas: number[]
-	setCeldasSeleccionadas: (value: number[]) => void
-}) {
-	const [open, setOpen] = useState(false)
-
-	return (
-		<AlertDialog open={open} onOpenChange={setOpen}>
-			<AlertDialogTrigger asChild>
-				<button className="cardBackground w-full py-3  sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75 text-center">
-					{celdasSeleccionadas.length === 0 ? (
-						<span className="flex items-center gap-2 w-full justify-center">
-							Dibujar Croquis <Paintbrush size={16} />
-						</span>
-					) : (
-						<span className="flex items-center gap-2 w-full justify-center">
-							Modificar Croquis <Paintbrush size={16} />
-						</span>
-					)}
-				</button>
-			</AlertDialogTrigger>
-			<AlertDialogContent className="p-30 px-40">
-				<AlertDialogTitle></AlertDialogTitle>
-				<CroquisGridToPaint
-					cantidadFilas={cantidadFilas}
-					cantidadColumnas={cantidadColumnas}
-					celdasSeleccionadas={celdasSeleccionadas}
-					setCeldasSeleccionadas={setCeldasSeleccionadas}
-					setOpen={setOpen}
-				/>
-			</AlertDialogContent>
-		</AlertDialog>
-	)
-}
-
-function CroquisGridToPaint({
-	cantidadFilas,
-	cantidadColumnas,
-	celdasSeleccionadas,
-	setCeldasSeleccionadas,
-	setOpen,
-}: {
-	cantidadFilas: number
-	cantidadColumnas: number
-	celdasSeleccionadas: number[]
-	setCeldasSeleccionadas: (value: number[]) => void
-	setOpen: (value: boolean) => void
-}) {
-	const totalCeldas = cantidadColumnas * cantidadFilas
-	const [isMouseDown, setIsMouseDown] = useState(false)
-	const agregarCelda = (index: number) => {
-		if (celdasSeleccionadas.includes(index)) {
-			setCeldasSeleccionadas(
-				celdasSeleccionadas.filter(celda => celda !== index)
-			)
-		} else {
-			setCeldasSeleccionadas([...celdasSeleccionadas, index])
-		}
-	}
-	useEffect(() => {
-		const handleMouseUp = () => setIsMouseDown(false)
-
-		window.addEventListener("mouseup", handleMouseUp)
-		return () => window.removeEventListener("mouseup", handleMouseUp)
-	}, [])
-
-	return (
-		<>
-			<div className="max-h-[500px] h-max sm:w-[600px] 2xl:w-[800px] overflow-auto bg-accent shadow rounded-lg ring ring-foreground/10">
-				<div className="w-max h-max p-20 mx-auto">
-					<div
-						className="grid relative"
-						style={{
-							gridTemplateColumns: `repeat(${cantidadColumnas}, minmax(0, 1fr))`,
-							gridTemplateRows: `repeat(${cantidadFilas}, minmax(0, 1fr))`,
-						}}
-					>
-						<Cotas
-							cantidadColumnas={cantidadColumnas}
-							cantidadFilas={cantidadFilas}
-						/>
-						{Array.from({ length: totalCeldas }).map((_, index) => {
-							return (
-								<button
-									key={index}
-									onMouseDown={() => {
-										setIsMouseDown(true)
-										agregarCelda(index)
-									}}
-									onMouseEnter={() => {
-										if (isMouseDown) {
-											agregarCelda(index)
-										}
-									}}
-									className={`border border-gray-400 size-20 cursor-pointer ${celdasSeleccionadas.includes(index) ? "bg-blue-500" : ""}`}
-								/>
-							)
-						})}
-					</div>
-				</div>
-			</div>
-			<button
-				onClick={() => setOpen(false)}
-				className="cardBackground px-4 py-3 cursor-pointer w-1/2 mx-auto justify-center tracking-widest font-semibold gap-4 mt-10"
-			>
-				Listo
-				<ThumbsUp size={16} />
-			</button>
-		</>
-	)
-}
-
-function AlertPointsCroquis({
+export function AlertPointsCroquis({
 	cantidadFilas,
 	cantidadColumnas,
 	celdasSeleccionadas,
 	cantidadMedicionesMinimas,
 	puntos,
 	setPuntos,
+	actualPunto,
+	setActualPunto,
 }: {
 	cantidadFilas: number
 	cantidadColumnas: number
@@ -501,15 +359,15 @@ function AlertPointsCroquis({
 	celdasSeleccionadas: number[]
 	puntos: PuntosType[]
 	setPuntos: (puntos: PuntosType[]) => void
+	actualPunto: PuntosType
+	setActualPunto: (punto: PuntosType) => void
 }) {
 	const [open, setOpen] = useState(false)
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild>
-				<button className="cardBackground w-full py-3  sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75 text-center">
-					<span className="flex items-center gap-2 w-full justify-center">
-						Colocar Puntos <MousePointer size={16} />
-					</span>
+				<button className="cursor-pointer hover:bg-background/75">
+					<Expand className="size-6" />
 				</button>
 			</AlertDialogTrigger>
 			<AlertDialogContent className="p-30 px-40">
@@ -522,6 +380,8 @@ function AlertPointsCroquis({
 					setOpen={setOpen}
 					puntos={puntos}
 					setPuntos={setPuntos}
+					actualPunto={actualPunto}
+					setActualPunto={setActualPunto}
 				/>
 			</AlertDialogContent>
 		</AlertDialog>
@@ -535,6 +395,8 @@ function CroquisGridToPoint({
 	setOpen,
 	puntos,
 	setPuntos,
+	actualPunto,
+	setActualPunto,
 }: {
 	cantidadFilas: number
 	cantidadColumnas: number
@@ -543,270 +405,37 @@ function CroquisGridToPoint({
 	setOpen: (value: boolean) => void
 	puntos: PuntosType[]
 	setPuntos: (puntos: PuntosType[]) => void
+	actualPunto: PuntosType
+	setActualPunto: (punto: PuntosType) => void
 }) {
-	const gridRef = useRef<HTMLButtonElement>(null)
-	const inputRef = useRef<HTMLInputElement>(null)
 	const [openValue, setOpenValue] = useState<"new" | "edit" | false>(false)
-	const totalCeldas = cantidadFilas * cantidadColumnas
-	const celdasSize = 20
-
-	const defaultPunto = {
-		nombre: "",
-		valor: 0,
-		valorX: 0,
-		valorY: 0,
-		cumple: false,
-	}
-
-	const [actualPunto, setActualPunto] = useState<PuntosType>(defaultPunto)
-
-	useEffect(() => {
-		if (openValue && inputRef.current) {
-			inputRef.current.focus()
-		}
-	}, [openValue])
-
-	const setXYPoint = (e: React.MouseEvent<HTMLButtonElement>) => {
-		if (!gridRef.current) return
-		const rect = gridRef.current.getBoundingClientRect()
-		const x = e.clientX - rect.left
-		const y = e.clientY - rect.top
-
-		setActualPunto(prev => {
-			return {
-				...prev,
-				nombre: `${x}-${y}`,
-				valorX: x,
-				valorY: y,
-			}
-		})
-		setOpenValue("new")
-	}
-
-	const handleNewSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
-		const form = new FormData(e.currentTarget)
-		const value = Number(form.get("valor"))
-		if (!value || value === actualPunto?.valor) return
-
-		// Add punto to puntos array
-		const newPunto: PuntosType = {
-			...actualPunto,
-			valor: value,
-		}
-
-		if (!puntos) {
-			setPuntos([newPunto])
-		} else {
-			setPuntos([...puntos, newPunto])
-		}
-		setActualPunto(defaultPunto)
-		setOpenValue(false)
-	}
-
-	const handleEditSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
-		const form = new FormData(e.currentTarget)
-		const value = Number(form.get("valor"))
-		if (!value || value === actualPunto?.valor || !puntos) return
-
-		const newPuntos = [...puntos].map(punto =>
-			punto.nombre !== actualPunto?.nombre ? punto : { ...punto, valor: value }
-		)
-		setPuntos(newPuntos)
-		setActualPunto(defaultPunto)
-		setOpenValue(false)
-	}
 
 	return (
-		<div className="relative">
+		<div className="flex flex-col justify-center items-center">
 			<div
-				className={`max-h-[500px] h-max sm:w-[600px] 2xl:w-[800px] overflow-auto bg-accent shadow rounded-lg ring ring-foreground/10 ${openValue ? "pointer-events-none blur" : ""}`}
+				className={`max-h-[500px] h-max sm:w-[600px] 2xl:w-[800px] overflow-auto bg-accent shadow rounded-lg ring ring-foreground/10 relative scale-100`}
 			>
-				<div className="w-max h-max p-20 mx-auto relative">
-					<button
-						className="grid relative"
-						ref={gridRef}
-						style={{
-							gridTemplateColumns: `repeat(${cantidadColumnas}, minmax(0, 1fr))`,
-							gridTemplateRows: `repeat(${cantidadFilas}, minmax(0, 1fr))`,
-						}}
-						onClick={e => {
-							setXYPoint(e)
-						}}
-					>
-						<Cotas
-							cantidadColumnas={cantidadColumnas}
-							cantidadFilas={cantidadFilas}
-						/>
-						{Array.from({ length: totalCeldas }).map((_, i) => {
-							return (
-								<div
-									key={i}
-									className={`border border-gray-400 size-${celdasSize} ${celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
-								/>
-							)
-						})}
-						{puntos?.map((punto, index) => (
-							<Punto
-								key={punto.valorX - punto.valorY}
-								punto={punto}
-								index={index}
-								onClick={() => {
-									setActualPunto(punto)
-									setOpenValue("edit")
-								}}
-							/>
-						))}
-					</button>
+				<div className="w-max h-max p-20 mx-auto">
+					<Croquis
+						cantidadFilas={cantidadFilas}
+						cantidadColumnas={cantidadColumnas}
+						celdasSeleccionadas={celdasSeleccionadas}
+						puntos={puntos}
+						setPuntos={setPuntos}
+						actualPunto={actualPunto}
+						setActualPunto={setActualPunto}
+						openValue={openValue}
+						setOpenValue={setOpenValue}
+					/>
 				</div>
 			</div>
-
-			{openValue === "new" && (
-				<form
-					onSubmit={handleNewSubmit}
-					className="card bg-background absolute top-[10%] left-[20%] w-[60%] h-max py-14 items-start flex-col gap-10"
-				>
-					<p className="border-t border-foreground/20 w-full text-end text-lg font-semibold tracking-widest">
-						punto-{puntos?.length + 1}
-					</p>
-
-					<div className="w-full relative">
-						<label
-							htmlFor=""
-							className="absolute -top-4 -left-2 text-xl tracking-widest bg-background text-foreground/70 px-6 rounded-lg font-bold"
-						>
-							VALOR
-						</label>
-						<input
-							ref={inputRef}
-							name="valor"
-							type="number"
-							className="w-full sm:text-4xl 2xl:text-6xl font-bold tracking-wildest p-4 card bg-foreground text-background text-center"
-						/>
-					</div>
-					<div className="w-full flex items-center gap-4">
-						<button
-							type="button"
-							className="flex-1 card bg-background py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer"
-							onClick={() => {
-								setOpenValue(false)
-								setActualPunto(defaultPunto)
-							}}
-						>
-							Cancelar
-						</button>
-						<button
-							type="submit"
-							className="flex-1 card bg-accent py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer"
-						>
-							Guardar
-						</button>
-					</div>
-				</form>
-			)}
-
-			{openValue === "edit" && actualPunto && (
-				<form
-					onSubmit={handleEditSubmit}
-					className="card bg-background absolute top-[10%] left-[20%] w-[60%] h-max py-14 items-start flex-col gap-10"
-				>
-					<p className="border-t border-foreground/20 w-full text-end text-lg font-semibold tracking-widest">
-						punto-{puntos?.length + 1}
-					</p>
-
-					<div className="w-full relative">
-						<label
-							htmlFor=""
-							className="absolute -top-4 -left-2 text-xl tracking-widest bg-background text-foreground/70 px-6 rounded-lg font-bold"
-						>
-							VALOR
-						</label>
-						<input
-							ref={inputRef}
-							name="valor"
-							type="number"
-							defaultValue={actualPunto.valor}
-							className="w-full sm:text-4xl 2xl:text-6xl font-bold tracking-wildest p-4 card bg-foreground text-background text-center"
-						/>
-					</div>
-					<div className="w-full flex items-center gap-4">
-						<button
-							type="button"
-							className="flex-1 card bg-red-500/50 py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer"
-							onClick={() => {
-								setOpenValue(false)
-								setActualPunto(defaultPunto)
-							}}
-						>
-							Eliminar
-						</button>
-						<button
-							type="submit"
-							className="flex-1 card bg-accent py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer"
-						>
-							Editar
-						</button>
-					</div>
-				</form>
-			)}
 			<button
 				onClick={() => setOpen(false)}
 				className="cardBackground px-4 py-3 cursor-pointer w-1/2 mx-auto justify-center tracking-widest font-semibold gap-4 mt-10"
 			>
-				Volver
+				Listo
 				<ThumbsUp size={16} />
 			</button>
 		</div>
-	)
-}
-
-const Punto = ({
-	punto,
-	index,
-	onClick,
-}: {
-	punto: PuntosType
-	index: number
-	onClick?: (punto: PuntosType) => void
-}) => {
-	return (
-		<button
-			className="absolute punto cursor-pointer"
-			style={{
-				top: `${punto?.valorY ? punto.valorY - 14 : 0}px`,
-				left: `${punto?.valorX ? punto.valorX - 14 : 0}px`,
-			}}
-			onClick={e => {
-				e.stopPropagation() // 🔥 clave
-				onClick?.(punto)
-			}}
-		>
-			<div className="relative cardBackground size-10 rounded-full justify-center">
-				<Lightbulb className="size-6 absolute top-1 left-1 text-amber-400 rotate-180" />
-				<span className="absolute bottom-1 w-4 right-1 text-sm text-amber-400 flex items-center justify-center">
-					{index + 1}
-				</span>
-			</div>
-		</button>
-	)
-}
-
-function Cotas({
-	cantidadColumnas,
-	cantidadFilas,
-}: {
-	cantidadColumnas: number
-	cantidadFilas: number
-}) {
-	return (
-		<>
-			<span className="absolute -top-14 left-0 right-0 border-b-[1.5px] border-foreground/30 flex justify-center py-1 text-semibold tracking-widest italic text-foreground/50">
-				Ancho {cantidadColumnas}m
-			</span>
-			<div className="absolute top-0 bottom-0 -left-18 border-r-[1.5px] border-foreground/30 flex flex-col justify-center items-center px-1 text-semibold tracking-widest italic text-foreground/50">
-				Largo <span>{cantidadFilas}m</span>
-			</div>
-		</>
 	)
 }

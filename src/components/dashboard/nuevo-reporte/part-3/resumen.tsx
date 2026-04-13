@@ -50,7 +50,7 @@ export default function NewReportResumen({
 								</span>
 							</div>
 							<span className="text-sm text-foreground/50">
-								Requerido {halfMedia.toFixed(2)}
+								Requerido {halfMedia.toFixed(0)}
 							</span>
 						</div>
 						{punto?.valor >= halfMedia ? (

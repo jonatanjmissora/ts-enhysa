@@ -4,7 +4,6 @@ import type { PuntosType } from "@/routes/_protected/new-report"
 import { toast } from "sonner"
 import InformacionMedicion from "./informacion/Informacion-medicion"
 import CroquisComponent from "./croquis/croquis"
-import PuntosList from "./puntos/puntos-list"
 import Area from "./area/area"
 
 export default function NewReportPart2({
@@ -82,8 +81,6 @@ export default function NewReportPart2({
 
 	const step1 = celdasSeleccionadas.length > 0
 
-	const step2 = puntos.length > 0
-
 	return (
 		<main
 			className={`${actualStep === 2 ? "flex-1" : "hidden"} p-20 sm:py-10 2xl:py-20 flex flex-col sm:gap-6 2xl:gap-10 justify-center`}
@@ -152,15 +149,10 @@ export default function NewReportPart2({
 						nombre={nombre}
 						cantidadFilas={cantidadFilas}
 						cantidadColumnas={cantidadColumnas}
-						cantidadAltura={cantidadAltura}
 						celdasSeleccionadas={celdasSeleccionadas}
-						setCeldasSeleccionadas={setCeldasSeleccionadas}
 						puntos={puntos}
 						setPuntos={setPuntos}
 					/>
-					<div className={`flex-1 flex ${!step2 && "opacity-50 blur-[2px]"}`}>
-						<PuntosList nombre={nombre} puntos={puntos} setPuntos={setPuntos} />
-					</div>
 				</div>
 			</div>
 			<button

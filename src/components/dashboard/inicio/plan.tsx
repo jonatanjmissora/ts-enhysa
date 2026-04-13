@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router"
 import { CheckCircle, Shield } from "lucide-react"
 
 export default function InicioPlan() {
@@ -31,9 +32,12 @@ export default function InicioPlan() {
 					<p className="sm:text-sm 2xl:text-base">Soporte prioritario</p>
 				</div>
 			</div>
-			<button className="rounded-xl text-foreground sm:text-lg 2xl:text-2xl w-full sm:py-2 2xl:py-3 tracking-widest shadow-xl themeBtnBackground cursor-pointer">
+			<Link
+				to="/pricing"
+				className="rounded-xl text-foreground sm:text-lg 2xl:text-2xl w-full sm:py-2 2xl:py-3 tracking-widest shadow-xl themeBtnBackground cursor-pointer text-center"
+			>
 				Gestionar Plan
-			</button>
+			</Link>
 
 			<Shield
 				className="absolute top-10 right-10 sm:size-34 2xl:size-44 text-yellow-100"

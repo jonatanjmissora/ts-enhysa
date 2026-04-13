@@ -37,14 +37,11 @@ polar
 
 +- en croquis
 
-boton de editar croquis en el croquis
-
-botom de pantalla completa para ver croquis
-
-puntos list agregados al pie del croquis
-
+debounce en el input de area
 
 mover puntos en el croquis
+
+agregar distintas areas de medicion
 
 mis informes: filtros por fecha, empresa, pendientes
 
