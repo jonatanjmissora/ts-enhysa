@@ -79,8 +79,8 @@ export default function NewReportPart2({
 		tipoFuente !== "" &&
 		iluminacion !== "" &&
 		valorRequerido !== ""
-	const step1 =
-		cantidadAltura !== 0 && cantidadColumnas !== 0 && cantidadFilas !== 0
+
+	const step1 = celdasSeleccionadas.length > 0
 
 	const step2 = puntos.length > 0
 
@@ -132,6 +132,7 @@ export default function NewReportPart2({
 							setCantidadFilas={setCantidadFilas}
 							setCantidadColumnas={setCantidadColumnas}
 							setCantidadAltura={setCantidadAltura}
+							celdasSeleccionadas={celdasSeleccionadas}
 							setCeldasSeleccionadas={setCeldasSeleccionadas}
 							setPuntos={setPuntos}
 						/>

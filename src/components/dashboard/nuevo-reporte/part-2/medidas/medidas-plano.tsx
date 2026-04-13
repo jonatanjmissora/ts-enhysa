@@ -1,21 +1,14 @@
-import { Box, Equal, EqualApproximately, Info, X } from "lucide-react"
-import {
-	AlertDialog,
-	AlertDialogTrigger,
-	AlertDialogContent,
-	AlertDialogTitle,
-	AlertDialogDescription,
-} from "@/components/ui/alert-dialog"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
+import { Box, Equal, EqualApproximately } from "lucide-react"
 import { getIndiceDeLocal, getIndiceRedondeo } from "@/lib/utils"
 import { PuntosType } from "@/routes/_protected/new-report"
+import { AlertPaintCroquis } from "./paint-croquis"
 
 export default function MedidasPlano({
 	nombre,
 	cantidadFilas,
 	cantidadColumnas,
 	cantidadAltura,
+	celdasSeleccionadas,
 	setCantidadFilas,
 	setCantidadColumnas,
 	setCantidadAltura,
@@ -26,6 +19,7 @@ export default function MedidasPlano({
 	cantidadFilas: number
 	cantidadColumnas: number
 	cantidadAltura: number
+	celdasSeleccionadas: number[]
 	setCantidadFilas: (value: number) => void
 	setCantidadColumnas: (value: number) => void
 	setCantidadAltura: (value: number) => void
@@ -34,14 +28,6 @@ export default function MedidasPlano({
 }) {
 	const hayValores =
 		cantidadFilas !== 0 && cantidadColumnas !== 0 && cantidadAltura !== 0
-
-	const indiceDeLocal = getIndiceDeLocal(
-		cantidadFilas,
-		cantidadColumnas,
-		cantidadAltura
-	)
-
-	const indiceRedondeo = getIndiceRedondeo(indiceDeLocal)
 
 	return (
 		<div className="card bg-accent flex-col gap-6">
@@ -112,117 +98,79 @@ export default function MedidasPlano({
 			</div>
 
 			{hayValores && (
-				<div className="flex flex-col gap-4 w-full p-6 rounded-lg cardBackground bg-background/75 items-start relative">
-					<div className="flex flex-col gap-2 justify-center items-center w-full">
-						<span className="w-full italic font-semibold text-foreground/50 tracking-widest border-b border-foreground/10">
-							Indice del local{" "}
-						</span>
-						<div className="flex justify-end items-center gap-3">
-							<div className="flex flex-col">
-								<span className="p-1 border-b border-foreground/50 w-full text-center px-10">
-									{cantidadFilas} * {cantidadColumnas}
-								</span>
-								<span className="p-1 text-center">
-									{cantidadAltura} * ( {cantidadFilas} + {cantidadColumnas} )
-								</span>
-							</div>
-							<Equal size={16} />
-							<span className="italic font-semibold text-lg tracking-widest">
-								{indiceDeLocal.toFixed(2)}
-							</span>
-							<EqualApproximately size={16} />
-							<span className="text-2xl bg-teal-500/50 px-4 py-1 rounded-lg">
-								{indiceRedondeo}
-							</span>
-						</div>
-					</div>
+				<AlertPaintCroquis
+					cantidadFilas={cantidadFilas}
+					cantidadColumnas={cantidadColumnas}
+					celdasSeleccionadas={celdasSeleccionadas}
+					setCeldasSeleccionadas={setCeldasSeleccionadas}
+				/>
+			)}
 
-					<div className="w-full flex gap-2 items-center justify-center">
-						<span className="text-2xl bg-pink-500/50 px-4 py-1 rounded-lg">
-							{indiceRedondeo >= 4 ? "36" : (indiceRedondeo + 2) ** 2}
-						</span>
-						<span className="italic tracking-wilder text-foreground/50">
-							Mínimo número de mediciones
-						</span>
-					</div>
-					<span className="tracking-widest italic font semibold text-foreground/50 border-t border-foreground/10 p1-2 w-full text-right sm:text-xs 2xl:text-sm">
-						Res. 84/2012 S.R.T.
-					</span>
-				</div>
+			{celdasSeleccionadas.length > 0 && (
+				<Formula
+					cantidadFilas={cantidadFilas}
+					cantidadColumnas={cantidadColumnas}
+					cantidadAltura={cantidadAltura}
+				/>
 			)}
 		</div>
 	)
 }
 
-export function FormulaAlertDialog({
+const Formula = ({
 	cantidadFilas,
 	cantidadColumnas,
 	cantidadAltura,
-	indiceDeLocal,
-	indiceRedondeo,
-	minimoNumeroCeldas,
 }: {
 	cantidadFilas: number
 	cantidadColumnas: number
 	cantidadAltura: number
-	indiceDeLocal: number
-	indiceRedondeo: number
-	minimoNumeroCeldas: string
-}) {
-	const [open, setOpen] = useState(false)
+}) => {
+	const indiceDeLocal = getIndiceDeLocal(
+		cantidadFilas,
+		cantidadColumnas,
+		cantidadAltura
+	)
+
+	const indiceRedondeo = getIndiceRedondeo(indiceDeLocal)
 
 	return (
-		<AlertDialog open={open} onOpenChange={setOpen}>
-			<AlertDialogTrigger asChild className="hover:bg-accent/50 rounded-full">
-				<Info
-					size={14}
-					className="absolute top-3 right-3 cursor-pointer text-foreground/50"
-				/>
-			</AlertDialogTrigger>
-			<AlertDialogContent className="p-20 bg-background/50 backdrop-blur-xl">
-				<Button
-					className="cursor-pointer absolute top-4 right-4"
-					variant="ghost"
-					onClick={() => setOpen(false)}
-				>
-					<X className="size-8" />
-				</Button>
-				<AlertDialogTitle className="text-center flex flex-col gap-6">
-					<div className="flex gap-2 justify-center items-center">
-						<span className="italic font-semibold text-lg tracking-widest">
-							Indice del local ={" "}
+		<div className="flex flex-col gap-4 w-full p-6 rounded-lg cardBackground bg-background/75 items-start relative">
+			<div className="flex flex-col gap-2 justify-center items-center w-full">
+				<span className="w-full italic font-semibold text-foreground/50 tracking-widest border-b border-foreground/10">
+					Indice del local{" "}
+				</span>
+				<div className="flex justify-end items-center gap-3">
+					<div className="flex flex-col">
+						<span className="p-1 border-b border-foreground/50 w-full text-center px-10">
+							{cantidadFilas} * {cantidadColumnas}
 						</span>
-						<div className="flex flex-col">
-							<span className="p-2 border-b border-foreground/50">
-								{cantidadFilas} * {cantidadColumnas}
-							</span>
-							<span>
-								{cantidadAltura} * ( {cantidadFilas} + {cantidadColumnas} )
-							</span>
-						</div>
-						<span className="italic font-semibold text-lg tracking-widest">
-							= {indiceDeLocal.toFixed(2)}
+						<span className="p-1 text-center">
+							{cantidadAltura} * ( {cantidadFilas} + {cantidadColumnas} )
 						</span>
 					</div>
-					<span className=" bg-teal-500/50 p-4 rounded-lg">
-						Indice Redondeado (IR) = {indiceRedondeo}
+					<Equal size={16} />
+					<span className="italic font-semibold text-lg tracking-widest">
+						{indiceDeLocal.toFixed(2)}
 					</span>
-				</AlertDialogTitle>
-				<AlertDialogDescription className="text-center">
-					<div className="flex flex-col gap-10">
-						<div className="flex flex-col p-4 gap-2 items-center justify-center pt-6 text-sm bg-pink-500/50 rounded-lg">
-							<span>Número mínimo de puntos de medición</span>
-							<span>
-								N = (IR + 2)² = {(indiceRedondeo + 2) ** 2} ={" "}
-								{minimoNumeroCeldas}
-							</span>
-						</div>
-						<span className="tracking-widest italic font semibold text-foreground/50 border-t border-foreground/10 pt-2 w-full text-right">
-							Res. 84/2012 S.R.T.
-						</span>
-					</div>
-				</AlertDialogDescription>
-			</AlertDialogContent>
-		</AlertDialog>
+					<EqualApproximately size={16} />
+					<span className="text-2xl bg-teal-500/50 px-4 py-1 rounded-lg">
+						{indiceRedondeo}
+					</span>
+				</div>
+			</div>
+
+			<div className="w-full flex gap-2 items-center justify-center">
+				<span className="text-2xl bg-pink-500/50 px-4 py-1 rounded-lg">
+					{indiceRedondeo >= 4 ? "36" : (indiceRedondeo + 2) ** 2}
+				</span>
+				<span className="italic tracking-wilder text-foreground/50">
+					Mínimo número de mediciones
+				</span>
+			</div>
+			<span className="tracking-widest italic font semibold text-foreground/50 border-t border-foreground/10 p1-2 w-full text-right sm:text-xs 2xl:text-sm">
+				Res. 84/2012 S.R.T.
+			</span>
+		</div>
 	)
 }

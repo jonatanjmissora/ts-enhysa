@@ -11,6 +11,7 @@ import {
 	Paintbrush,
 	RulerDimensionLine,
 	ThumbsUp,
+	Trash2,
 } from "lucide-react"
 import { toast } from "sonner"
 import { getMinimoMedicionesFrom } from "@/lib/utils"
@@ -23,31 +24,31 @@ export type PuntosType = {
 	cumple: boolean
 }
 
+const defaultPunto = {
+	nombre: "",
+	valor: 0,
+	valorX: 0,
+	valorY: 0,
+	cumple: false,
+}
+
 export default function CroquisComponent({
 	nombre,
 	cantidadFilas,
 	cantidadColumnas,
-	cantidadAltura,
 	celdasSeleccionadas,
-	setCeldasSeleccionadas,
 	puntos,
 	setPuntos,
 }: {
 	nombre: string
 	cantidadFilas: number
 	cantidadColumnas: number
-	cantidadAltura: number
 	celdasSeleccionadas: number[]
-	setCeldasSeleccionadas: (celdas: number[]) => void
 	puntos: PuntosType[]
 	setPuntos: (puntos: PuntosType[]) => void
 }) {
-	const totalCeldas = cantidadColumnas * cantidadFilas
-	const cantidadMedicionesMinimas = getMinimoMedicionesFrom(
-		cantidadFilas,
-		cantidadColumnas,
-		cantidadAltura
-	)
+	const [openValue, setOpenValue] = useState<"new" | "edit" | false>(false)
+	const [actualPunto, setActualPunto] = useState<PuntosType>(defaultPunto)
 
 	return (
 		<article className="card bg-accent flex-col gap-6 flex-1">
@@ -57,7 +58,7 @@ export default function CroquisComponent({
 						<RulerDimensionLine className="size-6" />
 					</div>
 					<span className="w-full sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2">
-						Croquis del plano
+						Puntos de medición ({puntos.length})
 					</span>
 				</div>
 				<p className="flex-1 text-right text-sm text-foreground/70 py-1">
@@ -66,59 +67,30 @@ export default function CroquisComponent({
 			</div>
 			<div className="flex flex-col gap-4 sm:w-[440px] 2xl:w-[600px]">
 				<div className="min-h-[400px] h-max w-full overflow-auto bg-background shadow rounded-lg ring ring-foreground/5 py-10  relative">
-					<div className="w-max h-max p-20 m-auto ">
-						<CroquisGrid
-							cantidadFilas={cantidadFilas}
-							cantidadColumnas={cantidadColumnas}
-							celdasSeleccionadas={celdasSeleccionadas}
-							puntos={puntos || []}
-						/>
-					</div>
-				</div>
-
-				<div className="flex gap-4 items-center w-full">
-					<div className="flex-1">
-						{totalCeldas === 0 ? (
-							<button
-								className="cardBackground w-full py-3  sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75 text-center"
-								onClick={() =>
-									toast.warning("Establece las medidas del plano primero.")
-								}
-							>
-								<span className="flex items-center gap-2 w-full justify-center">
-									Dibujar Croquis <Paintbrush size={16} />
-								</span>
-							</button>
-						) : (
-							<AlertPaintCroquis
-								cantidadFilas={cantidadFilas}
-								cantidadColumnas={cantidadColumnas}
-								celdasSeleccionadas={celdasSeleccionadas}
-								setCeldasSeleccionadas={setCeldasSeleccionadas}
-							/>
-						)}
-					</div>
-					<div className="flex-1">
-						{celdasSeleccionadas.length === 0 ? (
-							<button
-								className="cardBackground w-full py-3  sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75 text-center"
-								onClick={() => toast.warning("Dibuja el croquis primero.")}
-							>
-								<span className="flex items-center gap-2 w-full justify-center">
-									Colocar Puntos <MousePointer size={16} />
-								</span>
-							</button>
-						) : (
-							<AlertPointsCroquis
-								cantidadFilas={cantidadFilas}
-								cantidadColumnas={cantidadColumnas}
-								cantidadMedicionesMinimas={cantidadMedicionesMinimas}
-								celdasSeleccionadas={celdasSeleccionadas}
-								puntos={puntos}
-								setPuntos={setPuntos}
-							/>
-						)}
-					</div>
+					<CroquisGrid
+						cantidadFilas={cantidadFilas}
+						cantidadColumnas={cantidadColumnas}
+						celdasSeleccionadas={celdasSeleccionadas}
+						puntos={puntos}
+						setActualPunto={setActualPunto}
+						setOpenValue={setOpenValue}
+					/>
+					<NewPuntoForm
+						puntos={puntos}
+						setPuntos={setPuntos}
+						actualPunto={actualPunto}
+						setActualPunto={setActualPunto}
+						openValue={openValue}
+						setOpenValue={setOpenValue}
+					/>
+					<EditPuntoForm
+						puntos={puntos}
+						setPuntos={setPuntos}
+						actualPunto={actualPunto}
+						setActualPunto={setActualPunto}
+						openValue={openValue}
+						setOpenValue={setOpenValue}
+					/>
 				</div>
 			</div>
 		</article>
@@ -130,39 +102,269 @@ function CroquisGrid({
 	cantidadColumnas,
 	celdasSeleccionadas,
 	puntos,
+	setActualPunto,
+	setOpenValue,
 }: {
 	cantidadFilas: number
 	cantidadColumnas: number
 	celdasSeleccionadas: number[]
 	puntos: PuntosType[]
+	setActualPunto: (punto: PuntosType) => void
+	setOpenValue: (value: "new" | "edit" | false) => void
 }) {
-	const totalCeldas = cantidadColumnas * cantidadFilas
+	const gridRef = useRef<HTMLButtonElement>(null)
+	const totalCeldas = cantidadFilas * cantidadColumnas
+	const celdasSize = 20
+
+	const setXYPoint = (e: React.MouseEvent<HTMLButtonElement>) => {
+		if (!gridRef.current) return
+		const rect = gridRef.current.getBoundingClientRect()
+		const x = e.clientX - rect.left
+		const y = e.clientY - rect.top
+
+		setActualPunto(prev => {
+			return {
+				...prev,
+				nombre: `${x}-${y}`,
+				valorX: x,
+				valorY: y,
+			}
+		})
+		setOpenValue("new")
+	}
+
 	return (
-		<div
-			className="grid relative"
-			style={{
-				gridTemplateColumns: `repeat(${cantidadColumnas}, minmax(0, 1fr))`,
-				gridTemplateRows: `repeat(${cantidadFilas}, minmax(0, 1fr))`,
-			}}
-		>
-			{totalCeldas !== 0 && (
+		<div className="w-max h-max p-20 m-auto ">
+			<button
+				className="grid relative"
+				ref={gridRef}
+				style={{
+					gridTemplateColumns: `repeat(${cantidadColumnas}, minmax(0, 1fr))`,
+					gridTemplateRows: `repeat(${cantidadFilas}, minmax(0, 1fr))`,
+				}}
+				onClick={e => {
+					setXYPoint(e)
+				}}
+			>
 				<Cotas
 					cantidadColumnas={cantidadColumnas}
 					cantidadFilas={cantidadFilas}
 				/>
-			)}
-			{Array.from({ length: totalCeldas }).map((_, i) => {
-				return (
-					<div
-						key={i}
-						className={`border border-gray-400 size-20 ${celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
+				{Array.from({ length: totalCeldas }).map((_, i) => {
+					return (
+						<div
+							key={i}
+							className={`border border-gray-400 size-${celdasSize} ${celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
+						/>
+					)
+				})}
+				{puntos?.map((punto, index) => (
+					<Punto
+						key={punto.valorX - punto.valorY}
+						punto={punto}
+						index={index}
+						onClick={() => {
+							setActualPunto(punto)
+							setOpenValue("edit")
+						}}
 					/>
-				)
-			})}
-			{puntos?.map((punto, index) => (
-				<Punto key={punto.valorX - punto.valorY} punto={punto} index={index} />
-			))}
+				))}
+			</button>
 		</div>
+	)
+}
+
+function NewPuntoForm({
+	puntos,
+	setPuntos,
+	actualPunto,
+	setActualPunto,
+	openValue,
+	setOpenValue,
+}: {
+	puntos: PuntosType[]
+	setPuntos: (puntos: PuntosType[]) => void
+	actualPunto: PuntosType
+	setActualPunto: (punto: PuntosType) => void
+	openValue: "new" | "edit" | false
+	setOpenValue: (value: "new" | "edit" | false) => void
+}) {
+	const inputRef = useRef<HTMLInputElement>(null)
+	const handleNewSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		const form = new FormData(e.currentTarget)
+		const value = Number(form.get("valor"))
+		if (!value || value === actualPunto?.valor) return
+
+		// Add punto to puntos array
+		const newPunto: PuntosType = {
+			...actualPunto,
+			valor: value,
+		}
+
+		if (!puntos) {
+			setPuntos([newPunto])
+		} else {
+			setPuntos([...puntos, newPunto])
+		}
+		setActualPunto(defaultPunto)
+		setOpenValue(false)
+	}
+
+	useEffect(() => {
+		if (openValue && inputRef.current) {
+			inputRef.current.focus()
+		}
+	}, [openValue])
+
+	return (
+		<>
+			{openValue === "new" && (
+				<form
+					onSubmit={handleNewSubmit}
+					className="card bg-background absolute inset-0 py-14 items-center justify-center flex-col gap-10"
+				>
+					<p className="border-t border-foreground/20 w-full text-end text-lg font-semibold tracking-widest">
+						punto-{puntos?.length + 1}
+					</p>
+
+					<div className="w-full relative">
+						<label
+							htmlFor=""
+							className="absolute -top-4 -left-2 text-xl tracking-widest bg-background text-foreground/70 px-6 rounded-lg font-bold"
+						>
+							VALOR
+						</label>
+						<input
+							ref={inputRef}
+							name="valor"
+							type="number"
+							className="w-full sm:text-4xl 2xl:text-6xl font-bold tracking-wildest p-4 card bg-foreground text-background text-center"
+						/>
+					</div>
+					<div className="w-full flex items-center gap-4">
+						<button
+							type="button"
+							className="flex-1 card bg-background py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer"
+							onClick={() => {
+								setOpenValue(false)
+								setActualPunto(defaultPunto)
+							}}
+						>
+							Cancelar
+						</button>
+						<button
+							type="submit"
+							className="flex-1 card bg-accent py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer"
+						>
+							Guardar
+						</button>
+					</div>
+				</form>
+			)}
+		</>
+	)
+}
+
+function EditPuntoForm({
+	puntos,
+	setPuntos,
+	actualPunto,
+	setActualPunto,
+	openValue,
+	setOpenValue,
+}: {
+	puntos: PuntosType[]
+	setPuntos: (puntos: PuntosType[]) => void
+	actualPunto: PuntosType
+	setActualPunto: (punto: PuntosType) => void
+	openValue: "new" | "edit" | false
+	setOpenValue: (value: "new" | "edit" | false) => void
+}) {
+	const inputRef = useRef<HTMLInputElement>(null)
+
+	const handleEditSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		const form = new FormData(e.currentTarget)
+		const value = Number(form.get("valor"))
+		if (!value || value === actualPunto?.valor || !puntos)
+			return setOpenValue(false)
+
+		const newPuntos = [...puntos].map(punto =>
+			punto.nombre !== actualPunto?.nombre ? punto : { ...punto, valor: value }
+		)
+		setPuntos(newPuntos)
+		setActualPunto(defaultPunto)
+		setOpenValue(false)
+	}
+
+	const handleDeletePunto = () => {
+		const newPuntos = [...puntos].filter(
+			punto => punto.nombre !== actualPunto.nombre
+		)
+		setPuntos(newPuntos)
+		toast.success("Punto eliminado correctamente")
+		setOpenValue(false)
+	}
+
+	useEffect(() => {
+		if (openValue && inputRef.current) {
+			inputRef.current.focus()
+		}
+	}, [openValue])
+
+	return (
+		<>
+			{openValue === "edit" && actualPunto && (
+				<form
+					onSubmit={handleEditSubmit}
+					className="card bg-background absolute inset-0 py-14 items-center justify-center flex-col gap-10"
+				>
+					<div className="w-full flex flex-col items-end gap-1">
+						<button type="button" onClick={handleDeletePunto}>
+							<Trash2 className="size-10 text-red-500/40 cursor-pointer" />
+						</button>
+						<p className="border-t border-foreground/20 w-full text-end text-lg font-semibold tracking-widest">
+							punto-{puntos?.length + 1}
+						</p>
+					</div>
+
+					<div className="w-full relative">
+						<label
+							htmlFor=""
+							className="absolute -top-4 -left-2 text-xl tracking-widest bg-background text-foreground/70 px-6 rounded-lg font-bold"
+						>
+							VALOR
+						</label>
+						<input
+							ref={inputRef}
+							name="valor"
+							type="number"
+							defaultValue={actualPunto.valor}
+							className="w-full sm:text-4xl 2xl:text-6xl font-bold tracking-wildest p-4 card bg-foreground text-background text-center"
+						/>
+					</div>
+					<div className="w-full flex items-center gap-4">
+						<button
+							type="button"
+							className="flex-1 card bg-background py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer"
+							onClick={() => {
+								setOpenValue(false)
+								setActualPunto(defaultPunto)
+							}}
+						>
+							Cancelar
+						</button>
+						<button
+							type="submit"
+							className="flex-1 card bg-accent py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer"
+						>
+							Editar
+						</button>
+					</div>
+				</form>
+			)}
+		</>
 	)
 }
 

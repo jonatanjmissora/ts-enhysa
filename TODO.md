@@ -37,9 +37,12 @@ polar
 
 +- en croquis
 
-borrar puntos en el croquis
+boton de editar croquis en el croquis
 
-pedir valor de puntos en el croquis
+botom de pantalla completa para ver croquis
+
+puntos list agregados al pie del croquis
+
 
 mover puntos en el croquis
 
