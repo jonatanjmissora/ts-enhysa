@@ -1,9 +1,10 @@
 import { BookmarkCheck } from "lucide-react"
 import Resumen from "./resumen"
-import type { PuntosType } from "@/routes/_protected/new-report"
 import NewReportPart3Tags from "./tags"
 import NewReportPart3Plano from "./plano"
 import NewReportPart3Observaciones from "./observaciones"
+import { Link } from "@tanstack/react-router"
+import { PuntosType } from "../part-2/croquis/croquis"
 
 export default function NewReportPart3({
 	actualStep,
@@ -53,14 +54,13 @@ export default function NewReportPart3({
 				</div>
 			</div>
 
-			<button
-				type="button"
+			<Link
+				to="/new-report/pdf"
 				className="flex items-center gap-4 themeBtnAccent justify-center rounded-xl shadow-xl text-lg text-foreground tracking-wide px-6 py-4 cursor-pointer m-0"
-				onClick={finalizarProyecto}
 			>
 				<BookmarkCheck className="size-6" />
 				Generar Reporte PDF
-			</button>
+			</Link>
 		</main>
 	)
 }

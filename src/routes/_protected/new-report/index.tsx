@@ -1,22 +1,16 @@
+import { createFileRoute } from "@tanstack/react-router"
+import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
+import { empresasQueryOptions } from "queries/empresas/empresas-query"
+import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
+import { useState } from "react"
+import { ChevronLeft, ChevronRight, Trash2 } from "lucide-react"
+import { Link } from "@tanstack/react-router"
 import NewReportPart1 from "@/components/dashboard/nuevo-reporte/part-1/main"
 import NewReportPart2 from "@/components/dashboard/nuevo-reporte/part-2/main"
 import NewReportPart3 from "@/components/dashboard/nuevo-reporte/part-3/main"
-import { createFileRoute, Link } from "@tanstack/react-router"
-import { ChevronLeft, ChevronRight, Trash2 } from "lucide-react"
-import { empresasQueryOptions } from "queries/empresas/empresas-query"
-import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
-import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
-import { useState } from "react"
+import { PuntosType } from "@/components/dashboard/nuevo-reporte/part-2/croquis/croquis"
 
-export type PuntosType = {
-	nombre: string
-	valor: number
-	valorX: number
-	valorY: number
-	cumple: boolean
-}
-
-export const Route = createFileRoute("/_protected/new-report")({
+export const Route = createFileRoute("/_protected/new-report/")({
 	loader: ({ context }) => {
 		context.queryClient.ensureQueryData(tecnicoQueryOptions)
 		context.queryClient.ensureQueryData(empresasQueryOptions)

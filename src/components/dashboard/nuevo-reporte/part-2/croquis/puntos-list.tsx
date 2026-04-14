@@ -1,4 +1,4 @@
-import { PuntosType } from "@/routes/_protected/new-report"
+import { PuntosType } from "./croquis"
 import { DeletePuntoAlertDialog } from "./delete-punto-alert"
 
 export default function PuntosList({
@@ -53,7 +53,7 @@ const Punto = ({
 }) => {
 	return (
 		<div className="w-full grid grid-cols-[1fr_1fr_0.5fr] gap-4 place-items-center">
-			<span className="rounded-lg bg-background py-2 w-full text-center sm:text-xl">
+			<span className="rounded-lg bg-background py-2 w-full text-center 2xl:text-lg">
 				punto-{index + 1}
 			</span>
 			<input

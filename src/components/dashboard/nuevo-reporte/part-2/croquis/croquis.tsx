@@ -187,7 +187,7 @@ function NewPuntoForm({
 	useEffect(() => {
 		if (openValue && inputRef.current) {
 			window.scrollTo({
-				top: 0,
+				top: 200,
 				behavior: "smooth", // Use 'auto' for an instant jump
 			})
 			inputRef.current.focus()
@@ -278,7 +278,7 @@ function EditPuntoForm({
 	useEffect(() => {
 		if (openValue && inputRef.current) {
 			window.scrollTo({
-				top: 0,
+				top: 200,
 				behavior: "smooth", // Use 'auto' for an instant jump
 			})
 			inputRef.current.focus()
