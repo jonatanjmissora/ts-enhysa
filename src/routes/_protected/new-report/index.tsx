@@ -9,6 +9,7 @@ import NewReportPart1 from "@/components/dashboard/nuevo-reporte/part-1/main"
 import NewReportPart2 from "@/components/dashboard/nuevo-reporte/part-2/main"
 import NewReportPart3 from "@/components/dashboard/nuevo-reporte/part-3/main"
 import { PuntosType } from "@/components/dashboard/nuevo-reporte/part-2/croquis/croquis"
+import NewReportPart4 from "@/components/dashboard/nuevo-reporte/part-4/main"
 
 export const Route = createFileRoute("/_protected/new-report/")({
 	loader: ({ context }) => {
@@ -21,7 +22,10 @@ export const Route = createFileRoute("/_protected/new-report/")({
 })
 
 function RouteComponent() {
+	// estado del componente
 	const [actualStep, setActualStep] = useState(1)
+
+	// estados globales
 	const [nombre, setNombre] = useState("")
 	const [largo, setLargo] = useState<number>(0)
 	const [ancho, setAncho] = useState<number>(0)
@@ -32,6 +36,7 @@ function RouteComponent() {
 	const [tipoIluminacion, setTipoIluminacion] = useState<string>("natural")
 	const [tipoFuente, setTipoFuente] = useState<string>("incandescente")
 	const [iluminacion, setIluminacion] = useState<string>("general")
+	const [observaciones, setObservaciones] = useState<string>("")
 	const [valorRequerido, setValorRequerido] = useState<string>("100")
 
 	const volverPaso = () => {
@@ -106,6 +111,8 @@ function RouteComponent() {
 				setTipoFuente={setTipoFuente}
 				iluminacion={iluminacion}
 				setIluminacion={setIluminacion}
+				observaciones={observaciones}
+				setObservaciones={setObservaciones}
 				valorRequerido={valorRequerido}
 				setValorRequerido={setValorRequerido}
 			/>
@@ -124,6 +131,12 @@ function RouteComponent() {
 				celdasSeleccionadas={celdasSeleccionadas}
 				puntos={puntos}
 			/>
+
+			{/* ==================================================================== */}
+			{/* PARTE 4 */}
+			{/* ==================================================================== */}
+
+			<NewReportPart4 actualStep={actualStep} />
 		</div>
 	)
 }

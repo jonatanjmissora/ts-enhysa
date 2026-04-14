@@ -1,4 +1,7 @@
 import { Page, Text, View, StyleSheet } from "@react-pdf/renderer"
+import { EmpresaType } from "db/empresas/schema"
+import { InstrumentoType } from "db/instrumentos/schema"
+import { TecnicoType } from "db/tecnicos/schema"
 
 // Create styles
 const styles = StyleSheet.create({
@@ -51,33 +54,53 @@ const styles = StyleSheet.create({
 	},
 })
 
-export default function Page1({ nombre }: { nombre?: string }) {
+export default function Page1({
+	tecnico,
+	empresa,
+	instrumento,
+}: {
+	tecnico: TecnicoType
+	empresa: EmpresaType
+	instrumento: InstrumentoType
+}) {
 	return (
 		<Page size="A4" style={styles.page}>
 			<View style={styles.pagePadding}>
 				<Text style={styles.title}>
 					PROTOCOLO PARA MEDICIÓN DE ILUMINACIÓN EN EL AMBIENTE LABORAL
 				</Text>
-				<Text style={styles.row}>(1) Razón Social: {nombre}</Text>
-				<Text style={styles.row}>(2) Dirección: </Text>
-				<Text style={styles.row}>(3) Localidad: </Text>
-				<Text style={styles.row}>(4) Provincia: </Text>
-				<Text style={styles.row}>(5) CP: </Text>
-				<Text style={styles.row}>(6) C.U.I.T: </Text>
 				<Text style={styles.row}>
-					(7) Horarios / Turnos habituales de trabajo:{" "}
+					(1) Razón Social: {empresa.razonSocial.toUpperCase()}
+				</Text>
+				<Text style={styles.row}>
+					(2) Dirección: {empresa.direccion.toUpperCase()}
+				</Text>
+				<Text style={styles.row}>
+					(3) Localidad: {empresa.localidad.toUpperCase()}
+				</Text>
+				<Text style={styles.row}>
+					(4) Provincia: {empresa.provincia.toUpperCase()}
+				</Text>
+				<Text style={styles.row}>(5) CP: {empresa.codigoPostal}</Text>
+				<Text style={styles.row}>(6) C.U.I.T: {empresa.cuit}</Text>
+				<Text style={styles.row}>
+					(7) Horarios / Turnos habituales de trabajo: {empresa.horarios}
 				</Text>
 				<Text style={styles.subtitle}>Datos de la Medición</Text>
 				<Text style={styles.row}>
 					(8) Instrumento de medición utilizado, marca:{" "}
+					{instrumento.marca.toUpperCase()} {instrumento.modelo.toUpperCase()}
 				</Text>
 				<Text style={styles.row}>
 					(9) Fecha de calibración del instrumento utilizado en la medición:{" "}
+					{instrumento.fechaCalibracion}
 				</Text>
 				<Text style={styles.row}>
 					(10) Metodología utilizada en la medición: según Resolución SRT Nº
 					84/12, método de la grilla para iluminación general
 				</Text>
+
+				{/* TODO agarrar todos los puntos y sacar el primero y el ultimo timestamp */}
 				<View style={styles.flexrow}>
 					<View style={styles.flexrowelement}>
 						<Text>(11) Fecha de la medición:</Text>
@@ -95,6 +118,7 @@ export default function Page1({ nombre }: { nombre?: string }) {
 					</View>
 				</View>
 
+				{/* TODO traer el clima de part2 */}
 				<Text style={styles.row}>(14) Condiciones atmosféricas: </Text>
 
 				<Text style={styles.subtitle}>
@@ -104,6 +128,8 @@ export default function Page1({ nombre }: { nombre?: string }) {
 				<Text style={styles.row}>
 					(16) Plano o croquis del establecimiento:{" "}
 				</Text>
+
+				{/* TODO traer observaciones */}
 				<Text style={[styles.row, { height: 100, borderBottom: "none" }]}>
 					(17) Observaciones:{" "}
 				</Text>

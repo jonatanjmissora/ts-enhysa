@@ -1,9 +1,8 @@
 import MedidasPlano from "./medidas/medidas-plano"
 import { Save } from "lucide-react"
-import type { PuntosType } from "@/routes/_protected/new-report"
 import { toast } from "sonner"
 import InformacionMedicion from "./informacion/Informacion-medicion"
-import CroquisComponent from "./croquis/croquis"
+import CroquisComponent, { PuntosType } from "./croquis/croquis"
 import Area from "./area/area"
 
 export default function NewReportPart2({
@@ -31,6 +30,8 @@ export default function NewReportPart2({
 	setIluminacion,
 	valorRequerido,
 	setValorRequerido,
+	observaciones,
+	setObservaciones,
 }: {
 	actualStep: number
 	setActualStep: (step: number) => void
@@ -54,6 +55,8 @@ export default function NewReportPart2({
 	setTipoFuente: (tipoFuente: string) => void
 	iluminacion: string
 	setIluminacion: (iluminacion: string) => void
+	observaciones: string
+	setObservaciones: (observaciones: string) => void
 	valorRequerido: string
 	setValorRequerido: (valorRequerido: string) => void
 }) {
@@ -114,6 +117,8 @@ export default function NewReportPart2({
 						setTipoFuente={setTipoFuente}
 						iluminacion={iluminacion}
 						setIluminacion={setIluminacion}
+						observaciones={observaciones}
+						setObservaciones={setObservaciones}
 						valorRequerido={valorRequerido}
 						setValorRequerido={setValorRequerido}
 					/>

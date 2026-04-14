@@ -6,7 +6,7 @@ import { getInstrumentosServer } from "server/instrumentos/get-instrumentos-serv
 export const instrumentosQueryOptions = queryOptions({
 	queryKey: ["instrumentos"],
 	queryFn: () => getInstrumentosServer(),
-	refetchInterval: 60 * 1000, // refrescar cada 60 segundos
+	// refetchInterval: 60 * 1000, // refrescar cada 60 segundos
 })
 
 export const empresaQueryOptions = (id: string, tecnicoId: string) => {

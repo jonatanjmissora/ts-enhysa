@@ -122,7 +122,7 @@ export default function Page3() {
 					</View>
 					<View style={[styles.flexrowelement, { flex: 1 }]}>
 						<Text>
-							(25) Recomendaciones parta adecuar el nivel de iluminación a la
+							(42) Recomendaciones parta adecuar el nivel de iluminación a la
 							legislación vigente.
 						</Text>
 					</View>

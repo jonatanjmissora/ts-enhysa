@@ -3,10 +3,7 @@ import Resumen from "./resumen"
 import NewReportPart3Tags from "./tags"
 import NewReportPart3Plano from "./plano"
 import NewReportPart3Observaciones from "./observaciones"
-import { Link } from "@tanstack/react-router"
 import { PuntosType } from "../part-2/croquis/croquis"
-import { MyDocument } from "@/components/pdfs/my-document"
-import { PDFViewer } from "@react-pdf/renderer"
 
 export default function NewReportPart3({
 	actualStep,
@@ -26,11 +23,6 @@ export default function NewReportPart3({
 	cantidadAltura: number
 	celdasSeleccionadas: number[]
 }) {
-	const finalizarProyecto = () => {
-		// TODO: implementar
-		setActualStep(1)
-	}
-
 	return (
 		<main
 			className={`${actualStep === 3 ? "flex-1" : "hidden"} p-20 sm:py-10 2xl:py-20 flex flex-col gap-10 justify-center`}
@@ -56,17 +48,14 @@ export default function NewReportPart3({
 				</div>
 			</div>
 
-			<Link
-				to="/new-report/pdf"
+			<button
+				type="button"
+				onClick={() => setActualStep(4)}
 				className="flex items-center gap-4 themeBtnAccent justify-center rounded-xl shadow-xl text-lg text-foreground tracking-wide px-6 py-4 cursor-pointer m-0"
 			>
 				<BookmarkCheck className="size-6" />
 				Generar Reporte PDF
-			</Link>
-
-			<PDFViewer width="100%" height="100%" className="min-h-[300dvh] w-full">
-				<MyDocument nombre={nombre} />
-			</PDFViewer>
+			</button>
 		</main>
 	)
 }

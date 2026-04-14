@@ -7,6 +7,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
 import { Box } from "lucide-react"
 
 export default function Area({
@@ -22,6 +23,8 @@ export default function Area({
 	setIluminacion,
 	valorRequerido,
 	setValorRequerido,
+	observaciones,
+	setObservaciones,
 }: {
 	nombre: string
 	setNombre: (nombre: string) => void
@@ -33,6 +36,8 @@ export default function Area({
 	setTipoFuente: (tipoFuente: string) => void
 	iluminacion: string
 	setIluminacion: (iluminacion: string) => void
+	observaciones: string
+	setObservaciones: (observaciones: string) => void
 	valorRequerido: string
 	setValorRequerido: (valorRequerido: string) => void
 }) {
@@ -178,6 +183,18 @@ export default function Area({
 							</SelectContent>
 						</Select>
 					</div>
+				</div>
+
+				<div className="w-full flex flex-col items-center gap-1">
+					<label htmlFor="observaciones" className="w-full">
+						Observaciones
+					</label>
+					<Textarea
+						id="observaciones"
+						value={observaciones}
+						onChange={e => setObservaciones(e.target.value)}
+						className="w-full"
+					/>
 				</div>
 			</div>
 		</div>
