@@ -3,25 +3,30 @@ import Resumen from "./resumen"
 import NewReportPart3Tags from "./tags"
 import NewReportPart3Plano from "./plano"
 import NewReportPart3Observaciones from "./observaciones"
-import { PuntosType } from "../part-2/croquis/croquis"
+import {
+	CroquisType,
+	Part1DataType,
+	Part3DataType,
+	PuntoType,
+} from "@/lib/types"
 
 export default function NewReportPart3({
 	actualStep,
-	nombre,
 	setActualStep,
+	croquis,
+	nombre,
 	puntos,
-	cantidadFilas,
-	cantidadColumnas,
-	celdasSeleccionadas,
+	part3Data,
+	setPart3Data,
 }: {
 	actualStep: number
-	nombre: string
 	setActualStep: (step: number) => void
-	puntos: PuntosType[]
-	cantidadFilas: number
-	cantidadColumnas: number
-	cantidadAltura: number
-	celdasSeleccionadas: number[]
+	part1Data: Part1DataType
+	croquis: CroquisType
+	nombre: string
+	puntos: PuntoType[]
+	part3Data: Part3DataType
+	setPart3Data: (data: Part3DataType) => void
 }) {
 	return (
 		<main
@@ -38,12 +43,13 @@ export default function NewReportPart3({
 					<NewReportPart3Plano
 						puntos={puntos}
 						nombre={nombre}
-						cantidadFilas={cantidadFilas}
-						cantidadColumnas={cantidadColumnas}
-						celdasSeleccionadas={celdasSeleccionadas}
+						croquis={croquis}
 					/>
 					<div className="card bg-accent">
-						<NewReportPart3Observaciones />
+						<NewReportPart3Observaciones
+							part3Data={part3Data}
+							setPart3Data={setPart3Data}
+						/>
 					</div>
 				</div>
 			</div>

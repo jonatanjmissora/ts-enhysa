@@ -1,33 +1,21 @@
 import { Box, Equal, EqualApproximately } from "lucide-react"
 import { getIndiceDeLocal, getIndiceRedondeo } from "@/lib/utils"
-import { PuntosType } from "@/routes/_protected/new-report"
 import { AlertPaintCroquis } from "./paint-croquis"
+import { CroquisType, PuntoType } from "@/lib/types"
 
 export default function MedidasPlano({
 	nombre,
-	cantidadFilas,
-	cantidadColumnas,
-	cantidadAltura,
-	celdasSeleccionadas,
-	setCantidadFilas,
-	setCantidadColumnas,
-	setCantidadAltura,
-	setCeldasSeleccionadas,
+	croquis,
+	setCroquis,
 	setPuntos,
 }: {
 	nombre: string
-	cantidadFilas: number
-	cantidadColumnas: number
-	cantidadAltura: number
-	celdasSeleccionadas: number[]
-	setCantidadFilas: (value: number) => void
-	setCantidadColumnas: (value: number) => void
-	setCantidadAltura: (value: number) => void
-	setCeldasSeleccionadas: (value: number[]) => void
-	setPuntos: (puntos: PuntosType[]) => void
+	croquis: CroquisType
+	setCroquis: (croquis: CroquisType) => void
+	setPuntos: (puntos: PuntoType[]) => void
 }) {
 	const hayValores =
-		cantidadFilas !== 0 && cantidadColumnas !== 0 && cantidadAltura !== 0
+		croquis.ancho !== 0 && croquis.largo !== 0 && croquis.altura !== 0
 
 	return (
 		<div className="card bg-accent flex-col gap-6">
@@ -54,10 +42,12 @@ export default function MedidasPlano({
 						type="number"
 						className="w-40 bg-background py-1 px-4 rounded-lg text-center"
 						placeholder="Ej. 10.00"
-						value={cantidadFilas === 0 ? "" : cantidadFilas}
+						value={croquis.largo === 0 ? "" : croquis.largo}
 						onChange={e => {
-							setCantidadFilas(Number(e.target.value))
-							setCeldasSeleccionadas([])
+							setCroquis({
+								...croquis,
+								largo: Number(e.target.value),
+							})
 							setPuntos([])
 						}}
 					/>
@@ -71,10 +61,12 @@ export default function MedidasPlano({
 						type="number"
 						className="w-40 bg-background py-1 px-4 rounded-lg text-center"
 						placeholder="Ej. 8.00"
-						value={cantidadColumnas === 0 ? "" : cantidadColumnas}
+						value={croquis.ancho === 0 ? "" : croquis.ancho}
 						onChange={e => {
-							setCantidadColumnas(Number(e.target.value))
-							setCeldasSeleccionadas([])
+							setCroquis({
+								...croquis,
+								ancho: Number(e.target.value),
+							})
 							setPuntos([])
 						}}
 					/>
@@ -88,48 +80,32 @@ export default function MedidasPlano({
 						type="number"
 						className="w-40 bg-background py-1 px-4 rounded-lg text-center"
 						placeholder="Ej. 2,50"
-						value={cantidadAltura === 0 ? "" : cantidadAltura}
+						value={croquis.altura === 0 ? "" : croquis.altura}
 						onChange={e => {
-							setCantidadAltura(Number(e.target.value))
-							setCeldasSeleccionadas([])
+							setCroquis({
+								...croquis,
+								altura: Number(e.target.value),
+							})
+							setPuntos([])
 						}}
 					/>
 				</div>
 			</div>
 
 			{hayValores && (
-				<AlertPaintCroquis
-					cantidadFilas={cantidadFilas}
-					cantidadColumnas={cantidadColumnas}
-					celdasSeleccionadas={celdasSeleccionadas}
-					setCeldasSeleccionadas={setCeldasSeleccionadas}
-				/>
+				<AlertPaintCroquis croquis={croquis} setCroquis={setCroquis} />
 			)}
 
-			{celdasSeleccionadas.length > 0 && (
-				<Formula
-					cantidadFilas={cantidadFilas}
-					cantidadColumnas={cantidadColumnas}
-					cantidadAltura={cantidadAltura}
-				/>
-			)}
+			{croquis.celdasSeleccionadas.length > 0 && <Formula croquis={croquis} />}
 		</div>
 	)
 }
 
-const Formula = ({
-	cantidadFilas,
-	cantidadColumnas,
-	cantidadAltura,
-}: {
-	cantidadFilas: number
-	cantidadColumnas: number
-	cantidadAltura: number
-}) => {
+const Formula = ({ croquis }: { croquis: CroquisType }) => {
 	const indiceDeLocal = getIndiceDeLocal(
-		cantidadFilas,
-		cantidadColumnas,
-		cantidadAltura
+		croquis.largo,
+		croquis.ancho,
+		croquis.altura
 	)
 
 	const indiceRedondeo = getIndiceRedondeo(indiceDeLocal)
@@ -143,10 +119,10 @@ const Formula = ({
 				<div className="flex justify-end items-center gap-3">
 					<div className="flex flex-col">
 						<span className="p-1 border-b border-foreground/50 w-full text-center px-10">
-							{cantidadFilas} * {cantidadColumnas}
+							{croquis.largo} * {croquis.ancho}
 						</span>
 						<span className="p-1 text-center">
-							{cantidadAltura} * ( {cantidadFilas} + {cantidadColumnas} )
+							{croquis.altura} * ( {croquis.largo} + {croquis.ancho} )
 						</span>
 					</div>
 					<Equal size={16} />

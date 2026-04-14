@@ -1,11 +1,11 @@
+import { PuntoType } from "@/lib/types"
 import { puntosResult } from "@/lib/utils"
-import type { PuntosType } from "@/routes/_protected/new-report"
 import { Check, X } from "lucide-react"
 
 export default function NewReportPart3Tags({
 	puntos,
 }: {
-	puntos: PuntosType[] | null
+	puntos: PuntoType[] | null
 }) {
 	if (!puntos) return null
 

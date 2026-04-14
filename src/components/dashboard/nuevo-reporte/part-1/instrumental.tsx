@@ -1,8 +1,7 @@
 import { Cpu } from "lucide-react"
-import { Suspense, useState } from "react"
+import { Suspense } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
-import { InstrumentoType } from "db/instrumentos/schema"
 import {
 	Select,
 	SelectContent,
@@ -17,20 +16,35 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { TextTooltip } from "@/components/layout/text-tooltip"
 import { sortedByNombre } from "@/lib/utils"
+import { Part1DataType } from "@/lib/types"
 
-export default function NuevoReporteInstrumento() {
+export default function NuevoReporteInstrumento({
+	part1Data,
+	setPart1Data,
+}: {
+	part1Data: Part1DataType
+	setPart1Data: (data: Part1DataType) => void
+}) {
 	return (
 		<Suspense fallback={<Skelton />}>
-			<NuevoReporteInstrumentoContent />
+			<NuevoReporteInstrumentoContent
+				part1Data={part1Data}
+				setPart1Data={setPart1Data}
+			/>
 		</Suspense>
 	)
 }
 
-function NuevoReporteInstrumentoContent() {
+function NuevoReporteInstrumentoContent({
+	part1Data,
+	setPart1Data,
+}: {
+	part1Data: Part1DataType
+	setPart1Data: (data: Part1DataType) => void
+}) {
 	const { data: instrumentos } = useSuspenseQuery(instrumentosQueryOptions)
+	const actualInstrumento = instrumentos?.[part1Data.instrumentoIndex]
 	const sortedInstrumentos = sortedByNombre(instrumentos || [])
-	const [actualInstrumento, setActualInstrumento] =
-		useState<InstrumentoType | null>(sortedInstrumentos[0] ?? null)
 
 	return (
 		<div className="flex flex-col gap-2">
@@ -44,11 +58,13 @@ function NuevoReporteInstrumentoContent() {
 					</span>
 				</div>
 				<Select
-					defaultValue={actualInstrumento?.id.toString() ?? ""}
+					value={actualInstrumento?.nombre ?? ""}
 					onValueChange={value =>
-						setActualInstrumento(
-							sortedInstrumentos.find(i => i.id.toString() === value) ?? null
-						)
+						setPart1Data({
+							...part1Data,
+							instrumentoIndex:
+								instrumentos?.findIndex(i => i.nombre === value) ?? 0,
+						})
 					}
 				>
 					<SelectTrigger className="w-full max-w-48">
@@ -57,7 +73,7 @@ function NuevoReporteInstrumentoContent() {
 					<SelectContent position="popper">
 						<SelectGroup>
 							<SelectLabel>Instrumental</SelectLabel>
-							{instrumentos?.map(instrumento => (
+							{sortedInstrumentos?.map(instrumento => (
 								<SelectItem
 									key={instrumento.id}
 									value={instrumento.id.toString()}

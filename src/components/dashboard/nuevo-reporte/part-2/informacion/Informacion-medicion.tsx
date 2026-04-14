@@ -3,8 +3,17 @@ import NewReportPart2Clima from "./clima"
 import NewReportPart2Locacion from "./locacion"
 import { useState } from "react"
 import { InputFiles } from "@/components/layout/input-files"
+import { ClimaType } from "@/lib/types"
 
-export default function InformacionMedicion({ nombre }: { nombre: string }) {
+export default function InformacionMedicion({
+	nombre,
+	clima,
+	setClima,
+}: {
+	nombre: string
+	clima: ClimaType
+	setClima: (clima: ClimaType) => void
+}) {
 	const [planoFiles, setPlanoFiles] = useState<File[]>([])
 
 	return (
@@ -36,7 +45,7 @@ export default function InformacionMedicion({ nombre }: { nombre: string }) {
 				<NewReportPart2Locacion />
 			</div>
 
-			<NewReportPart2Clima />
+			<NewReportPart2Clima clima={clima} setClima={setClima} />
 		</div>
 	)
 }

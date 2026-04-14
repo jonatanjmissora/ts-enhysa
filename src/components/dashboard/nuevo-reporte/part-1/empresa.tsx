@@ -1,8 +1,7 @@
 import { Warehouse } from "lucide-react"
-import { Suspense, useState } from "react"
+import { Suspense } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { empresasQueryOptions } from "queries/empresas/empresas-query"
-import { EmpresaType } from "db/empresas/schema"
 import {
 	Select,
 	SelectContent,
@@ -14,21 +13,36 @@ import {
 } from "@/components/ui/select"
 import { TextTooltip } from "@/components/layout/text-tooltip"
 import { sortedByRazonSocial } from "@/lib/utils"
+import { Part1DataType } from "@/lib/types"
 
-export default function NuevoReporteEmpresa() {
+export default function NuevoReporteEmpresa({
+	part1Data,
+	setPart1Data,
+}: {
+	part1Data: Part1DataType
+	setPart1Data: (data: Part1DataType) => void
+}) {
 	return (
 		<Suspense fallback={<Skelton />}>
-			<NuevoReporteEmpresaContent />
+			<NuevoReporteEmpresaContent
+				part1Data={part1Data}
+				setPart1Data={setPart1Data}
+			/>
 		</Suspense>
 	)
 }
 
-function NuevoReporteEmpresaContent() {
+function NuevoReporteEmpresaContent({
+	part1Data,
+	setPart1Data,
+}: {
+	part1Data: Part1DataType
+	setPart1Data: (data: Part1DataType) => void
+}) {
 	const { data: empresas } = useSuspenseQuery(empresasQueryOptions)
+	const actualEmpresa = empresas?.[part1Data.empresaIndex]
 	const sortedEmpresas = sortedByRazonSocial(empresas ?? [])
-	const [actualEmpresa, setActualEmpresa] = useState<EmpresaType | null>(
-		sortedEmpresas[0] ?? null
-	)
+
 	return (
 		<div className="flex flex-col gap-2 flex-1">
 			<div className="flex items-center justify-between">
@@ -41,11 +55,13 @@ function NuevoReporteEmpresaContent() {
 					</span>
 				</div>
 				<Select
-					defaultValue={actualEmpresa?.id.toString() ?? ""}
+					defaultValue={empresas?.[0]?.razonSocial ?? ""}
 					onValueChange={value =>
-						setActualEmpresa(
-							sortedEmpresas.find(e => e.id.toString() === value) ?? null
-						)
+						setPart1Data({
+							...part1Data,
+							empresaIndex:
+								empresas?.findIndex(e => e.razonSocial === value) ?? 0,
+						})
 					}
 				>
 					<SelectTrigger className="w-full max-w-48">
@@ -64,6 +80,7 @@ function NuevoReporteEmpresaContent() {
 				</Select>
 			</div>
 			<article className="card dark:bg-(--dark-teal-opa) bg-(--teal-opa) flex-col gap-4 sm:text-base 2xl:text-xl relative flex-1">
+				empresa {JSON.stringify(actualEmpresa)} index {part1Data.empresaIndex}
 				<TextTooltip text={"Datos obtenidos a través del perfil."} />
 				<div className="grid grid-cols-2 gap-4 w-full">
 					<div className="flex flex-col gap-1">

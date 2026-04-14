@@ -8,24 +8,15 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select"
-import { useState } from "react"
+import { ClimaType } from "@/lib/types"
 
-type EstadoType = "soleado" | "nublado" | "templado" | "lluvioso"
-type HumedadType = "60" | "70" | "80" | "90"
-type TemperaturaType = "10" | "15" | "20" | "25" | "30" | "35"
-type clima = {
-	estado: EstadoType
-	humedad: HumedadType
-	temperatura: TemperaturaType
-}
-
-export default function NewReportPart2Clima() {
-	const [clima, setClima] = useState<clima>({
-		estado: "soleado",
-		humedad: "60",
-		temperatura: "20",
-	})
-
+export default function NewReportPart2Clima({
+	clima,
+	setClima,
+}: {
+	clima: ClimaType
+	setClima: (clima: ClimaType) => void
+}) {
 	return (
 		<div className="sm:w-full w-full flex sm:flex-col 2xl:flex-row gap-2 justify-between items-center font-semibold py-6">
 			<div className="w-full flex gap-3 items-center">
@@ -33,9 +24,9 @@ export default function NewReportPart2Clima() {
 					Clima
 				</label>
 				<Select
-					defaultValue={clima.estado}
-					onValueChange={(value: EstadoType) =>
-						setClima(prev => ({ ...prev, estado: value }))
+					value={clima.estado}
+					onValueChange={value =>
+						setClima({ ...clima, estado: value as ClimaType["estado"] })
 					}
 				>
 					<SelectTrigger className="w-full justify-center gap-3 sm:text-sm 2xl:text-base dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
@@ -71,8 +62,8 @@ export default function NewReportPart2Clima() {
 				</label>
 				<Select
 					defaultValue={clima.humedad}
-					onValueChange={(value: HumedadType) =>
-						setClima(prev => ({ ...prev, humedad: value }))
+					onValueChange={value =>
+						setClima({ ...clima, humedad: value as ClimaType["humedad"] })
 					}
 				>
 					<SelectTrigger className="w-full justify-center gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
@@ -95,8 +86,11 @@ export default function NewReportPart2Clima() {
 				</label>
 				<Select
 					defaultValue={clima.temperatura.toString()}
-					onValueChange={(value: TemperaturaType) =>
-						setClima(prev => ({ ...prev, temperatura: value }))
+					onValueChange={value =>
+						setClima({
+							...clima,
+							temperatura: value as ClimaType["temperatura"],
+						})
 					}
 				>
 					<SelectTrigger className="w-full justify-center gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">

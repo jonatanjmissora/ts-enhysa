@@ -6,17 +6,14 @@ import {
 	AlertDialogTitle,
 	AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { CroquisType } from "@/lib/types"
 
 export function AlertPaintCroquis({
-	cantidadFilas,
-	cantidadColumnas,
-	celdasSeleccionadas,
-	setCeldasSeleccionadas,
+	croquis,
+	setCroquis,
 }: {
-	cantidadFilas: number
-	cantidadColumnas: number
-	celdasSeleccionadas: number[]
-	setCeldasSeleccionadas: (value: number[]) => void
+	croquis: CroquisType
+	setCroquis: (croquis: CroquisType) => void
 }) {
 	const [open, setOpen] = useState(false)
 
@@ -24,7 +21,7 @@ export function AlertPaintCroquis({
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild>
 				<button className="cardBackground w-full py-3  sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75 text-center">
-					{celdasSeleccionadas.length === 0 ? (
+					{croquis.celdasSeleccionadas.length === 0 ? (
 						<span className="flex items-center gap-2 w-full justify-center">
 							Dibujar Croquis <Paintbrush size={16} />
 						</span>
@@ -38,10 +35,8 @@ export function AlertPaintCroquis({
 			<AlertDialogContent className="p-30 px-40">
 				<AlertDialogTitle></AlertDialogTitle>
 				<CroquisGridToPaint
-					cantidadFilas={cantidadFilas}
-					cantidadColumnas={cantidadColumnas}
-					celdasSeleccionadas={celdasSeleccionadas}
-					setCeldasSeleccionadas={setCeldasSeleccionadas}
+					croquis={croquis}
+					setCroquis={setCroquis}
 					setOpen={setOpen}
 				/>
 			</AlertDialogContent>
@@ -50,27 +45,29 @@ export function AlertPaintCroquis({
 }
 
 function CroquisGridToPaint({
-	cantidadFilas,
-	cantidadColumnas,
-	celdasSeleccionadas,
-	setCeldasSeleccionadas,
+	croquis,
+	setCroquis,
 	setOpen,
 }: {
-	cantidadFilas: number
-	cantidadColumnas: number
-	celdasSeleccionadas: number[]
-	setCeldasSeleccionadas: (value: number[]) => void
+	croquis: CroquisType
+	setCroquis: (croquis: CroquisType) => void
 	setOpen: (value: boolean) => void
 }) {
-	const totalCeldas = cantidadColumnas * cantidadFilas
+	const totalCeldas = croquis.ancho * croquis.largo
 	const [isMouseDown, setIsMouseDown] = useState(false)
 	const agregarCelda = (index: number) => {
-		if (celdasSeleccionadas.includes(index)) {
-			setCeldasSeleccionadas(
-				celdasSeleccionadas.filter(celda => celda !== index)
-			)
+		if (croquis.celdasSeleccionadas.includes(index)) {
+			setCroquis({
+				...croquis,
+				celdasSeleccionadas: croquis.celdasSeleccionadas.filter(
+					celda => celda !== index
+				),
+			})
 		} else {
-			setCeldasSeleccionadas([...celdasSeleccionadas, index])
+			setCroquis({
+				...croquis,
+				celdasSeleccionadas: [...croquis.celdasSeleccionadas, index],
+			})
 		}
 	}
 	useEffect(() => {
@@ -87,13 +84,13 @@ function CroquisGridToPaint({
 					<div
 						className="grid relative"
 						style={{
-							gridTemplateColumns: `repeat(${cantidadColumnas}, minmax(0, 1fr))`,
-							gridTemplateRows: `repeat(${cantidadFilas}, minmax(0, 1fr))`,
+							gridTemplateColumns: `repeat(${croquis.ancho}, minmax(0, 1fr))`,
+							gridTemplateRows: `repeat(${croquis.largo}, minmax(0, 1fr))`,
 						}}
 					>
 						<Cotas
-							cantidadColumnas={cantidadColumnas}
-							cantidadFilas={cantidadFilas}
+							cantidadColumnas={croquis.ancho}
+							cantidadFilas={croquis.largo}
 						/>
 						{Array.from({ length: totalCeldas }).map((_, index) => {
 							return (
@@ -108,7 +105,7 @@ function CroquisGridToPaint({
 											agregarCelda(index)
 										}
 									}}
-									className={`border border-gray-400 size-20 cursor-pointer ${celdasSeleccionadas.includes(index) ? "bg-blue-500" : ""}`}
+									className={`border border-gray-400 size-20 cursor-pointer ${croquis.celdasSeleccionadas.includes(index) ? "bg-blue-500" : ""}`}
 								/>
 							)
 						})}

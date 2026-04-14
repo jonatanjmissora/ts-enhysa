@@ -1,12 +1,12 @@
-import { PuntosType } from "./croquis"
+import { PuntoType } from "@/lib/types"
 import { DeletePuntoAlertDialog } from "./delete-punto-alert"
 
 export default function PuntosList({
 	puntos,
 	setPuntos,
 }: {
-	puntos: PuntosType[]
-	setPuntos: (puntos: PuntosType[]) => void
+	puntos: PuntoType[]
+	setPuntos: (puntos: PuntoType[]) => void
 }) {
 	return (
 		<div className="flex flex-col justify-between items-center gap-6 w-full">
@@ -46,9 +46,9 @@ const Punto = ({
 	setPuntos,
 	index,
 }: {
-	punto: PuntosType
-	puntos: PuntosType[]
-	setPuntos: (puntos: PuntosType[]) => void
+	punto: PuntoType
+	puntos: PuntoType[]
+	setPuntos: (puntos: PuntoType[]) => void
 	index: number
 }) => {
 	return (

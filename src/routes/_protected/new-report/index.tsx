@@ -8,8 +8,20 @@ import { Link } from "@tanstack/react-router"
 import NewReportPart1 from "@/components/dashboard/nuevo-reporte/part-1/main"
 import NewReportPart2 from "@/components/dashboard/nuevo-reporte/part-2/main"
 import NewReportPart3 from "@/components/dashboard/nuevo-reporte/part-3/main"
-import { PuntosType } from "@/components/dashboard/nuevo-reporte/part-2/croquis/croquis"
 import NewReportPart4 from "@/components/dashboard/nuevo-reporte/part-4/main"
+import {
+	ClimaType,
+	CroquisType,
+	Part1DataType,
+	Part3DataType,
+	PuntoType,
+	SectorType,
+	defaultClima,
+	defaultCroquis,
+	defaultPart1Data,
+	defaultPart3Data,
+	defaultSector,
+} from "@/lib/types"
 
 export const Route = createFileRoute("/_protected/new-report/")({
 	loader: ({ context }) => {
@@ -26,18 +38,17 @@ function RouteComponent() {
 	const [actualStep, setActualStep] = useState(1)
 
 	// estados globales
-	const [nombre, setNombre] = useState("")
-	const [largo, setLargo] = useState<number>(0)
-	const [ancho, setAncho] = useState<number>(0)
-	const [alto, setAlto] = useState<number>(0)
-	const [celdasSeleccionadas, setCeldasSeleccionadas] = useState<number[]>([])
-	const [puntos, setPuntos] = useState<PuntosType[]>([])
-	const [sector, setSector] = useState<string>("")
-	const [tipoIluminacion, setTipoIluminacion] = useState<string>("natural")
-	const [tipoFuente, setTipoFuente] = useState<string>("incandescente")
-	const [iluminacion, setIluminacion] = useState<string>("general")
-	const [observaciones, setObservaciones] = useState<string>("")
-	const [valorRequerido, setValorRequerido] = useState<string>("100")
+	const [part1Data, setPart1Data] = useState<Part1DataType>(defaultPart1Data)
+
+	const [sector, setSector] = useState<SectorType>(defaultSector)
+
+	const [croquis, setCroquis] = useState<CroquisType>(defaultCroquis)
+
+	const [clima, setClima] = useState<ClimaType>(defaultClima)
+
+	const [puntos, setPuntos] = useState<PuntoType[]>([])
+
+	const [part3Data, setPart3Data] = useState<Part3DataType>(defaultPart3Data)
 
 	const volverPaso = () => {
 		setActualStep(actualStep - 1)
@@ -82,7 +93,12 @@ function RouteComponent() {
 			{/* PARTE 1 */}
 			{/* ==================================================================== */}
 
-			<NewReportPart1 actualStep={actualStep} setActualStep={setActualStep} />
+			<NewReportPart1
+				actualStep={actualStep}
+				setActualStep={setActualStep}
+				part1Data={part1Data}
+				setPart1Data={setPart1Data}
+			/>
 
 			{/* ==================================================================== */}
 			{/* PARTE 2 */}
@@ -90,31 +106,15 @@ function RouteComponent() {
 
 			<NewReportPart2
 				actualStep={actualStep}
-				nombre={nombre}
-				setNombre={setNombre}
 				setActualStep={setActualStep}
-				cantidadFilas={largo}
-				cantidadColumnas={ancho}
-				cantidadAltura={alto}
-				setCantidadFilas={setLargo}
-				setCantidadColumnas={setAncho}
-				setCantidadAltura={setAlto}
-				celdasSeleccionadas={celdasSeleccionadas}
-				setCeldasSeleccionadas={setCeldasSeleccionadas}
+				croquis={croquis}
+				setCroquis={setCroquis}
 				puntos={puntos}
 				setPuntos={setPuntos}
 				sector={sector}
 				setSector={setSector}
-				tipoIluminacion={tipoIluminacion}
-				setTipoIluminacion={setTipoIluminacion}
-				tipoFuente={tipoFuente}
-				setTipoFuente={setTipoFuente}
-				iluminacion={iluminacion}
-				setIluminacion={setIluminacion}
-				observaciones={observaciones}
-				setObservaciones={setObservaciones}
-				valorRequerido={valorRequerido}
-				setValorRequerido={setValorRequerido}
+				clima={clima}
+				setClima={setClima}
 			/>
 
 			{/* ==================================================================== */}
@@ -123,20 +123,28 @@ function RouteComponent() {
 
 			<NewReportPart3
 				actualStep={actualStep}
-				nombre={nombre}
 				setActualStep={setActualStep}
-				cantidadAltura={alto}
-				cantidadFilas={largo}
-				cantidadColumnas={ancho}
-				celdasSeleccionadas={celdasSeleccionadas}
+				part1Data={part1Data}
+				nombre={sector.nombre}
+				croquis={croquis}
 				puntos={puntos}
+				part3Data={part3Data}
+				setPart3Data={setPart3Data}
 			/>
 
 			{/* ==================================================================== */}
 			{/* PARTE 4 */}
 			{/* ==================================================================== */}
 
-			<NewReportPart4 actualStep={actualStep} />
+			<NewReportPart4
+				actualStep={actualStep}
+				part1Data={part1Data}
+				sector={sector}
+				clima={clima}
+				croquis={croquis}
+				puntos={puntos}
+				part3Data={part3Data}
+			/>
 		</div>
 	)
 }

@@ -1,12 +1,12 @@
+import { PuntoType } from "@/lib/types"
 import { getHalfMedia } from "@/lib/utils"
-import type { PuntosType } from "@/routes/_protected/new-report"
 import { Info, Lightbulb } from "lucide-react"
 
 export default function NewReportResumen({
 	puntos,
 	nombre,
 }: {
-	puntos: PuntosType[] | null
+	puntos: PuntoType[] | null
 	nombre: string
 }) {
 	if (!puntos) return null

@@ -1,7 +1,11 @@
+import {
+	ClimaType,
+	Part1DataType,
+	Part3DataType,
+	SectorType,
+} from "@/lib/types"
 import { Page, Text, View, StyleSheet } from "@react-pdf/renderer"
-import { EmpresaType } from "db/empresas/schema"
-import { InstrumentoType } from "db/instrumentos/schema"
-import { TecnicoType } from "db/tecnicos/schema"
+import { EmpresaType, InstrumentoType, TecnicoType } from "db/schema"
 
 // Create styles
 const styles = StyleSheet.create({
@@ -58,10 +62,14 @@ export default function Page1({
 	tecnico,
 	empresa,
 	instrumento,
+	sector,
+	clima,
 }: {
 	tecnico: TecnicoType
 	empresa: EmpresaType
 	instrumento: InstrumentoType
+	sector: SectorType
+	clima: ClimaType
 }) {
 	return (
 		<Page size="A4" style={styles.page}>
@@ -118,8 +126,10 @@ export default function Page1({
 					</View>
 				</View>
 
-				{/* TODO traer el clima de part2 */}
-				<Text style={styles.row}>(14) Condiciones atmosféricas: </Text>
+				<Text style={styles.row}>
+					(14) Condiciones atmosféricas: {clima.estado} humedad: {clima.humedad}{" "}
+					temperatura: {clima.temperatura}
+				</Text>
 
 				<Text style={styles.subtitle}>
 					Documentación que se Adjuntará a la Medición
@@ -129,9 +139,8 @@ export default function Page1({
 					(16) Plano o croquis del establecimiento:{" "}
 				</Text>
 
-				{/* TODO traer observaciones */}
 				<Text style={[styles.row, { height: 100, borderBottom: "none" }]}>
-					(17) Observaciones:{" "}
+					(17) Observaciones: {sector.observaciones}
 				</Text>
 			</View>
 		</Page>

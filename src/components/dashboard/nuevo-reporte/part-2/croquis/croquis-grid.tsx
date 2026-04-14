@@ -1,24 +1,20 @@
 import { useRef } from "react"
-import { PuntosType } from "./croquis"
 import { Lightbulb } from "lucide-react"
+import { CroquisType, PuntoType } from "@/lib/types"
 
 export default function CroquisGrid({
-	cantidadFilas,
-	cantidadColumnas,
-	celdasSeleccionadas,
+	croquis,
 	puntos,
 	setActualPunto,
 	setOpenValue,
 }: {
-	cantidadFilas: number
-	cantidadColumnas: number
-	celdasSeleccionadas: number[]
-	puntos: PuntosType[]
-	setActualPunto: (punto: PuntosType) => void
+	croquis: CroquisType
+	puntos: PuntoType[]
+	setActualPunto: (punto: PuntoType) => void
 	setOpenValue: (value: "new" | "edit" | false) => void
 }) {
 	const gridRef = useRef<HTMLButtonElement>(null)
-	const totalCeldas = cantidadFilas * cantidadColumnas
+	const totalCeldas = croquis.largo * croquis.ancho
 	const celdasSize = 20
 
 	const setXYPoint = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -44,22 +40,19 @@ export default function CroquisGrid({
 				className="grid relative"
 				ref={gridRef}
 				style={{
-					gridTemplateColumns: `repeat(${cantidadColumnas}, minmax(0, 1fr))`,
-					gridTemplateRows: `repeat(${cantidadFilas}, minmax(0, 1fr))`,
+					gridTemplateColumns: `repeat(${croquis.ancho}, minmax(0, 1fr))`,
+					gridTemplateRows: `repeat(${croquis.largo}, minmax(0, 1fr))`,
 				}}
 				onClick={e => {
 					setXYPoint(e)
 				}}
 			>
-				<Cotas
-					cantidadColumnas={cantidadColumnas}
-					cantidadFilas={cantidadFilas}
-				/>
+				<Cotas cantidadColumnas={croquis.ancho} cantidadFilas={croquis.largo} />
 				{Array.from({ length: totalCeldas }).map((_, i) => {
 					return (
 						<div
 							key={i}
-							className={`border border-gray-400 size-${celdasSize} ${celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
+							className={`border border-gray-400 size-${celdasSize} ${croquis.celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
 						/>
 					)
 				})}
@@ -84,9 +77,9 @@ const Punto = ({
 	index,
 	onClick,
 }: {
-	punto: PuntosType
+	punto: PuntoType
 	index: number
-	onClick?: (punto: PuntosType) => void
+	onClick?: (punto: PuntoType) => void
 }) => {
 	return (
 		<button

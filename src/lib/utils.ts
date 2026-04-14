@@ -1,4 +1,3 @@
-import { PuntosType } from "@/components/dashboard/nuevo-reporte/part-2/croquis/croquis"
 import { clsx, type ClassValue } from "clsx"
 import { EmpresaFormType } from "db/empresas/empresa-validator"
 import { EmpresaType } from "db/empresas/schema"
@@ -7,6 +6,7 @@ import { InstrumentoType } from "db/instrumentos/schema"
 import { TecnicoType } from "db/tecnicos/schema"
 import { TecnicoFormType } from "db/tecnicos/tecnico-validator"
 import { twMerge } from "tailwind-merge"
+import { PuntoType } from "./types"
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
@@ -112,14 +112,14 @@ export const getMinimoMedicionesFrom = (
 	)
 }
 
-export const getHalfMedia = (puntos: PuntosType[]) => {
+export const getHalfMedia = (puntos: PuntoType[]) => {
 	const sumatoria = puntos.reduce((acc, valor) => acc + valor.valor, 0)
 	return sumatoria / puntos.length / 2
 }
 
-export const puntosResult = (puntos: PuntosType[]) => {
-	const puntosQueCumplen: PuntosType[] = []
-	const puntosQueNoCumplen: PuntosType[] = []
+export const puntosResult = (puntos: PuntoType[]) => {
+	const puntosQueCumplen: PuntoType[] = []
+	const puntosQueNoCumplen: PuntoType[] = []
 
 	const halfMedia = getHalfMedia(puntos)
 	puntos.map(punto =>

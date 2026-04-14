@@ -8,38 +8,15 @@ import {
 	SelectValue,
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import { SectorType } from "@/lib/types"
 import { Box } from "lucide-react"
 
 export default function Area({
-	nombre,
-	setNombre,
 	sector,
 	setSector,
-	tipoIluminacion,
-	setTipoIluminacion,
-	tipoFuente,
-	setTipoFuente,
-	iluminacion,
-	setIluminacion,
-	valorRequerido,
-	setValorRequerido,
-	observaciones,
-	setObservaciones,
 }: {
-	nombre: string
-	setNombre: (nombre: string) => void
-	sector: string
-	setSector: (sector: string) => void
-	tipoIluminacion: string
-	setTipoIluminacion: (tipoIluminacion: string) => void
-	tipoFuente: string
-	setTipoFuente: (tipoFuente: string) => void
-	iluminacion: string
-	setIluminacion: (iluminacion: string) => void
-	observaciones: string
-	setObservaciones: (observaciones: string) => void
-	valorRequerido: string
-	setValorRequerido: (valorRequerido: string) => void
+	sector: SectorType
+	setSector: (sector: SectorType) => void
 }) {
 	return (
 		<div className="card bg-accent flex-col gap-6">
@@ -53,7 +30,7 @@ export default function Area({
 					</span>
 				</div>
 				<p className="flex-1 text-right text-sm text-foreground/70 py-1">
-					{nombre || "Depósito"}
+					{sector.nombre || "Depósito"}
 				</p>
 			</div>
 			<div className="flex flex-col gap-3 w-full mx-auto sm:text-base 2xl:text-xl">
@@ -66,9 +43,9 @@ export default function Area({
 						type="text"
 						className="w-1/2 bg-background py-1 px-4 rounded-lg text-center"
 						placeholder="Ej. Sector A"
-						value={nombre ?? ""}
+						value={sector.nombre ?? ""}
 						onChange={e => {
-							setNombre(e.target.value)
+							setSector({ ...sector, nombre: e.target.value })
 						}}
 					/>
 				</div>
@@ -81,9 +58,9 @@ export default function Area({
 						type="text"
 						className="w-1/2 bg-background py-1 px-4 rounded-lg text-center"
 						placeholder="Ej. Sector A"
-						value={sector ?? ""}
+						value={sector.tipo ?? ""}
 						onChange={e => {
-							setSector(e.target.value)
+							setSector({ ...sector, tipo: e.target.value })
 						}}
 					/>
 				</div>
@@ -93,8 +70,13 @@ export default function Area({
 					</label>
 					<div className="w-1/2">
 						<Select
-							defaultValue={tipoIluminacion}
-							onValueChange={value => setTipoIluminacion(value)}
+							value={sector.tipoIluminacion}
+							onValueChange={value =>
+								setSector({
+									...sector,
+									tipoIluminacion: value as "Natural" | "Artificial" | "Mixta",
+								})
+							}
 						>
 							<SelectTrigger className="w-full justify-center gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
 								<SelectValue />
@@ -102,9 +84,9 @@ export default function Area({
 							<SelectContent className="w-full p-2 px4">
 								<SelectGroup>
 									<SelectLabel>Tipo de Iluminación</SelectLabel>
-									<SelectItem value="natural">Natural</SelectItem>
-									<SelectItem value="artificial">Artificial</SelectItem>
-									<SelectItem value="mixta">Mixta</SelectItem>
+									<SelectItem value="Natural">Natural</SelectItem>
+									<SelectItem value="Artificial">Artificial</SelectItem>
+									<SelectItem value="Mixta">Mixta</SelectItem>
 								</SelectGroup>
 							</SelectContent>
 						</Select>
@@ -116,8 +98,13 @@ export default function Area({
 					</label>
 					<div className="w-1/2">
 						<Select
-							defaultValue={tipoFuente}
-							onValueChange={value => setTipoFuente(value)}
+							value={sector.tipoFuente}
+							onValueChange={value =>
+								setSector({
+									...sector,
+									tipoFuente: value as "Incandescente" | "Descarga" | "Mixta",
+								})
+							}
 						>
 							<SelectTrigger className="w-full justify-center gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
 								<SelectValue />
@@ -125,9 +112,9 @@ export default function Area({
 							<SelectContent className="w-full p-2 px4">
 								<SelectGroup>
 									<SelectLabel>Tipo de Fuente</SelectLabel>
-									<SelectItem value="incandescente">Incandescente</SelectItem>
-									<SelectItem value="descarga">Descarga</SelectItem>
-									<SelectItem value="mixta">Mixta</SelectItem>
+									<SelectItem value="Incandescente">Incandescente</SelectItem>
+									<SelectItem value="Descarga">Descarga</SelectItem>
+									<SelectItem value="Mixta">Mixta</SelectItem>
 								</SelectGroup>
 							</SelectContent>
 						</Select>
@@ -139,8 +126,13 @@ export default function Area({
 					</label>
 					<div className="w-1/2">
 						<Select
-							defaultValue={iluminacion}
-							onValueChange={value => setIluminacion(value)}
+							value={sector.iluminacion}
+							onValueChange={value =>
+								setSector({
+									...sector,
+									iluminacion: value as "General" | "Localizada" | "Mixta",
+								})
+							}
 						>
 							<SelectTrigger className="w-full justify-center gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
 								<SelectValue />
@@ -148,9 +140,9 @@ export default function Area({
 							<SelectContent className="w-full p-2 px4">
 								<SelectGroup>
 									<SelectLabel>Iluminación</SelectLabel>
-									<SelectItem value="general">General</SelectItem>
-									<SelectItem value="localizada">Localizada</SelectItem>
-									<SelectItem value="mixta">Mixta</SelectItem>
+									<SelectItem value="General">General</SelectItem>
+									<SelectItem value="Localizada">Localizada</SelectItem>
+									<SelectItem value="Mixta">Mixta</SelectItem>
 								</SelectGroup>
 							</SelectContent>
 						</Select>
@@ -162,8 +154,21 @@ export default function Area({
 					</label>
 					<div className="w-1/2">
 						<Select
-							defaultValue={valorRequerido}
-							onValueChange={value => setValorRequerido(value)}
+							value={sector.valorRequerido}
+							onValueChange={value =>
+								setSector({
+									...sector,
+									valorRequerido: value as
+										| "100"
+										| "200"
+										| "300"
+										| "750"
+										| "1500"
+										| "3000"
+										| "5000"
+										| "10000",
+								})
+							}
 						>
 							<SelectTrigger className="w-full justify-center gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
 								<SelectValue />
@@ -191,8 +196,10 @@ export default function Area({
 					</label>
 					<Textarea
 						id="observaciones"
-						value={observaciones}
-						onChange={e => setObservaciones(e.target.value)}
+						value={sector.observaciones}
+						onChange={e =>
+							setSector({ ...sector, observaciones: e.target.value })
+						}
 						className="w-full"
 					/>
 				</div>

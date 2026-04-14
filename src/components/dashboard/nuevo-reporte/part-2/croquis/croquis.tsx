@@ -9,40 +9,21 @@ import { Expand, RulerDimensionLine, ThumbsUp } from "lucide-react"
 import CroquisGrid from "./croquis-grid"
 import PuntosList from "./puntos-list"
 import { DeletePuntoAlertDialog } from "./delete-punto-alert"
-
-export type PuntosType = {
-	nombre: string
-	valor: number
-	valorX: number
-	valorY: number
-	cumple: boolean
-}
-
-const defaultPunto = {
-	nombre: "",
-	valor: 0,
-	valorX: 0,
-	valorY: 0,
-	cumple: false,
-}
+import { CroquisType, defaultPunto, PuntoType } from "@/lib/types"
 
 export default function CroquisComponent({
 	nombre,
-	cantidadFilas,
-	cantidadColumnas,
-	celdasSeleccionadas,
+	croquis,
 	puntos,
 	setPuntos,
 }: {
 	nombre: string
-	cantidadFilas: number
-	cantidadColumnas: number
-	celdasSeleccionadas: number[]
-	puntos: PuntosType[]
-	setPuntos: (puntos: PuntosType[]) => void
+	croquis: CroquisType
+	puntos: PuntoType[]
+	setPuntos: (puntos: PuntoType[]) => void
 }) {
 	const [openValue, setOpenValue] = useState<"new" | "edit" | false>(false)
-	const [actualPunto, setActualPunto] = useState<PuntosType>(defaultPunto)
+	const [actualPunto, setActualPunto] = useState<PuntoType>(defaultPunto)
 
 	return (
 		<article className="card bg-accent flex-col gap-6 flex-1">
@@ -63,10 +44,7 @@ export default function CroquisComponent({
 				<div className="min-h-[400px] h-max w-full overflow-auto bg-background shadow rounded-lg ring ring-foreground/5 py-10">
 					<div className="absolute top-4 left-4">
 						<AlertPointsCroquis
-							cantidadFilas={cantidadFilas}
-							cantidadColumnas={cantidadColumnas}
-							cantidadMedicionesMinimas={celdasSeleccionadas.length}
-							celdasSeleccionadas={celdasSeleccionadas}
+							croquis={croquis}
 							puntos={puntos}
 							setPuntos={setPuntos}
 							actualPunto={actualPunto}
@@ -74,9 +52,7 @@ export default function CroquisComponent({
 						/>
 					</div>
 					<Croquis
-						cantidadFilas={cantidadFilas}
-						cantidadColumnas={cantidadColumnas}
-						celdasSeleccionadas={celdasSeleccionadas}
+						croquis={croquis}
 						puntos={puntos}
 						setPuntos={setPuntos}
 						actualPunto={actualPunto}
@@ -92,9 +68,7 @@ export default function CroquisComponent({
 }
 
 function Croquis({
-	cantidadFilas,
-	cantidadColumnas,
-	celdasSeleccionadas,
+	croquis,
 	puntos,
 	setPuntos,
 	actualPunto,
@@ -102,13 +76,11 @@ function Croquis({
 	openValue,
 	setOpenValue,
 }: {
-	cantidadFilas: number
-	cantidadColumnas: number
-	celdasSeleccionadas: number[]
-	puntos: PuntosType[]
-	setPuntos: (puntos: PuntosType[]) => void
-	actualPunto: PuntosType
-	setActualPunto: (puntos: PuntosType) => void
+	croquis: CroquisType
+	puntos: PuntoType[]
+	setPuntos: (puntos: PuntoType[]) => void
+	actualPunto: PuntoType
+	setActualPunto: (punto: PuntoType) => void
 	openValue: "new" | "edit" | false
 	setOpenValue: (value: "new" | "edit" | false) => void
 }) {
@@ -119,9 +91,7 @@ function Croquis({
 			</p>
 			<div className={`${openValue ? "blur-lg" : ""}`}>
 				<CroquisGrid
-					cantidadFilas={cantidadFilas}
-					cantidadColumnas={cantidadColumnas}
-					celdasSeleccionadas={celdasSeleccionadas}
+					croquis={croquis}
 					puntos={puntos}
 					setActualPunto={setActualPunto}
 					setOpenValue={setOpenValue}
@@ -155,10 +125,10 @@ function NewPuntoForm({
 	openValue,
 	setOpenValue,
 }: {
-	puntos: PuntosType[]
-	setPuntos: (puntos: PuntosType[]) => void
-	actualPunto: PuntosType
-	setActualPunto: (punto: PuntosType) => void
+	puntos: PuntoType[]
+	setPuntos: (puntos: PuntoType[]) => void
+	actualPunto: PuntoType
+	setActualPunto: (punto: PuntoType) => void
 	openValue: "new" | "edit" | false
 	setOpenValue: (value: "new" | "edit" | false) => void
 }) {
@@ -170,7 +140,7 @@ function NewPuntoForm({
 		if (!value || value === actualPunto?.valor) return
 
 		// Add punto to puntos array
-		const newPunto: PuntosType = {
+		const newPunto: PuntoType = {
 			...actualPunto,
 			valor: value,
 		}
@@ -251,10 +221,10 @@ function EditPuntoForm({
 	openValue,
 	setOpenValue,
 }: {
-	puntos: PuntosType[]
-	setPuntos: (puntos: PuntosType[]) => void
-	actualPunto: PuntosType
-	setActualPunto: (punto: PuntosType) => void
+	puntos: PuntoType[]
+	setPuntos: (puntos: PuntoType[]) => void
+	actualPunto: PuntoType
+	setActualPunto: (punto: PuntoType) => void
 	openValue: "new" | "edit" | false
 	setOpenValue: (value: "new" | "edit" | false) => void
 }) {
@@ -344,23 +314,17 @@ function EditPuntoForm({
 }
 
 export function AlertPointsCroquis({
-	cantidadFilas,
-	cantidadColumnas,
-	celdasSeleccionadas,
-	cantidadMedicionesMinimas,
+	croquis,
 	puntos,
 	setPuntos,
 	actualPunto,
 	setActualPunto,
 }: {
-	cantidadFilas: number
-	cantidadColumnas: number
-	cantidadMedicionesMinimas: number
-	celdasSeleccionadas: number[]
-	puntos: PuntosType[]
-	setPuntos: (puntos: PuntosType[]) => void
-	actualPunto: PuntosType
-	setActualPunto: (punto: PuntosType) => void
+	croquis: CroquisType
+	puntos: PuntoType[]
+	setPuntos: (puntos: PuntoType[]) => void
+	actualPunto: PuntoType
+	setActualPunto: (punto: PuntoType) => void
 }) {
 	const [open, setOpen] = useState(false)
 	return (
@@ -373,10 +337,7 @@ export function AlertPointsCroquis({
 			<AlertDialogContent className="p-30 px-40">
 				<AlertDialogTitle></AlertDialogTitle>
 				<CroquisGridToPoint
-					cantidadFilas={cantidadFilas}
-					cantidadColumnas={cantidadColumnas}
-					cantidadMedicionesMinimas={cantidadMedicionesMinimas}
-					celdasSeleccionadas={celdasSeleccionadas}
+					croquis={croquis}
 					setOpen={setOpen}
 					puntos={puntos}
 					setPuntos={setPuntos}
@@ -389,24 +350,19 @@ export function AlertPointsCroquis({
 }
 
 function CroquisGridToPoint({
-	cantidadFilas,
-	cantidadColumnas,
-	celdasSeleccionadas,
+	croquis,
 	setOpen,
 	puntos,
 	setPuntos,
 	actualPunto,
 	setActualPunto,
 }: {
-	cantidadFilas: number
-	cantidadColumnas: number
-	cantidadMedicionesMinimas: number
-	celdasSeleccionadas: number[]
+	croquis: CroquisType
 	setOpen: (value: boolean) => void
-	puntos: PuntosType[]
-	setPuntos: (puntos: PuntosType[]) => void
-	actualPunto: PuntosType
-	setActualPunto: (punto: PuntosType) => void
+	puntos: PuntoType[]
+	setPuntos: (puntos: PuntoType[]) => void
+	actualPunto: PuntoType
+	setActualPunto: (punto: PuntoType) => void
 }) {
 	const [openValue, setOpenValue] = useState<"new" | "edit" | false>(false)
 
@@ -417,9 +373,7 @@ function CroquisGridToPoint({
 			>
 				<div className="w-max h-max p-20 mx-auto">
 					<Croquis
-						cantidadFilas={cantidadFilas}
-						cantidadColumnas={cantidadColumnas}
-						celdasSeleccionadas={celdasSeleccionadas}
+						croquis={croquis}
 						puntos={puntos}
 						setPuntos={setPuntos}
 						actualPunto={actualPunto}

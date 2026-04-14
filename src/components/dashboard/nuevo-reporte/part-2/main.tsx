@@ -2,63 +2,32 @@ import MedidasPlano from "./medidas/medidas-plano"
 import { Save } from "lucide-react"
 import { toast } from "sonner"
 import InformacionMedicion from "./informacion/Informacion-medicion"
-import CroquisComponent, { PuntosType } from "./croquis/croquis"
 import Area from "./area/area"
+import { ClimaType, CroquisType, PuntoType, SectorType } from "@/lib/types"
+import CroquisComponent from "./croquis/croquis"
 
 export default function NewReportPart2({
 	actualStep,
 	setActualStep,
-	nombre,
-	setNombre,
 	puntos,
 	setPuntos,
-	cantidadFilas,
-	setCantidadFilas,
-	cantidadColumnas,
-	setCantidadColumnas,
-	cantidadAltura,
-	setCantidadAltura,
-	celdasSeleccionadas,
-	setCeldasSeleccionadas,
+	croquis,
+	setCroquis,
 	sector,
 	setSector,
-	tipoIluminacion,
-	setTipoIluminacion,
-	tipoFuente,
-	setTipoFuente,
-	iluminacion,
-	setIluminacion,
-	valorRequerido,
-	setValorRequerido,
-	observaciones,
-	setObservaciones,
+	clima,
+	setClima,
 }: {
 	actualStep: number
 	setActualStep: (step: number) => void
-	nombre: string
-	setNombre: (nombre: string) => void
-	puntos: PuntosType[]
-	setPuntos: (puntos: PuntosType[]) => void
-	cantidadFilas: number
-	setCantidadFilas: (cantidad: number) => void
-	cantidadColumnas: number
-	setCantidadColumnas: (cantidad: number) => void
-	cantidadAltura: number
-	setCantidadAltura: (cantidad: number) => void
-	celdasSeleccionadas: number[]
-	setCeldasSeleccionadas: (celdas: number[]) => void
-	sector: string
-	setSector: (sector: string) => void
-	tipoIluminacion: string
-	setTipoIluminacion: (tipoIluminacion: string) => void
-	tipoFuente: string
-	setTipoFuente: (tipoFuente: string) => void
-	iluminacion: string
-	setIluminacion: (iluminacion: string) => void
-	observaciones: string
-	setObservaciones: (observaciones: string) => void
-	valorRequerido: string
-	setValorRequerido: (valorRequerido: string) => void
+	puntos: PuntoType[]
+	setPuntos: (puntos: PuntoType[]) => void
+	croquis: CroquisType
+	setCroquis: (croquis: CroquisType) => void
+	sector: SectorType
+	setSector: (sector: SectorType) => void
+	clima: ClimaType
+	setClima: (clima: ClimaType) => void
 }) {
 	const pasarAlPaso3 = () => {
 		let completos = true
@@ -74,15 +43,9 @@ export default function NewReportPart2({
 		} else toast.error("Por favor, complete los valores de la tabla")
 	}
 
-	const step0 =
-		nombre !== "" &&
-		sector !== "" &&
-		tipoIluminacion !== "" &&
-		tipoFuente !== "" &&
-		iluminacion !== "" &&
-		valorRequerido !== ""
+	const step0 = sector.nombre !== "" && sector.tipo !== ""
 
-	const step1 = celdasSeleccionadas.length > 0
+	const step1 = croquis.celdasSeleccionadas.length > 0
 
 	return (
 		<main
@@ -93,7 +56,7 @@ export default function NewReportPart2({
 					Area de trabajo
 				</span>
 				<span className="sm:text-lg 2xl:text-xl text-foreground/70">
-					{nombre || "Depósito"}
+					{sector.nombre || "Depósito"}
 				</span>
 				<button
 					className="themeBtnAccent py-1 px-4 rounded-lg sm:text-lg 2xl:text-xl font-semibold tracking-wilder"
@@ -106,36 +69,15 @@ export default function NewReportPart2({
 			</header>
 			<div className="flex gap-10 items-stretch">
 				<div className="flex flex-col gap-10 sm:w-[40%] 2xl:w-1/2">
-					<Area
-						nombre={nombre}
-						setNombre={setNombre}
-						sector={sector}
-						setSector={setSector}
-						tipoIluminacion={tipoIluminacion}
-						setTipoIluminacion={setTipoIluminacion}
-						tipoFuente={tipoFuente}
-						setTipoFuente={setTipoFuente}
-						iluminacion={iluminacion}
-						setIluminacion={setIluminacion}
-						observaciones={observaciones}
-						setObservaciones={setObservaciones}
-						valorRequerido={valorRequerido}
-						setValorRequerido={setValorRequerido}
-					/>
+					<Area sector={sector} setSector={setSector} />
 
 					<div
 						className={`flex-1 flex flex-col ${!step0 && "opacity-50 blur-[2px]"}`}
 					>
 						<MedidasPlano
-							nombre={nombre}
-							cantidadFilas={cantidadFilas}
-							cantidadColumnas={cantidadColumnas}
-							cantidadAltura={cantidadAltura}
-							setCantidadFilas={setCantidadFilas}
-							setCantidadColumnas={setCantidadColumnas}
-							setCantidadAltura={setCantidadAltura}
-							celdasSeleccionadas={celdasSeleccionadas}
-							setCeldasSeleccionadas={setCeldasSeleccionadas}
+							nombre={sector.nombre}
+							croquis={croquis}
+							setCroquis={setCroquis}
 							setPuntos={setPuntos}
 						/>
 					</div>
@@ -143,7 +85,11 @@ export default function NewReportPart2({
 					<div
 						className={`flex-1 flex flex-col ${!step1 && "opacity-50 blur-[2px]"}`}
 					>
-						<InformacionMedicion nombre={nombre} />
+						<InformacionMedicion
+							nombre={sector.nombre}
+							clima={clima}
+							setClima={setClima}
+						/>
 					</div>
 				</div>
 
@@ -151,10 +97,8 @@ export default function NewReportPart2({
 					className={`flex-1 flex flex-col gap-10 ${!step1 && "opacity-50 blur-[2px]"}`}
 				>
 					<CroquisComponent
-						nombre={nombre}
-						cantidadFilas={cantidadFilas}
-						cantidadColumnas={cantidadColumnas}
-						celdasSeleccionadas={celdasSeleccionadas}
+						nombre={sector.nombre}
+						croquis={croquis}
 						puntos={puntos}
 						setPuntos={setPuntos}
 					/>

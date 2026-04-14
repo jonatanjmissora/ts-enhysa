@@ -1,3 +1,4 @@
+import { Part1DataType } from "@/lib/types"
 import NuevoReporteEmpresa from "./empresa"
 import NuevoReporteInstrumento from "./instrumental"
 import NuevoReportePersona from "./persona"
@@ -6,9 +7,13 @@ import { Save } from "lucide-react"
 export default function NewReportPart1({
 	actualStep,
 	setActualStep,
+	part1Data,
+	setPart1Data,
 }: {
 	actualStep: number
 	setActualStep: (step: number) => void
+	part1Data: Part1DataType
+	setPart1Data: (data: Part1DataType) => void
 }) {
 	return (
 		<main
@@ -16,9 +21,15 @@ export default function NewReportPart1({
 		>
 			<div className="flex items-stretch gap-10">
 				<NuevoReportePersona />
-				<NuevoReporteEmpresa />
+				<NuevoReporteEmpresa
+					part1Data={part1Data}
+					setPart1Data={setPart1Data}
+				/>
 			</div>
-			<NuevoReporteInstrumento />
+			<NuevoReporteInstrumento
+				part1Data={part1Data}
+				setPart1Data={setPart1Data}
+			/>
 			<button
 				onClick={() => {
 					setActualStep(2)

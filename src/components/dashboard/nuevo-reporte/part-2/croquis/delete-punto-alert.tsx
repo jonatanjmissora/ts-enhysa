@@ -5,10 +5,10 @@ import {
 	AlertDialogTitle,
 	AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { PuntosType } from "./croquis"
 import { Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
+import { PuntoType } from "@/lib/types"
 
 export function DeletePuntoAlertDialog({
 	punto,
@@ -16,9 +16,9 @@ export function DeletePuntoAlertDialog({
 	setPuntos,
 	setOpenValue,
 }: {
-	punto: PuntosType
-	puntos: PuntosType[]
-	setPuntos: (puntos: PuntosType[]) => void
+	punto: PuntoType
+	puntos: PuntoType[]
+	setPuntos: (puntos: PuntoType[]) => void
 	setOpenValue: (value: "new" | "edit" | false) => void
 }) {
 	const [open, setOpen] = useState(false)

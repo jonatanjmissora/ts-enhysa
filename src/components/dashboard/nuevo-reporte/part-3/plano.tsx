@@ -3,22 +3,18 @@ import {
 	TooltipContent,
 	TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { CroquisType, PuntoType } from "@/lib/types"
 import { getHalfMedia } from "@/lib/utils"
-import type { PuntosType } from "@/routes/_protected/new-report"
 import { Lightbulb, RulerDimensionLine } from "lucide-react"
 
 export default function NewReportPart3Plano({
 	puntos,
 	nombre,
-	cantidadFilas,
-	cantidadColumnas,
-	celdasSeleccionadas,
+	croquis,
 }: {
-	puntos: PuntosType[]
+	puntos: PuntoType[]
 	nombre: string
-	cantidadFilas: number
-	cantidadColumnas: number
-	celdasSeleccionadas: number[]
+	croquis: CroquisType
 }) {
 	return (
 		<div className="flex-1 card bg-accent flex flex-col gap-6 justify-center">
@@ -37,12 +33,7 @@ export default function NewReportPart3Plano({
 			</div>
 			<div className="flex flex-col gap-4 sm:w-[440px] 2xl:w-[550px] relative scale-100">
 				<div className="min-h-[400px] h-max w-full overflow-auto bg-background shadow rounded-lg ring ring-foreground/5 py-10">
-					<CroquisGrid
-						cantidadFilas={cantidadFilas}
-						cantidadColumnas={cantidadColumnas}
-						celdasSeleccionadas={celdasSeleccionadas}
-						puntos={puntos}
-					/>
+					<CroquisGrid croquis={croquis} puntos={puntos} />
 				</div>
 			</div>
 		</div>
@@ -50,37 +41,30 @@ export default function NewReportPart3Plano({
 }
 
 function CroquisGrid({
-	cantidadFilas,
-	cantidadColumnas,
-	celdasSeleccionadas,
+	croquis,
 	puntos,
 }: {
-	cantidadFilas: number
-	cantidadColumnas: number
-	celdasSeleccionadas: number[]
-	puntos: PuntosType[]
+	croquis: CroquisType
+	puntos: PuntoType[]
 }) {
 	const celdasSize = 20
-	const totalCeldas = cantidadColumnas * cantidadFilas
+	const totalCeldas = croquis.ancho * croquis.largo
 	const halfMedia = getHalfMedia(puntos)
 	return (
 		<div className="w-max h-max p-20 m-auto ">
 			<div
 				className="grid relative"
 				style={{
-					gridTemplateColumns: `repeat(${cantidadColumnas}, minmax(0, 1fr))`,
-					gridTemplateRows: `repeat(${cantidadFilas}, minmax(0, 1fr))`,
+					gridTemplateColumns: `repeat(${croquis.ancho}, minmax(0, 1fr))`,
+					gridTemplateRows: `repeat(${croquis.largo}, minmax(0, 1fr))`,
 				}}
 			>
-				<Cotas
-					cantidadColumnas={cantidadColumnas}
-					cantidadFilas={cantidadFilas}
-				/>
+				<Cotas cantidadColumnas={croquis.ancho} cantidadFilas={croquis.largo} />
 				{Array.from({ length: totalCeldas }).map((_, i) => {
 					return (
 						<div
 							key={i}
-							className={`border border-gray-400 size-${celdasSize} ${celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
+							className={`border border-gray-400 size-${celdasSize} ${croquis.celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
 						/>
 					)
 				})}
@@ -102,7 +86,7 @@ const Punto = ({
 	index,
 	halfMedia,
 }: {
-	punto: PuntosType
+	punto: PuntoType
 	index: number
 	halfMedia: number
 }) => {
