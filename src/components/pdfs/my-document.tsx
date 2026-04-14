@@ -8,9 +8,9 @@ Font.register({
 	src: "https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-regular-webfont.ttf",
 })
 
-export const MyDocument = () => (
+export const MyDocument = ({ nombre }: { nombre?: string }) => (
 	<Document>
-		<Page1 />
+		<Page1 nombre={nombre} />
 		<Page2 />
 		<Page3 />
 	</Document>

@@ -128,7 +128,9 @@ const Skelton = () => {
 					<div className="bg-teal-700/75 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
 						<Warehouse className="size-6" />
 					</div>
-					<span className="text-xl font-semibold tracking-wider">Empresa</span>
+					<span className="sm:text-lg 2xl:text-2xl font-semibold tracking-wider">
+						Empresa
+					</span>
 				</div>
 				<Select>
 					<SelectTrigger className="w-full max-w-48">
@@ -141,11 +143,11 @@ const Skelton = () => {
 					</SelectContent>
 				</Select>
 			</div>
-			<article className="card dark:bg-(--dark-teal-opa) bg-(--teal-opa) flex-col gap-4 text-lg relative flex-1">
+			<article className="card dark:bg-(--dark-teal-opa) bg-(--teal-opa) flex-col gap-4 sm:text-base 2xl:text-xl relative flex-1">
 				<TextTooltip text={"Datos obtenidos a través del perfil."} />
 				<div className="grid grid-cols-2 gap-4 w-full">
-					<div className="flex flex-col gap-2">
-						<label className="font-semibold" htmlFor="razon-social">
+					<div className="flex flex-col gap-1">
+						<label className="tracking-wider" htmlFor="razon-social">
 							Razón Social
 						</label>
 						<input
@@ -155,8 +157,8 @@ const Skelton = () => {
 							readOnly
 						/>
 					</div>
-					<div className="flex flex-col gap-2">
-						<label className="font-semibold" htmlFor="cuit">
+					<div className="flex flex-col gap-1">
+						<label className="tracking-wider" htmlFor="cuit">
 							CUIT
 						</label>
 						<input
@@ -167,8 +169,8 @@ const Skelton = () => {
 						/>
 					</div>
 				</div>
-				<div className="flex flex-col gap-2 w-full">
-					<label className="font-semibold" htmlFor="direccion">
+				<div className="flex flex-col gap-1 w-full">
+					<label className="tracking-wider" htmlFor="direccion">
 						Dirección
 					</label>
 					<input
@@ -178,8 +180,8 @@ const Skelton = () => {
 						readOnly
 					/>
 				</div>
-				<div className="flex flex-col gap-2 w-full">
-					<label className="font-semibold" htmlFor="cant-empleados">
+				<div className="flex flex-col gap-1 w-full">
+					<label className="tracking-wider" htmlFor="cant-empleados">
 						Localidad
 					</label>
 					<input

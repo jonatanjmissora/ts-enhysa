@@ -47,7 +47,7 @@ export default function CroquisComponent({
 	return (
 		<article className="card bg-accent flex-col gap-6 flex-1">
 			<div className="flex w-full items-center border-b border-foreground/20">
-				<div className="flex items-center gap-3 flex-1">
+				<div className="flex items-center gap-3">
 					<div className="bg-purple-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
 						<RulerDimensionLine className="size-6" />
 					</div>

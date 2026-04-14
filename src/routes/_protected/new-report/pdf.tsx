@@ -8,8 +8,8 @@ export const Route = createFileRoute("/_protected/new-report/pdf")({
 
 function RouteComponent() {
 	return (
-		<PDFViewer className="min-h-screen w-full">
-			<MyDocument />
+		<PDFViewer width="100%" height="100%" className="min-h-screen w-full">
+			<MyDocument nombre="PEPE" />
 		</PDFViewer>
 	)
 }

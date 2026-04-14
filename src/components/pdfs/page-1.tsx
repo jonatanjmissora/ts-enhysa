@@ -51,14 +51,14 @@ const styles = StyleSheet.create({
 	},
 })
 
-export default function Page1() {
+export default function Page1({ nombre }: { nombre?: string }) {
 	return (
 		<Page size="A4" style={styles.page}>
 			<View style={styles.pagePadding}>
 				<Text style={styles.title}>
 					PROTOCOLO PARA MEDICIÓN DE ILUMINACIÓN EN EL AMBIENTE LABORAL
 				</Text>
-				<Text style={styles.row}>(1) Razón Social: </Text>
+				<Text style={styles.row}>(1) Razón Social: {nombre}</Text>
 				<Text style={styles.row}>(2) Dirección: </Text>
 				<Text style={styles.row}>(3) Localidad: </Text>
 				<Text style={styles.row}>(4) Provincia: </Text>

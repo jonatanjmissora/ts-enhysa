@@ -76,7 +76,10 @@ function NuevoReportePersonaContent() {
 							className="dark:bg-background"
 							checked={tecnico?.firmaImg !== ""}
 						/>
-						<Label htmlFor="terms-checkbox" className="tracking-wider">
+						<Label
+							htmlFor="terms-checkbox"
+							className="sm:text-base 2xl:text-lg tracking-wider"
+						>
 							firma digital
 						</Label>
 					</Field>
@@ -87,7 +90,10 @@ function NuevoReportePersonaContent() {
 							className="dark:bg-background"
 							checked={tecnico?.membrete !== ""}
 						/>
-						<Label htmlFor="terms-checkbox" className="tracking-wider">
+						<Label
+							htmlFor="terms-checkbox"
+							className="sm:text-base 2xl:text-lg tracking-wider"
+						>
 							pie de página
 						</Label>
 					</Field>
@@ -104,12 +110,14 @@ const Skelton = () => {
 				<div className="bg-blue-700/50 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
 					<UserRound className="size-6" />
 				</div>
-				<span className="text-xl font-semibold tracking-wider">Persona</span>
+				<span className="sm:text-lg 2xl:text-2xl font-semibold tracking-wider">
+					Persona
+				</span>
 			</div>
-			<article className="card dark:bg-(--dark-blue-opa) bg-(--blue-opa) flex-col gap-4 text-lg relative flex-1">
+			<article className="card dark:bg-(--dark-blue-opa) bg-(--blue-opa) flex-col gap-4 sm:text-base 2xl:text-xl relative flex-1">
 				<TextTooltip text={"Datos obtenidos a través del perfil."} />
-				<div className="flex flex-col gap-2 w-full">
-					<label className="font-semibold" htmlFor="nombre-completo">
+				<div className="flex flex-col gap-1 w-full">
+					<label className="tracking-wider" htmlFor="nombre-completo">
 						Nombre Completo
 					</label>
 					<input
@@ -120,8 +128,8 @@ const Skelton = () => {
 					/>
 				</div>
 				<div className="grid grid-cols-2 gap-4 w-full">
-					<div className="flex flex-col gap-2">
-						<label className="font-semibold" htmlFor="matricula">
+					<div className="flex flex-col gap-1">
+						<label className="tracking-wider" htmlFor="matricula">
 							Matrícula
 						</label>
 						<input
@@ -131,8 +139,8 @@ const Skelton = () => {
 							readOnly
 						/>
 					</div>
-					<div className="flex flex-col gap-2">
-						<label className="font-semibold" htmlFor="cargo">
+					<div className="flex flex-col gap-1">
+						<label className="tracking-wider" htmlFor="cargo">
 							Cargo
 						</label>
 						<input
@@ -150,7 +158,10 @@ const Skelton = () => {
 							name="terms-checkbox"
 							className="dark:bg-background"
 						/>
-						<Label htmlFor="terms-checkbox" className="sm:text-lg 2xl:text-xl">
+						<Label
+							htmlFor="terms-checkbox"
+							className="sm:text-base 2xl:text-lg tracking-wider"
+						>
 							firma digital
 						</Label>
 					</Field>
@@ -160,7 +171,10 @@ const Skelton = () => {
 							name="terms-checkbox"
 							className="dark:bg-background"
 						/>
-						<Label htmlFor="terms-checkbox" className="sm:text-lg 2xl:text-xl">
+						<Label
+							htmlFor="terms-checkbox"
+							className="sm:text-base 2xl:text-lg tracking-wider"
+						>
 							pie de página
 						</Label>
 					</Field>

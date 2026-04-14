@@ -5,6 +5,8 @@ import NewReportPart3Plano from "./plano"
 import NewReportPart3Observaciones from "./observaciones"
 import { Link } from "@tanstack/react-router"
 import { PuntosType } from "../part-2/croquis/croquis"
+import { MyDocument } from "@/components/pdfs/my-document"
+import { PDFViewer } from "@react-pdf/renderer"
 
 export default function NewReportPart3({
 	actualStep,
@@ -61,6 +63,10 @@ export default function NewReportPart3({
 				<BookmarkCheck className="size-6" />
 				Generar Reporte PDF
 			</Link>
+
+			<PDFViewer width="100%" height="100%" className="min-h-[300dvh] w-full">
+				<MyDocument nombre={nombre} />
+			</PDFViewer>
 		</main>
 	)
 }

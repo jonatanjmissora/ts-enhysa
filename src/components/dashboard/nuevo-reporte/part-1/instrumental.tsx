@@ -134,7 +134,7 @@ function NuevoReporteInstrumentoContent() {
 							/>
 							<Label
 								htmlFor="cert-checkbox"
-								className="sm:text-base 2xl:text-xl tracking-wider"
+								className="sm:text-base 2xl:text-lg tracking-wider"
 							>
 								imagen certificado
 							</Label>
@@ -154,7 +154,7 @@ const Skelton = () => {
 					<div className="bg-orange-700/75 text-foreground rounded-sm p-1 px-3 flex items-center justify-center font-bold">
 						<Cpu className="size-6" />
 					</div>
-					<span className="text-xl font-semibold tracking-wider">
+					<span className="sm:text-lg 2xl:text-2xl font-semibold tracking-wider">
 						Instrumental
 					</span>
 				</div>
@@ -169,11 +169,11 @@ const Skelton = () => {
 					</SelectContent>
 				</Select>
 			</div>
-			<article className="card dark:bg-(--dark-orange-opa) bg-(--orange-opa) flex-col gap-4 text-lg relative flex-1">
+			<article className="card dark:bg-(--dark-orange-opa) bg-(--orange-opa) flex-col gap-4 sm:text-base 2xl:text-xl relative flex-1">
 				<TextTooltip text={"Datos obtenidos a través del perfil."} />
 				<div className="grid grid-cols-2 gap-4 w-full">
-					<div className="flex flex-col gap-2 w-full">
-						<label className="font-semibold" htmlFor="nombre">
+					<div className="flex flex-col gap-1 w-full">
+						<label className="tracking-wider" htmlFor="nombre">
 							Nombre
 						</label>
 						<input
@@ -183,8 +183,8 @@ const Skelton = () => {
 							placeholder=". . ."
 						/>
 					</div>
-					<div className="flex flex-col gap-2 w-full">
-						<label className="font-semibold" htmlFor="marca">
+					<div className="flex flex-col gap-1 w-full">
+						<label className="tracking-wider" htmlFor="marca">
 							Marca
 						</label>
 						<input
@@ -194,8 +194,8 @@ const Skelton = () => {
 							placeholder=". . ."
 						/>
 					</div>
-					<div className="flex flex-col gap-2 w-full">
-						<label className="font-semibold" htmlFor="modelo">
+					<div className="flex flex-col gap-1 w-full">
+						<label className="tracking-wider" htmlFor="modelo">
 							Modelo
 						</label>
 						<input
@@ -205,8 +205,8 @@ const Skelton = () => {
 							placeholder=". . ."
 						/>
 					</div>
-					<div className="flex flex-col gap-2 w-full">
-						<label className="font-semibold" htmlFor="fechaCalibracion">
+					<div className="flex flex-col gap-1 w-full">
+						<label className="tracking-wider" htmlFor="fechaCalibracion">
 							Fecha de calibración
 						</label>
 						<input
@@ -223,7 +223,10 @@ const Skelton = () => {
 								name="cert-checkbox"
 								className="dark:bg-background"
 							/>
-							<Label htmlFor="cert-checkbox" className="sm:text-lg 2xl:text-xl">
+							<Label
+								htmlFor="cert-checkbox"
+								className="sm:text-base 2xl:text-lg tracking-wider"
+							>
 								imagen certificado
 							</Label>
 						</Field>
