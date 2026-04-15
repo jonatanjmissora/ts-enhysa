@@ -54,7 +54,7 @@ export default function CroquisGrid({
 					return (
 						<div
 							key={i}
-							className={`border border-gray-400 size-[${CELDASIZE}] ${croquis.celdasSeleccionadas.includes(i) ? " bg-blue-500" : ""}`}
+							className={`border border-gray-400 size-[70px] ${croquis.celdasSeleccionadas.includes(i) ? " bg-blue-500" : ""}`}
 						/>
 					)
 				})}

@@ -61,7 +61,7 @@ agregar membretes
 
 agregar anexos y numero de paginas
 
-
+que pasa con la constante de CELDASIZE en el Croquisgrid
 
 
 
