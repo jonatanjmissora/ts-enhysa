@@ -42,6 +42,11 @@ export const MyDocument = ({
 	puntos: PuntoType[]
 	part3Data: Part3DataType
 }) => {
+	const membreteDerecho = [
+		"Seguridad e Higiene en el trabajo",
+		"Informe técnico - Medición de iluminación",
+	]
+
 	const sortedPuntosByTimestamp = getPuntosSortedByTimestamp(puntos)
 	const firstPunto = sortedPuntosByTimestamp[0]
 	const lastPunto = sortedPuntosByTimestamp[sortedPuntosByTimestamp.length - 1]
@@ -51,7 +56,8 @@ export const MyDocument = ({
 
 	return (
 		<Document>
-			{/* <Page1
+			<Page1
+				membreteDerecho={membreteDerecho}
 				tecnico={tecnico}
 				empresa={empresa}
 				instrumento={instrumento}
@@ -59,9 +65,23 @@ export const MyDocument = ({
 				clima={clima}
 				tiempo={{ fecha, horaInicio, horaFin }}
 			/>
-			<Page2 empresa={empresa} puntos={puntos} sector={sector} />
-			<Page3 empresa={empresa} part3Data={part3Data} /> */}
-			<Page4 sector={sector} croquis={croquis} puntos={puntos} />
+			<Page2
+				empresa={empresa}
+				puntos={puntos}
+				sector={sector}
+				membreteDerecho={membreteDerecho}
+			/>
+			<Page3
+				empresa={empresa}
+				part3Data={part3Data}
+				membreteDerecho={membreteDerecho}
+			/>
+			<Page4
+				sector={sector}
+				croquis={croquis}
+				puntos={puntos}
+				membreteDerecho={membreteDerecho}
+			/>
 		</Document>
 	)
 }

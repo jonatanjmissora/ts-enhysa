@@ -113,7 +113,13 @@ function CroquisGridToPaint({
 				</div>
 			</div>
 			<button
-				onClick={() => setOpen(false)}
+				onClick={() => {
+					window.scrollTo({
+						top: 100,
+						behavior: "smooth", // Use 'auto' for an instant jump
+					})
+					setOpen(false)
+				}}
 				className="cardBackground px-4 py-3 cursor-pointer w-1/2 mx-auto justify-center tracking-widest font-semibold gap-4 mt-10"
 			>
 				Listo

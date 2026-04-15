@@ -51,6 +51,17 @@ empresa con distintas direcciones
 
 tengo que refrescar la pagina, para que tome los cambios el pdf
 
+arreglar la cota en el dibujo
+
+alargar la ventana del pdf
+
+cambiar nombre de archivo a bajar
+
+agregar membretes
+
+agregar anexos y numero de paginas
+
+
 
 
 

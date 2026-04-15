@@ -17,7 +17,6 @@ export default function CroquisGrid({
 }) {
 	const gridRef = useRef<HTMLButtonElement>(null)
 	const totalCeldas = croquis.largo * croquis.ancho
-	const celdaSize = `size-[${CELDASIZE}]`
 
 	const setXYPoint = (e: React.MouseEvent<HTMLButtonElement>) => {
 		if (!gridRef.current) return
@@ -55,7 +54,7 @@ export default function CroquisGrid({
 					return (
 						<div
 							key={i}
-							className={`border border-gray-400 ${celdaSize} ${croquis.celdasSeleccionadas.includes(i) ? " bg-blue-500" : ""}`}
+							className={`border border-gray-400 size-[${CELDASIZE}] ${croquis.celdasSeleccionadas.includes(i) ? " bg-blue-500" : ""}`}
 						/>
 					)
 				})}

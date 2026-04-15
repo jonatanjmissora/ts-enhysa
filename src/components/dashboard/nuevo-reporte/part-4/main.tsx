@@ -73,7 +73,7 @@ const Report = ({
 	}
 
 	return (
-		<PDFViewer width="100%" height="100%" className="min-h-[300dvh] w-full">
+		<PDFViewer width="100%" height="100%" className="min-h-[500dvh] w-full">
 			<MyDocument
 				tecnico={tecnico}
 				empresa={empresas[part1Data.empresaIndex]}

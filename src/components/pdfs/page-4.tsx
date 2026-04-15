@@ -1,6 +1,7 @@
 import { CroquisType, PuntoType, SectorType } from "@/lib/types"
 import { Page, Text, View, StyleSheet } from "@react-pdf/renderer"
 import { CELDASIZE } from "../dashboard/nuevo-reporte/part-2/croquis/croquis-grid"
+import MembreteSuperior from "./membrete-superior"
 
 // Create styles
 const styles = StyleSheet.create({
@@ -8,9 +9,9 @@ const styles = StyleSheet.create({
 		flexDirection: "column",
 		backgroundColor: "#fff",
 		fontFamily: "Roboto",
+		padding: "0px 60px",
 	},
 	pagePadding: {
-		margin: "100px 60px",
 		border: "1px solid black",
 	},
 	title: {
@@ -55,16 +56,30 @@ const styles = StyleSheet.create({
 })
 
 export default function Page4({
+	membreteDerecho,
 	sector,
 	croquis,
 	puntos,
 }: {
+	membreteDerecho: string[]
 	sector: SectorType
 	croquis: CroquisType
 	puntos: PuntoType[]
 }) {
 	return (
 		<Page size="A4" style={styles.page}>
+			<MembreteSuperior membreteDerecho={membreteDerecho} />
+			<Text
+				style={{
+					width: "100%",
+					textAlign: "center",
+					fontSize: 12,
+					margin: 10,
+					fontWeight: "900",
+				}}
+			>
+				Anexo 4
+			</Text>
 			<View style={[styles.pagePadding, { border: "none" }]}>
 				<Text style={styles.title}>PLANOS</Text>
 				<Text style={[styles.row, { padding: "10px 5px", margin: "10px 0px" }]}>

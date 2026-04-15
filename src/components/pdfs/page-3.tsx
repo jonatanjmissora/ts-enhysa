@@ -1,6 +1,7 @@
 import { Part3DataType } from "@/lib/types"
 import { Page, Text, View, StyleSheet } from "@react-pdf/renderer"
 import { EmpresaType } from "db/empresas/schema"
+import MembreteSuperior from "./membrete-superior"
 
 // Create styles
 const styles = StyleSheet.create({
@@ -8,9 +9,9 @@ const styles = StyleSheet.create({
 		flexDirection: "column",
 		backgroundColor: "#fff",
 		fontFamily: "Roboto",
+		padding: "0px 30px",
 	},
 	pagePadding: {
-		margin: "100px 30px",
 		border: "1px solid black",
 	},
 	title: {
@@ -57,14 +58,28 @@ const styles = StyleSheet.create({
 })
 
 export default function Page3({
+	membreteDerecho,
 	empresa,
 	part3Data,
 }: {
+	membreteDerecho: string[]
 	empresa: EmpresaType
 	part3Data: Part3DataType
 }) {
 	return (
 		<Page size="A4" orientation="landscape" style={styles.page}>
+			<MembreteSuperior membreteDerecho={membreteDerecho} />
+			<Text
+				style={{
+					width: "100%",
+					textAlign: "center",
+					fontSize: 12,
+					margin: 10,
+					fontWeight: "900",
+				}}
+			>
+				Anexo 3
+			</Text>
 			<View style={styles.pagePadding}>
 				<Text style={styles.title}>
 					PROTOCOLO PARA MEDICIÓN DE ILUMINACIÓN EN EL AMBIENTE LABORAL
