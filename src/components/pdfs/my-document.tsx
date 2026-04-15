@@ -13,6 +13,7 @@ import {
 import { TecnicoType } from "db/tecnicos/schema"
 import { EmpresaType } from "db/empresas/schema"
 import { InstrumentoType } from "db/instrumentos/schema"
+import { getPuntosSortedByTimestamp } from "@/lib/utils"
 
 Font.register({
 	family: "Roboto",
@@ -39,16 +40,26 @@ export const MyDocument = ({
 	croquis: CroquisType
 	puntos: PuntoType[]
 	part3Data: Part3DataType
-}) => (
-	<Document>
-		<Page1
-			tecnico={tecnico}
-			empresa={empresa}
-			instrumento={instrumento}
-			sector={sector}
-			clima={clima}
-		/>
-		<Page2 />
-		<Page3 />
-	</Document>
-)
+}) => {
+	const sortedPuntosByTimestamp = getPuntosSortedByTimestamp(puntos)
+	const firstPunto = sortedPuntosByTimestamp[0]
+	const lastPunto = sortedPuntosByTimestamp[sortedPuntosByTimestamp.length - 1]
+	const fecha = new Date(firstPunto.created).toLocaleDateString()
+	const horaInicio = new Date(firstPunto.created).toLocaleTimeString()
+	const horaFin = new Date(lastPunto.created).toLocaleTimeString()
+
+	return (
+		<Document>
+			<Page1
+				tecnico={tecnico}
+				empresa={empresa}
+				instrumento={instrumento}
+				sector={sector}
+				clima={clima}
+				tiempo={{ fecha, horaInicio, horaFin }}
+			/>
+			<Page2 />
+			<Page3 />
+		</Document>
+	)
+}

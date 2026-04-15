@@ -74,12 +74,8 @@ function NuevoReporteInstrumentoContent({
 						<SelectGroup>
 							<SelectLabel>Instrumental</SelectLabel>
 							{sortedInstrumentos?.map(instrumento => (
-								<SelectItem
-									key={instrumento.id}
-									value={instrumento.id.toString()}
-								>
-									{instrumento.nombre.toUpperCase()} - {instrumento.marca} -{" "}
-									{instrumento.modelo}
+								<SelectItem key={instrumento.id} value={instrumento.nombre}>
+									{instrumento.nombre.toUpperCase()} - {instrumento.marca}
 								</SelectItem>
 							))}
 						</SelectGroup>
@@ -108,7 +104,7 @@ function NuevoReporteInstrumentoContent({
 						<input
 							id="marca"
 							className="bg-background py-2 px-4 rounded-lg text-center"
-							value={actualInstrumento?.marca ?? ""}
+							value={actualInstrumento?.marca.toUpperCase() ?? ""}
 							readOnly
 							placeholder="Ej. Extech"
 						/>
@@ -120,7 +116,7 @@ function NuevoReporteInstrumentoContent({
 						<input
 							id="modelo"
 							className="bg-background py-2 px-4 rounded-lg text-center"
-							value={actualInstrumento?.modelo ?? ""}
+							value={actualInstrumento?.modelo.toUpperCase() ?? ""}
 							readOnly
 							placeholder="LT3000"
 						/>

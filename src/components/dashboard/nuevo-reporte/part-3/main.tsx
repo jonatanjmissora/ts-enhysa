@@ -9,6 +9,7 @@ import {
 	Part3DataType,
 	PuntoType,
 } from "@/lib/types"
+import { toast } from "sonner"
 
 export default function NewReportPart3({
 	actualStep,
@@ -28,6 +29,13 @@ export default function NewReportPart3({
 	part3Data: Part3DataType
 	setPart3Data: (data: Part3DataType) => void
 }) {
+	const pasarAlPaso4 = () => {
+		if (part3Data.conclusion && part3Data.recomendacion) {
+			window.scrollTo(0, 0)
+			setActualStep(4)
+		} else toast.error("Por favor, complete los Conclusiones y Recomendaciones")
+	}
+
 	return (
 		<main
 			className={`${actualStep === 3 ? "flex-1" : "hidden"} p-20 sm:py-10 2xl:py-20 flex flex-col gap-10 justify-center`}
@@ -56,7 +64,7 @@ export default function NewReportPart3({
 
 			<button
 				type="button"
-				onClick={() => setActualStep(4)}
+				onClick={pasarAlPaso4}
 				className="flex items-center gap-4 themeBtnAccent justify-center rounded-xl shadow-xl text-lg text-foreground tracking-wide px-6 py-4 cursor-pointer m-0"
 			>
 				<BookmarkCheck className="size-6" />

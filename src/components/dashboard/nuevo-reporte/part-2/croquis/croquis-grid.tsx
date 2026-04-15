@@ -29,6 +29,7 @@ export default function CroquisGrid({
 			valorX: x,
 			valorY: y,
 			cumple: false,
+			created: Date.now(),
 		}
 		setActualPunto(newActualPunto)
 		setOpenValue("new")

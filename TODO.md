@@ -39,6 +39,8 @@ polar
 
 debounce en el input de area
 
+por que es tan lento la carga de datos del part1 y part2 ?
+
 mover puntos en el croquis
 
 agregar distintas areas de medicion
@@ -46,6 +48,8 @@ agregar distintas areas de medicion
 mis informes: filtros por fecha, empresa, pendientes
 
 empresa con distintas direcciones
+
+tengo que refrescar la pagina, para que tome los cambios el pdf
 
 
 

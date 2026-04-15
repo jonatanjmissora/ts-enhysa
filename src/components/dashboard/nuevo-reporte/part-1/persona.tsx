@@ -63,7 +63,7 @@ function NuevoReportePersonaContent() {
 							id="cargo"
 							className="bg-background py-2 px-4 rounded-lg text-center"
 							placeholder="Ej. Seguridad e Higiene"
-							defaultValue={tecnico?.cargo || ""}
+							defaultValue={tecnico?.cargo.toUpperCase() || ""}
 							readOnly
 						/>
 					</div>

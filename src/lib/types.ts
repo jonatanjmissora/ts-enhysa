@@ -82,6 +82,7 @@ export type PuntoType = {
 	valorX: number
 	valorY: number
 	cumple: boolean
+	created: number
 }
 
 export const defaultPunto = {
@@ -90,6 +91,7 @@ export const defaultPunto = {
 	valorX: 0,
 	valorY: 0,
 	cumple: false,
+	created: Date.now(),
 }
 
 // ************************************************************************************************

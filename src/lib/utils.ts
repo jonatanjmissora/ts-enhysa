@@ -129,3 +129,7 @@ export const puntosResult = (puntos: PuntoType[]) => {
 	)
 	return { puntosQueCumplen, puntosQueNoCumplen }
 }
+
+export const getPuntosSortedByTimestamp = (puntos: PuntoType[]) => {
+	return puntos.sort((a, b) => a.created - b.created)
+}

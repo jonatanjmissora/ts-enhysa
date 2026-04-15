@@ -1,9 +1,4 @@
-import {
-	ClimaType,
-	Part1DataType,
-	Part3DataType,
-	SectorType,
-} from "@/lib/types"
+import { ClimaType, SectorType } from "@/lib/types"
 import { Page, Text, View, StyleSheet } from "@react-pdf/renderer"
 import { EmpresaType, InstrumentoType, TecnicoType } from "db/schema"
 
@@ -51,6 +46,7 @@ const styles = StyleSheet.create({
 	flexrowelement: {
 		flex: 1,
 		display: "flex",
+		flexDirection: "column",
 		justifyContent: "center",
 		alignItems: "center",
 		fontSize: 9,
@@ -59,17 +55,22 @@ const styles = StyleSheet.create({
 })
 
 export default function Page1({
-	tecnico,
 	empresa,
 	instrumento,
 	sector,
 	clima,
+	tiempo,
 }: {
 	tecnico: TecnicoType
 	empresa: EmpresaType
 	instrumento: InstrumentoType
 	sector: SectorType
 	clima: ClimaType
+	tiempo: {
+		fecha: string
+		horaInicio: string
+		horaFin: string
+	}
 }) {
 	return (
 		<Page size="A4" style={styles.page}>
@@ -108,10 +109,10 @@ export default function Page1({
 					84/12, método de la grilla para iluminación general
 				</Text>
 
-				{/* TODO agarrar todos los puntos y sacar el primero y el ultimo timestamp */}
 				<View style={styles.flexrow}>
 					<View style={styles.flexrowelement}>
 						<Text>(11) Fecha de la medición:</Text>
+						<Text>{tiempo.fecha}</Text>
 					</View>
 					<View
 						style={[
@@ -119,28 +120,33 @@ export default function Page1({
 							{ borderRight: "1px solid black", borderLeft: "1px solid black" },
 						]}
 					>
-						<Text>(12) Hora de inicio: </Text>
+						<Text>(12) Hora de inicio:</Text>
+						<Text>{tiempo.horaInicio}</Text>
 					</View>
 					<View style={styles.flexrowelement}>
-						<Text>(13) Hora de finalización: </Text>
+						<Text>(13) Hora de finalización:</Text>
+						<Text>{tiempo.horaFin}</Text>
 					</View>
 				</View>
 
 				<Text style={styles.row}>
-					(14) Condiciones atmosféricas: {clima.estado} humedad: {clima.humedad}{" "}
-					temperatura: {clima.temperatura}
+					(14) Condiciones atmosféricas: {clima.estado} humedad({clima.humedad}
+					%) temperatura({clima.temperatura}°C)
 				</Text>
 
 				<Text style={styles.subtitle}>
 					Documentación que se Adjuntará a la Medición
 				</Text>
-				<Text style={styles.row}>(15) Certificado de calibración: </Text>
+				<Text style={styles.row}>(15) Certificado de calibración: Anexo 4</Text>
 				<Text style={styles.row}>
-					(16) Plano o croquis del establecimiento:{" "}
+					(16) Plano o croquis del establecimiento: Anexo 5
 				</Text>
 
 				<Text style={[styles.row, { height: 100, borderBottom: "none" }]}>
-					(17) Observaciones: {sector.observaciones}
+					(17) Observaciones:{" "}
+					{sector.observaciones !== ""
+						? sector.observaciones
+						: "Sin observaciones"}
 				</Text>
 			</View>
 		</Page>

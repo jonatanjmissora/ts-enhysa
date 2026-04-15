@@ -143,6 +143,7 @@ function NewPuntoForm({
 		const newPunto: PuntoType = {
 			...actualPunto,
 			valor: value,
+			created: Date.now(),
 		}
 
 		if (!puntos) {
@@ -238,7 +239,9 @@ function EditPuntoForm({
 			return setOpenValue(false)
 
 		const newPuntos = [...puntos].map(punto =>
-			punto.nombre !== actualPunto?.nombre ? punto : { ...punto, valor: value }
+			punto.nombre !== actualPunto?.nombre
+				? punto
+				: { ...punto, valor: value, created: Date.now() }
 		)
 		setPuntos(newPuntos)
 		setActualPunto(defaultPunto)

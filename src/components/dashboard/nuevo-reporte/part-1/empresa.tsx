@@ -55,7 +55,7 @@ function NuevoReporteEmpresaContent({
 					</span>
 				</div>
 				<Select
-					defaultValue={empresas?.[0]?.razonSocial ?? ""}
+					defaultValue={actualEmpresa?.razonSocial}
 					onValueChange={value =>
 						setPart1Data({
 							...part1Data,
@@ -71,8 +71,8 @@ function NuevoReporteEmpresaContent({
 						<SelectGroup>
 							<SelectLabel>Empresas</SelectLabel>
 							{sortedEmpresas.map(empresa => (
-								<SelectItem key={empresa.id} value={empresa.id.toString()}>
-									{empresa.razonSocial.toUpperCase()}
+								<SelectItem key={empresa.id} value={empresa.razonSocial}>
+									{empresa.razonSocial.toUpperCase()} - {empresa.direccion}
 								</SelectItem>
 							))}
 						</SelectGroup>
@@ -80,7 +80,6 @@ function NuevoReporteEmpresaContent({
 				</Select>
 			</div>
 			<article className="card dark:bg-(--dark-teal-opa) bg-(--teal-opa) flex-col gap-4 sm:text-base 2xl:text-xl relative flex-1">
-				empresa {JSON.stringify(actualEmpresa)} index {part1Data.empresaIndex}
 				<TextTooltip text={"Datos obtenidos a través del perfil."} />
 				<div className="grid grid-cols-2 gap-4 w-full">
 					<div className="flex flex-col gap-1">
@@ -116,7 +115,7 @@ function NuevoReporteEmpresaContent({
 						id="direccion"
 						className="bg-background py-2 px-4 rounded-lg text-center"
 						placeholder="Calle, Altura"
-						value={actualEmpresa?.direccion ?? ""}
+						value={actualEmpresa?.direccion.toUpperCase() ?? ""}
 						readOnly
 					/>
 				</div>
@@ -128,7 +127,7 @@ function NuevoReporteEmpresaContent({
 						id="localidad"
 						placeholder="Ciudad, Provincia, Pais"
 						className="bg-background py-2 px-4 rounded-lg text-center"
-						value={actualEmpresa?.localidad ?? ""}
+						value={actualEmpresa?.localidad.toUpperCase() ?? ""}
 						readOnly
 					/>
 				</div>
