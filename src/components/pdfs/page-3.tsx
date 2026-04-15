@@ -1,4 +1,6 @@
+import { Part3DataType } from "@/lib/types"
 import { Page, Text, View, StyleSheet } from "@react-pdf/renderer"
+import { EmpresaType } from "db/empresas/schema"
 
 // Create styles
 const styles = StyleSheet.create({
@@ -54,7 +56,13 @@ const styles = StyleSheet.create({
 	},
 })
 
-export default function Page3() {
+export default function Page3({
+	empresa,
+	part3Data,
+}: {
+	empresa: EmpresaType
+	part3Data: Part3DataType
+}) {
 	return (
 		<Page size="A4" orientation="landscape" style={styles.page}>
 			<View style={styles.pagePadding}>
@@ -64,7 +72,7 @@ export default function Page3() {
 
 				<View style={styles.flexrow}>
 					<View style={[styles.flexrowelement, { flex: 1 }]}>
-						<Text>(35) Razón Social: </Text>
+						<Text>(18) Razón Social: {empresa.razonSocial.toUpperCase()}</Text>
 					</View>
 					<View
 						style={[
@@ -72,7 +80,7 @@ export default function Page3() {
 							{ borderLeft: "1px solid black", width: 180 },
 						]}
 					>
-						<Text>(36) C.U.I.T.: </Text>
+						<Text>(19) C.U.I.T.: {empresa.cuit}</Text>
 					</View>
 				</View>
 
@@ -83,7 +91,7 @@ export default function Page3() {
 							{ borderRight: "1px solid black", width: "35%" },
 						]}
 					>
-						<Text>(37) Dirección: </Text>
+						<Text>(20) Dirección: {empresa.direccion.toUpperCase()}</Text>
 					</View>
 					<View
 						style={[
@@ -91,7 +99,7 @@ export default function Page3() {
 							{ borderRight: "1px solid black", width: "25%" },
 						]}
 					>
-						<Text>(38) Localidad: </Text>
+						<Text>(21) Localidad: {empresa.localidad.toUpperCase()}</Text>
 					</View>
 					<View
 						style={[
@@ -99,10 +107,10 @@ export default function Page3() {
 							{ borderRight: "1px solid black", width: "15%" },
 						]}
 					>
-						<Text>(39) CP: </Text>
+						<Text>(22) CP: {empresa.codigoPostal}</Text>
 					</View>
 					<View style={[styles.flexrowelement, { width: "25%" }]}>
-						<Text>(40) Provincia: </Text>
+						<Text>(23) Provincia: {empresa.provincia.toUpperCase()}</Text>
 					</View>
 				</View>
 
@@ -135,10 +143,18 @@ export default function Page3() {
 							{ borderRight: "1px solid black", flex: 1, height: 200 },
 						]}
 					>
-						<Text></Text>
+						<Text>
+							{part3Data.conclusion !== ""
+								? part3Data.conclusion
+								: "No hay conclusiones."}
+						</Text>
 					</View>
 					<View style={[styles.flexrowelement, { height: 200, flex: 1 }]}>
-						<Text></Text>
+						<Text>
+							{part3Data.recomendacion !== ""
+								? part3Data.recomendacion
+								: "No hay recomendaciones."}
+						</Text>
 					</View>
 				</View>
 			</View>

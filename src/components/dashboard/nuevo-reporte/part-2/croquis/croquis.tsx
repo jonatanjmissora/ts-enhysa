@@ -188,6 +188,7 @@ function NewPuntoForm({
 							name="valor"
 							type="number"
 							className="w-full sm:text-4xl 2xl:text-6xl font-bold tracking-wildest p-4 card bg-foreground text-background text-center"
+							autoComplete="off"
 						/>
 					</div>
 					<div className="w-full flex items-center gap-4">
@@ -290,6 +291,7 @@ function EditPuntoForm({
 							type="number"
 							defaultValue={actualPunto.valor}
 							className="w-full sm:text-4xl 2xl:text-6xl font-bold tracking-wildest p-4 card bg-foreground text-background text-center"
+							autoComplete="off"
 						/>
 					</div>
 					<div className="w-full flex items-center gap-4">

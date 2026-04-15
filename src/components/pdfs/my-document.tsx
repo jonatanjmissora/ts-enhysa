@@ -14,6 +14,7 @@ import { TecnicoType } from "db/tecnicos/schema"
 import { EmpresaType } from "db/empresas/schema"
 import { InstrumentoType } from "db/instrumentos/schema"
 import { getPuntosSortedByTimestamp } from "@/lib/utils"
+import Page4 from "./page-4"
 
 Font.register({
 	family: "Roboto",
@@ -50,7 +51,7 @@ export const MyDocument = ({
 
 	return (
 		<Document>
-			<Page1
+			{/* <Page1
 				tecnico={tecnico}
 				empresa={empresa}
 				instrumento={instrumento}
@@ -58,8 +59,9 @@ export const MyDocument = ({
 				clima={clima}
 				tiempo={{ fecha, horaInicio, horaFin }}
 			/>
-			<Page2 />
-			<Page3 />
+			<Page2 empresa={empresa} puntos={puntos} sector={sector} />
+			<Page3 empresa={empresa} part3Data={part3Data} /> */}
+			<Page4 sector={sector} croquis={croquis} puntos={puntos} />
 		</Document>
 	)
 }

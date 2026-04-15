@@ -2,6 +2,8 @@ import { useRef } from "react"
 import { Lightbulb } from "lucide-react"
 import { CroquisType, PuntoType } from "@/lib/types"
 
+export const CELDASIZE = "70px"
+
 export default function CroquisGrid({
 	croquis,
 	puntos,
@@ -15,7 +17,7 @@ export default function CroquisGrid({
 }) {
 	const gridRef = useRef<HTMLButtonElement>(null)
 	const totalCeldas = croquis.largo * croquis.ancho
-	const celdasSize = 20
+	const celdaSize = `size-[${CELDASIZE}]`
 
 	const setXYPoint = (e: React.MouseEvent<HTMLButtonElement>) => {
 		if (!gridRef.current) return
@@ -53,7 +55,7 @@ export default function CroquisGrid({
 					return (
 						<div
 							key={i}
-							className={`border border-gray-400 size-${celdasSize} ${croquis.celdasSeleccionadas.includes(i) ? "bg-blue-500" : ""}`}
+							className={`border border-gray-400 ${celdaSize} ${croquis.celdasSeleccionadas.includes(i) ? " bg-blue-500" : ""}`}
 						/>
 					)
 				})}

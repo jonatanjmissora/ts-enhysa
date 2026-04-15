@@ -1,4 +1,7 @@
+import { PuntoType, SectorType } from "@/lib/types"
+import { MUESTREO } from "@/lib/utils"
 import { Page, Text, View, StyleSheet } from "@react-pdf/renderer"
+import { EmpresaType } from "db/empresas/schema"
 
 // Create styles
 const styles = StyleSheet.create({
@@ -54,7 +57,17 @@ const styles = StyleSheet.create({
 	},
 })
 
-export default function Page2() {
+const COLUMNWIDTH = [6, 5, 16, 16, 10, 11, 10, 10, 6, 10]
+
+export default function Page2({
+	empresa,
+	puntos,
+	sector,
+}: {
+	empresa: EmpresaType
+	puntos: PuntoType[]
+	sector: SectorType
+}) {
 	return (
 		<Page size="A4" orientation="landscape" style={styles.page}>
 			<View style={styles.pagePadding}>
@@ -64,7 +77,7 @@ export default function Page2() {
 
 				<View style={styles.flexrow}>
 					<View style={[styles.flexrowelement, { flex: 1 }]}>
-						<Text>(18) Razón Social: </Text>
+						<Text>(18) Razón Social: {empresa.razonSocial.toUpperCase()}</Text>
 					</View>
 					<View
 						style={[
@@ -72,7 +85,7 @@ export default function Page2() {
 							{ borderLeft: "1px solid black", width: 180 },
 						]}
 					>
-						<Text>(19) C.U.I.T.: </Text>
+						<Text>(19) C.U.I.T.: {empresa.cuit}</Text>
 					</View>
 				</View>
 
@@ -83,7 +96,7 @@ export default function Page2() {
 							{ borderRight: "1px solid black", width: "35%" },
 						]}
 					>
-						<Text>(20) Dirección: </Text>
+						<Text>(20) Dirección: {empresa.direccion.toUpperCase()}</Text>
 					</View>
 					<View
 						style={[
@@ -91,7 +104,7 @@ export default function Page2() {
 							{ borderRight: "1px solid black", width: "25%" },
 						]}
 					>
-						<Text>(21) Localidad: </Text>
+						<Text>(21) Localidad: {empresa.localidad.toUpperCase()}</Text>
 					</View>
 					<View
 						style={[
@@ -99,10 +112,10 @@ export default function Page2() {
 							{ borderRight: "1px solid black", width: "15%" },
 						]}
 					>
-						<Text>(22) CP: </Text>
+						<Text>(22) CP: {empresa.codigoPostal}</Text>
 					</View>
 					<View style={[styles.flexrowelement, { width: "25%" }]}>
-						<Text>(23) Provincia: </Text>
+						<Text>(23) Provincia: {empresa.provincia.toUpperCase()}</Text>
 					</View>
 				</View>
 
@@ -113,7 +126,7 @@ export default function Page2() {
 					<View
 						style={[
 							styles.flexRowElementWithHight,
-							{ borderRight: "1px solid black", width: "6%" },
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[0]}%` },
 						]}
 					>
 						<Text>(24)</Text>
@@ -123,7 +136,7 @@ export default function Page2() {
 					<View
 						style={[
 							styles.flexRowElementWithHight,
-							{ borderRight: "1px solid black", width: "4%" },
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[1]}%` },
 						]}
 					>
 						<Text>(25) </Text>
@@ -132,7 +145,7 @@ export default function Page2() {
 					<View
 						style={[
 							styles.flexRowElementWithHight,
-							{ borderRight: "1px solid black", width: "15%" },
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[2]}%` },
 						]}
 					>
 						<Text>(26) </Text>
@@ -141,7 +154,7 @@ export default function Page2() {
 					<View
 						style={[
 							styles.flexRowElementWithHight,
-							{ borderRight: "1px solid black", width: "15%" },
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[3]}%` },
 						]}
 					>
 						<Text>(27)</Text>
@@ -150,7 +163,7 @@ export default function Page2() {
 					<View
 						style={[
 							styles.flexRowElementWithHight,
-							{ borderRight: "1px solid black", flex: 1 },
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[4]}%` },
 						]}
 					>
 						<Text>(28)</Text>
@@ -163,7 +176,7 @@ export default function Page2() {
 					<View
 						style={[
 							styles.flexRowElementWithHight,
-							{ borderRight: "1px solid black", flex: 1 },
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[5]}%` },
 						]}
 					>
 						<Text>(29)</Text>
@@ -176,7 +189,7 @@ export default function Page2() {
 					<View
 						style={[
 							styles.flexRowElementWithHight,
-							{ borderRight: "1px solid black", flex: 1 },
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[6]}%` },
 						]}
 					>
 						<Text>(30)</Text>
@@ -188,7 +201,7 @@ export default function Page2() {
 					<View
 						style={[
 							styles.flexRowElementWithHight,
-							{ borderRight: "1px solid black", width: "12%" },
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[7]}%` },
 						]}
 					>
 						<Text>(31) Valor de</Text>
@@ -200,7 +213,7 @@ export default function Page2() {
 					<View
 						style={[
 							styles.flexRowElementWithHight,
-							{ borderRight: "1px solid black", width: "6%" },
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[8]}%` },
 						]}
 					>
 						<Text>(32)</Text>
@@ -211,7 +224,7 @@ export default function Page2() {
 					<View
 						style={[
 							styles.flexRowElementWithHight,
-							{ borderRight: "1px solid black", flex: 1 },
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[9]}%` },
 						]}
 					>
 						<Text>(33) Valor</Text>
@@ -225,107 +238,143 @@ export default function Page2() {
 
 				{/* **************************************************************************************************** */}
 
-				{Array.from({ length: 10 }).map((_, i) => (
-					<View key={i} style={styles.flexrow}>
-						<View
-							style={[
-								styles.flexRowElementWithHight,
-								{ borderRight: "1px solid black", width: "6%" },
-							]}
-						>
-							<Text>24</Text>
-							{/* Punto de muestreo */}
-						</View>
-						<View
-							style={[
-								styles.flexRowElementWithHight,
-								{ borderRight: "1px solid black", width: "4%" },
-							]}
-						>
-							<Text>25</Text>
-							{/* Hora */}
-						</View>
-						<View
-							style={[
-								styles.flexRowElementWithHight,
-								{ borderRight: "1px solid black", width: "15%" },
-							]}
-						>
-							<Text>26</Text>
-							{/* Sector */}
-						</View>
-						<View
-							style={[
-								styles.flexRowElementWithHight,
-								{ borderRight: "1px solid black", width: "15%" },
-							]}
-						>
-							<Text>27</Text>
-							{/* Sección / Puesto / Tipo */}
-						</View>
-						<View
-							style={[
-								styles.flexRowElementWithHight,
-								{ borderRight: "1px solid black", flex: 1 },
-							]}
-						>
-							<Text>28</Text>
-							{/* Tipo de iluminación */}
-						</View>
-						<View
-							style={[
-								styles.flexRowElementWithHight,
-								{ borderRight: "1px solid black", flex: 1 },
-							]}
-						>
-							<Text>29</Text>
-							{/* Tipo de fuente */}
-						</View>
-						<View
-							style={[
-								styles.flexRowElementWithHight,
-								{ borderRight: "1px solid black", flex: 1 },
-							]}
-						>
-							<Text>30</Text>
-							{/* Iluminación: */}
-						</View>
-						<View
-							style={[
-								styles.flexRowElementWithHight,
-								{ borderRight: "1px solid black", width: "12%" },
-							]}
-						>
-							<Text>31</Text>
-							{/* Valor */}
-						</View>
-						<View
-							style={[
-								styles.flexRowElementWithHight,
-								{ borderRight: "1px solid black", width: "6%" },
-							]}
-						>
-							<Text>32</Text>
-							{/* Valor Medido */}
-						</View>
-						<View
-							style={[
-								styles.flexRowElementWithHight,
-								{ borderRight: "1px solid black", flex: 1 },
-							]}
-						>
-							<Text>33</Text>
-							{/* Valor requerido */}
-						</View>
-					</View>
-				))}
+				<TablaDePuntos puntos={puntos} sector={sector} />
 
 				{/* **************************************************************************************************** */}
 
 				<Text style={[styles.row, { height: 60, borderBottom: "none" }]}>
-					(34) Observaciones:
+					(34) Observaciones:{" "}
+					{sector.observaciones !== ""
+						? sector.observaciones
+						: "Sin observaciones"}
 				</Text>
 			</View>
 		</Page>
+	)
+}
+
+function TablaDePuntos({
+	puntos,
+	sector,
+}: {
+	puntos: PuntoType[]
+	sector: SectorType
+}) {
+	const Eminima = puntos.sort(
+		(a: PuntoType, b: PuntoType) => a.valor - b.valor
+	)[0].valor
+	const EmediaSobre2 = Math.round(
+		puntos.reduce((acc: number, punto: PuntoType) => acc + punto.valor, 0) /
+			puntos.length /
+			2
+	)
+
+	return (
+		<>
+			{puntos.map(punto => (
+				<View key={punto.nombre} style={styles.flexrow}>
+					<View
+						style={[
+							styles.flexRowElementWithHight,
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[0]}%` },
+						]}
+					>
+						{/* LETRA */}
+						<Text>{MUESTREO[0]}</Text>
+					</View>
+					<View
+						style={[
+							styles.flexRowElementWithHight,
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[1]}%` },
+						]}
+					>
+						{/* HORA */}
+						<Text>
+							{new Date(punto.created).toLocaleTimeString().substring(0, 5)}
+						</Text>
+					</View>
+					<View
+						style={[
+							styles.flexRowElementWithHight,
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[2]}%` },
+						]}
+					>
+						{/* SECTOR NOMBRE */}
+						<Text>{sector.nombre}</Text>
+					</View>
+					<View
+						style={[
+							styles.flexRowElementWithHight,
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[3]}%` },
+						]}
+					>
+						{/* Sección / Puesto / Tipo */}
+						<Text>{sector.tipo}</Text>
+					</View>
+					<View
+						style={[
+							styles.flexRowElementWithHight,
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[4]}%` },
+						]}
+					>
+						{/* Tipo de iluminación */}
+						<Text>{sector.tipoIluminacion}</Text>
+					</View>
+					<View
+						style={[
+							styles.flexRowElementWithHight,
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[5]}%` },
+						]}
+					>
+						{/* Tipo de fuente */}
+						<Text>{sector.tipoFuente}</Text>
+					</View>
+					<View
+						style={[
+							styles.flexRowElementWithHight,
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[6]}%` },
+						]}
+					>
+						{/* Iluminación: */}
+						<Text>{sector.iluminacion}</Text>
+					</View>
+					<View
+						style={[
+							styles.flexRowElementWithHight,
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[7]}%` },
+						]}
+					>
+						<Text>
+							{Eminima} {"\u2265"} {EmediaSobre2}
+						</Text>
+						{/* Valor media*/}
+					</View>
+					<View
+						style={[
+							styles.flexRowElementWithHight,
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[8]}%` },
+						]}
+					>
+						<Text
+							style={{
+								color: `${punto.valor === Eminima ? "red" : "black"}`,
+							}}
+						>
+							{punto.valor}
+						</Text>
+						{/* Valor Medido */}
+					</View>
+					<View
+						style={[
+							styles.flexRowElementWithHight,
+							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[9]}%` },
+						]}
+					>
+						<Text>{sector.valorRequerido}</Text>
+						{/* Valor requerido */}
+					</View>
+				</View>
+			))}
+		</>
 	)
 }
