@@ -5,7 +5,6 @@ import Page3 from "./page-3"
 import {
 	ClimaType,
 	CroquisType,
-	Part1DataType,
 	Part3DataType,
 	PuntoType,
 	SectorType,
@@ -25,7 +24,6 @@ export const MyDocument = ({
 	tecnico,
 	empresa,
 	instrumento,
-	part1Data,
 	sector,
 	clima,
 	croquis,
@@ -35,14 +33,13 @@ export const MyDocument = ({
 	tecnico: TecnicoType
 	empresa: EmpresaType
 	instrumento: InstrumentoType
-	part1Data: Part1DataType
 	sector: SectorType
 	clima: ClimaType
 	croquis: CroquisType
 	puntos: PuntoType[]
 	part3Data: Part3DataType
 }) => {
-	const membreteDerecho = [
+	const membreteSupDerecho = [
 		"Seguridad e Higiene en el trabajo",
 		"Informe técnico - Medición de iluminación",
 	]
@@ -57,7 +54,7 @@ export const MyDocument = ({
 	return (
 		<Document>
 			<Page1
-				membreteDerecho={membreteDerecho}
+				membreteSupDerecho={membreteSupDerecho}
 				tecnico={tecnico}
 				empresa={empresa}
 				instrumento={instrumento}
@@ -69,18 +66,21 @@ export const MyDocument = ({
 				empresa={empresa}
 				puntos={puntos}
 				sector={sector}
-				membreteDerecho={membreteDerecho}
+				membreteSupDerecho={membreteSupDerecho}
+				tecnico={tecnico}
 			/>
 			<Page3
 				empresa={empresa}
 				part3Data={part3Data}
-				membreteDerecho={membreteDerecho}
+				membreteSupDerecho={membreteSupDerecho}
+				tecnico={tecnico}
 			/>
 			<Page4
 				sector={sector}
 				croquis={croquis}
 				puntos={puntos}
-				membreteDerecho={membreteDerecho}
+				membreteSupDerecho={membreteSupDerecho}
+				tecnico={tecnico}
 			/>
 		</Document>
 	)

@@ -78,7 +78,6 @@ const Report = ({
 				tecnico={tecnico}
 				empresa={empresas[part1Data.empresaIndex]}
 				instrumento={instrumentos[part1Data.instrumentoIndex]}
-				part1Data={part1Data}
 				sector={sector}
 				clima={clima}
 				croquis={croquis}

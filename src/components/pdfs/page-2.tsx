@@ -3,6 +3,8 @@ import { MUESTREO } from "@/lib/utils"
 import { Page, Text, View, StyleSheet } from "@react-pdf/renderer"
 import { EmpresaType } from "db/empresas/schema"
 import MembreteSuperior from "./membrete-superior"
+import MembreteInferior from "./membrete-inferior"
+import { TecnicoType } from "db/tecnicos/schema"
 
 // Create styles
 const styles = StyleSheet.create({
@@ -61,19 +63,21 @@ const styles = StyleSheet.create({
 const COLUMNWIDTH = [6, 5, 16, 16, 10, 11, 10, 10, 6, 10]
 
 export default function Page2({
-	membreteDerecho,
+	membreteSupDerecho,
 	empresa,
 	puntos,
 	sector,
+	tecnico,
 }: {
-	membreteDerecho: string[]
+	membreteSupDerecho: string[]
 	empresa: EmpresaType
 	puntos: PuntoType[]
 	sector: SectorType
+	tecnico: TecnicoType
 }) {
 	return (
 		<Page size="A4" orientation="landscape" style={styles.page}>
-			<MembreteSuperior membreteDerecho={membreteDerecho} />
+			<MembreteSuperior membreteSupDerecho={membreteSupDerecho} />
 			<Text
 				style={{
 					width: "100%",
@@ -85,7 +89,7 @@ export default function Page2({
 			>
 				Anexo 2
 			</Text>
-			<View style={styles.pagePadding}>
+			<View style={[styles.pagePadding, { flex: 1 }]}>
 				<Text style={styles.title}>
 					PROTOCOLO PARA MEDICIÓN DE ILUMINACIÓN EN EL AMBIENTE LABORAL
 				</Text>
@@ -264,6 +268,7 @@ export default function Page2({
 						: "Sin observaciones"}
 				</Text>
 			</View>
+			<MembreteInferior tecnico={tecnico} />
 		</Page>
 	)
 }

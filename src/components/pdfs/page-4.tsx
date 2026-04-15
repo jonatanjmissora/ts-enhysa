@@ -2,6 +2,8 @@ import { CroquisType, PuntoType, SectorType } from "@/lib/types"
 import { Page, Text, View, StyleSheet } from "@react-pdf/renderer"
 import { CELDASIZE } from "../dashboard/nuevo-reporte/part-2/croquis/croquis-grid"
 import MembreteSuperior from "./membrete-superior"
+import { TecnicoType } from "db/tecnicos/schema"
+import MembreteInferior from "./membrete-inferior"
 
 // Create styles
 const styles = StyleSheet.create({
@@ -56,19 +58,21 @@ const styles = StyleSheet.create({
 })
 
 export default function Page4({
-	membreteDerecho,
+	membreteSupDerecho,
 	sector,
 	croquis,
 	puntos,
+	tecnico,
 }: {
-	membreteDerecho: string[]
+	membreteSupDerecho: string[]
 	sector: SectorType
 	croquis: CroquisType
 	puntos: PuntoType[]
+	tecnico: TecnicoType
 }) {
 	return (
 		<Page size="A4" style={styles.page}>
-			<MembreteSuperior membreteDerecho={membreteDerecho} />
+			<MembreteSuperior membreteSupDerecho={membreteSupDerecho} />
 			<Text
 				style={{
 					width: "100%",
@@ -80,7 +84,7 @@ export default function Page4({
 			>
 				Anexo 4
 			</Text>
-			<View style={[styles.pagePadding, { border: "none" }]}>
+			<View style={[styles.pagePadding, { flex: 1, border: "none" }]}>
 				<Text style={styles.title}>PLANOS</Text>
 				<Text style={[styles.row, { padding: "10px 5px", margin: "10px 0px" }]}>
 					(A) {sector.nombre.toUpperCase()} - {sector.tipo.toUpperCase()}
@@ -139,6 +143,7 @@ export default function Page4({
 					<View style={{ flex: 1 }}></View>
 				</View>
 			</View>
+			<MembreteInferior tecnico={tecnico} />
 		</Page>
 	)
 }

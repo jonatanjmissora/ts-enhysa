@@ -2,6 +2,8 @@ import { Part3DataType } from "@/lib/types"
 import { Page, Text, View, StyleSheet } from "@react-pdf/renderer"
 import { EmpresaType } from "db/empresas/schema"
 import MembreteSuperior from "./membrete-superior"
+import { TecnicoType } from "db/tecnicos/schema"
+import MembreteInferior from "./membrete-inferior"
 
 // Create styles
 const styles = StyleSheet.create({
@@ -58,17 +60,19 @@ const styles = StyleSheet.create({
 })
 
 export default function Page3({
-	membreteDerecho,
+	membreteSupDerecho,
 	empresa,
 	part3Data,
+	tecnico,
 }: {
-	membreteDerecho: string[]
+	membreteSupDerecho: string[]
 	empresa: EmpresaType
 	part3Data: Part3DataType
+	tecnico: TecnicoType
 }) {
 	return (
 		<Page size="A4" orientation="landscape" style={styles.page}>
-			<MembreteSuperior membreteDerecho={membreteDerecho} />
+			<MembreteSuperior membreteSupDerecho={membreteSupDerecho} />
 			<Text
 				style={{
 					width: "100%",
@@ -80,7 +84,7 @@ export default function Page3({
 			>
 				Anexo 3
 			</Text>
-			<View style={styles.pagePadding}>
+			<View style={[styles.pagePadding, { flex: 1 }]}>
 				<Text style={styles.title}>
 					PROTOCOLO PARA MEDICIÓN DE ILUMINACIÓN EN EL AMBIENTE LABORAL
 				</Text>
@@ -173,6 +177,7 @@ export default function Page3({
 					</View>
 				</View>
 			</View>
+			<MembreteInferior tecnico={tecnico} />
 		</Page>
 	)
 }

@@ -1,9 +1,9 @@
 import { View, Text } from "@react-pdf/renderer"
 
 export default function MembreteSuperior({
-	membreteDerecho,
+	membreteSupDerecho,
 }: {
-	membreteDerecho: string[]
+	membreteSupDerecho: string[]
 }) {
 	return (
 		<View
@@ -27,7 +27,7 @@ export default function MembreteSuperior({
 				</Text>
 			</View>
 			<View style={{ flex: 1 }}>
-				{membreteDerecho.map((line, index) => (
+				{membreteSupDerecho.map((line, index) => (
 					<Text key={index} style={{ fontSize: 11, textAlign: "right" }}>
 						{line}
 					</Text>
