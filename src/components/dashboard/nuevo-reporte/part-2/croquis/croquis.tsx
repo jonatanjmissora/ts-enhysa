@@ -10,6 +10,7 @@ import CroquisGrid from "./croquis-grid"
 import PuntosList from "./puntos-list"
 import { DeletePuntoAlertDialog } from "./delete-punto-alert"
 import { CroquisType, defaultPunto, PuntoType } from "@/lib/types"
+import { getLastPuntoOrden } from "@/lib/utils"
 
 export default function CroquisComponent({
 	nombre,
@@ -143,6 +144,7 @@ function NewPuntoForm({
 		const newPunto: PuntoType = {
 			...actualPunto,
 			valor: value,
+			orden: getLastPuntoOrden(puntos) + 1,
 			created: Date.now(),
 		}
 
@@ -231,6 +233,8 @@ function EditPuntoForm({
 	setOpenValue: (value: "new" | "edit" | false) => void
 }) {
 	const inputRef = useRef<HTMLInputElement>(null)
+	const actualPuntoIndex =
+		puntos.findIndex(punto => punto.nombre === actualPunto.nombre) + 1 || 1
 
 	const handleEditSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
@@ -274,7 +278,7 @@ function EditPuntoForm({
 							setOpenValue={setOpenValue}
 						/>
 						<p className="border-t border-foreground/20 w-full text-end text-lg font-semibold tracking-widest">
-							punto-{puntos?.length + 1}
+							punto-{actualPuntoIndex}
 						</p>
 					</div>
 

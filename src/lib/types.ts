@@ -81,7 +81,7 @@ export type PuntoType = {
 	valor: number
 	valorX: number
 	valorY: number
-	cumple: boolean
+	orden: number
 	created: number
 }
 
@@ -90,18 +90,20 @@ export const defaultPunto = {
 	valor: 0,
 	valorX: 0,
 	valorY: 0,
-	cumple: false,
+	orden: 0,
 	created: Date.now(),
 }
 
 // ************************************************************************************************
 
 export type Part3DataType = {
+	observacion: string
 	conclusion: string
 	recomendacion: string
 }
 
 export const defaultPart3Data: Part3DataType = {
+	observacion: "",
 	conclusion: "",
 	recomendacion: "",
 }

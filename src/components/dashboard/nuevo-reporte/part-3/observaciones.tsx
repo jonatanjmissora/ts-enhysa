@@ -1,5 +1,5 @@
 import { Textarea } from "@/components/ui/textarea"
-import { Notebook, SearchAlert } from "lucide-react"
+import { List, Notebook, Search } from "lucide-react"
 import { Part3DataType } from "@/lib/types"
 
 export default function NewReportPart3Observaciones({
@@ -11,6 +11,23 @@ export default function NewReportPart3Observaciones({
 }) {
 	return (
 		<div className="w-full flex flex-col gap-4">
+			<div className="flex flex-col gap-2">
+				<label
+					htmlFor="observaciones"
+					className="font-semibold tracking-wider 2xl:text-lg flex items-center gap-3"
+				>
+					<Search size={16} color="orange" /> Observaciones
+				</label>
+				<Textarea
+					id="observaciones"
+					placeholder={`Las observaciones generales de toda la medición, en base a todos los sectores descriptos. "Sin observaciónes" quedará por defecto si no completa este campo.`}
+					className="w-full bg-background min-h-40 p-4"
+					value={part3Data.observacion}
+					onChange={e =>
+						setPart3Data({ ...part3Data, conclusion: e.target.value })
+					}
+				/>
+			</div>
 			<div className="flex flex-col gap-2">
 				<label
 					htmlFor="conclusion"
@@ -34,7 +51,7 @@ export default function NewReportPart3Observaciones({
 					htmlFor="recomendaciones"
 					className="font-semibold tracking-wider 2xl:text-lg flex items-center gap-3"
 				>
-					<SearchAlert size={16} color="orange" /> Recomendaciones
+					<List size={16} color="orange" /> Recomendaciones
 				</label>
 				<Textarea
 					id="recomendacion"

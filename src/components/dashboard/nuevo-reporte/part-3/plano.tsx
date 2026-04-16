@@ -5,7 +5,7 @@ import {
 } from "@/components/ui/tooltip"
 import { CroquisType, PuntoType } from "@/lib/types"
 import { getHalfMedia } from "@/lib/utils"
-import { Lightbulb, RulerDimensionLine } from "lucide-react"
+import { RulerDimensionLine } from "lucide-react"
 
 export default function NewReportPart3Plano({
 	puntos,
@@ -95,31 +95,23 @@ const Punto = ({
 			key={punto?.nombre || index}
 			className="absolute"
 			style={{
-				top: `${punto?.valorY ? punto.valorY - 14 : 0}px`,
-				left: `${punto?.valorX ? punto.valorX - 14 : 0}px`,
+				top: `${punto?.valorY ? punto.valorY - 18 : 0}px`,
+				left: `${punto?.valorX ? punto.valorX - 18 : 0}px`,
 			}}
 		>
 			<Tooltip>
 				<TooltipTrigger asChild>
 					<div
-						className={`relative cardBackground size-10 rounded-full justify-center ${
-							punto?.valor >= halfMedia ? "text-green-600" : "text-red-600"
-						}`}
+						className={`cardBackground ${
+							punto?.valor >= halfMedia ? "bg-green-700/90" : "bg-red-900/90"
+						} ring ring-black/20 size-10 rounded-lg justify-center`}
 					>
-						<Lightbulb className="rotate-180 size-6 absolute top-1 left-1" />
-						<span className="absolute bottom-1 w-4 right-1 text-sm flex items-center justify-center">
-							{index + 1}
-						</span>
+						<span className="italic">{punto.valor}</span>
 					</div>
 				</TooltipTrigger>
 				<TooltipContent>
-					<div
-						className={`flex flex-col gap-1 text-base ${
-							punto?.valor >= halfMedia ? "text-green-600" : "text-red-600"
-						}`}
-					>
+					<div className="flex flex-col gap-1 text-base">
 						<p>punto-{index + 1}</p>
-						<p>valor: {punto?.valor}</p>
 					</div>
 				</TooltipContent>
 			</Tooltip>

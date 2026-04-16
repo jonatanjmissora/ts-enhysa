@@ -63,6 +63,7 @@ agregar anexos y numero de paginas
 
 que pasa con la constante de CELDASIZE en el Croquisgrid
 
+problemas con el orden en que se muestran y se listan los puntos, cuando hago un edit, y vuelvo a abrir el formulario de nuevo/edit punto
 
 
 

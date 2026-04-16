@@ -73,8 +73,8 @@ function RouteComponent() {
 						</button>
 						<button
 							onClick={siguientePaso}
-							disabled={actualStep === 3}
-							className={`cursor-pointer ${actualStep === 3 && "opacity-10"}`}
+							disabled={actualStep === 4}
+							className={`cursor-pointer ${actualStep === 4 && "opacity-10"}`}
 						>
 							<ChevronRight className="size-7" />
 						</button>

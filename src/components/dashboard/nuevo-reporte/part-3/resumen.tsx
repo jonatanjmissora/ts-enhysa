@@ -29,7 +29,7 @@ export default function NewReportResumen({
 			</div>
 
 			<div className="flex flex-col gap-3 w-full">
-				{puntos.map(punto => (
+				{puntos.map((punto, index) => (
 					<div
 						key={punto?.nombre}
 						className={`cardBackground w-full px-3 py-2 flex items-center gap-4 rounded-lg ${punto?.valor >= halfMedia ? "bg-green-600/10 border border-green-600/30" : "bg-red-600/10 border border-red-600/30"}`}
@@ -40,10 +40,7 @@ export default function NewReportResumen({
 						<div className="flex flex-col gap-0">
 							<div className="flex gap-6 items-center">
 								<span className="italic font-semibold text-lg tracking-wider">
-									{punto?.nombre
-										? punto?.nombre?.charAt(0).toUpperCase() +
-											punto?.nombre?.slice(1)
-										: ""}
+									punto-{index + 1}
 								</span>
 								<span className="italic font-semibold text-lg tracking-wider">
 									Valor: {punto?.valor}

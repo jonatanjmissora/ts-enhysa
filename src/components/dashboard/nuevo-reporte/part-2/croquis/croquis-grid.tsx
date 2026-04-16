@@ -1,6 +1,10 @@
 import { useRef } from "react"
-import { Lightbulb } from "lucide-react"
-import { CroquisType, PuntoType } from "@/lib/types"
+import { CroquisType, defaultPunto, PuntoType } from "@/lib/types"
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 export const CELDASIZE = "70px"
 
@@ -25,12 +29,10 @@ export default function CroquisGrid({
 		const y = e.clientY - rect.top
 
 		const newActualPunto = {
+			...defaultPunto,
 			nombre: `${x}-${y}`,
-			valor: 0,
 			valorX: x,
 			valorY: y,
-			cumple: false,
-			created: Date.now(),
 		}
 		setActualPunto(newActualPunto)
 		setOpenValue("new")
@@ -87,20 +89,28 @@ const Punto = ({
 		<button
 			className="absolute punto cursor-pointer"
 			style={{
-				top: `${punto?.valorY ? punto.valorY - 14 : 0}px`,
-				left: `${punto?.valorX ? punto.valorX - 14 : 0}px`,
+				top: `${punto?.valorY ? punto.valorY - 18 : 0}px`,
+				left: `${punto?.valorX ? punto.valorX - 18 : 0}px`,
 			}}
 			onClick={e => {
 				e.stopPropagation() // 🔥 clave
 				onClick?.(punto)
 			}}
 		>
-			<div className="relative cardBackground size-10 rounded-full justify-center">
-				<Lightbulb className="size-6 absolute top-1 left-1 text-amber-400 rotate-180" />
-				<span className="absolute bottom-1 w-4 right-1 text-sm text-amber-400 flex items-center justify-center">
-					{index + 1}
-				</span>
-			</div>
+			<Tooltip>
+				<TooltipTrigger asChild>
+					<div
+						className={`cardBackground bg-amber-600 ring ring-black/20 size-10 rounded-lg justify-center`}
+					>
+						<span className="italic">{punto.valor}</span>
+					</div>
+				</TooltipTrigger>
+				<TooltipContent>
+					<div className="flex flex-col gap-1 text-base">
+						<p>punto-{index + 1}</p>
+					</div>
+				</TooltipContent>
+			</Tooltip>
 		</button>
 	)
 }
