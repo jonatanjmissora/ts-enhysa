@@ -265,6 +265,19 @@ code {
     @apply shadow-xl ring ring-foreground/10 dark:ring-foreground/15 rounded-xl flex items-center p-10 2xl:px-14
   }
 
+  .textXL {
+    @apply tracking-widest font-semibold sm:text-[20px] 2xl:text-2xl
+  }
+  .textL {
+    @apply tracking-widest font-light sm:text-lg 2xl:text-xl
+  }
+  .textM {
+    @apply tracking-wider sm:text-base 2xl:text-lg
+  }
+  .textS {
+    @apply tracking-wider sm:text-sm 2xl:text-base
+  }
+
 }
 
 /* ============================================

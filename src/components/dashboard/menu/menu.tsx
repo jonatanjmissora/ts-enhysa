@@ -32,6 +32,14 @@ export default function DashboardMenu() {
 							Nuevo Proyecto
 						</Link>
 						<Link
+							to="/new-report2"
+							className="flex items-center gap-4 sm:text-lg 2xl:text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
+							activeProps={{ className: "themeBtnBackground shadow-xl" }}
+						>
+							<FilePlus className="sm:size-6 2xl:size-7" />
+							Nuevo Proyecto 2
+						</Link>
+						<Link
 							to="/reports"
 							className="flex items-center gap-4 sm:text-lg 2xl:text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
 							activeProps={{ className: "themeBtnBackground shadow-xl" }}
