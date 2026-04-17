@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button"
-import { RulerDimensionLine } from "lucide-react"
 import {
 	Select,
 	SelectContent,
@@ -9,55 +7,26 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select"
+import { Lightbulb } from "lucide-react"
 
-export default function Part2Data() {
+export default function Part2Iluminacion() {
 	return (
-		<article className="w-full flex flex-col justify-center items-center">
-			<div className="flex items-center justify-between w-full">
-				<div className="textXL py-2 px-3 flex items-center gap-8">
-					Areas{" "}
-					<RulerDimensionLine className="sm:size-8 2xl:size-10 text-amber-500/50" />
+		<div className="w-full">
+			<div className="flex items-center justify-between w-full border-b border-cyan-300/25 mb-10">
+				<div className="textL py-2 px-3 flex items-center gap-8">
+					Iluminación{" "}
+					<Lightbulb className="sm:size-7 2xl:size-9 text-cyan-300/75" />
 				</div>
-				<span className="textL">Planta Baja</span>
-				<Button variant="theme" className="tracking-widest">
-					+ Nueva Area
-				</Button>
 			</div>
-			<div className="w-full bg-background flex flex-col justify-center items-center gap-10 p-8">
-				<div className="grid grid-cols-2 gap-8 w-2/3">
-					<div className="flex flex-col gap-1">
-						<label className="tracking-wider" htmlFor="matricula">
-							Nombre del Sector
-						</label>
-						<input
-							id="matricula"
-							className="card bg-accent py-2 px-4 rounded-lg text-center"
-							placeholder="N° Matrícula "
-							defaultValue="Planta Baja"
-							readOnly
-						/>
-					</div>
-					<div className="flex flex-col gap-1">
-						<label className="tracking-wider" htmlFor="matricula">
-							Tipo de Sector
-						</label>
-						<input
-							id="matricula"
-							className="card bg-accent py-2 px-4 rounded-lg text-center"
-							placeholder="N° Matrícula "
-							defaultValue="Oficinas"
-							readOnly
-						/>
-					</div>
-				</div>
 
-				<div className="grid grid-cols-3 gap-8 w-2/3">
+			<div className="flex flex-col items-center gap-8 w-full">
+				<div className="grid grid-cols-3 gap-8 w-3/4">
 					<div className="flex flex-col gap-1">
 						<label className="tracking-wider" htmlFor="matricula">
 							Tipo de iluminación
 						</label>
 						<Select defaultValue="natural">
-							<SelectTrigger className="w-full px-3 py-1 card bg-accent">
+							<SelectTrigger className="w-full px-6 py-1 card dark:bg-accent dark:h-10">
 								<SelectValue
 									placeholder="Seleccione Tipo"
 									className="text-center"
@@ -80,7 +49,7 @@ export default function Part2Data() {
 							Tipo de Fuente
 						</label>
 						<Select defaultValue="incandescente">
-							<SelectTrigger className="w-full px-3 py-1 card bg-accent">
+							<SelectTrigger className="w-full px-6 py-1 card dark:bg-accent dark:h-10">
 								<SelectValue
 									placeholder="Seleccione Tipo"
 									className="text-center"
@@ -103,7 +72,7 @@ export default function Part2Data() {
 							Iluminación
 						</label>
 						<Select defaultValue="general">
-							<SelectTrigger className="w-full px-3 py-1 card bg-accent">
+							<SelectTrigger className="w-full px-6 py-1 card dark:bg-accent dark:h-10">
 								<SelectValue
 									placeholder="Seleccione Tipo"
 									className="text-center"
@@ -122,18 +91,29 @@ export default function Part2Data() {
 					</div>
 				</div>
 
-				<div className="grid grid-cols-2 gap-8 w-2/3">
+				<div className="grid grid-cols-2 gap-8 w-3/4">
 					<div className="flex flex-col gap-1">
 						<label className="tracking-wider" htmlFor="matricula">
 							Valor Requerido
 						</label>
-						<input
-							id="matricula"
-							className="card bg-accent py-2 px-4 rounded-lg text-center"
-							placeholder="N° Matrícula "
-							defaultValue="300 lum"
-							readOnly
-						/>
+						<Select defaultValue="300">
+							<SelectTrigger className="w-full px-6 py-1 card dark:bg-accent dark:h-10">
+								<SelectValue
+									placeholder="Seleccione Tipo"
+									className="text-center"
+								/>
+							</SelectTrigger>
+							<SelectContent position="popper">
+								<SelectGroup>
+									<SelectLabel>Valores</SelectLabel>
+
+									<SelectItem value="100">100 lum</SelectItem>
+									<SelectItem value="200">200 lum</SelectItem>
+									<SelectItem value="300">300 lum</SelectItem>
+									<SelectItem value="750">750 lum</SelectItem>
+								</SelectGroup>
+							</SelectContent>
+						</Select>
 					</div>
 					<div className="flex flex-col gap-1">
 						<label className="tracking-wider" htmlFor="matricula">
@@ -149,6 +129,6 @@ export default function Part2Data() {
 					</div>
 				</div>
 			</div>
-		</article>
+		</div>
 	)
 }

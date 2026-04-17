@@ -26,14 +26,14 @@ export default function Part1Data() {
 			>
 				<AccordionItem
 					value="tecnico"
-					className="border-b border-foreground/5 last:border-b-0"
+					className="border-b border-foreground/10"
 				>
 					<AccordionTrigger className="flex px-5">
 						<div className="w-80 flex items-center gap-2">
-							<UserRound className="size-6 text-orange-600" />
+							<UserRound className="size-6" />
 							Técnico responsable
 						</div>
-						<span className="w-60 px-3 py-1 rounded-sm bg-background/50 text-center">
+						<span className="w-60 px-6 py-1 card bg-background rounded-lg textXS">
 							MISSORA JONATAN
 						</span>
 					</AccordionTrigger>
@@ -44,15 +44,15 @@ export default function Part1Data() {
 
 				<AccordionItem
 					value="empresa"
-					className="border-b border-foreground/5 last:border-b-0"
+					className="border-b border-foreground/10"
 				>
 					<AccordionTrigger className="flex px-5">
 						<span className="w-80 flex items-center gap-3">
-							<Warehouse className="size-6 text-purple-700" />
+							<Warehouse className="size-6" />
 							Empresa receptora
 						</span>
 						<Select defaultValue="telefonica">
-							<SelectTrigger className="w-60 px-3 py-1 rounded-sm dark:bg-background/50 mx-auto text-center flex justify-center">
+							<SelectTrigger className="w-60 px-6 py-1 card dark:bg-background rounded-lg">
 								<SelectValue
 									placeholder="Seleccione Empresa"
 									className="text-center"
@@ -76,14 +76,14 @@ export default function Part1Data() {
 
 				<AccordionItem
 					value="instrumento"
-					className="border-b border-foreground/5 last:border-b-0"
+					className="border-b border-foreground/10"
 				>
 					<AccordionTrigger className="flex px-5">
 						<span className="w-80 flex items-center gap-3">
-							<Cpu className="size-6 text-cyan-700" /> Instrumento utilizado
+							<Cpu className="size-6" /> Instrumento utilizado
 						</span>
 						<Select defaultValue="luxometro1">
-							<SelectTrigger className="w-60 px-3 py-1 rounded-sm dark:bg-background/50 mx-auto text-center flex justify-center">
+							<SelectTrigger className="w-60 px-6 py-1 card dark:bg-background rounded-lg">
 								<SelectValue
 									placeholder="Seleccione Instrumento"
 									className="text-center"
@@ -112,7 +112,7 @@ export default function Part1Data() {
 const Tecnico = () => {
 	return (
 		<div className="bg-background p-10 flex items-center justify-center">
-			<div className="grid grid-cols-2 gap-8 w-2/3">
+			<div className="grid grid-cols-2 gap-8 w-3/4">
 				<div className="flex flex-col gap-1">
 					<label className="tracking-wider" htmlFor="matricula">
 						Matrícula
@@ -161,7 +161,7 @@ const Tecnico = () => {
 const Empresa = () => {
 	return (
 		<div className="bg-background p-10 flex items-center justify-center">
-			<div className="grid grid-cols-2 gap-8 w-2/3">
+			<div className="grid grid-cols-2 gap-8 w-3/4">
 				<div className="flex flex-col gap-1">
 					<label className="tracking-wider" htmlFor="razon-social">
 						Razón Social
@@ -242,7 +242,7 @@ const Empresa = () => {
 const Instrumento = () => {
 	return (
 		<div className="bg-background p-10 flex items-center justify-center">
-			<div className="grid grid-cols-2 gap-8 w-2/3">
+			<div className="grid grid-cols-2 gap-8 w-3/4">
 				<div className="flex flex-col gap-1">
 					<label className="tracking-wider" htmlFor="matricula">
 						Marca

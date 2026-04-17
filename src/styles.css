@@ -117,7 +117,7 @@
   --secondary-foreground: var(--gray-50);
   --muted: var(--gray-700);
   --muted-foreground: var(--gray-600);
-  --accent: var(--gray-700);
+  --accent: var(--gray-800);
   --accent-foreground: var(--gray-50);
   --destructive: var(--red-400);
   --destructive-foreground: var(--red-300);
@@ -262,7 +262,7 @@ code {
   }
 
   .card {
-    @apply shadow-xl ring ring-foreground/10 dark:ring-foreground/15 rounded-xl flex items-center p-10 2xl:px-14
+    @apply shadow-xl ring ring-foreground/10 dark:ring-foreground/8 rounded-none flex items-center p-10 2xl:px-14
   }
 
   .textXL {
@@ -274,7 +274,7 @@ code {
   .textM {
     @apply tracking-wider sm:text-base 2xl:text-lg
   }
-  .textS {
+  .textXS {
     @apply tracking-wider sm:text-sm 2xl:text-base
   }
 
