@@ -10,6 +10,9 @@ export const Route = createFileRoute("/_protected/")({
 })
 
 function App() {
+	const isMobil = window.innerWidth < 640
+
+	if (isMobil) return <MovilIndex />
 	return (
 		<div className="min-h-screen flex flex-col">
 			<header className="sm:text-base 2xl:text-xl font-semibold tracking-wider sm:h-20 2xl:h-24 px-20 bg-accent border border-background flex justify-between items-center">
@@ -28,5 +31,15 @@ function App() {
 				</div>
 			</main>
 		</div>
+	)
+}
+
+const MovilIndex = () => {
+	return (
+		<main className="flex-1 flex flex-col px-6 py-10 gap-30">
+			<InicioHeader />
+
+			<InicioTags />
+		</main>
 	)
 }
