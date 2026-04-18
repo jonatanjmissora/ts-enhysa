@@ -25,7 +25,7 @@ function App() {
 
 				<InicioTags />
 
-				<div className="flex gap-10">
+				<div className="flex gap-10 flex-col sm:flex-row">
 					<InicioRecientes />
 					<InicioPlan />
 				</div>
@@ -40,6 +40,11 @@ const MovilIndex = () => {
 			<InicioHeader />
 
 			<InicioTags />
+
+			<div className="flex gap-10 flex-col sm:flex-row">
+				<InicioRecientes />
+				<InicioPlan />
+			</div>
 		</main>
 	)
 }
