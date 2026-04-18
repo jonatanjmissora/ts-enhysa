@@ -3,6 +3,7 @@ import { RegisterForm } from "@/components/register-form"
 import { createFileRoute } from "@tanstack/react-router"
 import { useState } from "react"
 import { PreferencesMenu } from "@/components/layout/preferences-menu"
+import MovilLogin from "@/components/movil/login"
 
 export const Route = createFileRoute("/login/")({
 	component: RouteComponent,
@@ -12,6 +13,9 @@ function RouteComponent() {
 	const [activeForm, setActiveForm] = useState<"login" | "register">("login")
 	const authPosition =
 		activeForm === "login" ? "translate-x-0" : "-translate-x-[50dvw]"
+
+	const isMovil = window.innerWidth < 640
+	if (isMovil) return <MovilLogin />
 
 	return (
 		<section className="w-screen h-screen flex items-center relative overflow-hidden">

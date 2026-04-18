@@ -3,44 +3,42 @@ import { CheckCircle, Shield } from "lucide-react"
 
 export default function InicioPlan() {
 	return (
-		<div className="flex-1 sm:p-6 2xl:p-10 cardAccent flex-col justify-start items-start text-lg relative">
-			<p className="font-semibold sm:text-base 2xl:text-2xl tracking-wider">
-				Tu Suscripción
-			</p>
-			<p className="font-semibold sm:pt-6 2xl:pt-10 sm:text-2xl 2xl:text-4xl tracking-wider">
-				Plan Profesional
-			</p>
-			<p className="sm:text-sm 2xl:text-base tracking-wider text-amber-500/50">
-				Expira en 245 días
-			</p>
+		<div className="px-4 py-12 flex-1 sm:p-6 2xl:p-10 card bg-accent rounded-lg flex-col justify-between items-start text-lg relative">
+			<div className="flex flex-col">
+				<p className="textXL text-shadow-lg/50">Tu Suscripción</p>
+				<p className="textXL text-shadow-lg/50">Plan Profesional</p>
+				<p className="textM tracking-wider text-amber-500/50 text-shadow-lg/50">
+					Expira en 245 días
+				</p>
+			</div>
 
-			<div className="flex flex-col gap-2 sm:py-4 2xl:py-10">
+			<div className="pl-2 flex flex-col gap-3 sm:gap-4 py-4 2xl:py-10">
 				<div className="flex items-center gap-2">
 					<CheckCircle size={15} className="text-green-500/75" />
-					<p className="sm:text-sm 2xl:text-base">Informes ilimitados</p>
+					<p className="textM">Informes ilimitados</p>
 				</div>
 				<div className="flex items-center gap-2">
 					<CheckCircle size={15} className="text-green-500/75" />
-					<p className="sm:text-sm 2xl:text-base">Croquis dinamico avanzado</p>
+					<p className="textM">Croquis dinamico avanzado</p>
 				</div>
 				<div className="flex items-center gap-2">
 					<CheckCircle size={15} className="text-green-500/75" />
-					<p className="sm:text-sm 2xl:text-base">Analisis con IA</p>
+					<p className="textM">Analisis con IA</p>
 				</div>
 				<div className="flex items-center gap-2">
 					<CheckCircle size={15} className="text-green-500/75" />
-					<p className="sm:text-sm 2xl:text-base">Soporte prioritario</p>
+					<p className="textM">Soporte prioritario</p>
 				</div>
 			</div>
 			<Link
 				to="/pricing"
-				className="rounded-xl text-foreground sm:text-lg 2xl:text-2xl w-full sm:py-2 2xl:py-3 tracking-widest shadow-xl themeBtnBackground cursor-pointer text-center"
+				className="flex items-center gap-2 p-6 py-2 sm:py-4 textM font-semibold rounded-xl themeBtnAccent  my-shadow w-full justify-center text-shadow-lg/50 mt-10 sm:mt-0"
 			>
 				Gestionar Plan
 			</Link>
 
 			<Shield
-				className="absolute top-10 right-10 sm:size-34 2xl:size-44 text-yellow-100"
+				className="absolute top-0 right-0 -rotate-20  sm:top-10 sm:right-10 size-34 2xl:size-44 text-amber-500/50"
 				opacity={0.5}
 			/>
 		</div>

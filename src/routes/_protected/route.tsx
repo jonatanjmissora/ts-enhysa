@@ -26,11 +26,9 @@ function RouteComponent() {
 
 const MovilRoute = () => {
 	return (
-		<section className="w-screen min-h-screen overflow-hidden flex flex-col">
+		<main className="w-screen min-h-screen overflow-hidden flex flex-col">
 			<MovilMenu />
-			<article className="w-full pt-30">
-				<Outlet />
-			</article>
-		</section>
+			<Outlet />
+		</main>
 	)
 }

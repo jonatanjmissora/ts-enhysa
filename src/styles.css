@@ -61,6 +61,7 @@
 
   /* Shared properties */
   --radius: 0.625rem;
+  --shadow: 4px 4px 4px rgb(0,0,0,0.4);
 }
 
 /* ============================================
@@ -261,15 +262,19 @@ code {
    @apply shadow-xl ring ring-foreground/10 dark:ring-foreground/3 bg-background rounded-xl flex items-center
   }
 
+  .my-shadow {
+    @apply shadow-(--shadow)
+  }
+
   .card {
-    @apply shadow-xl ring ring-foreground/10 dark:ring-foreground/8 rounded-none flex items-center p-10 2xl:px-14
+    @apply shadow-(--shadow) ring ring-foreground/10 dark:ring-foreground/8 rounded-none flex items-center p-10 2xl:px-14
   }
 
   .textXL {
-    @apply tracking-widest font-semibold text-2xl sm:text-[20px] 2xl:text-2xl
+    @apply tracking-widest font-bold text-2xl sm:text-[20px] 2xl:text-2xl
   }
   .textL {
-    @apply tracking-widest font-light text-xl sm:text-lg 2xl:text-xl
+    @apply tracking-widest text-lg 2xl:text-xl
   }
   .textM {
     @apply tracking-wider text-lg sm:text-base 2xl:text-lg

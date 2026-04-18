@@ -4,6 +4,10 @@ import InicioTags from "@/components/dashboard/inicio/tags"
 import InicioRecientes from "@/components/dashboard/inicio/recientes"
 import InicioPlan from "@/components/dashboard/inicio/plan"
 import { PreferencesMenu } from "@/components/layout/preferences-menu"
+import Footer from "@/components/movil/footer"
+import MovilHero from "@/components/movil/inicio/hero"
+import MovilInicioTags from "@/components/movil/inicio/tags"
+import MovilRecientes from "@/components/movil/inicio/recientes"
 
 export const Route = createFileRoute("/_protected/")({
 	component: App,
@@ -36,15 +40,19 @@ function App() {
 
 const MovilIndex = () => {
 	return (
-		<main className="flex-1 flex flex-col px-6 py-10 gap-30">
-			<InicioHeader />
+		<section className="w-full pt-18 overflow-visible">
+			<div className="flex-1 flex flex-col gap-30 px-6">
+				<MovilHero />
 
-			<InicioTags />
+				<MovilInicioTags />
 
-			<div className="flex gap-10 flex-col sm:flex-row">
-				<InicioRecientes />
-				<InicioPlan />
+				<div className="flex gap-30 flex-col sm:flex-row">
+					<MovilRecientes />
+					<InicioPlan />
+				</div>
 			</div>
-		</main>
+
+			<Footer />
+		</section>
 	)
 }

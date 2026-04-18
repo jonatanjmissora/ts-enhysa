@@ -1,0 +1,60 @@
+import { Link } from "@tanstack/react-router"
+import { CheckCircle2, Clock } from "lucide-react"
+
+export default function MovilRecientes() {
+	return (
+		<div className="flex flex-col gap-4 p-3 py-12 flex-1 card bg-accent rounded-lg items-start">
+			<header className="text-[22px] tracking-wider font-semibold pb-2 text-shadow-lg/50">
+				Protocolos Recientes
+			</header>
+			<div className="p-2 px-6 py-4 card bg-background rounded-lg justify-between w-full">
+				<div className="flex gap-4 items-center relative">
+					<CheckCircle2 className="absolute -top-8 -right-13 size-10 text-green-400 bg-green-900 rounded-lg p-2 my-shadow" />
+					<div className="flex flex-col gap-1">
+						<p className="textM font-semibold w-60 truncate">
+							Empresa Metalurgica SA - Planta A
+						</p>
+						<p className="text-xs text-foreground/50">
+							Realizado el 15/05/2024
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div className="p-2 px-6 py-4 card bg-background rounded-lg justify-between w-full">
+				<div className="flex gap-4 items-center relative">
+					<CheckCircle2 className="absolute -top-8 -right-13 size-10 text-green-400 bg-green-900 rounded-lg p-2 my-shadow" />
+					<div className="flex flex-col gap-1">
+						<p className="textM font-semibold w-60 truncate">
+							Empresa Metalurgica SA - Planta A
+						</p>
+						<p className="text-xs text-foreground/50">
+							Realizado el 15/05/2024
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div className="p-2 px-6 py-4 card bg-background rounded-lg justify-between w-full">
+				<div className="flex gap-4 items-center relative">
+					<Clock className="absolute -top-8 -right-13 size-10 text-amber-400 bg-amber-900 rounded-lg p-2 my-shadow" />
+					<div className="flex flex-col gap-1">
+						<p className="textM font-semibold w-60 truncate">
+							Empresa Metalurgica SA - Planta A
+						</p>
+						<p className="text-xs text-foreground/50">
+							Realizado el 15/05/2024
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<Link
+				to="/reports"
+				className=" text-sm text-foreground/70 hover:underline py-2 border-t border-foreground/10 w-full text-right"
+			>
+				Ver todos
+			</Link>
+		</div>
+	)
+}

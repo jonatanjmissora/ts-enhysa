@@ -80,10 +80,26 @@ export function LoginForm({
 	}
 
 	return (
-		<div className={cn("w-90 relative ml-50", className)} {...props}>
-			<Card className="cardBackground items-stretch">
+		<div
+			className={cn("w-[90dvw] sm:w-90 relative sm:ml-50", className)}
+			{...props}
+		>
+			<Card className="card bg-accent/90 rounded-lg my-shadow items-stretch">
 				<CardHeader className="text-center">
-					<CardTitle className="text-xl">Bienvenido de nuevo</CardTitle>
+					<div className="w-full sm:hidden flex flex-col items-center pb-4 relative">
+						<img
+							src="/EnHySa_logo.webp"
+							alt="logo EnHySa"
+							className="size-40"
+						/>
+
+						<p className="absolute bottom-3 left-1/2 -translate-x-1/2 textXL text-3xl text-shadow-lg/50 w-full">
+							EnHySa App
+						</p>
+					</div>
+					<CardTitle className="hidden sm:block text-xl">
+						Bienvenido de nuevo
+					</CardTitle>
 					<CardDescription className="text-foreground/75">
 						Ingresa con una cuenta
 					</CardDescription>
