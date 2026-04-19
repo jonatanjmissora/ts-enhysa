@@ -17,7 +17,6 @@ import {
 	FieldLabel,
 	FieldSeparator,
 } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { useRouter } from "@tanstack/react-router"
 import { useState } from "react"
@@ -80,11 +79,8 @@ export function LoginForm({
 	}
 
 	return (
-		<div
-			className={cn("w-[90dvw] sm:w-90 relative sm:ml-50", className)}
-			{...props}
-		>
-			<Card className="card bg-accent/90 rounded-lg my-shadow items-stretch">
+		<div className={cn("sm:w-90 relative sm:ml-50", className)} {...props}>
+			<Card className="card bg-accent/90 rounded-lg my-shadow items-stretch ring ring-foreground/30">
 				<CardHeader className="text-center">
 					<div className="w-full sm:hidden flex flex-col items-center pb-4 relative">
 						<img
@@ -97,15 +93,16 @@ export function LoginForm({
 							EnHySa App
 						</p>
 					</div>
-					<CardTitle className="hidden sm:block text-xl">
+					<CardTitle className="hidden sm:block text-xl text-shadow-lg/50">
 						Bienvenido de nuevo
 					</CardTitle>
 					<CardDescription className="text-foreground/75">
 						Ingresa con una cuenta
 					</CardDescription>
 				</CardHeader>
-				<CardContent>
+				<CardContent className="p-0 sm:px-4">
 					<form
+						className=""
 						id="login-form"
 						onSubmit={e => {
 							e.preventDefault()
@@ -130,7 +127,7 @@ export function LoginForm({
 								</Button>
 							</Field>
 							<FieldSeparator>
-								<span className="text-foreground/75 dk:bg-background bg-accent">
+								<span className="text-foreground/75 bg-accent">
 									O continua con
 								</span>
 							</FieldSeparator>
@@ -142,8 +139,13 @@ export function LoginForm({
 										field.state.meta.isTouched && !field.state.meta.isValid
 									return (
 										<Field data-invalid={isInvalid}>
-											<FieldLabel htmlFor={field.name}>Email</FieldLabel>
-											<Input
+											<FieldLabel
+												htmlFor={field.name}
+												className="text-shadow-lg/50"
+											>
+												Email
+											</FieldLabel>
+											<input
 												id={field.name}
 												name={field.name}
 												value={field.state.value}
@@ -151,6 +153,7 @@ export function LoginForm({
 												onChange={e => field.handleChange(e.target.value)}
 												aria-invalid={isInvalid}
 												placeholder="m@example.com"
+												className="card bg-background rounded-lg py-2"
 											/>
 											{isInvalid && (
 												<FieldError errors={field.state.meta.errors} />
@@ -167,9 +170,14 @@ export function LoginForm({
 										field.state.meta.isTouched && !field.state.meta.isValid
 									return (
 										<Field data-invalid={isInvalid}>
-											<FieldLabel htmlFor={field.name}>Contraseña</FieldLabel>
+											<FieldLabel
+												htmlFor={field.name}
+												className="text-shadow-sm/50"
+											>
+												Contraseña
+											</FieldLabel>
 											<div className="relative">
-												<Input
+												<input
 													id={field.name}
 													name={field.name}
 													value={field.state.value}
@@ -178,6 +186,7 @@ export function LoginForm({
 													aria-invalid={isInvalid}
 													placeholder="********"
 													type={showPassword ? "text" : "password"}
+													className="card bg-background rounded-lg py-2 w-full"
 												/>
 												<button
 													type="button"
@@ -202,7 +211,7 @@ export function LoginForm({
 							<Field>
 								<button
 									type="submit"
-									className="themeBtnAccent tracking-wider font-semibold shadow cursor-pointer rounded-xl py-2"
+									className="themeBtnAccent tracking-wider font-semibold shadow cursor-pointer rounded-xl py-2 text-shadow-sm/50 ring ring-green-500/30"
 								>
 									Ingresar
 								</button>
@@ -211,7 +220,7 @@ export function LoginForm({
 									<button
 										onClick={() => setActiveForm("register")}
 										// viewTransition={{ types: ["rotateZ"] }}
-										className="cursor-pointer dark:hover:text-green-400 underline"
+										className="cursor-pointer dark:hover:text-green-400 underline text-shadow-sm/50"
 										type="button"
 									>
 										Registrate
