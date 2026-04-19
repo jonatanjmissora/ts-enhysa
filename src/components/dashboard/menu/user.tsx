@@ -17,7 +17,9 @@ export default function User() {
 	const { avatar, fullName } = getUserInfo(session)
 	return (
 		<div className="flex flex-col sm:gap-2 2xl:gap-4 m-6">
-			<div className="gap-4 p-8 py-4 cardBackground">
+			<div
+				className={`gap-4 p-8 py-4 card rounded-lg bg-green-700 sm:bg-background`}
+			>
 				<div className="bg-accent rounded-full flex justify-center items-center">
 					{avatar ? (
 						<img
@@ -66,8 +68,8 @@ export function LogoutAlertDialog() {
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild className="m-4 hover:bg-accent">
-				<span className="flex p-2 rounded-sm cursor-pointer text-sm items-center gap-2 text-left">
-					<LogOut size={14} className="text-muted-foreground" /> Cerrar sesion
+				<span className="flex p-2 rounded-sm cursor-pointer textM items-center justify-end sm:justify-start gap-2 text-left">
+					<LogOut size={16} className="text-foreground/80" /> Cerrar sesion
 				</span>
 			</AlertDialogTrigger>
 			<AlertDialogContent className="p-20 bg-red-900/10 backdrop-blur-xl">
