@@ -65,5 +65,7 @@ que pasa con la constante de CELDASIZE en el Croquisgrid
 
 problemas con el orden en que se muestran y se listan los puntos, cuando hago un edit, y vuelvo a abrir el formulario de nuevo/edit punto
 
+ver como los links desde el pie de pagina, o desde el menu del movil. El suscripciones del pie de pagina anda bien
+
 
 

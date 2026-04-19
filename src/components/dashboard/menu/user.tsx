@@ -72,7 +72,7 @@ export function LogoutAlertDialog() {
 					<LogOut size={16} className="text-foreground/80" /> Cerrar sesion
 				</span>
 			</AlertDialogTrigger>
-			<AlertDialogContent className="p-20 bg-red-900/10 backdrop-blur-xl">
+			<AlertDialogContent className="p-10 sm:p-20 bg-red-900/10 backdrop-blur-xl w-11/12 sm:w-auto">
 				<AlertDialogTitle className="text-center sm:text-lg 2xl:text-xl">
 					¿Estás seguro de que quieres cerrar sesión?
 				</AlertDialogTitle>

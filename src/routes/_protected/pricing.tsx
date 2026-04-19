@@ -50,7 +50,7 @@ function RouteComponent() {
 
 	return (
 		<div className="min-h-screen flex flex-col">
-			<header className="sm:text-base 2xl:text-xl font-semibold tracking-wider sm:h-20 2xl:h-24 px-20 bg-accent border border-background flex justify-between items-center">
+			<header className="hidden sm:text-base 2xl:text-xl font-semibold tracking-wider sm:h-20 2xl:h-24 px-20 bg-accent border border-background sm:flex justify-between items-center">
 				<span>Protocolo de Iluminación Res 84/12 SRT</span>
 				<div className="flex gap-10 items-center justify-center">
 					<Link
@@ -63,18 +63,18 @@ function RouteComponent() {
 				</div>
 			</header>
 
-			<div className="flex-1 flex justify-center items-center flex-col gap-6 	sm:py-10 2xl:py-20">
-				<div className="flex items-center gap-2  sm:text-5xl 2xl:text-6xl font-bold tracking-wildest relative">
+			<div className="flex-1 flex justify-center items-center flex-col gap-6 pt-40 sm:py-10 2xl:py-20">
+				<div className="flex items-center gap-2 text-5xl 2xl:text-6xl font-bold tracking-wildest relative">
 					<span>Planes</span>
-					<Shield className="absolute top-1/2 left-full -translate-1/2 sm:size-30 2xl:size-50 -rotate-15 text-amber-500/30 -z-10" />
+					<Shield className="absolute top-1/2 left-full -translate-1/2 size-30 2xl:size-50 -rotate-15 text-amber-500/30 -z-10" />
 				</div>
 				<div>
-					<p className="italic tracking-wider font-semibold text-pretty sm:text-base 2xl:text-xl w-1/2 mx-auto text-center text-foreground/50">
+					<p className="italic tracking-wider font-semibold text-pretty sm:text-base 2xl:text-xl w-11/12 sm:w-1/2 mx-auto text-center text-foreground/50">
 						Tu actual plan es el "Plan Profesional". ¿Deseas cambiar a plan
 						Empresarial? Checkea los beneficios de subir de plan.
 					</p>
 				</div>
-				<div className="flex gap-6 sm:mt-10 2xl:mt-20">
+				<div className="flex flex-col sm:flex-row gap-6 my-15 sm:mt-10 2xl:mt-20">
 					{PLANS.map((plan, index) => (
 						<Plan
 							key={plan.title}
@@ -111,7 +111,7 @@ const Plan = ({
 }: PlanProps) => {
 	return (
 		<div
-			className={`overflow-hidden relative  sm:w-80 2xl:w-100 card flex flex-col items-start gap-4 duration-300 ${actualPlan === index ? "bg-[#1f301f] scale-120 z-10 " : "bg-accent"}`}
+			className={`overflow-hidden relative  sm:w-80 2xl:w-100 card rounded-lg flex flex-col items-start gap-4 duration-300 ${actualPlan === index ? "bg-[#1f301f] scale-100 sm:scale-120 z-10 " : "bg-accent"}`}
 		>
 			{actualPlan === index && (
 				<img
