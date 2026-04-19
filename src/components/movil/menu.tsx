@@ -16,7 +16,7 @@ export default function MovilMenu() {
 					<p className="textXL text-shadow-lg/50">EnHySa App</p>
 				</div>
 				<button onClick={() => setIsOpen(!isOpen)}>
-					{!isOpen ? <X className="size-7" /> : <Menu className="size-7" />}
+					{isOpen ? <X className="size-7" /> : <Menu className="size-7" />}
 				</button>
 			</header>
 			<MovilMenuContent isOpen={isOpen} setIsOpen={setIsOpen} />
@@ -71,6 +71,7 @@ const MovilMenuContent = ({
 				</Link>
 			</ul>
 			<User />
+			<div className="h-3"></div>
 		</div>
 	)
 }

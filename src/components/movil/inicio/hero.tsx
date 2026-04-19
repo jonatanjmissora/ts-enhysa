@@ -3,14 +3,14 @@ import { FilePlus } from "lucide-react"
 
 export default function MovilHero() {
 	return (
-		<div className="flex justify-between items-center flex-col mt-[10dvh] h-[75dvh] relative overflow-visible">
+		<div className="flex justify-between items-center flex-col mt-[70px] h-[550px] relative overflow-visible">
 			<p className="text-4xl font-semibold text-center tracking-wider text-pretty px-6 text-shadow-lg">
 				Tus Informes de iluminación y protocolo.
 			</p>
 			<img
 				src="/movil-hero.webp"
 				alt="logo EnHySa"
-				className="absolute opacity-75 top-6 -left-6 -right-6 w-screen h-[68dvh] bottom-0 -z-10 max-w-none mask-t-from-50% mask-b-from-80%"
+				className="absolute opacity-75 top-6 -left-6 -right-6 w-screen h-[500px] bottom-0 -z-10 max-w-none mask-t-from-50% mask-b-from-80%"
 			/>
 			<Link
 				to="/new-report"
