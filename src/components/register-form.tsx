@@ -86,13 +86,24 @@ export function RegisterForm({
 	}
 
 	return (
-		<div className={cn("w-90 relative mr-50", className)} {...props}>
+		<div className={cn("w-90 relative sm:mr-50", className)} {...props}>
 			<Card className="card bg-accent/90 rounded-lg my-shadow items-stretch ring ring-foreground/30">
 				<CardHeader className="text-center">
-					<CardTitle className="text-xl text-shadow-lg/50">
+					<div className="w-full sm:hidden flex flex-col items-center pb-4 relative">
+						<img
+							src="/EnHySa_logo.webp"
+							alt="logo EnHySa"
+							className="size-40"
+						/>
+
+						<p className="absolute bottom-3 left-1/2 -translate-x-1/2 textXL text-3xl text-shadow-lg/50 w-full">
+							EnHySa App
+						</p>
+					</div>
+					<CardTitle className="hidden sm:block text-xl text-shadow-lg/50">
 						Bienvenido a la app
 					</CardTitle>
-					<CardDescription className="text-foreground/75">
+					<CardDescription className="hidden sm:block text-foreground/75">
 						Ingresa con una cuenta de Google
 					</CardDescription>
 				</CardHeader>
@@ -121,8 +132,8 @@ export function RegisterForm({
 									)}
 								</Button>
 							</Field>
-							<FieldSeparator>
-								<span className="text-foreground/75 dk:bg-background bg-accent">
+							<FieldSeparator className="hidden sm:block">
+								<span className="text-foreground/75 bg-accent">
 									O continua con
 								</span>
 							</FieldSeparator>

@@ -79,8 +79,8 @@ export function LoginForm({
 	}
 
 	return (
-		<div className={cn("sm:w-90 relative sm:ml-50", className)} {...props}>
-			<Card className="card bg-accent/90 rounded-lg my-shadow items-stretch ring ring-foreground/30">
+		<div className={cn("w-90 relative sm:ml-50", className)} {...props}>
+			<Card className="card bg-accent/90 rounded-lg my-shadow items-stretch ring ring-foreground/30 justify-center">
 				<CardHeader className="text-center">
 					<div className="w-full sm:hidden flex flex-col items-center pb-4 relative">
 						<img
@@ -96,7 +96,7 @@ export function LoginForm({
 					<CardTitle className="hidden sm:block text-xl text-shadow-lg/50">
 						Bienvenido de nuevo
 					</CardTitle>
-					<CardDescription className="text-foreground/75">
+					<CardDescription className="hidden sm:block text-foreground/75">
 						Ingresa con una cuenta
 					</CardDescription>
 				</CardHeader>
@@ -109,7 +109,7 @@ export function LoginForm({
 							form.handleSubmit()
 						}}
 					>
-						<FieldGroup>
+						<FieldGroup className="">
 							<Field>
 								<Button variant="theme" type="button" onClick={signIn}>
 									{loading ? (
@@ -126,7 +126,7 @@ export function LoginForm({
 									)}
 								</Button>
 							</Field>
-							<FieldSeparator>
+							<FieldSeparator className="hidden sm:block">
 								<span className="text-foreground/75 bg-accent">
 									O continua con
 								</span>
