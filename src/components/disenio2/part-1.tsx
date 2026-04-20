@@ -17,7 +17,7 @@ import { Cpu, UserRound, Warehouse } from "lucide-react"
 
 export default function Part1Data() {
 	return (
-		<article className="w-full">
+		<article className="w-full my-10 sm:my-4">
 			<Accordion
 				type="single"
 				collapsible
@@ -28,12 +28,12 @@ export default function Part1Data() {
 					value="tecnico"
 					className="border-b border-foreground/10"
 				>
-					<AccordionTrigger className="flex px-5">
+					<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center">
 						<div className="w-80 flex items-center gap-2">
 							<UserRound className="size-6" />
 							Técnico responsable
 						</div>
-						<span className="w-60 px-6 py-1 card bg-background rounded-lg textXS">
+						<span className="w-60 px-6 py-2 card bg-background rounded-lg textXS">
 							MISSORA JONATAN
 						</span>
 					</AccordionTrigger>
@@ -46,7 +46,7 @@ export default function Part1Data() {
 					value="empresa"
 					className="border-b border-foreground/10"
 				>
-					<AccordionTrigger className="flex px-5">
+					<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center">
 						<span className="w-80 flex items-center gap-3">
 							<Warehouse className="size-6" />
 							Empresa receptora
@@ -78,7 +78,7 @@ export default function Part1Data() {
 					value="instrumento"
 					className="border-b border-foreground/10"
 				>
-					<AccordionTrigger className="flex px-5">
+					<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center">
 						<span className="w-80 flex items-center gap-3">
 							<Cpu className="size-6" /> Instrumento utilizado
 						</span>
@@ -111,15 +111,15 @@ export default function Part1Data() {
 
 const Tecnico = () => {
 	return (
-		<div className="bg-background p-10 flex items-center justify-center">
-			<div className="grid grid-cols-2 gap-8 w-3/4">
+		<div className="bg-accent sm:bg-background py-10 sm:p-10 flex items-center justify-center">
+			<div className="grid-cols-1 grid sm:grid-cols-2 gap-8 w-5/6">
 				<div className="flex flex-col gap-1">
 					<label className="tracking-wider" htmlFor="matricula">
 						Matrícula
 					</label>
 					<input
 						id="matricula"
-						className="card bg-accent py-2 px-4 rounded-lg text-center"
+						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="N° Matrícula "
 						defaultValue="MISSORA JONATAN"
 						readOnly
@@ -131,7 +131,7 @@ const Tecnico = () => {
 					</label>
 					<input
 						id="cargo"
-						className="card bg-accent py-2 px-4 rounded-lg text-center"
+						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Ej. Seguridad e Higiene"
 						defaultValue="Técnico en Seguridad e Higiene"
 						readOnly
@@ -139,17 +139,17 @@ const Tecnico = () => {
 				</div>
 				<div className="flex flex-col gap-1">
 					<p className="tracking-wider text-left">firma digital</p>
-					<div className="card bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
+					<div className="card bg-background sm:bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
 						<img src="/firma.png" alt="firma-digital" className="size-20" />
 					</div>
 				</div>
 
 				<div className="flex flex-col gap-1">
 					<p className="tracking-wider text-left">pie de página</p>
-					<span className="card bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
+					<span className="card bg-background sm:bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
 						SeH MISSORA JONATAN
 					</span>
-					<span className="card bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
+					<span className="card bg-background sm:bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
 						MAT 1234523
 					</span>
 				</div>
@@ -160,8 +160,8 @@ const Tecnico = () => {
 
 const Empresa = () => {
 	return (
-		<div className="bg-background p-10 flex items-center justify-center">
-			<div className="grid grid-cols-2 gap-8 w-3/4">
+		<div className="bg-accent sm:bg-background py-10 sm:p-10 flex items-center justify-center">
+			<div className="grid-cols-1 grid sm:grid-cols-2 gap-8 w-5/6">
 				<div className="flex flex-col gap-1">
 					<label className="tracking-wider" htmlFor="razon-social">
 						Razón Social
@@ -169,7 +169,7 @@ const Empresa = () => {
 					<input
 						id="razon-social"
 						placeholder="Nombre de la empresa"
-						className="card bg-accent py-2 px-4 rounded-lg text-center"
+						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						value="TELEFONICA S.A"
 						readOnly
 					/>
@@ -180,7 +180,7 @@ const Empresa = () => {
 					</label>
 					<input
 						id="cuit"
-						className="card bg-accent py-2 px-4 rounded-lg text-center"
+						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="00-00000000-0"
 						value="30-58114785-2"
 						readOnly
@@ -192,7 +192,7 @@ const Empresa = () => {
 					</label>
 					<input
 						id="direccion"
-						className="card bg-accent py-2 px-4 rounded-lg text-center"
+						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Calle, Altura"
 						value="BERUTI 70"
 						readOnly
@@ -205,7 +205,7 @@ const Empresa = () => {
 					<input
 						id="localidad"
 						placeholder="Ciudad, Provincia, Pais"
-						className="card bg-accent py-2 px-4 rounded-lg text-center"
+						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						value="BAHIA BLANCA"
 						readOnly
 					/>
@@ -217,7 +217,7 @@ const Empresa = () => {
 					<input
 						id="codigoPostal"
 						placeholder="Ciudad, Provincia, Pais"
-						className="card bg-accent py-2 px-4 rounded-lg text-center"
+						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						value="8000"
 						readOnly
 					/>
@@ -229,7 +229,7 @@ const Empresa = () => {
 					<input
 						id="provincia"
 						placeholder="Ciudad, Provincia, Pais"
-						className="card bg-accent py-2 px-4 rounded-lg text-center"
+						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						value="BUENOS AIRES"
 						readOnly
 					/>
@@ -241,15 +241,15 @@ const Empresa = () => {
 
 const Instrumento = () => {
 	return (
-		<div className="bg-background p-10 flex items-center justify-center">
-			<div className="grid grid-cols-2 gap-8 w-3/4">
+		<div className="bg-accent sm:bg-background py-10 sm:p-10 flex items-center justify-center">
+			<div className="grid-cols-1 grid sm:grid-cols-2 gap-8 w-5/6">
 				<div className="flex flex-col gap-1">
 					<label className="tracking-wider" htmlFor="matricula">
 						Marca
 					</label>
 					<input
 						id="matricula"
-						className="card bg-accent py-2 px-4 rounded-lg text-center"
+						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="N° Matrícula "
 						defaultValue="LUXIS"
 						readOnly
@@ -261,7 +261,7 @@ const Instrumento = () => {
 					</label>
 					<input
 						id="cargo"
-						className="card bg-accent py-2 px-4 rounded-lg text-center"
+						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Ej. Seguridad e Higiene"
 						defaultValue="EXO-4000"
 						readOnly
@@ -273,7 +273,7 @@ const Instrumento = () => {
 					</label>
 					<input
 						id="serie"
-						className="card bg-accent py-2 px-4 rounded-lg text-center"
+						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Ej. Seguridad e Higiene"
 						defaultValue="12858752"
 						readOnly
@@ -285,7 +285,7 @@ const Instrumento = () => {
 					</label>
 					<input
 						id="fecha"
-						className="card bg-accent py-2 px-4 rounded-lg text-center"
+						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Ej. Seguridad e Higiene"
 						defaultValue="12/10/25"
 						readOnly
@@ -293,14 +293,14 @@ const Instrumento = () => {
 				</div>
 				<div className="flex flex-col gap-1">
 					<p className="tracking-wider text-left">Imágenes</p>
-					<div className="card bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
+					<div className="card bg-background sm:bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
 						<img src="/luxometro.jpg" alt="luxometro" className="size-20" />
 					</div>
 				</div>
 
 				<div className="flex flex-col gap-1">
 					<p className="tracking-wider text-left">Certificado</p>
-					<div className="card bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
+					<div className="card bg-background sm:bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
 						<img src="/calibracion.webp" alt="luxometro" className="size-20" />
 					</div>
 				</div>

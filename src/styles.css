@@ -280,9 +280,11 @@ code {
     @apply tracking-wider text-lg sm:text-base 2xl:text-lg
   }
   .textXS {
-    @apply tracking-wider text-base sm:text-sm 2xl:text-base
+    @apply tracking-wider text-xs sm:text-sm 2xl:text-base
   }
-
+  .bw {
+    @apply border border-white
+  }
 }
 
 /* ============================================

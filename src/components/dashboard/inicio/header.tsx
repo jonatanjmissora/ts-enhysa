@@ -17,7 +17,7 @@ export default function InicioHeader() {
 				className="flex items-center gap-2 sm:text-base 2xl:text-xl tracking-wide p-6 py-4 text-foreground rounded-xl themeBtnAccent shadow w-full sm:w-auto justify-center"
 			>
 				<FilePlus className="sm:size-5 2xl:size-6 text-foreground/70" />
-				Nuevo Protocolo
+				Nuevo Reporte
 			</Link>
 		</div>
 	)

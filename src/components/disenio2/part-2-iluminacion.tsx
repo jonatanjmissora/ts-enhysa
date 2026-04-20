@@ -12,7 +12,7 @@ import { Lightbulb } from "lucide-react"
 export default function Part2Iluminacion() {
 	return (
 		<div className="w-full">
-			<div className="flex items-center justify-between w-full border-b border-cyan-300/25 mb-10">
+			<div className="flex items-center justify-between border-b border-cyan-300/25 mb-10 w-11/12 mx-auto">
 				<div className="textL py-2 px-3 flex items-center gap-8">
 					Iluminación{" "}
 					<Lightbulb className="sm:size-7 2xl:size-9 text-cyan-300/75" />
@@ -20,7 +20,7 @@ export default function Part2Iluminacion() {
 			</div>
 
 			<div className="flex flex-col items-center gap-8 w-full">
-				<div className="grid grid-cols-3 gap-8 w-3/4">
+				<div className="grid grid-cols-1 sm:grid-cols-3 gap-8 w-3/4">
 					<div className="flex flex-col gap-1">
 						<label className="tracking-wider" htmlFor="matricula">
 							Tipo de iluminación
@@ -91,7 +91,7 @@ export default function Part2Iluminacion() {
 					</div>
 				</div>
 
-				<div className="grid grid-cols-2 gap-8 w-3/4">
+				<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-3/4">
 					<div className="flex flex-col gap-1">
 						<label className="tracking-wider" htmlFor="matricula">
 							Valor Requerido

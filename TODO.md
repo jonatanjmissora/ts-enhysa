@@ -67,5 +67,7 @@ problemas con el orden en que se muestran y se listan los puntos, cuando hago un
 
 ver como los links desde el pie de pagina, o desde el menu del movil. El suscripciones del pie de pagina anda bien
 
+en new report cuando abro un area, la 2da por ejemplo, no me hace scroll hasta el principio del acordeon content
+
 
 

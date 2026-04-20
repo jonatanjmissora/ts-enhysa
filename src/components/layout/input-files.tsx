@@ -84,21 +84,19 @@ export const InputFiles = ({
 				<FileUpload
 					maxFiles={maxFiles}
 					maxSize={5 * 1024 * 1024}
-					className="w-full px-4"
+					className="w-full sm:px-6"
 					value={files}
 					onValueChange={setFiles}
 					multiple
 				>
-					<FileUploadDropzone className="flex flex-col items-center justify-center border-dotted-2 text-center gap-0 py-2 w-full">
+					<FileUploadDropzone className="flex flex-col items-center justify-center border-dotted-2 text-center gap-0 py-2 w-full sm:border-foreground/20 p-0 sm:p-2">
 						<FileUploadTrigger asChild disabled={!editMode}>
 							<div className="flex items-center justify-center flex-wrap gap-0 w-full cursor-pointer">
-								<CloudUpload className="size-6 mx-2 text-foreground/20 pointer-events-none" />
-								<span className="text-foreground/20 sm:text-sm 2xl:text-lg">
-									{text}
-								</span>
+								<CloudUpload className="size-7 sm:mx-2 text-foreground/20 pointer-events-none" />
+								<span className="text-foreground/50 textXS">{text}</span>
 							</div>
 						</FileUploadTrigger>
-						<p className="text-sm tracking-wide text-foreground/50 italic">
+						<p className="text-xs tracking-wide text-foreground/30 italic">
 							hasta {maxFiles} archivos de menos de 5MB
 						</p>
 					</FileUploadDropzone>

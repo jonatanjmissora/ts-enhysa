@@ -11,7 +11,7 @@ export const Route = createFileRoute("/_protected/new-report2/")({
 function RouteComponent() {
 	return (
 		<div className="card bg-accent rounded-lg flex-col items-start gap-10 pb-40">
-			<p className="w-full text-left textXL bg-blue-500/25 py-4 flex items-center gap-8 px-5 rounded">
+			<p className="w-full text-left textXL bg-blue-500/25 py-4  mt-10 flex items-center gap-8 px-5 rounded">
 				Nuevo Reporte <FileChartColumn className="sm:size-5 2xl:size-7" />
 			</p>
 

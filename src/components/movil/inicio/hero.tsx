@@ -17,7 +17,7 @@ export default function MovilHero() {
 				className="flex items-center gap-2 p-6 py-4 textM font-semibold rounded-xl themeBtnAccent  my-shadow w-full sm:w-auto justify-center"
 			>
 				<FilePlus className="sm:size-5 2xl:size-6 text-foreground/70" />
-				Nuevo Protocolo
+				Nuevo Reporte
 			</Link>
 		</div>
 	)

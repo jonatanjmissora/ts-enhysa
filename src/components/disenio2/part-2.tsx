@@ -12,7 +12,7 @@ export default function Part2Data() {
 	return (
 		<article className="w-full flex flex-col justify-center items-center">
 			<div className="flex items-center justify-between w-full px-5 rounded bg-orange-500/25">
-				<div className="textXL py-2 flex items-center gap-8">
+				<div className="textXL py-3 flex items-center gap-8">
 					Areas <RulerDimensionLine className="sm:size-7 2xl:size-9" />
 				</div>
 				<button className="card bg-background py-2 px-4 rounded-lg">
@@ -30,14 +30,14 @@ export default function Part2Data() {
 					value="plantaalta"
 					className="border-b border-foreground/5 last:border-b-0"
 				>
-					<AccordionTrigger className="flex px-10 w-full border-b border-foreground/10">
+					<AccordionTrigger className="flex px-10 w-full border-b border-foreground/10 items-center">
 						<div className="flex items-center gap-2">
 							<Notebook className="size-6" />
 							PLANTA BAJA - DEPOSITO
 						</div>
 					</AccordionTrigger>
 					<AccordionContent className="">
-						<div className="w-full card border-0 bg-background flex flex-col justify-center items-center gap-20 p-8 pb-40">
+						<div className="w-full card border-0 bg-background flex flex-col justify-center items-center gap-20 p-0 sm:p-8 pb-40">
 							<NombreArea />
 							<Part2Iluminacion />
 							<Part2Plano />
@@ -65,7 +65,7 @@ export default function Part2Data() {
 				</AccordionItem>
 			</Accordion>
 
-			<button className="card bg-background py-2 px-4 rounded-lg my-20 flex items-center justify-center gap-2 mx-auto w-1/2 textL">
+			<button className="card bg-background py-2 px-4 rounded-lg my-20 flex items-center justify-center gap-2 mx-auto w-full sm:w-1/3 textL">
 				+ Agregar Area
 			</button>
 		</article>
@@ -74,7 +74,7 @@ export default function Part2Data() {
 
 const NombreArea = () => {
 	return (
-		<div className="grid grid-cols-2 gap-8 w-[97%] mt-10">
+		<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-3/4 mt-10">
 			<div className="flex flex-col gap-1">
 				<label className="tracking-wider" htmlFor="matricula">
 					Nombre del Sector

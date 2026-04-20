@@ -22,13 +22,13 @@ export const Part3Data = () => {
 	return (
 		<article className="w-full flex flex-col justify-center items-center">
 			<div className="flex items-center justify-between w-full mb-10 px-5 rounded bg-pink-500/25">
-				<div className="textXL py-2 flex items-center gap-8">
+				<div className="textXL py-3 flex items-center gap-8">
 					Información <Database className="sm:size-7 2xl:size-9" />
 				</div>
 			</div>
 
 			<div className="flex flex-col items-center gap-8 w-full">
-				<div className="grid grid-cols-3 gap-8 w-3/4">
+				<div className="grid grid-cols-1 sm:grid-cols-3 gap-8 w-full sm:w-3/4">
 					<div className="flex flex-col gap-1">
 						<label className="tracking-wider" htmlFor="matricula">
 							Clima
@@ -102,7 +102,7 @@ export const Part3Data = () => {
 					</div>
 				</div>
 
-				<div className="flex flex-col gap-2 w-3/4">
+				<div className="flex flex-col gap-2 w-full sm:w-3/4">
 					<label
 						className="tracking-wider sm:text-base 2xl:text-xl flex items-center gap-4"
 						htmlFor="matricula"
@@ -112,14 +112,14 @@ export const Part3Data = () => {
 					</label>
 					<textarea
 						id="matricula"
-						className={`card bg-background px-4 rounded-lg text-center min-h-24 italic text-foreground/40 tracking-wider py-6 textXS`}
+						className={`card bg-accent sm:bg-background px-4 rounded-lg text-center min-h-30 sm:min-h-24 italic text-foreground/40 tracking-wider py-6 textXS`}
 						placeholder="N° Matrícula "
 						defaultValue="Detalle general del estado del terreno de medición, condiciones generales, etc. En caso de no haber observaciones, dejar este campo en blanco."
 						readOnly
 					/>
 				</div>
 
-				<div className="flex flex-col gap-2 w-3/4">
+				<div className="flex flex-col gap-2 w-full sm:w-3/4">
 					<label
 						className="tracking-wider sm:text-base 2xl:text-xl flex items-center gap-4"
 						htmlFor="matricula"
@@ -129,14 +129,14 @@ export const Part3Data = () => {
 					</label>
 					<textarea
 						id="matricula"
-						className={`card bg-background px-4 rounded-lg text-center min-h-24 italic text-foreground/40 tracking-wider py-6 textXS`}
+						className={`card bg-accent sm:bg-background px-4 rounded-lg text-center min-h-30 sm:min-h-24 italic text-foreground/40 tracking-wider py-6 textXS`}
 						placeholder="N° Matrícula "
 						defaultValue="Conclusión final del reporte, detalles observados, etc. En caso de no haber conclusiones, dejar este campo en blanco."
 						readOnly
 					/>
 				</div>
 
-				<div className="flex flex-col gap-2 w-3/4">
+				<div className="flex flex-col gap-2 w-full sm:w-3/4">
 					<label
 						className="tracking-wider sm:text-base 2xl:text-xl flex items-center gap-4"
 						htmlFor="matricula"
@@ -146,7 +146,7 @@ export const Part3Data = () => {
 					</label>
 					<textarea
 						id="matricula"
-						className={`card bg-background px-4 rounded-lg text-center min-h-24 italic text-foreground/40 tracking-wider py-6 textXS`}
+						className={`card bg-accent sm:bg-background px-4 rounded-lg text-center min-h-30 sm:min-h-24 italic text-foreground/40 tracking-wider py-6 textXS`}
 						placeholder="N° Matrícula "
 						defaultValue="Recomendaciones generales luego de efectuar las mediciones, sin especificaciones técnicas. En caso de no haber recomendaciones, dejar este campo en blanco."
 						readOnly
