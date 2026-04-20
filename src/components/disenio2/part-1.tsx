@@ -14,10 +14,15 @@ import {
 	SelectValue,
 } from "@/components/ui/select"
 import { Cpu, UserRound, Warehouse } from "lucide-react"
+import { TextTooltip } from "../layout/text-tooltip"
 
 export default function Part1Data() {
 	return (
-		<article className="w-full my-10 sm:my-4">
+		<article className="w-full my-10 sm:my-4 relative">
+			<TextTooltip
+				text={"Datos obtenidos a través del perfil."}
+				className={"-top-8 right-0"}
+			/>
 			<Accordion
 				type="single"
 				collapsible

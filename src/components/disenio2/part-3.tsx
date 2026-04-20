@@ -34,7 +34,7 @@ export const Part3Data = () => {
 							Clima
 						</label>
 						<Select defaultValue="soleado">
-							<SelectTrigger className="p-6 w-full justify-between gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg  dark:hover:bg-background/75">
+							<SelectTrigger className="p-6 w-5/6 sm:w-full mx-auto justify-between gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg  dark:hover:bg-background/75">
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent className="w-full p-2 px-6">
@@ -66,7 +66,7 @@ export const Part3Data = () => {
 							Humedad
 						</label>
 						<Select defaultValue="60">
-							<SelectTrigger className="p-6 w-full justify-between gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg  dark:hover:bg-background/75">
+							<SelectTrigger className="p-6 w-5/6 sm:w-full mx-auto justify-between gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg  dark:hover:bg-background/75">
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent className="w-full p-2">
@@ -86,7 +86,7 @@ export const Part3Data = () => {
 							Temperatura
 						</label>
 						<Select defaultValue="20">
-							<SelectTrigger className="p-6 w-full justify-between gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg dark:hover:bg-background/75">
+							<SelectTrigger className="p-6 w-5/6 sm:w-full mx-auto justify-between gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg dark:hover:bg-background/75">
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent className="w-full p-2">

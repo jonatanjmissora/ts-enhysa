@@ -67,6 +67,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 				text={
 					"Complete los datos del técnico encargado de realizar los informes. Seran pre cargados en todos los reportes nuevos."
 				}
+				className={"top-4 right-4"}
 			/>
 			<form
 				className="flex flex-col gap-6"

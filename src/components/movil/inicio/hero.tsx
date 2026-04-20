@@ -13,7 +13,7 @@ export default function MovilHero() {
 				className="absolute opacity-75 top-6 -left-6 -right-6 w-screen h-[500px] bottom-0 -z-10 max-w-none mask-t-from-50% mask-b-from-80%"
 			/>
 			<Link
-				to="/new-report"
+				to="/new-report2"
 				className="flex items-center gap-2 p-6 py-4 textM font-semibold rounded-xl themeBtnAccent  my-shadow w-full sm:w-auto justify-center"
 			>
 				<FilePlus className="sm:size-5 2xl:size-6 text-foreground/70" />

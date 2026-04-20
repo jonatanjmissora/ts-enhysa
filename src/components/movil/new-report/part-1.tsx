@@ -1,3 +1,4 @@
+import { TextTooltip } from "@/components/layout/text-tooltip"
 import {
 	Accordion,
 	AccordionContent,
@@ -24,7 +25,11 @@ export default function MovilPart1Data() {
 				defaultValue=""
 				className="flex flex-col gap-4"
 			>
-				<div className="flex flex-col gap-3">
+				<div className="flex flex-col gap-3 relative">
+					<TextTooltip
+						text={"Datos obtenidos a través del perfil."}
+						className={"top-0 right-0"}
+					/>
 					<div className="flex items-center gap-2">
 						<UserRound className="size-6" />
 						Técnico responsable
@@ -46,7 +51,11 @@ export default function MovilPart1Data() {
 					</AccordionContent>
 				</AccordionItem>
 
-				<div className="flex flex-col gap-3">
+				<div className="flex flex-col gap-3 relative">
+					<TextTooltip
+						text={"Datos obtenidos a través del perfil."}
+						className={"top-0 right-0"}
+					/>
 					<span className="flex items-center gap-3">
 						<Warehouse className="size-6" />
 						Empresa receptora
@@ -54,7 +63,7 @@ export default function MovilPart1Data() {
 					<div className="w-5/6 mx-auto">
 						<Select defaultValue="telefonica">
 							<SelectTrigger
-								className="w-full mx-auto px-6 py-2 card  justify-center bg-accent rounded-lg text-xs tracking-widest"
+								className="w-full mx-auto px-6 py-2 card justify-center bg-accent rounded-lg text-xs tracking-widest"
 								onClick={e => e.stopPropagation()}
 							>
 								<SelectValue
@@ -86,13 +95,21 @@ export default function MovilPart1Data() {
 					</AccordionContent>
 				</AccordionItem>
 
-				{/*<AccordionItem
-					value="instrumento"
-					className="border-b border-foreground/10 relative"
-				>
-					<div className="absolute sm:top-2 sm:left-1/2 left-0 top-13 ">
+				<div className="flex flex-col gap-3 relative">
+					<TextTooltip
+						text={"Datos obtenidos a través del perfil."}
+						className={"top-0 right-0"}
+					/>
+					<span className="flex items-center gap-3">
+						<Cpu className="size-6" /> Instrumento utilizado
+					</span>
+
+					<div className="w-5/6 mx-auto">
 						<Select defaultValue="luxometro1">
-							<SelectTrigger className="w-60 px-6 py-1 card dark:bg-background rounded-lg">
+							<SelectTrigger
+								className="w-full mx-auto px-6 py-2 card justify-center bg-accent rounded-lg text-xs tracking-widest"
+								onClick={e => e.stopPropagation()}
+							>
 								<SelectValue
 									placeholder="Seleccione Instrumento"
 									className="text-center"
@@ -109,16 +126,20 @@ export default function MovilPart1Data() {
 							</SelectContent>
 						</Select>
 					</div>
-					<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center justify-between">
-						<span className="flex items-center gap-3 w-full sm:w-max">
-							<Cpu className="size-6" /> Instrumento utilizado
-						</span>
-						<span className="flex-1 ml-auto text-right">ver</span>
+				</div>
+
+				<AccordionItem
+					value="instrumento"
+					className="border-b border-foreground/10 relative mb-10"
+				>
+					<div className="absolute sm:top-2 sm:left-1/2 left-0 top-13 "></div>
+					<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center justify-between  p-0 py-1">
+						<span className="flex-1 ml-auto text-right text-sm">ver</span>
 					</AccordionTrigger>
 					<AccordionContent>
 						<Instrumento />
 					</AccordionContent>
-				</AccordionItem> */}
+				</AccordionItem>
 			</Accordion>
 		</article>
 	)

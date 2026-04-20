@@ -65,7 +65,7 @@ export default function Part2Data() {
 				</AccordionItem>
 			</Accordion>
 
-			<button className="card bg-background py-2 px-4 rounded-lg my-20 flex items-center justify-center gap-2 mx-auto w-full sm:w-1/3 textL">
+			<button className="card bg-background py-2 px-4 rounded-lg my-20 flex items-center justify-center gap-2 mx-auto w-5/6 sm:w-1/3 textL">
 				+ Agregar Area
 			</button>
 		</article>

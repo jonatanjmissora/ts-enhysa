@@ -75,5 +75,5 @@ poner lo de components/disenio2 en components/nuevo-reporte
 
 realizar el lazy import que me aconsejo chatgpt para desktop / movil
 
-
+colocar boton para crear nueva empresa e instrumento en perfil
 

@@ -9,7 +9,7 @@ interface TextTooltipProps {
 export const TextTooltip = ({ text, className }: TextTooltipProps) => {
 	return (
 		<Tooltip>
-			<TooltipTrigger className={`absolute top-4 right-4 ${className}`}>
+			<TooltipTrigger className={`absolute ${className}`}>
 				<Info className="size-4 text-amber-500/50" />
 			</TooltipTrigger>
 			<TooltipContent className="bg-gray-300">
