@@ -69,5 +69,11 @@ ver como los links desde el pie de pagina, o desde el menu del movil. El suscrip
 
 en new report cuando abro un area, la 2da por ejemplo, no me hace scroll hasta el principio del acordeon content
 
+borrar new-report y profile, ya que me quedo con new-report2 y profile2
+
+poner lo de components/disenio2 en components/nuevo-reporte
+
+realizar el lazy import que me aconsejo chatgpt para desktop / movil
+
 
 

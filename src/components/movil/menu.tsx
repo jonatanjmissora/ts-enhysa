@@ -56,7 +56,7 @@ const MovilMenuContent = ({
 					Mis Informes
 				</Link>
 				<Link
-					to="/profile"
+					to="/profile2"
 					onClick={() => setIsOpen(!isOpen)}
 					resetScroll={true}
 				>

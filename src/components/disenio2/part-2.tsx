@@ -37,7 +37,7 @@ export default function Part2Data() {
 						</div>
 					</AccordionTrigger>
 					<AccordionContent className="">
-						<div className="w-full card border-0 bg-background flex flex-col justify-center items-center gap-20 p-0 sm:p-8 pb-40">
+						<div className="w-full card border-0 bg-background flex flex-col justify-center items-center gap-20 p-0 sm:p-8 pb-40 bw">
 							<NombreArea />
 							<Part2Iluminacion />
 							<Part2Plano />
@@ -49,14 +49,14 @@ export default function Part2Data() {
 					value="plantabaja"
 					className="border-b border-foreground/5 last:border-b-0"
 				>
-					<AccordionTrigger className="flex px-10 w-full border-b border-foreground/10">
+					<AccordionTrigger className="flex px-10 w-full border-b border-foreground/10 items-center">
 						<div className="flex items-center gap-2">
 							<Notebook className="size-6" />
 							PLANTA ALTA - OFICINAS
 						</div>
 					</AccordionTrigger>
 					<AccordionContent className="">
-						<div className="w-full card border-0 bg-background flex flex-col justify-center items-center gap-20 p-8 pb-40">
+						<div className="w-full card border-0 bg-background flex flex-col justify-center items-center gap-20 p-0 sm:p-8 pb-40 bw">
 							<NombreArea />
 							<Part2Iluminacion />
 							<Part2Plano />
