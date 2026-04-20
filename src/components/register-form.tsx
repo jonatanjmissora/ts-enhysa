@@ -22,6 +22,7 @@ import { useRouter } from "@tanstack/react-router"
 import { authClient } from "@/lib/auth-client"
 import { useState } from "react"
 import { Eye, EyeClosed } from "lucide-react"
+import { PreferencesMenu } from "./layout/preferences-menu"
 
 const formSchema = z.object({
 	nombre: z.string().min(3, "Nombre mínimo de 3 caracteres."),
@@ -87,6 +88,9 @@ export function RegisterForm({
 
 	return (
 		<div className={cn("w-90 relative sm:mr-50", className)} {...props}>
+			<div className=" sm:hidden absolute top-4 left-4 right-4">
+				<PreferencesMenu />
+			</div>
 			<Card className="card bg-accent/90 rounded-lg my-shadow items-stretch ring ring-foreground/30">
 				<CardHeader className="text-center">
 					<div className="w-full sm:hidden flex flex-col items-center pb-4 relative">

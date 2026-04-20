@@ -15,44 +15,46 @@ import {
 } from "@/components/ui/select"
 import { Cpu, UserRound, Warehouse } from "lucide-react"
 
-export default function Part1Data() {
+export default function MovilPart1Data() {
 	return (
 		<article className="w-full my-10 sm:my-4">
 			<Accordion
 				type="single"
 				collapsible
 				defaultValue=""
-				className="flex flex-col gap-8"
+				className="flex flex-col gap-4"
 			>
+				<div className="flex flex-col gap-3">
+					<div className="flex items-center gap-2">
+						<UserRound className="size-6" />
+						Técnico responsable
+					</div>
+					<span className="w-5/6 mx-auto px-6 py-2 card justify-center bg-accent rounded-lg textXS">
+						MISSORA JONATAN
+					</span>
+				</div>
+
 				<AccordionItem
 					value="tecnico"
-					className="border-b border-foreground/10 relative"
+					className="border-b border-foreground/10 relative mb-10"
 				>
-					<div className="absolute top-2  left-1/2">
-						<span className="w-60 px-6 py-2 card bg-background rounded-lg textXS">
-							MISSORA JONATAN
-						</span>
-					</div>
-					<AccordionTrigger className="flex px-5 w-11/12 sm:w-full items-center justify-between">
-						<div className="flex items-center gap-2">
-							<UserRound className="size-6" />
-							Técnico responsable
-						</div>
-						<span className="flex-1 ml-auto text-right">ver</span>
+					<AccordionTrigger className="flex px-5 w-11/12 sm:w-full items-center justify-between p-0 py-1">
+						<span className="flex-1 ml-auto text-right text-sm">ver</span>
 					</AccordionTrigger>
 					<AccordionContent>
 						<Tecnico />
 					</AccordionContent>
 				</AccordionItem>
 
-				<AccordionItem
-					value="empresa"
-					className="border-b border-foreground/10 relative"
-				>
-					<div className="absolute top-2  left-1/2">
+				<div className="flex flex-col gap-3">
+					<span className="flex items-center gap-3">
+						<Warehouse className="size-6" />
+						Empresa receptora
+					</span>
+					<div className="w-5/6 mx-auto">
 						<Select defaultValue="telefonica">
 							<SelectTrigger
-								className="w-60 px-6 py-1 card dark:bg-background rounded-lg"
+								className="w-full mx-auto px-6 py-2 card  justify-center bg-accent rounded-lg text-xs tracking-widest"
 								onClick={e => e.stopPropagation()}
 							>
 								<SelectValue
@@ -71,19 +73,20 @@ export default function Part1Data() {
 							</SelectContent>
 						</Select>
 					</div>
-					<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center justify-between">
-						<span className="flex items-center gap-3">
-							<Warehouse className="size-6" />
-							Empresa receptora
-						</span>
-						<span className="flex-1 ml-auto text-right">ver</span>
+				</div>
+				<AccordionItem
+					value="empresa"
+					className="border-b border-foreground/10 relative mb-10"
+				>
+					<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center justify-between  p-0 py-1">
+						<span className="flex-1 ml-auto text-right text-sm">ver</span>
 					</AccordionTrigger>
 					<AccordionContent>
 						<Empresa />
 					</AccordionContent>
 				</AccordionItem>
 
-				<AccordionItem
+				{/*<AccordionItem
 					value="instrumento"
 					className="border-b border-foreground/10 relative"
 				>
@@ -115,7 +118,7 @@ export default function Part1Data() {
 					<AccordionContent>
 						<Instrumento />
 					</AccordionContent>
-				</AccordionItem>
+				</AccordionItem> */}
 			</Accordion>
 		</article>
 	)

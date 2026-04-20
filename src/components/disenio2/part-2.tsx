@@ -37,7 +37,7 @@ export default function Part2Data() {
 						</div>
 					</AccordionTrigger>
 					<AccordionContent className="">
-						<div className="w-full card border-0 bg-background flex flex-col justify-center items-center gap-20 p-0 sm:p-8 pb-40 bw">
+						<div className="w-full card border-0 bg-accent sm:bg-background flex flex-col justify-center items-center gap-20 p-0 sm:p-8 pb-20">
 							<NombreArea />
 							<Part2Iluminacion />
 							<Part2Plano />
@@ -56,7 +56,7 @@ export default function Part2Data() {
 						</div>
 					</AccordionTrigger>
 					<AccordionContent className="">
-						<div className="w-full card border-0 bg-background flex flex-col justify-center items-center gap-20 p-0 sm:p-8 pb-40 bw">
+						<div className="w-full card border-0 bg-accent sm:bg-background flex flex-col justify-center items-center gap-20 p-0 sm:p-8 pb-20">
 							<NombreArea />
 							<Part2Iluminacion />
 							<Part2Plano />
@@ -81,7 +81,7 @@ const NombreArea = () => {
 				</label>
 				<input
 					id="matricula"
-					className="card bg-accent py-2 px-4 rounded-lg text-center"
+					className="card sm:bg-accent bg-background py-2 px-4 rounded-lg text-center"
 					placeholder="N° Matrícula "
 					defaultValue="Planta Baja"
 					readOnly
@@ -93,7 +93,7 @@ const NombreArea = () => {
 				</label>
 				<input
 					id="matricula"
-					className="card bg-accent py-2 px-4 rounded-lg text-center"
+					className="card sm:bg-accent bg-background py-2 px-4 rounded-lg text-center"
 					placeholder="N° Matrícula "
 					defaultValue="Oficinas"
 					readOnly

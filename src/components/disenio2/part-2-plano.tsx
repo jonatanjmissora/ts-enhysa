@@ -22,7 +22,7 @@ export default function Part2Plano() {
 						</label>
 						<input
 							id="matricula"
-							className="card bg-accent py-2 px-4 rounded-lg text-center"
+							className="card sm:dark:bg-accent dark:bg-background py-2 px-4 rounded-lg text-center"
 							placeholder="N° Matrícula "
 							defaultValue="Ej. 4"
 							readOnly
@@ -35,7 +35,7 @@ export default function Part2Plano() {
 						</label>
 						<input
 							id="matricula"
-							className="card bg-accent py-2 px-4 rounded-lg text-center"
+							className="card sm:dark:bg-accent dark:bg-background py-2 px-4 rounded-lg text-center"
 							placeholder="N° Matrícula "
 							defaultValue="Ej. 6"
 							readOnly
@@ -48,7 +48,7 @@ export default function Part2Plano() {
 						</label>
 						<input
 							id="matricula"
-							className="card bg-accent py-2 px-4 rounded-lg text-center"
+							className="card sm:dark:bg-accent dark:bg-background py-2 px-4 rounded-lg text-center"
 							placeholder="N° Matrícula "
 							defaultValue="Ej. 2"
 							readOnly
@@ -56,7 +56,7 @@ export default function Part2Plano() {
 					</div>
 				</div>
 
-				<div className="w-full sm:w-3/4 py-4 card bg-accent rounded-lg flex items-center justify-center flex-col">
+				<div className="w-full sm:w-3/4 py-4 card sm:bg-accent bg-background rounded-lg flex items-center justify-center flex-col">
 					<InputFiles
 						text="Imágenes del plano a medir."
 						files={planoFiles}
@@ -102,7 +102,7 @@ export default function Part2Plano() {
 					</span>
 				</div>
 
-				<div className="flex flex-col sm:flex-row items-stretch justify-center gap-4 w-full sm:w-3/4 card bg-accent sm:rounded-lg sm:p-8 p-0 ">
+				<div className="flex flex-col sm:flex-row items-stretch justify-center gap-4 w-full sm:w-3/4 card sm:bg-accent bg-background sm:rounded-lg sm:p-8 p-0 ">
 					<Croquis />
 					<PuntosList />
 				</div>
@@ -127,7 +127,7 @@ const Croquis = () => {
 								<span className="italic tracking-widest text-xs">
 									punto-{i * 3 + j + 1}
 								</span>
-								<span className="w-15 text-xl font-semibold py-1 px-3 card bg-background justify-center items-center rounded-lg">
+								<span className="w-15 text-xl font-semibold py-1 px-3 card bg-accent sm:bg-background justify-center items-center rounded-lg">
 									{PUNTOS[i * 3 + j]}
 								</span>
 							</div>
@@ -135,9 +135,6 @@ const Croquis = () => {
 					))}
 				</div>
 			))}
-			<span className="absolute bottom-20 left-1/2 -translate-x-1/2 text-xs">
-				6 mts
-			</span>
 		</div>
 	)
 }

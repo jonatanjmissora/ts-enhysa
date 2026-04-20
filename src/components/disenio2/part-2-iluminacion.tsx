@@ -26,7 +26,7 @@ export default function Part2Iluminacion() {
 							Tipo de iluminación
 						</label>
 						<Select defaultValue="natural">
-							<SelectTrigger className="w-full px-6 py-1 card dark:bg-accent dark:h-10">
+							<SelectTrigger className="w-full px-6 py-1 card sm:dark:bg-accent dark:bg-background dark:h-10">
 								<SelectValue
 									placeholder="Seleccione Tipo"
 									className="text-center"
@@ -49,7 +49,7 @@ export default function Part2Iluminacion() {
 							Tipo de Fuente
 						</label>
 						<Select defaultValue="incandescente">
-							<SelectTrigger className="w-full px-6 py-1 card dark:bg-accent dark:h-10">
+							<SelectTrigger className="w-full px-6 py-1 card sm:dark:bg-accent dark:bg-background dark:h-10">
 								<SelectValue
 									placeholder="Seleccione Tipo"
 									className="text-center"
@@ -72,7 +72,7 @@ export default function Part2Iluminacion() {
 							Iluminación
 						</label>
 						<Select defaultValue="general">
-							<SelectTrigger className="w-full px-6 py-1 card dark:bg-accent dark:h-10">
+							<SelectTrigger className="w-full px-6 py-1 card sm:dark:bg-accent dark:bg-background dark:h-10">
 								<SelectValue
 									placeholder="Seleccione Tipo"
 									className="text-center"
@@ -97,7 +97,7 @@ export default function Part2Iluminacion() {
 							Valor Requerido
 						</label>
 						<Select defaultValue="300">
-							<SelectTrigger className="w-full px-6 py-1 card dark:bg-accent dark:h-10">
+							<SelectTrigger className="w-full px-6 py-1 card sm:dark:bg-accent dark:bg-background dark:h-10">
 								<SelectValue
 									placeholder="Seleccione Tipo"
 									className="text-center"
@@ -121,7 +121,7 @@ export default function Part2Iluminacion() {
 						</label>
 						<input
 							id="matricula"
-							className="card bg-accent py-2 px-4 rounded-lg text-center"
+							className="card sm:bg-accent bg-background py-2 px-4 rounded-lg text-center"
 							placeholder="N° Matrícula "
 							defaultValue="Sin observación"
 							readOnly
