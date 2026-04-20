@@ -1,13 +1,6 @@
 import { PreferencesMenu } from "@/components/layout/preferences-menu"
 import { createFileRoute } from "@tanstack/react-router"
-import {
-	Ban,
-	CheckCircle2,
-	Clock,
-	Download,
-	FileChartColumn,
-	Trash2,
-} from "lucide-react"
+import { Clock, Download, FileChartColumn, Trash2 } from "lucide-react"
 
 export const Route = createFileRoute("/_protected/reports")({
 	component: RouteComponent,
