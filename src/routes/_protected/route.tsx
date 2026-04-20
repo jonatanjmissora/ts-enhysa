@@ -1,7 +1,13 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router"
+import {
+	createFileRoute,
+	Link,
+	Outlet,
+	useLocation,
+} from "@tanstack/react-router"
 import { protectedRoute } from "@/lib/protected-route"
 import DashboardMenu from "@/components/dashboard/menu/menu"
 import MovilMenu from "@/components/movil/menu"
+import { ChevronLeft } from "lucide-react"
 
 export const Route = createFileRoute("/_protected")({
 	loader: async () => await protectedRoute(),
@@ -25,9 +31,20 @@ function RouteComponent() {
 }
 
 const MovilRoute = () => {
+	const pathname = useLocation({
+		select: location => location.pathname,
+	})
+	const isHome = pathname === "/"
+
 	return (
-		<main className="w-screen min-h-screen overflow-hidden flex flex-col">
+		<main className="w-screen min-h-screen overflow-hidden flex flex-col relative">
 			<MovilMenu />
+			<Link
+				to="/"
+				className={`absolute top-20 left-4 ${isHome ? "hidden" : ""}`}
+			>
+				<ChevronLeft size={24} />
+			</Link>
 			<Outlet />
 		</main>
 	)

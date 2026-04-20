@@ -8,13 +8,13 @@ export default function MovilMenu() {
 	return (
 		<>
 			<header
-				className={`w-full fixed top-0 left-0 right-0 h-18 z-50 flex items-center justify-between p-4 bg-green-900 ${isOpen ? "shadow-[0px_2px_2px_rgb(0,0,0,0.4)]" : ""}`}
+				className={`w-full fixed top-0 left-0 right-0 h-18 z-50 flex items-center justify-between p-4 bg-green-900 ${isOpen ? "" : "shadow-[0px_2px_2px_rgb(0,0,0,0.4)]"}`}
 			>
-				<div className="flex items-center gap-3">
+				<Link to="/" className="flex items-center gap-3">
 					<img src="/EnHySa_logo.webp" alt="logo EnHySa" className="size-10" />
 
 					<p className="textXL text-shadow-lg/50">EnHySa App</p>
-				</div>
+				</Link>
 				<button onClick={() => setIsOpen(!isOpen)}>
 					{isOpen ? <X className="size-7" /> : <Menu className="size-7" />}
 				</button>
@@ -42,7 +42,7 @@ const MovilMenuContent = ({
 					Inicio
 				</Link>
 				<Link
-					to="/new-report"
+					to="/new-report2"
 					onClick={() => setIsOpen(!isOpen)}
 					resetScroll={false}
 				>

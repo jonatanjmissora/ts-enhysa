@@ -13,7 +13,7 @@ export default function Footer() {
 			<p className="textL">Mapa del sitio</p>
 			<ul className="p-4 flex flex-col gap-2">
 				<Link to="/">Inicio</Link>
-				<Link to="/new-report">Nuevo Proyecto</Link>
+				<Link to="/new-report2">Nuevo Proyecto</Link>
 				<Link to="/reports">Mis Informes</Link>
 				<Link to="/profile">Mi Perfil</Link>
 				<Link to="/pricing">Suscripción</Link>

@@ -5,6 +5,7 @@ import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { empresasQueryOptions } from "queries/empresas/empresas-query"
 import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
 import { useState } from "react"
+import MovilNewReport from "@/components/movil/new-report"
 
 export const Route = createFileRoute("/_protected/new-report2")({
 	loader: ({ context }) => {
@@ -26,6 +27,9 @@ function RouteComponent() {
 	const siguientePaso = () => {
 		setActualStep(actualStep + 1)
 	}
+
+	const isMobile = window.innerWidth < 640
+	if (isMobile) return <MovilNewReport />
 
 	return (
 		<div className="min-h-screen flex flex-col">
