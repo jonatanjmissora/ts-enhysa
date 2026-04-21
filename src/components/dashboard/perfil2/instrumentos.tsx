@@ -5,6 +5,7 @@ import {
 	AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Trash2, Pencil } from "lucide-react"
 
 export default function ProfileInstrumentos() {
@@ -66,47 +67,51 @@ const Instrumento = () => {
 			<Trash2 className="absolute bottom-22 left-10 sm:top-4 sm:right-10 size-6 cursor-pointer text-red-600/50" />
 			<div className="grid-cols-1 grid sm:grid-cols-2 gap-8 w-5/6">
 				<div className="flex flex-col gap-1">
-					<label className="tracking-wider" htmlFor="matricula">
+					<Label className="tracking-wider" htmlFor="matricula">
 						Marca
-					</label>
+					</Label>
 					<Input
 						id="matricula"
 						placeholder="N° Matrícula "
 						defaultValue="LUXIS"
 						readOnly
+						className="bg-background sm:bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
-					<label className="tracking-wider" htmlFor="cargo">
+					<Label className="tracking-wider" htmlFor="cargo">
 						Modelo
-					</label>
+					</Label>
 					<Input
 						id="cargo"
 						placeholder="Ej. Seguridad e Higiene"
 						defaultValue="EXO-4000"
 						readOnly
+						className="bg-background sm:bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
-					<label className="tracking-wider" htmlFor="cargo">
+					<Label className="tracking-wider" htmlFor="cargo">
 						Nro Serie
-					</label>
+					</Label>
 					<Input
 						id="serie"
 						placeholder="Ej. Seguridad e Higiene"
 						defaultValue="12858752"
 						readOnly
+						className="bg-background sm:bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
-					<label className="tracking-wider" htmlFor="cargo">
+					<Label className="tracking-wider" htmlFor="cargo">
 						Calibración
-					</label>
+					</Label>
 					<Input
 						id="fecha"
 						placeholder="Ej. Seguridad e Higiene"
 						defaultValue="12/10/25"
 						readOnly
+						className="bg-background sm:bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
@@ -124,7 +129,7 @@ const Instrumento = () => {
 				</div>
 			</div>
 			<div className=" my-10 w-5/6">
-				<button className="card bg-background rounded-lg cursor-pointer textM py-2 w-2/3 sm:w-1/4 justify-center gap-4 ml-auto">
+				<button className="card bg-background sm:bg-accent rounded-lg cursor-pointer textM py-2 w-2/3 sm:w-1/4 justify-center gap-4 ml-auto">
 					<Pencil className="size-6 text-foreground/70" />
 					Editar
 				</button>

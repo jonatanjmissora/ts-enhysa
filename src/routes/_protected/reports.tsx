@@ -1,6 +1,13 @@
 import { PreferencesMenu } from "@/components/layout/preferences-menu"
 import { createFileRoute } from "@tanstack/react-router"
-import { Clock, Download, Eye, FileChartColumn, Trash2 } from "lucide-react"
+import {
+	Clock,
+	Download,
+	Ellipsis,
+	Eye,
+	FileChartColumn,
+	Trash2,
+} from "lucide-react"
 
 export const Route = createFileRoute("/_protected/reports")({
 	component: RouteComponent,
@@ -31,7 +38,7 @@ function RouteComponent() {
 						<div className="flex gap-2 items-center">
 							<FileChartColumn className="sm:size-8 2xl:size-10 text-blue-700/70" />
 							<div className="flex flex-col gap-0">
-								<p className="sm:text-sm 2xl:text-lg font-semibold w-40 sm:w-max truncate">
+								<p className="sm:text-sm 2xl:text-lg font-semibold w-55 sm:w-max truncate">
 									Empresa Metalurgica SA - Planta A
 								</p>
 								<p className="textXS text-foreground/50">
@@ -39,18 +46,19 @@ function RouteComponent() {
 								</p>
 							</div>
 						</div>
-						<div className="flex items-center gap-4">
+						<div className="hidden sm:flex items-center gap-4">
 							<Eye className="sm:size-6 2xl:size-8 text-foreground/70 cursor-pointer hover:text-foreground transition-colors" />
 							<Download className="sm:size-6 2xl:size-8 text-foreground/70 cursor-pointer hover:text-foreground transition-colors" />
 							<Trash2 className="sm:size-6 2xl:size-8 text-red-700/70 cursor-pointer hover:text-foreground transition-colors" />
 						</div>
+						<Ellipsis className="sm:hidden size-6" />
 					</div>
 
 					<div className="px-4 sm:px-6 py-4 2xl:py-6 cardAccent justify-between w-full">
 						<div className="flex gap-2 items-center">
 							<FileChartColumn className="sm:size-8 2xl:size-10 text-blue-700/70" />
 							<div className="flex flex-col gap-0">
-								<p className="sm:text-sm 2xl:text-lg font-semibold w-40 sm:w-max truncate">
+								<p className="sm:text-sm 2xl:text-lg font-semibold w-55 sm:w-max truncate">
 									Empresa Metalurgica SA - Planta A
 								</p>
 								<p className="textXS text-foreground/50">
@@ -58,18 +66,19 @@ function RouteComponent() {
 								</p>
 							</div>
 						</div>
-						<div className="flex items-center gap-4">
+						<div className="hidden sm:flex items-center gap-4">
 							<Eye className="sm:size-6 2xl:size-8 text-foreground/70 cursor-pointer hover:text-foreground transition-colors" />
 							<Download className="sm:size-6 2xl:size-8 text-foreground/70 cursor-pointer hover:text-foreground transition-colors" />
 							<Trash2 className="sm:size-6 2xl:size-8 text-red-700/70 cursor-pointer hover:text-foreground transition-colors" />
 						</div>
+						<Ellipsis className="sm:hidden size-6" />
 					</div>
 
 					<div className="px-4 sm:px-6 py-4 2xl:py-6 cardAccent justify-between w-full">
 						<div className="flex gap-2 items-center">
 							<Clock className="sm:size-8 2xl:size-10 text-amber-700/70" />
 							<div className="flex flex-col gap-0">
-								<p className="sm:text-sm 2xl:text-lg font-semibold w-40 sm:w-max truncate">
+								<p className="sm:text-sm 2xl:text-lg font-semibold w-55 sm:w-max truncate">
 									Empresa Metalurgica SA - Planta A
 								</p>
 								<p className="textXS text-foreground/50">
@@ -77,18 +86,19 @@ function RouteComponent() {
 								</p>
 							</div>
 						</div>
-						<div className="flex items-center gap-4">
+						<div className="hidden sm:flex items-center gap-4">
 							<Eye className="sm:size-6 2xl:size-8 text-foreground/70 cursor-pointer hover:text-foreground transition-colors" />
 							<Download className="sm:size-6 2xl:size-8 text-foreground/70 cursor-pointer hover:text-foreground transition-colors" />
 							<Trash2 className="sm:size-6 2xl:size-8 text-red-700/70 cursor-pointer hover:text-foreground transition-colors" />
 						</div>
+						<Ellipsis className="sm:hidden size-6" />
 					</div>
 
 					<div className="px-4 sm:px-6 py-4 2xl:py-6 cardAccent justify-between w-full">
 						<div className="flex gap-2 items-center">
 							<FileChartColumn className="sm:size-8 2xl:size-10 text-blue-700/70" />
 							<div className="flex flex-col gap-0">
-								<p className="sm:text-sm 2xl:text-lg font-semibold w-40 sm:w-max truncate">
+								<p className="sm:text-sm 2xl:text-lg font-semibold w-55 sm:w-max truncate">
 									Empresa Metalurgica SA - Planta A
 								</p>
 								<p className="textXS text-foreground/50">
@@ -96,18 +106,19 @@ function RouteComponent() {
 								</p>
 							</div>
 						</div>
-						<div className="flex items-center gap-4">
+						<div className="hidden sm:flex items-center gap-4">
 							<Eye className="sm:size-6 2xl:size-8 text-foreground/70 cursor-pointer hover:text-foreground transition-colors" />
 							<Download className="sm:size-6 2xl:size-8 text-foreground/70 cursor-pointer hover:text-foreground transition-colors" />
 							<Trash2 className="sm:size-6 2xl:size-8 text-red-700/70 cursor-pointer hover:text-foreground transition-colors" />
 						</div>
+						<Ellipsis className="sm:hidden size-6" />
 					</div>
 
 					<div className="px-4 sm:px-6 py-4 2xl:py-6 cardAccent justify-between w-full">
 						<div className="flex gap-2 items-center">
 							<Clock className="sm:size-8 2xl:size-10 text-amber-700/70" />
 							<div className="flex flex-col gap-0">
-								<p className="sm:text-sm 2xl:text-lg font-semibold w-40 sm:w-max truncate">
+								<p className="sm:text-sm 2xl:text-lg font-semibold w-55 sm:w-max truncate">
 									Empresa Metalurgica SA - Planta A
 								</p>
 								<p className="textXS text-foreground/50">
@@ -115,18 +126,19 @@ function RouteComponent() {
 								</p>
 							</div>
 						</div>
-						<div className="flex items-center gap-4">
+						<div className="hidden sm:flex items-center gap-4">
 							<Eye className="sm:size-6 2xl:size-8 text-foreground/70 cursor-pointer hover:text-foreground transition-colors" />
 							<Download className="sm:size-6 2xl:size-8 text-foreground/70 cursor-pointer hover:text-foreground transition-colors" />
 							<Trash2 className="sm:size-6 2xl:size-8 text-red-700/70 cursor-pointer hover:text-foreground transition-colors" />
 						</div>
+						<Ellipsis className="sm:hidden size-6" />
 					</div>
 
 					<div className="px-4 sm:px-6 py-4 2xl:py-6 cardAccent justify-between w-full">
 						<div className="flex gap-2 items-center">
 							<FileChartColumn className="sm:size-8 2xl:size-10 text-blue-700/70" />
 							<div className="flex flex-col gap-0">
-								<p className="sm:text-sm 2xl:text-lg font-semibold w-40 sm:w-max truncate">
+								<p className="sm:text-sm 2xl:text-lg font-semibold w-55 sm:w-max truncate">
 									Empresa Metalurgica SA - Planta A
 								</p>
 								<p className="textXS text-foreground/50">
@@ -134,11 +146,12 @@ function RouteComponent() {
 								</p>
 							</div>
 						</div>
-						<div className="flex items-center gap-4">
+						<div className="hidden sm:flex items-center gap-4">
 							<Eye className="sm:size-6 2xl:size-8 text-foreground/70 cursor-pointer hover:text-foreground transition-colors" />
 							<Download className="sm:size-6 2xl:size-8 text-foreground/70 cursor-pointer hover:text-foreground transition-colors" />
 							<Trash2 className="sm:size-6 2xl:size-8 text-red-700/70 cursor-pointer hover:text-foreground transition-colors" />
 						</div>
+						<Ellipsis className="sm:hidden size-6" />
 					</div>
 				</div>
 			</article>

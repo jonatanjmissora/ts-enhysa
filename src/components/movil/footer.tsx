@@ -16,7 +16,7 @@ export default function Footer() {
 				<Link to="/">Inicio</Link>
 				<Link to="/new-report2">Nuevo Proyecto</Link>
 				<Link to="/reports">Mis Informes</Link>
-				<Link to="/profile">Mi Perfil</Link>
+				<Link to="/profile2">Mi Perfil</Link>
 				<Link to="/pricing">Suscripción</Link>
 			</ul>
 			<p className="text-xs w-full text-center">
