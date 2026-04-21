@@ -8,6 +8,7 @@ import {
 	AccordionTrigger,
 } from "../ui/accordion"
 import { Input } from "../ui/input"
+import { Label } from "../ui/label"
 
 export default function Part2Data() {
 	return (
@@ -23,15 +24,15 @@ export default function Part2Data() {
 				type="single"
 				collapsible
 				defaultValue=""
-				className="flex flex-col gap-8 w-full"
+				className="flex flex-col gap-2 w-full mt-5"
 			>
 				<AccordionItem
 					value="plantaalta"
 					className="border-b border-foreground/5 last:border-b-0"
 				>
 					<AccordionTrigger className="flex px-10 w-full border-b border-foreground/10 items-center">
-						<div className="flex items-center gap-2">
-							<Notebook className="size-6" />
+						<div className="flex items-center gap-2 textXS">
+							<Notebook className="size-4" />
 							PLANTA BAJA - DEPOSITO
 						</div>
 					</AccordionTrigger>
@@ -49,8 +50,8 @@ export default function Part2Data() {
 					className="border-b border-foreground/5 last:border-b-0"
 				>
 					<AccordionTrigger className="flex px-10 w-full border-b border-foreground/10 items-center">
-						<div className="flex items-center gap-2">
-							<Notebook className="size-6" />
+						<div className="flex items-center gap-2 textXS">
+							<Notebook className="size-4" />
 							PLANTA ALTA - OFICINAS
 						</div>
 					</AccordionTrigger>
@@ -75,27 +76,27 @@ const NombreArea = () => {
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-3/4 mt-10">
 			<div className="flex flex-col gap-1">
-				<label className="tracking-wider" htmlFor="matricula">
+				<Label className="tracking-wider" htmlFor="matricula">
 					Nombre del Sector
-				</label>
+				</Label>
 				<Input
 					id="matricula"
 					placeholder="N° Matrícula "
 					defaultValue="Planta Baja"
 					readOnly
-					className="bg-accent"
+					className="bg-background sm:bg-accent"
 				/>
 			</div>
 			<div className="flex flex-col gap-1">
-				<label className="tracking-wider" htmlFor="matricula">
+				<Label className="tracking-wider" htmlFor="matricula">
 					Tipo de Sector
-				</label>
+				</Label>
 				<Input
 					id="matricula"
 					placeholder="N° Matrícula "
 					defaultValue="Oficinas"
 					readOnly
-					className="bg-accent"
+					className="bg-background sm:bg-accent"
 				/>
 			</div>
 		</div>

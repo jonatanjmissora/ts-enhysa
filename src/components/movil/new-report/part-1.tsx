@@ -6,6 +6,7 @@ import {
 	AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import {
 	Select,
 	SelectContent,
@@ -64,7 +65,7 @@ export default function MovilPart1Data() {
 					<div className="w-5/6 mx-auto">
 						<Select defaultValue="telefonica">
 							<SelectTrigger
-								className="w-full mx-auto px-6 py-2 card justify-center bg-accent text-xs tracking-widest"
+								className="w-full mx-auto px-6 py-2 justify-center dark:bg-accent text-xs tracking-widest"
 								onClick={e => e.stopPropagation()}
 							>
 								<SelectValue
@@ -108,7 +109,7 @@ export default function MovilPart1Data() {
 					<div className="w-5/6 mx-auto">
 						<Select defaultValue="luxometro1">
 							<SelectTrigger
-								className="w-full mx-auto px-6 py-2 card justify-center bg-accent text-xs tracking-widest"
+								className="w-full mx-auto px-6 py-2 justify-center dark:bg-accent text-xs tracking-widest"
 								onClick={e => e.stopPropagation()}
 							>
 								<SelectValue
@@ -151,9 +152,9 @@ const Tecnico = () => {
 		<div className="bg-accent sm:bg-background py-10 sm:p-10 flex items-center justify-center">
 			<div className="grid-cols-1 grid sm:grid-cols-2 gap-8 w-5/6">
 				<div className="flex flex-col gap-1">
-					<label className="tracking-wider" htmlFor="matricula">
+					<Label className="tracking-wider" htmlFor="matricula">
 						Nombre
-					</label>
+					</Label>
 					<Input
 						id="matricula"
 						placeholder="N° Matrícula "
@@ -162,9 +163,9 @@ const Tecnico = () => {
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
-					<label className="tracking-wider" htmlFor="cargo">
+					<Label className="tracking-wider" htmlFor="cargo">
 						Cargo
-					</label>
+					</Label>
 					<Input
 						id="cargo"
 						placeholder="Ej. Seguridad e Higiene"
@@ -173,20 +174,28 @@ const Tecnico = () => {
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
-					<p className="tracking-wider text-left">firma digital</p>
+					<Label>Firma Digital</Label>
 					<div className="card bg-background sm:bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
 						<img src="/firma.png" alt="firma-digital" className="size-20" />
 					</div>
 				</div>
 
 				<div className="flex flex-col gap-1">
-					<p className="tracking-wider text-left">pie de página</p>
-					<span className="card bg-background sm:bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
-						SeH MISSORA JONATAN
-					</span>
-					<span className="card bg-background sm:bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
-						MAT 1234523
-					</span>
+					<Label>Pie de Página</Label>
+					<Input
+						id="pie1"
+						placeholder="N° Matrícula "
+						defaultValue="SeH MISSORA JONATAN"
+						readOnly
+						className="text-center"
+					/>
+					<Input
+						id="pie2"
+						placeholder="N° Matrícula "
+						defaultValue="MAT 1234523"
+						readOnly
+						className="text-center"
+					/>
 				</div>
 			</div>
 		</div>
@@ -198,9 +207,9 @@ const Empresa = () => {
 		<div className="bg-accent sm:bg-background py-10 sm:p-10 flex items-center justify-center">
 			<div className="grid-cols-1 grid sm:grid-cols-2 gap-8 w-5/6">
 				<div className="flex flex-col gap-1">
-					<label className="tracking-wider" htmlFor="razon-social">
+					<Label className="tracking-wider" htmlFor="razon-social">
 						Razón Social
-					</label>
+					</Label>
 					<Input
 						id="razon-social"
 						placeholder="Nombre de la empresa"
@@ -209,9 +218,9 @@ const Empresa = () => {
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
-					<label className="tracking-wider" htmlFor="cuit">
+					<Label className="tracking-wider" htmlFor="cuit">
 						CUIT
-					</label>
+					</Label>
 					<Input
 						id="cuit"
 						placeholder="00-00000000-0"
@@ -220,9 +229,9 @@ const Empresa = () => {
 					/>
 				</div>
 				<div className="flex flex-col gap-1 w-full">
-					<label className="tracking-wider" htmlFor="direccion">
+					<Label className="tracking-wider" htmlFor="direccion">
 						Dirección
-					</label>
+					</Label>
 					<Input
 						id="direccion"
 						placeholder="Calle, Altura"
@@ -231,9 +240,9 @@ const Empresa = () => {
 					/>
 				</div>
 				<div className="flex flex-col gap-1 w-full">
-					<label className="tracking-wider" htmlFor="cant-empleados">
+					<Label className="tracking-wider" htmlFor="cant-empleados">
 						Localidad
-					</label>
+					</Label>
 					<Input
 						id="localidad"
 						placeholder="Ciudad, Provincia, Pais"
@@ -242,9 +251,9 @@ const Empresa = () => {
 					/>
 				</div>
 				<div className="flex flex-col gap-1 w-full">
-					<label className="tracking-wider" htmlFor="cant-empleados">
+					<Label className="tracking-wider" htmlFor="cant-empleados">
 						CP
-					</label>
+					</Label>
 					<Input
 						id="codigoPostal"
 						placeholder="Ciudad, Provincia, Pais"
@@ -253,9 +262,9 @@ const Empresa = () => {
 					/>
 				</div>
 				<div className="flex flex-col gap-1 w-full">
-					<label className="tracking-wider" htmlFor="cant-empleados">
+					<Label className="tracking-wider" htmlFor="cant-empleados">
 						Provincia
-					</label>
+					</Label>
 					<Input
 						id="provincia"
 						placeholder="Ciudad, Provincia, Pais"
@@ -273,9 +282,9 @@ const Instrumento = () => {
 		<div className="bg-accent sm:bg-background py-10 sm:p-10 flex items-center justify-center">
 			<div className="grid-cols-1 grid sm:grid-cols-2 gap-8 w-5/6">
 				<div className="flex flex-col gap-1">
-					<label className="tracking-wider" htmlFor="matricula">
+					<Label className="tracking-wider" htmlFor="matricula">
 						Marca
-					</label>
+					</Label>
 					<Input
 						id="matricula"
 						placeholder="N° Matrícula "
@@ -284,9 +293,9 @@ const Instrumento = () => {
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
-					<label className="tracking-wider" htmlFor="cargo">
+					<Label className="tracking-wider" htmlFor="cargo">
 						Modelo
-					</label>
+					</Label>
 					<Input
 						id="cargo"
 						placeholder="Ej. Seguridad e Higiene"
@@ -295,9 +304,9 @@ const Instrumento = () => {
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
-					<label className="tracking-wider" htmlFor="cargo">
+					<Label className="tracking-wider" htmlFor="cargo">
 						Nro Serie
-					</label>
+					</Label>
 					<Input
 						id="serie"
 						placeholder="Ej. Seguridad e Higiene"
@@ -306,9 +315,9 @@ const Instrumento = () => {
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
-					<label className="tracking-wider" htmlFor="cargo">
+					<Label className="tracking-wider" htmlFor="cargo">
 						Calibración
-					</label>
+					</Label>
 					<Input
 						id="fecha"
 						placeholder="Ej. Seguridad e Higiene"
@@ -317,14 +326,14 @@ const Instrumento = () => {
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
-					<p className="tracking-wider text-left">Imágenes</p>
+					<Label className="tracking-wider">Imágenes</Label>
 					<div className="card bg-background sm:bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
 						<img src="/luxometro.jpg" alt="luxometro" className="size-20" />
 					</div>
 				</div>
 
 				<div className="flex flex-col gap-1">
-					<p className="tracking-wider text-left">Certificado</p>
+					<Label className="tracking-wider">Certificado</Label>
 					<div className="card bg-background sm:bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
 						<img src="/calibracion.webp" alt="luxometro" className="size-20" />
 					</div>

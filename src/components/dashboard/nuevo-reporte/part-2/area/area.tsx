@@ -78,7 +78,7 @@ export default function Area({
 								})
 							}
 						>
-							<SelectTrigger className="w-full justify-center gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
+							<SelectTrigger>
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent className="w-full p-2 px4">
@@ -106,7 +106,7 @@ export default function Area({
 								})
 							}
 						>
-							<SelectTrigger className="w-full justify-center gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
+							<SelectTrigger>
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent className="w-full p-2 px4">
@@ -134,7 +134,7 @@ export default function Area({
 								})
 							}
 						>
-							<SelectTrigger className="w-full justify-center gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
+							<SelectTrigger>
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent className="w-full p-2 px4">
@@ -170,7 +170,7 @@ export default function Area({
 								})
 							}
 						>
-							<SelectTrigger className="w-full justify-center gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg py-[1.15rem] dark:hover:bg-background/75">
+							<SelectTrigger>
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent className="w-full p-2 px4">

@@ -17,24 +17,25 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "../ui/select"
+import { Label } from "../ui/label"
 
 export const Part3Data = () => {
 	return (
 		<article className="w-full flex flex-col justify-center items-center">
 			<div className="flex items-center justify-between w-full mb-10 px-5 rounded bg-pink-500/25">
-				<div className="textXL py-3 flex items-center gap-8">
+				<div className="textXL py-2 px-2 flex items-center gap-8 justify-between w-full sm:w-max">
 					Información <Database className="sm:size-7 2xl:size-9" />
 				</div>
 			</div>
 
 			<div className="flex flex-col items-center gap-8 w-full">
 				<div className="grid grid-cols-1 sm:grid-cols-3 gap-8 w-full sm:w-3/4">
-					<div className="flex flex-col gap-1">
-						<label className="tracking-wider" htmlFor="matricula">
+					<div className="flex flex-col gap-1 sm:w-full w-5/6 mx-auto">
+						<Label className="tracking-wider" htmlFor="matricula">
 							Clima
-						</label>
+						</Label>
 						<Select defaultValue="soleado">
-							<SelectTrigger className="p-6 w-5/6 sm:w-full mx-auto justify-between gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg  dark:hover:bg-background/75">
+							<SelectTrigger className="w-full">
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent className="w-full p-2 px-6">
@@ -61,12 +62,12 @@ export const Part3Data = () => {
 						</Select>
 					</div>
 
-					<div className="flex flex-col gap-1">
-						<label className="tracking-wider" htmlFor="matricula">
+					<div className="flex flex-col gap-1 sm:w-full w-5/6 mx-auto">
+						<Label className="tracking-wider" htmlFor="matricula">
 							Humedad
-						</label>
+						</Label>
 						<Select defaultValue="60">
-							<SelectTrigger className="p-6 w-5/6 sm:w-full mx-auto justify-between gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg  dark:hover:bg-background/75">
+							<SelectTrigger className="w-full">
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent className="w-full p-2">
@@ -81,12 +82,12 @@ export const Part3Data = () => {
 						</Select>
 					</div>
 
-					<div className="flex flex-col gap-1">
-						<label className="tracking-wider" htmlFor="matricula">
+					<div className="flex flex-col gap-1 sm:w-full w-5/6 mx-auto">
+						<Label className="tracking-wider" htmlFor="matricula">
 							Temperatura
-						</label>
+						</Label>
 						<Select defaultValue="20">
-							<SelectTrigger className="p-6 w-5/6 sm:w-full mx-auto justify-between gap-3 sm:text-base 2xl:text-xl dark:bg-background rounded-lg dark:hover:bg-background/75">
+							<SelectTrigger className="w-full">
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent className="w-full p-2">
@@ -103,13 +104,13 @@ export const Part3Data = () => {
 				</div>
 
 				<div className="flex flex-col gap-2 w-full sm:w-3/4">
-					<label
+					<Label
 						className="tracking-wider sm:text-base 2xl:text-xl flex items-center gap-4"
 						htmlFor="matricula"
 					>
 						<Search className="size-5 text-amber-500/70" />
 						Observacion General
-					</label>
+					</Label>
 					<textarea
 						id="matricula"
 						className={`card bg-accent sm:bg-background px-4 text-center min-h-30 sm:min-h-24 italic text-foreground/40 tracking-wider py-6 textXS`}
@@ -120,13 +121,13 @@ export const Part3Data = () => {
 				</div>
 
 				<div className="flex flex-col gap-2 w-full sm:w-3/4">
-					<label
+					<Label
 						className="tracking-wider sm:text-base 2xl:text-xl flex items-center gap-4"
 						htmlFor="matricula"
 					>
 						<NotebookPen className="size-5 text-amber-500/70" />
 						Conclusiónes Finales
-					</label>
+					</Label>
 					<textarea
 						id="matricula"
 						className={`card bg-accent sm:bg-background px-4 text-center min-h-30 sm:min-h-24 italic text-foreground/40 tracking-wider py-6 textXS`}
@@ -137,13 +138,13 @@ export const Part3Data = () => {
 				</div>
 
 				<div className="flex flex-col gap-2 w-full sm:w-3/4">
-					<label
+					<Label
 						className="tracking-wider sm:text-base 2xl:text-xl flex items-center gap-4"
 						htmlFor="matricula"
 					>
 						<List className="size-5 text-amber-500/70" />
 						Recomendaciones Generales
-					</label>
+					</Label>
 					<textarea
 						id="matricula"
 						className={`card bg-accent sm:bg-background px-4 text-center min-h-30 sm:min-h-24 italic text-foreground/40 tracking-wider py-6 textXS`}

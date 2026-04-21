@@ -3,61 +3,63 @@ import { InputFiles } from "@/components/layout/input-files"
 import { Box, Equal, EqualApproximately, Trash2 } from "lucide-react"
 import { useState } from "react"
 import { Input } from "../ui/input"
+import { Label } from "../ui/label"
 
 export default function Part2Plano() {
 	const [planoFiles, setPlanoFiles] = useState<File[]>([])
 
 	return (
 		<div className="w-full">
-			<div className="flex items-center justify-between border-b border-orange-300/25 mb-10 w-11/12 mx-auto">
-				<div className="textL py-2 px-3 flex items-center gap-8">
-					Plano <Box className="sm:size-7 2xl:size-9 text-orange-300/75" />
+			<div className="flex items-center justify-between border-b border-orange-700/70 dark:border-orange-300/25 mb-10 w-11/12 mx-auto">
+				<div className="textL py-2 px-3 flex items-center gap-8 justify-between w-full sm:w-max">
+					Plano{" "}
+					<Box className="sm:size-7 2xl:size-9 text-orange-700/70 dark:text-orange-300/75" />
 				</div>
 			</div>
 
 			<div className="flex flex-col items-center gap-8 w-full">
 				<div className="grid grid-cols-1 sm:grid-cols-3 gap-8 w-3/4">
 					<div className="flex flex-col gap-1">
-						<label className="tracking-wider" htmlFor="matricula">
+						<Label className="tracking-wider" htmlFor="matricula">
 							Largo (m)
-						</label>
+						</Label>
 						<Input
 							id="matricula"
 							placeholder="N° Matrícula "
 							defaultValue="Ej. 4"
 							readOnly
-							className="bg-accent"
+							className="bg-background sm:bg-accent"
 						/>
 					</div>
 
 					<div className="flex flex-col gap-1">
-						<label className="tracking-wider" htmlFor="matricula">
+						<Label className="tracking-wider" htmlFor="matricula">
 							Ancho (m)
-						</label>
+						</Label>
 						<Input
 							id="matricula"
 							placeholder="N° Matrícula "
 							defaultValue="Ej. 6"
 							readOnly
-							className="bg-accent"
+							className="bg-background sm:bg-accent"
 						/>
 					</div>
 
 					<div className="flex flex-col gap-1">
-						<label className="tracking-wider" htmlFor="matricula">
+						<Label className="tracking-wider" htmlFor="matricula">
 							Alto del montaje (m)
-						</label>
+						</Label>
 						<Input
 							id="matricula"
 							placeholder="N° Matrícula "
 							defaultValue="Ej. 2"
 							readOnly
-							className="bg-accent"
+							className="bg-background sm:bg-accent"
 						/>
 					</div>
 				</div>
 
-				<div className="w-full sm:w-3/4 py-4 card sm:bg-accent bg-background flex items-center justify-center flex-col">
+				<div className="w-11/12 sm:w-3/4 py-4 card sm:bg-accent bg-background flex items-center justify-center flex-col">
 					<InputFiles
 						text="Imágenes del plano a medir."
 						files={planoFiles}
