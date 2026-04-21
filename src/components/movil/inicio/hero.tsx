@@ -4,7 +4,7 @@ import { FilePlus } from "lucide-react"
 export default function MovilHero() {
 	return (
 		<div className="flex justify-between items-center flex-col mt-[70px] h-[550px] relative overflow-visible">
-			<p className="text-4xl font-semibold text-center tracking-wider text-pretty px-6 text-shadow-lg">
+			<p className="text-4xl font-semibold text-center tracking-wider text-pretty px-6 dark:text-shadow-lg">
 				Tus Informes de iluminación y protocolo.
 			</p>
 			<img
@@ -14,7 +14,7 @@ export default function MovilHero() {
 			/>
 			<Link
 				to="/new-report2"
-				className="flex items-center gap-2 p-6 py-4 textM font-semibold rounded-xl themeBtnAccent  my-shadow w-full sm:w-auto justify-center"
+				className="flex items-center gap-2 p-6 py-4 textM font-semibold rounded-xl themeBtnAccent  my-shadow w-full sm:w-auto justify-center dark:text-shadow-lg/50"
 			>
 				<FilePlus className="sm:size-5 2xl:size-6 text-foreground/70" />
 				Nuevo Reporte

@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select"
 import { Cpu, UserRound, Warehouse } from "lucide-react"
 import { TextTooltip } from "../layout/text-tooltip"
+import { Input } from "../ui/input"
 
 export default function Part1Data() {
 	return (
@@ -34,7 +35,7 @@ export default function Part1Data() {
 					className="border-b border-foreground/10 relative"
 				>
 					<div className="absolute top-2  left-1/2">
-						<span className="w-60 px-6 py-2 card bg-background rounded-lg textXS">
+						<span className="w-60 px-6 py-2 card bg-background textXS ring ring-foreground/10 dark:ring-foreground/7">
 							MISSORA JONATAN
 						</span>
 					</div>
@@ -57,7 +58,7 @@ export default function Part1Data() {
 					<div className="absolute top-2  left-1/2">
 						<Select defaultValue="telefonica">
 							<SelectTrigger
-								className="w-60 px-6 py-1 card dark:bg-background rounded-lg"
+								className="w-60"
 								onClick={e => e.stopPropagation()}
 							>
 								<SelectValue
@@ -94,7 +95,7 @@ export default function Part1Data() {
 				>
 					<div className="absolute sm:top-2 sm:left-1/2 left-0 top-13 ">
 						<Select defaultValue="luxometro1">
-							<SelectTrigger className="w-60 px-6 py-1 card dark:bg-background rounded-lg">
+							<SelectTrigger className="w-60 px-6 py-1 card dark:bg-background">
 								<SelectValue
 									placeholder="Seleccione Instrumento"
 									className="text-center"
@@ -134,24 +135,24 @@ const Tecnico = () => {
 					<label className="tracking-wider" htmlFor="matricula">
 						Nombre
 					</label>
-					<input
+					<Input
 						id="matricula"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="N° Matrícula "
 						defaultValue="MISSORA JONATAN"
 						readOnly
+						className="bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
 					<label className="tracking-wider" htmlFor="cargo">
 						Cargo
 					</label>
-					<input
+					<Input
 						id="cargo"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Ej. Seguridad e Higiene"
 						defaultValue="Técnico en Seguridad e Higiene"
 						readOnly
+						className="bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
@@ -183,72 +184,72 @@ const Empresa = () => {
 					<label className="tracking-wider" htmlFor="razon-social">
 						Razón Social
 					</label>
-					<input
+					<Input
 						id="razon-social"
 						placeholder="Nombre de la empresa"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						value="TELEFONICA S.A"
 						readOnly
+						className="bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
 					<label className="tracking-wider" htmlFor="cuit">
 						CUIT
 					</label>
-					<input
+					<Input
 						id="cuit"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="00-00000000-0"
 						value="30-58114785-2"
 						readOnly
+						className="bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1 w-full">
 					<label className="tracking-wider" htmlFor="direccion">
 						Dirección
 					</label>
-					<input
+					<Input
 						id="direccion"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Calle, Altura"
 						value="BERUTI 70"
 						readOnly
+						className="bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1 w-full">
 					<label className="tracking-wider" htmlFor="cant-empleados">
 						Localidad
 					</label>
-					<input
+					<Input
 						id="localidad"
 						placeholder="Ciudad, Provincia, Pais"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						value="BAHIA BLANCA"
 						readOnly
+						className="bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1 w-full">
 					<label className="tracking-wider" htmlFor="cant-empleados">
 						CP
 					</label>
-					<input
+					<Input
 						id="codigoPostal"
 						placeholder="Ciudad, Provincia, Pais"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						value="8000"
 						readOnly
+						className="bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1 w-full">
 					<label className="tracking-wider" htmlFor="cant-empleados">
 						Provincia
 					</label>
-					<input
+					<Input
 						id="provincia"
 						placeholder="Ciudad, Provincia, Pais"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						value="BUENOS AIRES"
 						readOnly
+						className="bg-accent"
 					/>
 				</div>
 			</div>
@@ -264,48 +265,48 @@ const Instrumento = () => {
 					<label className="tracking-wider" htmlFor="matricula">
 						Marca
 					</label>
-					<input
+					<Input
 						id="matricula"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="N° Matrícula "
 						defaultValue="LUXIS"
 						readOnly
+						className="bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
 					<label className="tracking-wider" htmlFor="cargo">
 						Modelo
 					</label>
-					<input
+					<Input
 						id="cargo"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Ej. Seguridad e Higiene"
 						defaultValue="EXO-4000"
 						readOnly
+						className="bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
 					<label className="tracking-wider" htmlFor="cargo">
 						Nro Serie
 					</label>
-					<input
+					<Input
 						id="serie"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Ej. Seguridad e Higiene"
 						defaultValue="12858752"
 						readOnly
+						className="bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
 					<label className="tracking-wider" htmlFor="cargo">
 						Calibración
 					</label>
-					<input
+					<Input
 						id="fecha"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Ej. Seguridad e Higiene"
 						defaultValue="12/10/25"
 						readOnly
+						className="bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1">

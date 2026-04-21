@@ -225,7 +225,7 @@
 /* ============================================
    BASE STYLES
    ============================================ */
-html {
+   html {
   scroll-behavior: smooth;
 }
 body {
@@ -255,19 +255,18 @@ code {
   .themeBtnBackground {
     @apply ring ring-green-300 dark:ring-green-700/30 bg-linear-to-t from-green-600/50 dark:from-green-600/20  to-background hover:to-green-600/50 dark:hover:to-green-600/20 transition-colors cursor-pointer;
   }
-  .cardAccent {
-   @apply shadow-xl ring ring-foreground/15 dark:ring-foreground/10 bg-accent rounded-xl flex items-center
-  }
-.cardBackground {
-   @apply shadow-xl ring ring-foreground/10 dark:ring-foreground/3 bg-background rounded-xl flex items-center
-  }
-
   .my-shadow {
     @apply shadow-(--shadow)
   }
+  .cardAccent {
+   @apply shadow-(--shadow) ring ring-foreground/15 dark:ring-foreground/10 bg-accent rounded-xl flex items-center
+  }
+.cardBackground {
+   @apply shadow-(--shadow) ring ring-foreground/10 dark:ring-foreground/3 bg-background rounded-xl flex items-center
+  }
 
   .card {
-    @apply shadow-(--shadow) ring ring-foreground/10 dark:ring-foreground/15 rounded-none flex items-center p-10 2xl:px-14
+    @apply shadow-(--shadow) ring ring-foreground/10 rounded-lg flex items-center p-10 2xl:px-14
   }
 
   .textXL {

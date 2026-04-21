@@ -54,7 +54,7 @@ function RouteComponent() {
 					</div>
 					<Link
 						to="/"
-						className="flex items-center justify-center gap-2 themeBtnAccent rounded-lg shadow-xl sm:text-sm 2xl:text-lg text-foreground tracking-wider px-6 py-2 cursor-pointer m-0"
+						className="flex items-center justify-center gap-2 themeBtnAccent rounded-lg my-shadow sm:text-sm 2xl:text-lg text-foreground tracking-wider px-6 py-2 cursor-pointer m-0"
 					>
 						<Trash2 className="size-5" />
 						descartar

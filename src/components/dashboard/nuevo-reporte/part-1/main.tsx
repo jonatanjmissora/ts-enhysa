@@ -36,7 +36,7 @@ export default function NewReportPart1({
 					window.scrollTo(0, 0)
 				}}
 				type="button"
-				className="flex items-center gap-4 themeBtnAccent justify-center rounded-xl shadow-xl text-lg text-foreground tracking-wide px-6 py-4 cursor-pointer m-0"
+				className="flex items-center gap-4 themeBtnAccent justify-center rounded-xl my-shadow text-lg text-foreground tracking-wide px-6 py-4 cursor-pointer m-0"
 			>
 				<Save className="size-6" />
 				Guardar y Continuar

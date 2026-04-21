@@ -7,6 +7,7 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "../ui/accordion"
+import { Input } from "../ui/input"
 
 export default function Part2Data() {
 	return (
@@ -15,9 +16,7 @@ export default function Part2Data() {
 				<div className="textXL py-3 flex items-center gap-8">
 					Areas <RulerDimensionLine className="sm:size-7 2xl:size-9" />
 				</div>
-				<button className="card bg-background py-2 px-4 rounded-lg">
-					+ Nueva Area
-				</button>
+				<button className="card bg-background py-2 px-4">+ Nueva Area</button>
 			</div>
 
 			<Accordion
@@ -65,7 +64,7 @@ export default function Part2Data() {
 				</AccordionItem>
 			</Accordion>
 
-			<button className="card bg-background py-2 px-4 rounded-lg my-20 flex items-center justify-center gap-2 mx-auto w-5/6 sm:w-1/3 textL">
+			<button className="card bg-background py-2 px-4 my-20 flex items-center justify-center gap-2 mx-auto w-5/6 sm:w-1/3 textL">
 				+ Agregar Area
 			</button>
 		</article>
@@ -79,24 +78,24 @@ const NombreArea = () => {
 				<label className="tracking-wider" htmlFor="matricula">
 					Nombre del Sector
 				</label>
-				<input
+				<Input
 					id="matricula"
-					className="card sm:bg-accent bg-background py-2 px-4 rounded-lg text-center"
 					placeholder="N° Matrícula "
 					defaultValue="Planta Baja"
 					readOnly
+					className="bg-accent"
 				/>
 			</div>
 			<div className="flex flex-col gap-1">
 				<label className="tracking-wider" htmlFor="matricula">
 					Tipo de Sector
 				</label>
-				<input
+				<Input
 					id="matricula"
-					className="card sm:bg-accent bg-background py-2 px-4 rounded-lg text-center"
 					placeholder="N° Matrícula "
 					defaultValue="Oficinas"
 					readOnly
+					className="bg-accent"
 				/>
 			</div>
 		</div>

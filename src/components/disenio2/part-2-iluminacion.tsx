@@ -8,6 +8,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select"
 import { Lightbulb } from "lucide-react"
+import { Input } from "../ui/input"
 
 export default function Part2Iluminacion() {
 	return (
@@ -119,12 +120,12 @@ export default function Part2Iluminacion() {
 						<label className="tracking-wider" htmlFor="matricula">
 							Observación
 						</label>
-						<input
+						<Input
 							id="matricula"
-							className="card sm:bg-accent bg-background py-2 px-4 rounded-lg text-center"
 							placeholder="N° Matrícula "
 							defaultValue="Sin observación"
 							readOnly
+							className="bg-accent"
 						/>
 					</div>
 				</div>

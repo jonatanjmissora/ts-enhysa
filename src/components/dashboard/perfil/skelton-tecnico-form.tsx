@@ -12,20 +12,14 @@ export default function SkeltonTecnicoForm() {
 							<FieldLabel className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl">
 								Nombre completo
 							</FieldLabel>
-							<Input
-								placeholder=". . ."
-								className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg animate-pulse`}
-							/>
+							<Input placeholder=". . ." className={`animate-pulse`} />
 						</Field>
 
 						<Field className="relative">
 							<FieldLabel className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl">
 								Teléfono
 							</FieldLabel>
-							<Input
-								placeholder=". . ."
-								className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg animate-pulse`}
-							/>
+							<Input placeholder=". . ." className={`animate-pulse`} />
 						</Field>
 					</div>
 
@@ -34,20 +28,14 @@ export default function SkeltonTecnicoForm() {
 							<FieldLabel className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl">
 								Cargo
 							</FieldLabel>
-							<Input
-								placeholder=". . ."
-								className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg animate-pulse`}
-							/>
+							<Input placeholder=". . ." className={`animate-pulse`} />
 						</Field>
 
 						<Field className="relative">
 							<FieldLabel className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl">
 								Localidad
 							</FieldLabel>
-							<Input
-								placeholder=". . ."
-								className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg animate-pulse`}
-							/>
+							<Input placeholder=". . ." className={`animate-pulse`} />
 						</Field>
 					</div>
 
@@ -56,10 +44,7 @@ export default function SkeltonTecnicoForm() {
 							<FieldLabel className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl">
 								Matrícula
 							</FieldLabel>
-							<Input
-								placeholder=". . ."
-								className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg animate-pulse`}
-							/>
+							<Input placeholder=". . ." className={`animate-pulse`} />
 						</Field>
 
 						<div

@@ -83,7 +83,6 @@ export default function CreateTecnicoForm() {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="Nombre Completo"
-											className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 										/>
 										{isInvalid && (
 											<FieldError
@@ -117,7 +116,6 @@ export default function CreateTecnicoForm() {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="000-0000000"
-											className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 										/>
 										{isInvalid && (
 											<FieldError
@@ -154,7 +152,6 @@ export default function CreateTecnicoForm() {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="Ej. Seguridad e Higiene"
-											className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 										/>
 										{isInvalid && (
 											<FieldError
@@ -188,7 +185,6 @@ export default function CreateTecnicoForm() {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="Ej. Andorra"
-											className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 										/>
 										{isInvalid && (
 											<FieldError
@@ -225,7 +221,6 @@ export default function CreateTecnicoForm() {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="N° Matrícula"
-											className={`bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 										/>
 										{isInvalid && (
 											<FieldError

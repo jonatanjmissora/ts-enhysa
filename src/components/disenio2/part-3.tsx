@@ -112,7 +112,7 @@ export const Part3Data = () => {
 					</label>
 					<textarea
 						id="matricula"
-						className={`card bg-accent sm:bg-background px-4 rounded-lg text-center min-h-30 sm:min-h-24 italic text-foreground/40 tracking-wider py-6 textXS`}
+						className={`card bg-accent sm:bg-background px-4 text-center min-h-30 sm:min-h-24 italic text-foreground/40 tracking-wider py-6 textXS`}
 						placeholder="N° Matrícula "
 						defaultValue="Detalle general del estado del terreno de medición, condiciones generales, etc. En caso de no haber observaciones, dejar este campo en blanco."
 						readOnly
@@ -129,7 +129,7 @@ export const Part3Data = () => {
 					</label>
 					<textarea
 						id="matricula"
-						className={`card bg-accent sm:bg-background px-4 rounded-lg text-center min-h-30 sm:min-h-24 italic text-foreground/40 tracking-wider py-6 textXS`}
+						className={`card bg-accent sm:bg-background px-4 text-center min-h-30 sm:min-h-24 italic text-foreground/40 tracking-wider py-6 textXS`}
 						placeholder="N° Matrícula "
 						defaultValue="Conclusión final del reporte, detalles observados, etc. En caso de no haber conclusiones, dejar este campo en blanco."
 						readOnly
@@ -146,7 +146,7 @@ export const Part3Data = () => {
 					</label>
 					<textarea
 						id="matricula"
-						className={`card bg-accent sm:bg-background px-4 rounded-lg text-center min-h-30 sm:min-h-24 italic text-foreground/40 tracking-wider py-6 textXS`}
+						className={`card bg-accent sm:bg-background px-4 text-center min-h-30 sm:min-h-24 italic text-foreground/40 tracking-wider py-6 textXS`}
 						placeholder="N° Matrícula "
 						defaultValue="Recomendaciones generales luego de efectuar las mediciones, sin especificaciones técnicas. En caso de no haber recomendaciones, dejar este campo en blanco."
 						readOnly

@@ -142,7 +142,6 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 									onChange={e => field.handleChange(e.target.value)}
 									aria-invalid={isInvalid}
 									placeholder="Ej. Luxómetro"
-									className={`bg-background py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 								/>
 
 								{isInvalid && (
@@ -181,7 +180,6 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. DataLogger"
-										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 									/>
 
 									{isInvalid && (
@@ -218,7 +216,6 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. DT-8809A"
-										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 									/>
 
 									{isInvalid && (
@@ -257,7 +254,6 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. 32451"
-										className={`text-foreground  bg-background py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 									/>
 
 									{isInvalid && (

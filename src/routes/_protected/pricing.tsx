@@ -55,7 +55,7 @@ function RouteComponent() {
 				<div className="flex gap-10 items-center justify-center">
 					<Link
 						to="/"
-						className="flex items-center justify-center gap-2 themeBtnAccent rounded-lg shadow-xl sm:text-sm 2xl:text-lg text-foreground tracking-wider px-6 py-2 cursor-pointer m-0"
+						className="flex items-center justify-center gap-2 themeBtnAccent rounded-lg my-shadow sm:text-sm 2xl:text-lg text-foreground tracking-wider px-6 py-2 cursor-pointer m-0"
 					>
 						<ChevronLeft className="size-5" />
 						Volver
@@ -111,7 +111,7 @@ const Plan = ({
 }: PlanProps) => {
 	return (
 		<div
-			className={`overflow-hidden relative  sm:w-80 2xl:w-100 card rounded-lg flex flex-col items-start gap-4 duration-300 ${actualPlan === index ? "bg-[#1f301f] scale-100 sm:scale-120 z-10 " : "bg-accent"}`}
+			className={`overflow-hidden relative  sm:w-80 2xl:w-100 card  flex flex-col items-start gap-4 duration-300 ${actualPlan === index ? "bg-[#1f301f] scale-100 sm:scale-120 z-10 " : "bg-accent"}`}
 		>
 			{actualPlan === index && (
 				<img
@@ -139,7 +139,7 @@ const Plan = ({
 			</div>
 
 			<button
-				className={`${actualPlan !== index ? "themeBtnAccent" : "bg-background"} rounded-lg shadow-xl sm:text-sm 2xl:text-lg text-foreground tracking-widest px-6 py-2 cursor-pointer m-auto sm:mt-4 2xl:mt-10 w-full flex justify-center items-center gap-4`}
+				className={`${actualPlan !== index ? "themeBtnAccent" : "bg-background"} rounded-lg my-shadow sm:text-sm 2xl:text-lg text-foreground tracking-widest px-6 py-2 cursor-pointer m-auto sm:mt-4 2xl:mt-10 w-full flex justify-center items-center gap-4`}
 				onClick={() => setActualPlan(index as 0 | 1 | 2)}
 			>
 				{actualPlan === index ? (

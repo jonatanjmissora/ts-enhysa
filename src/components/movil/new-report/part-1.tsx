@@ -5,6 +5,7 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion"
+import { Input } from "@/components/ui/input"
 import {
 	Select,
 	SelectContent,
@@ -34,7 +35,7 @@ export default function MovilPart1Data() {
 						<UserRound className="size-6" />
 						Técnico responsable
 					</div>
-					<span className="w-5/6 mx-auto px-6 py-2 card justify-center bg-accent rounded-lg textXS">
+					<span className="w-5/6 mx-auto px-6 py-2 card justify-center bg-accent textXS">
 						MISSORA JONATAN
 					</span>
 				</div>
@@ -63,7 +64,7 @@ export default function MovilPart1Data() {
 					<div className="w-5/6 mx-auto">
 						<Select defaultValue="telefonica">
 							<SelectTrigger
-								className="w-full mx-auto px-6 py-2 card justify-center bg-accent rounded-lg text-xs tracking-widest"
+								className="w-full mx-auto px-6 py-2 card justify-center bg-accent text-xs tracking-widest"
 								onClick={e => e.stopPropagation()}
 							>
 								<SelectValue
@@ -107,7 +108,7 @@ export default function MovilPart1Data() {
 					<div className="w-5/6 mx-auto">
 						<Select defaultValue="luxometro1">
 							<SelectTrigger
-								className="w-full mx-auto px-6 py-2 card justify-center bg-accent rounded-lg text-xs tracking-widest"
+								className="w-full mx-auto px-6 py-2 card justify-center bg-accent text-xs tracking-widest"
 								onClick={e => e.stopPropagation()}
 							>
 								<SelectValue
@@ -153,9 +154,8 @@ const Tecnico = () => {
 					<label className="tracking-wider" htmlFor="matricula">
 						Nombre
 					</label>
-					<input
+					<Input
 						id="matricula"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="N° Matrícula "
 						defaultValue="MISSORA JONATAN"
 						readOnly
@@ -165,9 +165,8 @@ const Tecnico = () => {
 					<label className="tracking-wider" htmlFor="cargo">
 						Cargo
 					</label>
-					<input
+					<Input
 						id="cargo"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Ej. Seguridad e Higiene"
 						defaultValue="Técnico en Seguridad e Higiene"
 						readOnly
@@ -202,10 +201,9 @@ const Empresa = () => {
 					<label className="tracking-wider" htmlFor="razon-social">
 						Razón Social
 					</label>
-					<input
+					<Input
 						id="razon-social"
 						placeholder="Nombre de la empresa"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						value="TELEFONICA S.A"
 						readOnly
 					/>
@@ -214,9 +212,8 @@ const Empresa = () => {
 					<label className="tracking-wider" htmlFor="cuit">
 						CUIT
 					</label>
-					<input
+					<Input
 						id="cuit"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="00-00000000-0"
 						value="30-58114785-2"
 						readOnly
@@ -226,9 +223,8 @@ const Empresa = () => {
 					<label className="tracking-wider" htmlFor="direccion">
 						Dirección
 					</label>
-					<input
+					<Input
 						id="direccion"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Calle, Altura"
 						value="BERUTI 70"
 						readOnly
@@ -238,10 +234,9 @@ const Empresa = () => {
 					<label className="tracking-wider" htmlFor="cant-empleados">
 						Localidad
 					</label>
-					<input
+					<Input
 						id="localidad"
 						placeholder="Ciudad, Provincia, Pais"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						value="BAHIA BLANCA"
 						readOnly
 					/>
@@ -250,10 +245,9 @@ const Empresa = () => {
 					<label className="tracking-wider" htmlFor="cant-empleados">
 						CP
 					</label>
-					<input
+					<Input
 						id="codigoPostal"
 						placeholder="Ciudad, Provincia, Pais"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						value="8000"
 						readOnly
 					/>
@@ -262,10 +256,9 @@ const Empresa = () => {
 					<label className="tracking-wider" htmlFor="cant-empleados">
 						Provincia
 					</label>
-					<input
+					<Input
 						id="provincia"
 						placeholder="Ciudad, Provincia, Pais"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						value="BUENOS AIRES"
 						readOnly
 					/>
@@ -283,9 +276,8 @@ const Instrumento = () => {
 					<label className="tracking-wider" htmlFor="matricula">
 						Marca
 					</label>
-					<input
+					<Input
 						id="matricula"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="N° Matrícula "
 						defaultValue="LUXIS"
 						readOnly
@@ -295,9 +287,8 @@ const Instrumento = () => {
 					<label className="tracking-wider" htmlFor="cargo">
 						Modelo
 					</label>
-					<input
+					<Input
 						id="cargo"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Ej. Seguridad e Higiene"
 						defaultValue="EXO-4000"
 						readOnly
@@ -307,9 +298,8 @@ const Instrumento = () => {
 					<label className="tracking-wider" htmlFor="cargo">
 						Nro Serie
 					</label>
-					<input
+					<Input
 						id="serie"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Ej. Seguridad e Higiene"
 						defaultValue="12858752"
 						readOnly
@@ -319,9 +309,8 @@ const Instrumento = () => {
 					<label className="tracking-wider" htmlFor="cargo">
 						Calibración
 					</label>
-					<input
+					<Input
 						id="fecha"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Ej. Seguridad e Higiene"
 						defaultValue="12/10/25"
 						readOnly

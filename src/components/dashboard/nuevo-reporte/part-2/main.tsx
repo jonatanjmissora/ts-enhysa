@@ -107,7 +107,7 @@ export default function NewReportPart2({
 			<button
 				onClick={pasarAlPaso3}
 				type="button"
-				className="flex items-center gap-4 themeBtnAccent justify-center rounded-xl shadow-xl text-lg text-foreground tracking-wide px-6 py-4 cursor-pointer m-0"
+				className="flex items-center gap-4 themeBtnAccent justify-center rounded-xl my-shadow text-lg text-foreground tracking-wide px-6 py-4 cursor-pointer m-0"
 			>
 				<Save className="size-6" />
 				Guardar y Calcular

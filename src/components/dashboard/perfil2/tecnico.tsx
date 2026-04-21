@@ -1,3 +1,4 @@
+import { Input } from "@/components/ui/input"
 import { Trash2, Pencil } from "lucide-react"
 
 export default function ProfileTecnico() {
@@ -9,9 +10,8 @@ export default function ProfileTecnico() {
 					<label className="tracking-wider" htmlFor="matricula">
 						Matrícula
 					</label>
-					<input
+					<Input
 						id="matricula"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="N° Matrícula "
 						defaultValue="MISSORA JONATAN"
 						readOnly
@@ -21,9 +21,8 @@ export default function ProfileTecnico() {
 					<label className="tracking-wider" htmlFor="cargo">
 						Cargo
 					</label>
-					<input
+					<Input
 						id="cargo"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Ej. Seguridad e Higiene"
 						defaultValue="Técnico en Seguridad e Higiene"
 						readOnly

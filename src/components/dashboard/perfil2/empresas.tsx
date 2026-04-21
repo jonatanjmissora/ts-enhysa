@@ -4,6 +4,7 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion"
+import { Input } from "@/components/ui/input"
 import { Pencil, Trash2 } from "lucide-react"
 
 export default function ProfileEmpresas() {
@@ -68,10 +69,9 @@ const Empresa = () => {
 					<label className="tracking-wider" htmlFor="razon-social">
 						Razón Social
 					</label>
-					<input
+					<Input
 						id="razon-social"
 						placeholder="Nombre de la empresa"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						value="TELEFONICA S.A"
 						readOnly
 					/>
@@ -80,9 +80,8 @@ const Empresa = () => {
 					<label className="tracking-wider" htmlFor="cuit">
 						CUIT
 					</label>
-					<input
+					<Input
 						id="cuit"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="00-00000000-0"
 						value="30-58114785-2"
 						readOnly
@@ -92,9 +91,8 @@ const Empresa = () => {
 					<label className="tracking-wider" htmlFor="direccion">
 						Dirección
 					</label>
-					<input
+					<Input
 						id="direccion"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Calle, Altura"
 						value="BERUTI 70"
 						readOnly
@@ -104,10 +102,9 @@ const Empresa = () => {
 					<label className="tracking-wider" htmlFor="cant-empleados">
 						Localidad
 					</label>
-					<input
+					<Input
 						id="localidad"
 						placeholder="Ciudad, Provincia, Pais"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						value="BAHIA BLANCA"
 						readOnly
 					/>
@@ -116,10 +113,9 @@ const Empresa = () => {
 					<label className="tracking-wider" htmlFor="cant-empleados">
 						CP
 					</label>
-					<input
+					<Input
 						id="codigoPostal"
 						placeholder="Ciudad, Provincia, Pais"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						value="8000"
 						readOnly
 					/>
@@ -128,10 +124,9 @@ const Empresa = () => {
 					<label className="tracking-wider" htmlFor="cant-empleados">
 						Provincia
 					</label>
-					<input
+					<Input
 						id="provincia"
 						placeholder="Ciudad, Provincia, Pais"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						value="BUENOS AIRES"
 						readOnly
 					/>

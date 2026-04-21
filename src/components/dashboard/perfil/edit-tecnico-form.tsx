@@ -101,7 +101,6 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="Nombre Completo"
-											className={`${editMode ? "bg-green-700/10 dark:bg-green-700/20" : "bg-background"} py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 											readOnly={!editMode}
 										/>
 										{isInvalid && (
@@ -136,7 +135,6 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="000-0000000"
-											className={`${editMode ? "bg-green-700/10 dark:bg-green-700/20" : "bg-background"} py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 											readOnly={!editMode}
 										/>
 										{isInvalid && (
@@ -174,7 +172,6 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="Ej. Seguridad e Higiene"
-											className={`${editMode ? "bg-green-700/10 dark:bg-green-700/20" : "bg-background"} py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 											readOnly={!editMode}
 										/>
 										{isInvalid && (
@@ -209,7 +206,6 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="Ej. Andorra"
-											className={`${editMode ? "bg-green-700/10 dark:bg-green-700/20" : "bg-background"} py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 											readOnly={!editMode}
 										/>
 										{isInvalid && (
@@ -247,7 +243,6 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="N° Matrícula"
-											className={`${editMode ? "bg-green-700/10 dark:bg-green-700/20" : "bg-background"} py-2 px-4 rounded-lg text-center sm:text-base 2xl:text-lg`}
 											readOnly={!editMode}
 										/>
 										{isInvalid && (

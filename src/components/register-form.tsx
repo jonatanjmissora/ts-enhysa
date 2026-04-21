@@ -23,6 +23,7 @@ import { authClient } from "@/lib/auth-client"
 import { useState } from "react"
 import { Eye, EyeClosed } from "lucide-react"
 import { PreferencesMenu } from "./layout/preferences-menu"
+import { Input } from "./ui/input"
 
 const formSchema = z.object({
 	nombre: z.string().min(3, "Nombre mínimo de 3 caracteres."),
@@ -91,7 +92,7 @@ export function RegisterForm({
 			<div className=" sm:hidden absolute top-4 left-4 right-4">
 				<PreferencesMenu />
 			</div>
-			<Card className="card bg-accent/90 rounded-lg my-shadow items-stretch ring ring-foreground/30">
+			<Card className="card bg-accent/90 rounded-lg  my-shadow items-stretch ring ring-foreground/30">
 				<CardHeader className="text-center">
 					<div className="w-full sm:hidden flex flex-col items-center pb-4 relative">
 						<img
@@ -100,11 +101,11 @@ export function RegisterForm({
 							className="size-40"
 						/>
 
-						<p className="absolute bottom-3 left-1/2 -translate-x-1/2 textXL text-3xl text-shadow-lg/50 w-full">
+						<p className="absolute bottom-3 left-1/2 -translate-x-1/2 textXL text-3xl dark:text-shadow-lg/50 w-full">
 							EnHySa App
 						</p>
 					</div>
-					<CardTitle className="hidden sm:block text-xl text-shadow-lg/50">
+					<CardTitle className="hidden sm:block text-xl dark:text-shadow-lg/50">
 						Bienvenido a la app
 					</CardTitle>
 					<CardDescription className="hidden sm:block text-foreground/75">
@@ -151,11 +152,11 @@ export function RegisterForm({
 										<Field data-invalid={isInvalid}>
 											<FieldLabel
 												htmlFor={field.name}
-												className="text-shadow-sm/50"
+												className="dark:text-shadow-sm/50"
 											>
 												Nombre
 											</FieldLabel>
-											<input
+											<Input
 												id={field.name}
 												name={field.name}
 												value={field.state.value}
@@ -164,7 +165,6 @@ export function RegisterForm({
 												aria-invalid={isInvalid}
 												placeholder="nombre apellido"
 												autoComplete="off"
-												className="card bg-background rounded-lg py-2"
 											/>
 											{isInvalid && (
 												<FieldError errors={field.state.meta.errors} />
@@ -183,11 +183,11 @@ export function RegisterForm({
 										<Field data-invalid={isInvalid}>
 											<FieldLabel
 												htmlFor={field.name}
-												className="text-shadow-sm/50"
+												className="dark:text-shadow-sm/50"
 											>
 												Email
 											</FieldLabel>
-											<input
+											<Input
 												id={field.name}
 												name={field.name}
 												value={field.state.value}
@@ -196,7 +196,6 @@ export function RegisterForm({
 												aria-invalid={isInvalid}
 												placeholder="m@example.com"
 												autoComplete="off"
-												className="card bg-background rounded-lg py-2"
 											/>
 											{isInvalid && (
 												<FieldError errors={field.state.meta.errors} />
@@ -215,12 +214,12 @@ export function RegisterForm({
 										<Field data-invalid={isInvalid}>
 											<FieldLabel
 												htmlFor={field.name}
-												className="text-shadow-sm/50"
+												className="dark:text-shadow-sm/50"
 											>
 												Contraseña
 											</FieldLabel>
 											<div className="relative">
-												<input
+												<Input
 													id={field.name}
 													name={field.name}
 													value={field.state.value}
@@ -229,7 +228,6 @@ export function RegisterForm({
 													aria-invalid={isInvalid}
 													placeholder="********"
 													type={showPassword ? "text" : "password"}
-													className="card bg-background rounded-lg py-2 w-full"
 												/>
 												<button
 													type="button"
@@ -254,7 +252,7 @@ export function RegisterForm({
 							<Field>
 								<button
 									type="submit"
-									className="themeBtnAccent tracking-wider font-semibold shadow cursor-pointer rounded-xl py-2 text-shadow-sm/50 ring ring-green-500/30"
+									className="themeBtnAccent tracking-wider font-semibold shadow cursor-pointer rounded-xl py-2 dark:text-shadow-sm/50 ring ring-green-500/30"
 								>
 									Registrar
 								</button>
@@ -264,7 +262,7 @@ export function RegisterForm({
 										type="button"
 										onClick={() => setActiveForm("login")}
 										// viewTransition={{ types: ["rotateZ"] }}
-										className="cursor-pointer dark:hover:text-green-400 underline text-shadow-sm/50"
+										className="cursor-pointer dark:hover:text-green-400 underline dark:text-shadow-sm/50"
 									>
 										Ingresar
 									</button>

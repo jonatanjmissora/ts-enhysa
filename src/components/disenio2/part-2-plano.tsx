@@ -2,6 +2,7 @@ import { InputFiles } from "@/components/layout/input-files"
 
 import { Box, Equal, EqualApproximately, Trash2 } from "lucide-react"
 import { useState } from "react"
+import { Input } from "../ui/input"
 
 export default function Part2Plano() {
 	const [planoFiles, setPlanoFiles] = useState<File[]>([])
@@ -20,12 +21,12 @@ export default function Part2Plano() {
 						<label className="tracking-wider" htmlFor="matricula">
 							Largo (m)
 						</label>
-						<input
+						<Input
 							id="matricula"
-							className="card sm:dark:bg-accent dark:bg-background py-2 px-4 rounded-lg text-center"
 							placeholder="N° Matrícula "
 							defaultValue="Ej. 4"
 							readOnly
+							className="bg-accent"
 						/>
 					</div>
 
@@ -33,12 +34,12 @@ export default function Part2Plano() {
 						<label className="tracking-wider" htmlFor="matricula">
 							Ancho (m)
 						</label>
-						<input
+						<Input
 							id="matricula"
-							className="card sm:dark:bg-accent dark:bg-background py-2 px-4 rounded-lg text-center"
 							placeholder="N° Matrícula "
 							defaultValue="Ej. 6"
 							readOnly
+							className="bg-accent"
 						/>
 					</div>
 
@@ -46,17 +47,17 @@ export default function Part2Plano() {
 						<label className="tracking-wider" htmlFor="matricula">
 							Alto del montaje (m)
 						</label>
-						<input
+						<Input
 							id="matricula"
-							className="card sm:dark:bg-accent dark:bg-background py-2 px-4 rounded-lg text-center"
 							placeholder="N° Matrícula "
 							defaultValue="Ej. 2"
 							readOnly
+							className="bg-accent"
 						/>
 					</div>
 				</div>
 
-				<div className="w-full sm:w-3/4 py-4 card sm:bg-accent bg-background rounded-lg flex items-center justify-center flex-col">
+				<div className="w-full sm:w-3/4 py-4 card sm:bg-accent bg-background flex items-center justify-center flex-col">
 					<InputFiles
 						text="Imágenes del plano a medir."
 						files={planoFiles}
@@ -102,7 +103,7 @@ export default function Part2Plano() {
 					</span>
 				</div>
 
-				<div className="flex flex-col sm:flex-row items-stretch justify-center gap-4 w-full sm:w-3/4 card sm:bg-accent bg-background sm:rounded-lg sm:p-8 p-0 ">
+				<div className="flex flex-col sm:flex-row items-stretch justify-center gap-4 w-full sm:w-3/4 card sm:bg-accent bg-background rounded-none sm:rounded-lg sm:p-8 p-0 ">
 					<Croquis />
 					<PuntosList />
 				</div>
@@ -127,7 +128,7 @@ const Croquis = () => {
 								<span className="italic tracking-widest text-xs">
 									punto-{i * 3 + j + 1}
 								</span>
-								<span className="w-15 text-xl font-semibold py-1 px-3 card bg-accent sm:bg-background justify-center items-center rounded-lg">
+								<span className="w-15 text-xl font-semibold py-1 px-3 card bg-accent sm:bg-background justify-center items-center">
 									{PUNTOS[i * 3 + j]}
 								</span>
 							</div>

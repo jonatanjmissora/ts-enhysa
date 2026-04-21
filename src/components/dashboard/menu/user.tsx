@@ -18,14 +18,14 @@ export default function User() {
 	return (
 		<div className="flex flex-col sm:gap-2 2xl:gap-4 m-6">
 			<div
-				className={`gap-4 p-8 py-4 card rounded-lg bg-green-700 sm:bg-background`}
+				className={`gap-4 p-8 py-4 card  bg-gray-900/50 sm:bg-background sm:ring-foreground/5`}
 			>
 				<div className="bg-accent rounded-full flex justify-center items-center">
 					{avatar ? (
 						<img
 							src={avatar}
 							alt="User avatar"
-							className="sm:size-10 2xl:size-14 rounded-full"
+							className="sm:size-10 2xl:size-14 rounded-full drop-shadow-lg/50"
 						/>
 					) : (
 						<div className="bg-accent p-2 rounded-full">
@@ -34,15 +34,17 @@ export default function User() {
 					)}
 				</div>
 				<div className="flex flex-col items-end w-full">
-					<p className="sm:text-base 2xl:text-lg font-semibold tracking-wider text-left w-full">
+					<p className="sm:text-base 2xl:text-lg font-semibold tracking-wider text-left w-full sm:text-shadow-none text-shadow-sm/50 dark:text-shadow-sm/50 ">
 						{fullName || "Usuario"}
 					</p>
 					<Link
 						to="/pricing"
-						className="sm:text-sm 2xl:text-base text-foreground/40 tracking-wider w-full flex items-end justify-end gap-1"
+						className="sm:text-sm 2xl:text-base tracking-wider w-full flex items-end justify-end gap-1"
 					>
-						<Shield className="size-5 text-amber-500/50" />
-						<span className="font-semibold">Plan Profesional</span>
+						<Shield className="size-5 dark:text-amber-500/50 text-amber-700/70" />
+						<span className="font-semibold text-gray-50/50 sm:text-foreground/50">
+							Plan Profesional
+						</span>
 					</Link>
 				</div>
 			</div>
@@ -69,10 +71,11 @@ export function LogoutAlertDialog() {
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild className="m-4 hover:bg-accent">
 				<span className="flex p-2 rounded-sm cursor-pointer textM items-center justify-end sm:justify-start gap-2 text-left">
-					<LogOut size={16} className="text-foreground/80" /> Cerrar sesion
+					<LogOut size={16} className="text-gray-50/50 sm:text-foreground/80" />{" "}
+					Cerrar sesion
 				</span>
 			</AlertDialogTrigger>
-			<AlertDialogContent className="p-10 sm:p-20 bg-red-900/10 backdrop-blur-xl w-11/12 sm:w-auto">
+			<AlertDialogContent className="p-10 sm:p-20 dark:bg-background bg-accent backdrop-blur-xl w-11/12 sm:w-auto">
 				<AlertDialogTitle className="text-center sm:text-lg 2xl:text-xl">
 					¿Estás seguro de que quieres cerrar sesión?
 				</AlertDialogTitle>

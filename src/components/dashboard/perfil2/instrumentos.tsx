@@ -4,6 +4,7 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion"
+import { Input } from "@/components/ui/input"
 import { Trash2, Pencil } from "lucide-react"
 
 export default function ProfileInstrumentos() {
@@ -68,9 +69,8 @@ const Instrumento = () => {
 					<label className="tracking-wider" htmlFor="matricula">
 						Marca
 					</label>
-					<input
+					<Input
 						id="matricula"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="N° Matrícula "
 						defaultValue="LUXIS"
 						readOnly
@@ -80,9 +80,8 @@ const Instrumento = () => {
 					<label className="tracking-wider" htmlFor="cargo">
 						Modelo
 					</label>
-					<input
+					<Input
 						id="cargo"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Ej. Seguridad e Higiene"
 						defaultValue="EXO-4000"
 						readOnly
@@ -92,9 +91,8 @@ const Instrumento = () => {
 					<label className="tracking-wider" htmlFor="cargo">
 						Nro Serie
 					</label>
-					<input
+					<Input
 						id="serie"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Ej. Seguridad e Higiene"
 						defaultValue="12858752"
 						readOnly
@@ -104,9 +102,8 @@ const Instrumento = () => {
 					<label className="tracking-wider" htmlFor="cargo">
 						Calibración
 					</label>
-					<input
+					<Input
 						id="fecha"
-						className="card bg-background sm:bg-accent py-2 px-4 rounded-lg text-center"
 						placeholder="Ej. Seguridad e Higiene"
 						defaultValue="12/10/25"
 						readOnly

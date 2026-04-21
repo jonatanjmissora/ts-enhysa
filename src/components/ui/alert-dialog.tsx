@@ -56,7 +56,7 @@ function AlertDialogContent({
 				data-slot="alert-dialog-content"
 				data-size={size}
 				className={cn(
-					"group/alert-dialog-content fixed top-[50%] left-[50%] z-50 grid translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border bg-accent p-6  duration-200 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 shadow-xl ring ring-foreground/15 dark:ring-foreground/10",
+					"group/alert-dialog-content fixed top-[50%] left-[50%] z-50 grid translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border bg-accent p-6  duration-200 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 my-shadow ring ring-foreground/15 dark:ring-foreground/10",
 					className
 				)}
 				{...props}

@@ -65,7 +65,7 @@ export default function NewReportPart3({
 			<button
 				type="button"
 				onClick={pasarAlPaso4}
-				className="flex items-center gap-4 themeBtnAccent justify-center rounded-xl shadow-xl text-lg text-foreground tracking-wide px-6 py-4 cursor-pointer m-0"
+				className="flex items-center gap-4 themeBtnAccent justify-center rounded-xl my-shadow text-lg text-foreground tracking-wide px-6 py-4 cursor-pointer m-0"
 			>
 				<BookmarkCheck className="size-6" />
 				Generar Reporte PDF

@@ -4,11 +4,14 @@ import { ChevronRight, FileChartColumn } from "lucide-react"
 
 export default function InicioRecientes() {
 	return (
-		<div className="p-3 py-12 flex-1 sm:p-6 2xl:p-10 flex-col gap-3 2xl:gap-6 card bg-accent rounded-lg items-start">
-			<header className="textXL pb-2">Protocolos Recientes</header>
-			<div className="p-2 sm:px-6 sm:py-4 2xl:px-6 2xl:py-6 cardBackground justify-between w-full">
+		<div className="p-3 py-12 flex-1 sm:p-6 2xl:p-10 flex-col gap-3 2xl:gap-6 card bg-accent items-start">
+			<header className="textXL pb-2 dark:text-shadow-lg/50">
+				Protocolos Recientes
+			</header>
+
+			<div className="p-2 sm:px-6 sm:py-4 2xl:px-6 2xl:py-6 card bg-background ring-foreground/5 justify-between w-full">
 				<div className="flex gap-4 items-center">
-					<FileChartColumn className="size-8 sm:size-10 2xl:size-14 text-foreground/70 p-1 sm:p-2 bg-accent rounded-lg shadow-xl" />
+					<FileChartColumn className="size-8 sm:size-10 2xl:size-14 text-foreground/70 p-1 sm:p-2 bg-accent rounded-lg my-shadow" />
 					<div className="flex flex-col gap-1">
 						<p className="sm:text-sm 2xl:text-lg font-semibold w-60 truncate sm:w-full">
 							Empresa Metalurgica SA - Planta A
@@ -26,9 +29,9 @@ export default function InicioRecientes() {
 				</div>
 			</div>
 
-			<div className="p-2 sm:px-6 sm:py-4 2xl:px-6 2xl:py-6 cardBackground justify-between w-full">
+			<div className="p-2 sm:px-6 sm:py-4 2xl:px-6 2xl:py-6 card bg-background ring-foreground/5 justify-between w-full">
 				<div className="flex gap-4 items-center">
-					<FileChartColumn className="size-8 sm:size-10 2xl:size-14 text-foreground/70 p-1 sm:p-2 bg-accent rounded-lg shadow-xl" />
+					<FileChartColumn className="size-8 sm:size-10 2xl:size-14 text-foreground/70 p-1 sm:p-2 bg-accent rounded-lg my-shadow" />
 					<div className="flex flex-col gap-1">
 						<p className="sm:text-sm 2xl:text-lg font-semibold w-60 truncate sm:w-full">
 							Empresa Metalurgica SA - Planta A
@@ -45,9 +48,9 @@ export default function InicioRecientes() {
 					<ChevronRight size={24} className="cursor-pointer" />
 				</div>
 			</div>
-			<div className="p-2 sm:px-6 sm:py-4 2xl:px-6 2xl:py-6 cardBackground justify-between w-full">
+			<div className="p-2 sm:px-6 sm:py-4 2xl:px-6 2xl:py-6 card bg-background ring-foreground/5 justify-between w-full">
 				<div className="flex gap-4 items-center">
-					<FileChartColumn className="size-8 sm:size-10 2xl:size-14 text-foreground/70 p-1 sm:p-2 bg-accent rounded-lg shadow-xl" />
+					<FileChartColumn className="size-8 sm:size-10 2xl:size-14 text-foreground/70 p-1 sm:p-2 bg-accent rounded-lg my-shadow" />
 					<div className="flex flex-col gap-1">
 						<p className="sm:text-sm 2xl:text-lg font-semibold w-60 truncate sm:w-full">
 							Empresa Metalurgica SA - Planta A

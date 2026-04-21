@@ -23,6 +23,7 @@ import { useState } from "react"
 import { authClient } from "@/lib/auth-client"
 import { Eye, EyeClosed } from "lucide-react"
 import { PreferencesMenu } from "./layout/preferences-menu"
+import { Input } from "./ui/input"
 
 const formSchema = z.object({
 	email: z.email("Email inválido"),
@@ -84,7 +85,7 @@ export function LoginForm({
 			<div className="sm:hidden absolute top-4 left-4 right-4">
 				<PreferencesMenu />
 			</div>
-			<Card className="card bg-accent/90 rounded-lg my-shadow items-stretch ring ring-foreground/30 justify-center">
+			<Card className="card bg-accent/90 rounded-lg  my-shadow items-stretch ring ring-foreground/30 justify-center">
 				<CardHeader className="text-center">
 					<div className="w-full sm:hidden flex flex-col items-center pb-4 relative">
 						<img
@@ -93,11 +94,11 @@ export function LoginForm({
 							className="size-40"
 						/>
 
-						<p className="absolute bottom-3 left-1/2 -translate-x-1/2 textXL text-3xl text-shadow-lg/50 w-full">
+						<p className="absolute bottom-3 left-1/2 -translate-x-1/2 textXL text-3xl dark:text-shadow-lg/50 w-full">
 							EnHySa App
 						</p>
 					</div>
-					<CardTitle className="hidden sm:block text-xl text-shadow-lg/50">
+					<CardTitle className="hidden sm:block text-xl dark:text-shadow-lg/50">
 						Bienvenido de nuevo
 					</CardTitle>
 					<CardDescription className="hidden sm:block text-foreground/75">
@@ -145,11 +146,11 @@ export function LoginForm({
 										<Field data-invalid={isInvalid}>
 											<FieldLabel
 												htmlFor={field.name}
-												className="text-shadow-lg/50"
+												className="dark:text-shadow-sm/50"
 											>
 												Email
 											</FieldLabel>
-											<input
+											<Input
 												id={field.name}
 												name={field.name}
 												value={field.state.value}
@@ -157,7 +158,6 @@ export function LoginForm({
 												onChange={e => field.handleChange(e.target.value)}
 												aria-invalid={isInvalid}
 												placeholder="m@example.com"
-												className="card bg-background rounded-lg py-2"
 											/>
 											{isInvalid && (
 												<FieldError errors={field.state.meta.errors} />
@@ -176,12 +176,12 @@ export function LoginForm({
 										<Field data-invalid={isInvalid}>
 											<FieldLabel
 												htmlFor={field.name}
-												className="text-shadow-sm/50"
+												className="dark:text-shadow-sm/50"
 											>
 												Contraseña
 											</FieldLabel>
 											<div className="relative">
-												<input
+												<Input
 													id={field.name}
 													name={field.name}
 													value={field.state.value}
@@ -190,7 +190,6 @@ export function LoginForm({
 													aria-invalid={isInvalid}
 													placeholder="********"
 													type={showPassword ? "text" : "password"}
-													className="card bg-background rounded-lg py-2 w-full"
 												/>
 												<button
 													type="button"
@@ -215,7 +214,7 @@ export function LoginForm({
 							<Field>
 								<button
 									type="submit"
-									className="themeBtnAccent tracking-wider font-semibold shadow cursor-pointer rounded-xl py-2 text-shadow-sm/50 ring ring-green-500/30"
+									className="themeBtnAccent tracking-wider font-semibold shadow cursor-pointer rounded-xl py-2 dark:text-shadow-sm/50 ring ring-green-500/30"
 								>
 									Ingresar
 								</button>
@@ -224,7 +223,7 @@ export function LoginForm({
 									<button
 										onClick={() => setActiveForm("register")}
 										// viewTransition={{ types: ["rotateZ"] }}
-										className="cursor-pointer dark:hover:text-green-400 underline text-shadow-sm/50"
+										className="cursor-pointer dark:hover:text-green-400 underline dark:text-shadow-sm/50"
 										type="button"
 									>
 										Registrate

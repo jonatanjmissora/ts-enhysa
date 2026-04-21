@@ -117,7 +117,6 @@ export function EditInstrumentoForm({
 									onChange={e => field.handleChange(e.target.value)}
 									aria-invalid={isInvalid}
 									placeholder="Ej. Luxómetro"
-									className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 								/>
 								{isInvalid && (
 									<FieldError
@@ -153,7 +152,6 @@ export function EditInstrumentoForm({
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. DataLogger"
-										className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -187,7 +185,6 @@ export function EditInstrumentoForm({
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. DT-8809A"
-										className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -223,7 +220,6 @@ export function EditInstrumentoForm({
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. 32451"
-										className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError

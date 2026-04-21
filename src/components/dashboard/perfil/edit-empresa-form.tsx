@@ -105,7 +105,6 @@ export function EditEmpresaForm({
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. Teléfonica"
-										className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -140,7 +139,6 @@ export function EditEmpresaForm({
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. 00-00000000-0"
-										className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -176,7 +174,6 @@ export function EditEmpresaForm({
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. Villa Verde"
-										className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -210,7 +207,6 @@ export function EditEmpresaForm({
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. Andorra"
-										className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -246,7 +242,6 @@ export function EditEmpresaForm({
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. 5000"
-										className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -280,7 +275,6 @@ export function EditEmpresaForm({
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. Pr. Andorra"
-										className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -316,7 +310,6 @@ export function EditEmpresaForm({
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
 										placeholder="Ej. Lun a Vie de 08:00 a 18:00"
-										className={`bg-green-700/10 dark:bg-green-700/20 py-2 px-4 rounded-lg text-foreground text-center sm:text-base 2xl:text-lg`}
 									/>
 									{isInvalid && (
 										<FieldError
