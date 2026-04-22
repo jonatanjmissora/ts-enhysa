@@ -14,7 +14,13 @@ import { Suspense } from "react"
 
 export default function ProfileInstrumentos() {
 	return (
-		<Suspense fallback={<span>Cargando Instrumentos ...</span>}>
+		<Suspense
+			fallback={
+				<span className="p-20 text-foreground/70">
+					Cargando Instrumentos ...
+				</span>
+			}
+		>
 			<InstrumentosList />
 		</Suspense>
 	)
@@ -38,7 +44,7 @@ function InstrumentosList() {
 					className="border-b border-foreground/10 last:border-b-0"
 				>
 					<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center">
-						<div className="flex items-center gap-2 textM w-60 sm:w-max truncate">
+						<div className="flex items-center gap-2 textM text-sm sm:text-base w-60 sm:w-max truncate">
 							{instrumento.nombre.toUpperCase()} -{" "}
 							{instrumento.modelo.toUpperCase()}
 						</div>

@@ -14,7 +14,11 @@ import { Suspense } from "react"
 
 export default function ProfileEmpresas() {
 	return (
-		<Suspense fallback={<span>Cargando Empresas ...</span>}>
+		<Suspense
+			fallback={
+				<span className="p-20 text-foreground/70">Cargando Empresas ...</span>
+			}
+		>
 			<EmpresasList />
 		</Suspense>
 	)
@@ -39,7 +43,7 @@ function EmpresasList() {
 					className="border-b border-foreground/10 last:border-b-0"
 				>
 					<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center">
-						<div className="flex items-center gap-2 textM w-60 sm:w-max truncate">
+						<div className="flex items-center gap-2 textM text-sm sm:text-base w-60 sm:w-max truncate">
 							{empresa.razonSocial.toUpperCase()} -{" "}
 							{empresa.direccion.toUpperCase()} - {empresa.cuit}
 						</div>

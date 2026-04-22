@@ -8,6 +8,8 @@ import { Cpu, UserRound, Warehouse } from "lucide-react"
 import ProfileTecnico from "./tecnico/tecnico"
 import ProfileEmpresas from "./empresa/empresas"
 import ProfileInstrumentos from "./instrumento/instrumentos"
+import CreateEmpresa from "./empresa/create-empresa"
+import { CreateInstrumento } from "./instrumento/create-instrumento"
 
 export default function Profile() {
 	return (
@@ -34,17 +36,15 @@ export default function Profile() {
 
 				<AccordionItem
 					value="empresa"
-					className="border-b border-orange-700 dark:border-orange-600"
+					className="border-b border-orange-700 dark:border-orange-600 relative"
 				>
+					<div className="absolute top-4 right-15">
+						<CreateEmpresa />
+					</div>
 					<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center data-[state=open]:bg-orange-500/50 dark:data-[state=open]:bg-orange-900">
-						<div className="flex items-center justify-between flex-1">
-							<div className="textL flex items-center gap-3">
-								<Warehouse className="size-6 text-orange-700 dark:text-orange-600" />
-								Empresas
-							</div>
-							<button className="text-sm sm:text-base card bg-background py-1 px-2">
-								+ Nueva
-							</button>
+						<div className="textL flex items-center gap-3">
+							<Warehouse className="size-6 text-orange-700 dark:text-orange-600" />
+							Empresas
 						</div>
 					</AccordionTrigger>
 					<AccordionContent>
@@ -54,17 +54,15 @@ export default function Profile() {
 
 				<AccordionItem
 					value="instrumento"
-					className="border-b border-purple-700 dark:border-purple-600"
+					className="border-b border-purple-700 dark:border-purple-600 relative"
 				>
+					<div className="absolute top-4 right-15">
+						<CreateInstrumento />
+					</div>
 					<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center data-[state=open]:bg-purple-500/50 dark:data-[state=open]:bg-purple-900">
-						<div className="flex items-center justify-between flex-1">
-							<div className="textL flex items-center gap-3">
-								<Cpu className="size-6 text-purple-700 dark:text-purple-600" />{" "}
-								Instrumentos
-							</div>
-							<button className="text-sm sm:text-base card bg-background py-1 px-2">
-								+ Nuevo
-							</button>
+						<div className="textL flex items-center gap-3">
+							<Cpu className="size-6 text-purple-700 dark:text-purple-600" />{" "}
+							Instrumentos
 						</div>
 					</AccordionTrigger>
 					<AccordionContent>
