@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/accordion"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Trash2, Pencil } from "lucide-react"
+import { Trash2, Pencil, Ellipsis } from "lucide-react"
 
 export default function ProfileInstrumentos() {
 	return (
@@ -21,7 +21,7 @@ export default function ProfileInstrumentos() {
 				className="border-b border-foreground/10 last:border-b-0"
 			>
 				<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center">
-					<div className="flex items-center gap-2 textL w-60 truncate">
+					<div className="flex items-center gap-2 textL w-60 sm:w-max truncate">
 						Instrumento 1 - modelo 1
 					</div>
 				</AccordionTrigger>
@@ -35,7 +35,7 @@ export default function ProfileInstrumentos() {
 				className="border-b border-foreground/10 last:border-b-0"
 			>
 				<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center">
-					<span className="flex items-center gap-3 textL w-60 truncate">
+					<span className="flex items-center gap-3 textL w-60 sm:w-max truncate">
 						Instrumento 1 - modelo 1
 					</span>
 				</AccordionTrigger>
@@ -49,7 +49,7 @@ export default function ProfileInstrumentos() {
 				className="border-b border-foreground/10 last:border-b-0"
 			>
 				<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center">
-					<span className="flex items-center gap-3 textL w-60 truncate">
+					<span className="flex items-center gap-3 textL w-60 sm:w-max truncate">
 						Instrumento 1 - modelo 1
 					</span>
 				</AccordionTrigger>
@@ -63,9 +63,10 @@ export default function ProfileInstrumentos() {
 
 const Instrumento = () => {
 	return (
-		<div className="bg-accent sm:bg-background py-10 sm:p-10 flex items-center justify-center flex-col relative">
-			<Trash2 className="absolute bottom-22 left-10 sm:top-4 sm:right-10 size-6 cursor-pointer text-red-600/50" />
-			<div className="grid-cols-1 grid sm:grid-cols-2 gap-8 w-5/6">
+		<div className="bg-accent sm:bg-background py-10 sm:p-10 flex items-center justify-center flex-col relative border border-purple-700 dark:border-purple-600">
+			<Trash2 className="sm:block hidden absolute sm:top-4 sm:right-15 size-6 cursor-pointer text-red-600/50" />
+			<Ellipsis className="sm:hidden block absolute top-4 right-5 size-6 cursor-pointer text-foreground/50" />
+			<div className="grid-cols-1 grid sm:grid-cols-2 gap-8 w-5/6 my-10">
 				<div className="flex flex-col gap-1">
 					<Label className="tracking-wider" htmlFor="matricula">
 						Marca
@@ -128,7 +129,7 @@ const Instrumento = () => {
 					</div>
 				</div>
 			</div>
-			<div className=" my-10 w-5/6">
+			<div className="sm:block hidden my-10 w-5/6">
 				<button className="card bg-background sm:bg-accent rounded-lg cursor-pointer textM py-2 w-2/3 sm:w-1/4 justify-center gap-4 ml-auto">
 					<Pencil className="size-6 text-foreground/70" />
 					Editar

@@ -10,7 +10,7 @@ function RouteComponent() {
 	return (
 		<section className="card bg-accent rounded-lg flex-col items-start gap-10 pb-40">
 			<div className="text-left textXL bg-blue-500/25 py-4 mt-10 px-5 rounded w-full">
-				<div className="flex items-center gap-6 w-full sm:w-max">
+				<div className="flex items-center gap-8 w-max">
 					Mi Perfil
 					<FileText className="size-7" />
 				</div>
