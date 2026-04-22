@@ -3,6 +3,7 @@ import SkeltonTecnicoForm from "./skelton-tecnico-form"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import EditTecnicoForm from "./edit-tecnico-form"
+import CreateTecnicoForm from "./create-tecnico-form"
 
 export default function ProfileTecnico() {
 	return (
@@ -13,10 +14,5 @@ export default function ProfileTecnico() {
 }
 const TecnicoForm = () => {
 	const { data: tecnico } = useSuspenseQuery(tecnicoQueryOptions)
-
 	return tecnico ? <EditTecnicoForm tecnico={tecnico} /> : <CreateTecnicoForm />
-}
-
-const CreateTecnicoForm = () => {
-	return <span>CREAR</span>
 }

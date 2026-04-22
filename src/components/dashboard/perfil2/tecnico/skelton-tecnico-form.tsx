@@ -56,7 +56,7 @@ export default function SkeltonTecnicoForm() {
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 items-end mb-3 sm:mb-0">
 						<Field className="relative gap-1">
 							<FieldLabel>
-								Matricula
+								Matrícula
 								<Asterisk className="text-destructive size-3" />
 							</FieldLabel>
 							<Input
@@ -66,7 +66,7 @@ export default function SkeltonTecnicoForm() {
 						</Field>
 
 						<div className="flex flex-col gap-1">
-							<Label>Matricula Digital</Label>
+							<Label>Matrícula Digital</Label>
 							<Input
 								placeholder="..."
 								className="animate-pulse bg-background sm:bg-accent"

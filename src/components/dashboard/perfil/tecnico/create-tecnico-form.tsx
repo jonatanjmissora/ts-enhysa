@@ -210,7 +210,7 @@ export default function CreateTecnicoForm() {
 											htmlFor={field.name}
 											className="font-semibold text-foreground/50 tracking-wider sm:text-lg 2xl:text-xl"
 										>
-											Matricula
+											Matrícula
 											<Asterisk className="text-destructive size-3" />
 										</FieldLabel>
 										<Input

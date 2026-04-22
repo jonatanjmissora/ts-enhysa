@@ -209,7 +209,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 								return (
 									<Field data-invalid={isInvalid} className="relative gap-1">
 										<FieldLabel htmlFor={field.name}>
-											Matricula
+											Matrícula
 											<Asterisk className="text-destructive size-3" />
 										</FieldLabel>
 										<Input
@@ -234,7 +234,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 							}}
 						/>
 						<div className="flex flex-col gap-1">
-							<Label>Matricula Digital</Label>
+							<Label>Matrícula Digital</Label>
 							<div className="card p-2 bg-background sm:bg-accent text-sm">
 								<InputFiles
 									files={matriculaFiles}
@@ -312,7 +312,10 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 						) : (
 							<div className="flex item-center w-full gap-3">
 								<button
-									onClick={() => setEditMode(false)}
+									onClick={() => {
+										form.reset()
+										setEditMode(false)
+									}}
 									type="button"
 									disabled={isPending}
 									className="textM w-1/2 flex gap-3 items-center justify-center card p-1"
