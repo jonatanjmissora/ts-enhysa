@@ -6,8 +6,8 @@ import {
 } from "@/components/ui/accordion"
 import { Cpu, UserRound, Warehouse } from "lucide-react"
 import ProfileTecnico from "./tecnico/tecnico"
-import ProfileEmpresas from "./empresas"
-import ProfileInstrumentos from "./instrumentos"
+import ProfileEmpresas from "./empresa/empresas"
+import ProfileInstrumentos from "./instrumento/instrumentos"
 
 export default function Profile() {
 	return (
@@ -37,10 +37,15 @@ export default function Profile() {
 					className="border-b border-orange-700 dark:border-orange-600"
 				>
 					<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center data-[state=open]:bg-orange-500/50 dark:data-[state=open]:bg-orange-900">
-						<span className="flex items-center gap-3 textL">
-							<Warehouse className="size-6 text-orange-700 dark:text-orange-600" />
-							Empresa receptora
-						</span>
+						<div className="flex items-center justify-between flex-1">
+							<div className="textL flex items-center gap-3">
+								<Warehouse className="size-6 text-orange-700 dark:text-orange-600" />
+								Empresas
+							</div>
+							<button className="text-sm sm:text-base card bg-background py-1 px-2">
+								+ Nueva
+							</button>
+						</div>
 					</AccordionTrigger>
 					<AccordionContent>
 						<ProfileEmpresas />
@@ -52,10 +57,15 @@ export default function Profile() {
 					className="border-b border-purple-700 dark:border-purple-600"
 				>
 					<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center data-[state=open]:bg-purple-500/50 dark:data-[state=open]:bg-purple-900">
-						<span className="flex items-center gap-3 textL">
-							<Cpu className="size-6 text-purple-700 dark:text-purple-600" />{" "}
-							Instrumento utilizado
-						</span>
+						<div className="flex items-center justify-between flex-1">
+							<div className="textL flex items-center gap-3">
+								<Cpu className="size-6 text-purple-700 dark:text-purple-600" />{" "}
+								Instrumentos
+							</div>
+							<button className="text-sm sm:text-base card bg-background py-1 px-2">
+								+ Nuevo
+							</button>
+						</div>
 					</AccordionTrigger>
 					<AccordionContent>
 						<ProfileInstrumentos />

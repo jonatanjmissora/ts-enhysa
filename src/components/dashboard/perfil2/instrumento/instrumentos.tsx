@@ -6,9 +6,24 @@ import {
 } from "@/components/ui/accordion"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useSuspenseQuery } from "@tanstack/react-query"
+import { InstrumentoType } from "db/instrumentos/schema"
 import { Trash2, Pencil, Ellipsis } from "lucide-react"
+import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
+import { Suspense } from "react"
 
 export default function ProfileInstrumentos() {
+	return (
+		<Suspense fallback={<span>Cargando Instrumentos ...</span>}>
+			<InstrumentosList />
+		</Suspense>
+	)
+}
+function InstrumentosList() {
+	const { data: instrumentos } = useSuspenseQuery(instrumentosQueryOptions)
+
+	if (!instrumentos || instrumentos.length === 0) return <InstrumentosVacios />
+
 	return (
 		<Accordion
 			type="single"
@@ -16,65 +31,41 @@ export default function ProfileInstrumentos() {
 			defaultValue=""
 			className="flex flex-col gap-2 w-11/12 mx-auto py-4"
 		>
-			<AccordionItem
-				value="tecnico"
-				className="border-b border-foreground/10 last:border-b-0"
-			>
-				<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center">
-					<div className="flex items-center gap-2 textL w-60 sm:w-max truncate">
-						Instrumento 1 - modelo 1
-					</div>
-				</AccordionTrigger>
-				<AccordionContent>
-					<Instrumento />
-				</AccordionContent>
-			</AccordionItem>
-
-			<AccordionItem
-				value="empresa"
-				className="border-b border-foreground/10 last:border-b-0"
-			>
-				<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center">
-					<span className="flex items-center gap-3 textL w-60 sm:w-max truncate">
-						Instrumento 1 - modelo 1
-					</span>
-				</AccordionTrigger>
-				<AccordionContent>
-					<Instrumento />
-				</AccordionContent>
-			</AccordionItem>
-
-			<AccordionItem
-				value="instrumento"
-				className="border-b border-foreground/10 last:border-b-0"
-			>
-				<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center">
-					<span className="flex items-center gap-3 textL w-60 sm:w-max truncate">
-						Instrumento 1 - modelo 1
-					</span>
-				</AccordionTrigger>
-				<AccordionContent>
-					<Instrumento />
-				</AccordionContent>
-			</AccordionItem>
+			{instrumentos.map(instrumento => (
+				<AccordionItem
+					key={instrumento.id}
+					value={instrumento.id}
+					className="border-b border-foreground/10 last:border-b-0"
+				>
+					<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center">
+						<div className="flex items-center gap-2 textM w-60 sm:w-max truncate">
+							{instrumento.nombre.toUpperCase()} -{" "}
+							{instrumento.modelo.toUpperCase()}
+						</div>
+					</AccordionTrigger>
+					<AccordionContent>
+						<Instrumento instrumento={instrumento} />
+					</AccordionContent>
+				</AccordionItem>
+			))}
 		</Accordion>
 	)
 }
 
-const Instrumento = () => {
+const Instrumento = ({ instrumento }: { instrumento: InstrumentoType }) => {
 	return (
 		<div className="bg-accent sm:bg-background py-10 sm:p-10 flex items-center justify-center flex-col relative border border-purple-700 dark:border-purple-600">
 			<Trash2 className="sm:block hidden absolute sm:top-4 sm:right-15 size-6 cursor-pointer text-red-600/50" />
 			<Ellipsis className="sm:hidden block absolute top-4 right-5 size-6 cursor-pointer text-foreground/50" />
 			<div className="grid-cols-1 grid sm:grid-cols-2 gap-8 w-5/6 my-10">
 				<div className="flex flex-col gap-1">
-					<Label className="tracking-wider" htmlFor="matricula">
+					<Label className="tracking-wider" htmlFor="marca">
 						Marca
 					</Label>
 					<Input
-						id="matricula"
-						placeholder="N° Matrícula "
-						defaultValue="LUXIS"
+						id="marca"
+						placeholder="Marca"
+						value={instrumento.marca.toUpperCase()}
 						readOnly
 						className="bg-background sm:bg-accent"
 					/>
@@ -84,46 +75,46 @@ const Instrumento = () => {
 						Modelo
 					</Label>
 					<Input
-						id="cargo"
-						placeholder="Ej. Seguridad e Higiene"
-						defaultValue="EXO-4000"
+						id="modelo"
+						placeholder="Modelo"
+						value={instrumento.modelo.toUpperCase()}
 						readOnly
 						className="bg-background sm:bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
-					<Label className="tracking-wider" htmlFor="cargo">
+					<Label className="tracking-wider" htmlFor="serie">
 						Nro Serie
 					</Label>
 					<Input
 						id="serie"
-						placeholder="Ej. Seguridad e Higiene"
-						defaultValue="12858752"
+						placeholder="Serie"
+						value={instrumento.serie}
 						readOnly
 						className="bg-background sm:bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
-					<Label className="tracking-wider" htmlFor="cargo">
+					<Label className="tracking-wider" htmlFor="calibracion">
 						Calibración
 					</Label>
 					<Input
-						id="fecha"
-						placeholder="Ej. Seguridad e Higiene"
-						defaultValue="12/10/25"
+						id="calibracion"
+						placeholder="Calibracion"
+						value={instrumento.fechaCalibracion}
 						readOnly
 						className="bg-background sm:bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
-					<p className="tracking-wider text-left">Imágenes</p>
+					<Label>Imágenes</Label>
 					<div className="card bg-background sm:bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
 						<img src="/luxometro.jpg" alt="luxometro" className="size-20" />
 					</div>
 				</div>
 
 				<div className="flex flex-col gap-1">
-					<p className="tracking-wider text-left">Certificado</p>
+					<Label>Certificado</Label>
 					<div className="card bg-background sm:bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
 						<img src="/calibracion.webp" alt="luxometro" className="size-20" />
 					</div>
@@ -136,5 +127,13 @@ const Instrumento = () => {
 				</button>
 			</div>
 		</div>
+	)
+}
+
+function InstrumentosVacios() {
+	return (
+		<p className="py-10 text-center w-full text-pretty textM italic text-foreground/70">
+			Todavia no tiene instrumentos cargados.
+		</p>
 	)
 }

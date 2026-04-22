@@ -1,6 +1,6 @@
 import { db } from "db"
 import { instrumentos } from "./schema"
-import { eq, desc } from "drizzle-orm"
+import { eq, asc } from "drizzle-orm"
 import { delay } from "@/lib/utils"
 
 export async function getInstrumentosDB(userId: string) {
@@ -10,7 +10,7 @@ export async function getInstrumentosDB(userId: string) {
 			.select()
 			.from(instrumentos)
 			.where(eq(instrumentos.userId, userId))
-			.orderBy(desc(instrumentos.nombre))
+			.orderBy(asc(instrumentos.nombre))
 	} catch (error) {
 		console.error(
 			"ERROR obteniendo instrumental:",

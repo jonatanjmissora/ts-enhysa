@@ -6,9 +6,25 @@ import {
 } from "@/components/ui/accordion"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useSuspenseQuery } from "@tanstack/react-query"
+import { EmpresaType } from "db/empresas/schema"
 import { Ellipsis, Pencil, Trash2 } from "lucide-react"
+import { empresasQueryOptions } from "queries/empresas/empresas-query"
+import { Suspense } from "react"
 
 export default function ProfileEmpresas() {
+	return (
+		<Suspense fallback={<span>Cargando Empresas ...</span>}>
+			<EmpresasList />
+		</Suspense>
+	)
+}
+
+function EmpresasList() {
+	const { data: empresas } = useSuspenseQuery(empresasQueryOptions)
+
+	if (!empresas || empresas.length === 0) return <EmpresasVacias />
+
 	return (
 		<Accordion
 			type="single"
@@ -16,52 +32,28 @@ export default function ProfileEmpresas() {
 			defaultValue=""
 			className="flex flex-col gap-2 w-11/12 mx-auto py-4"
 		>
-			<AccordionItem
-				value="tecnico"
-				className="border-b border-foreground/10 last:border-b-0"
-			>
-				<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center">
-					<div className="flex items-center gap-2 textL w-60 sm:w-max truncate">
-						Empresa 1 - direccion 1 - cuit 1
-					</div>
-				</AccordionTrigger>
-				<AccordionContent>
-					<Empresa />
-				</AccordionContent>
-			</AccordionItem>
-
-			<AccordionItem
-				value="empresa"
-				className="border-b border-foreground/10 last:border-b-0"
-			>
-				<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center">
-					<span className="flex items-center gap-3 textL w-60 sm:w-max truncate">
-						Empresa 1 - direccion 1 - cuit 1
-					</span>
-				</AccordionTrigger>
-				<AccordionContent>
-					<Empresa />
-				</AccordionContent>
-			</AccordionItem>
-
-			<AccordionItem
-				value="instrumento"
-				className="border-b border-foreground/10 last:border-b-0"
-			>
-				<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center">
-					<span className="flex items-center gap-3 textL w-60 sm:w-max truncate">
-						Empresa 1 - direccion 1 - cuit 1
-					</span>
-				</AccordionTrigger>
-				<AccordionContent>
-					<Empresa />
-				</AccordionContent>
-			</AccordionItem>
+			{empresas.map(empresa => (
+				<AccordionItem
+					key={empresa.id}
+					value={empresa.id}
+					className="border-b border-foreground/10 last:border-b-0"
+				>
+					<AccordionTrigger className="flex px-5 w-11/12 sm:w-full flex-wrap items-center">
+						<div className="flex items-center gap-2 textM w-60 sm:w-max truncate">
+							{empresa.razonSocial.toUpperCase()} -{" "}
+							{empresa.direccion.toUpperCase()} - {empresa.cuit}
+						</div>
+					</AccordionTrigger>
+					<AccordionContent>
+						<Empresa empresa={empresa} />
+					</AccordionContent>
+				</AccordionItem>
+			))}
 		</Accordion>
 	)
 }
 
-const Empresa = () => {
+const Empresa = ({ empresa }: { empresa: EmpresaType }) => {
 	return (
 		<div className="bg-accent sm:bg-background py-10 sm:p-10 flex items-center justify-center flex-col relative border border-orange-700 dark:border-orange-600">
 			<Trash2 className="sm:block hidden absolute sm:top-4 sm:right-15 size-6 cursor-pointer text-red-600/50" />
@@ -74,7 +66,7 @@ const Empresa = () => {
 					<Input
 						id="razon-social"
 						placeholder="Nombre de la empresa"
-						value="TELEFONICA S.A"
+						value={empresa.razonSocial.toUpperCase()}
 						readOnly
 						className="bg-background sm:bg-accent"
 					/>
@@ -86,7 +78,7 @@ const Empresa = () => {
 					<Input
 						id="cuit"
 						placeholder="00-00000000-0"
-						value="30-58114785-2"
+						value={empresa.cuit}
 						readOnly
 						className="bg-background sm:bg-accent"
 					/>
@@ -98,46 +90,62 @@ const Empresa = () => {
 					<Input
 						id="direccion"
 						placeholder="Calle, Altura"
-						value="BERUTI 70"
+						value={empresa.direccion.toUpperCase()}
 						readOnly
 						className="bg-background sm:bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1 w-full">
-					<Label className="tracking-wider" htmlFor="cant-empleados">
+					<Label className="tracking-wider" htmlFor="localidad">
 						Localidad
 					</Label>
 					<Input
 						id="localidad"
 						placeholder="Ciudad, Provincia, Pais"
-						value="BAHIA BLANCA"
+						value={empresa.localidad.toUpperCase()}
 						readOnly
 						className="bg-background sm:bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1 w-full">
-					<Label className="tracking-wider" htmlFor="cant-empleados">
+					<Label className="tracking-wider" htmlFor="codigoPostal">
 						CP
 					</Label>
 					<Input
 						id="codigoPostal"
 						placeholder="Ciudad, Provincia, Pais"
-						value="8000"
+						value={empresa.codigoPostal}
 						readOnly
 						className="bg-background sm:bg-accent"
 					/>
 				</div>
 				<div className="flex flex-col gap-1 w-full">
-					<Label className="tracking-wider" htmlFor="cant-empleados">
+					<Label className="tracking-wider" htmlFor="provincia">
 						Provincia
 					</Label>
 					<Input
 						id="provincia"
 						placeholder="Ciudad, Provincia, Pais"
-						value="BUENOS AIRES"
+						value={empresa.provincia.toUpperCase()}
 						readOnly
 						className="bg-background sm:bg-accent"
 					/>
+				</div>
+				<div className="flex flex-col gap-1 w-full">
+					<Label htmlFor="horarios">Horarios</Label>
+					<Input
+						id="horarios"
+						placeholder="Lun a Vie 8:00 a 16:00"
+						value={empresa.horarios.toUpperCase()}
+						readOnly
+						className="bg-background sm:bg-accent"
+					/>
+				</div>
+				<div className="flex flex-col gap-1">
+					<Label>Logo</Label>
+					<div className="card bg-background sm:bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
+						<img src="/telefonica.png" alt="luxometro" className="size-20" />
+					</div>
 				</div>
 			</div>
 			<div className="sm:block hidden my-10 w-5/6">
@@ -147,5 +155,13 @@ const Empresa = () => {
 				</button>
 			</div>
 		</div>
+	)
+}
+
+function EmpresasVacias() {
+	return (
+		<p className="py-10 text-center w-full text-pretty textM italic text-foreground/70">
+			Todavia no tiene empresas cargadas.
+		</p>
 	)
 }
