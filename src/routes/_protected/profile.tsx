@@ -1,11 +1,11 @@
-import Empresas from "@/components/dashboard/perfil/empresa"
-import Tecnico from "@/components/dashboard/perfil/tecnico"
+import Empresas from "@/components/dashboard/perfil/empresa/empresa"
+import Tecnico from "@/components/dashboard/perfil/tecnico/tecnico"
 import { createFileRoute } from "@tanstack/react-router"
 import { Cpu, UserRound, Warehouse } from "lucide-react"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { useState } from "react"
 import { empresasQueryOptions } from "queries/empresas/empresas-query"
-import Instrumental from "@/components/dashboard/perfil/instrumentos"
+import Instrumental from "@/components/dashboard/perfil/instrumento/instrumentos"
 import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
 
 export const Route = createFileRoute("/_protected/profile")({

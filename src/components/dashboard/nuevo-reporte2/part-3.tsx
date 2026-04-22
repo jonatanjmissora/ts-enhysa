@@ -16,8 +16,8 @@ import {
 	SelectLabel,
 	SelectTrigger,
 	SelectValue,
-} from "../ui/select"
-import { Label } from "../ui/label"
+} from "@/components/ui/select"
+import { Label } from "@/components/ui/label"
 
 export const Part3Data = () => {
 	return (

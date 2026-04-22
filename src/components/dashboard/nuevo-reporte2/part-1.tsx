@@ -14,8 +14,8 @@ import {
 	SelectValue,
 } from "@/components/ui/select"
 import { Cpu, UserRound, Warehouse } from "lucide-react"
-import { TextTooltip } from "../layout/text-tooltip"
-import { Input } from "../ui/input"
+import { TextTooltip } from "../../layout/text-tooltip"
+import { Input } from "../../ui/input"
 
 export default function Part1Data() {
 	return (

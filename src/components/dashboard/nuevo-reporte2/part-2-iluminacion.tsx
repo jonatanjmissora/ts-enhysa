@@ -1,3 +1,5 @@
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import {
 	Select,
 	SelectContent,
@@ -8,8 +10,6 @@ import {
 	SelectValue,
 } from "@/components/ui/select"
 import { Lightbulb } from "lucide-react"
-import { Input } from "../ui/input"
-import { Label } from "../ui/label"
 
 export default function Part2Iluminacion() {
 	return (

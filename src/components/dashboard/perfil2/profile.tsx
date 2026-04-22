@@ -5,7 +5,7 @@ import {
 	AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Cpu, UserRound, Warehouse } from "lucide-react"
-import ProfileTecnico from "./tecnico"
+import ProfileTecnico from "./tecnico/tecnico"
 import ProfileEmpresas from "./empresas"
 import ProfileInstrumentos from "./instrumentos"
 

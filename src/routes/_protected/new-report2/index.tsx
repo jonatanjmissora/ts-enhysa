@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { FileChartColumn } from "lucide-react"
-import Part1Data from "../../../components/disenio2/part-1"
-import Part2Data from "../../../components/disenio2/part-2"
-import { Part3Data } from "@/components/disenio2/part-3"
+import Part1Data from "@/components/dashboard/nuevo-reporte2/part-1"
+import Part2Data from "@/components/dashboard/nuevo-reporte2/part-2"
+import { Part3Data } from "@/components/dashboard/nuevo-reporte2/part-3"
 
 export const Route = createFileRoute("/_protected/new-report2/")({
 	component: RouteComponent,

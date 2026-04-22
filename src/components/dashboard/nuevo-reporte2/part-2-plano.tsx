@@ -2,8 +2,8 @@ import { InputFiles } from "@/components/layout/input-files"
 
 import { Box, Equal, EqualApproximately, Trash2 } from "lucide-react"
 import { useState } from "react"
-import { Input } from "../ui/input"
-import { Label } from "../ui/label"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 export default function Part2Plano() {
 	const [planoFiles, setPlanoFiles] = useState<File[]>([])

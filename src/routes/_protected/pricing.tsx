@@ -65,8 +65,8 @@ function RouteComponent() {
 
 			<div className="flex-1 flex justify-center items-center flex-col gap-6 pt-40 sm:py-10 2xl:py-20">
 				<div className="flex items-center gap-2 text-5xl 2xl:text-6xl font-bold tracking-wildest relative">
-					<span>Planes</span>
-					<Shield className="absolute top-1/2 left-full -translate-1/2 size-30 2xl:size-50 -rotate-15 text-amber-500/30 -z-10" />
+					<span className="text-shadow-lg/50">Planes</span>
+					<Shield className="absolute top-1/2 left-full -translate-1/2 size-30 2xl:size-50 -rotate-15 text-amber-500/30 -z-10 drop-shadow-lg/90" />
 				</div>
 				<div>
 					<p className="italic tracking-wider font-semibold text-pretty sm:text-base 2xl:text-xl w-11/12 sm:w-1/2 mx-auto text-center text-foreground/50">

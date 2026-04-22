@@ -1,7 +1,7 @@
-import Part2Data from "@/components/disenio2/part-2"
-import { Part3Data } from "@/components/disenio2/part-3"
 import { FileChartColumn } from "lucide-react"
 import MovilPart1Data from "./part-1"
+import Part2Data from "@/components/dashboard/nuevo-reporte2/part-2"
+import { Part3Data } from "@/components/dashboard/nuevo-reporte2/part-3"
 
 export default function MovilNewReport() {
 	return (

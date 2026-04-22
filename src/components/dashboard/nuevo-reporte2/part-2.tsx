@@ -6,9 +6,9 @@ import {
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
-} from "../ui/accordion"
-import { Input } from "../ui/input"
-import { Label } from "../ui/label"
+} from "@/components/ui/accordion"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 export default function Part2Data() {
 	return (
