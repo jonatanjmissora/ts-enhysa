@@ -70,7 +70,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 				}}
 			>
 				<FieldGroup className="gap-5">
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 mb-3 sm:mb-0">
+					<div className="grid grid-cols-1 sm:grid-cols-2 gap-7 sm:gap-y-4 sm:gap-x-10 justify-center items-start w-full mx-auto mb-3 sm:mb-0">
 						<form.Field
 							name="nombre"
 							children={field => {
@@ -133,9 +133,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 								)
 							}}
 						/>
-					</div>
 
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 mb-3 sm:mb-0">
 						<form.Field
 							name="cargo"
 							children={field => {
@@ -198,9 +196,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 								)
 							}}
 						/>
-					</div>
 
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 items-end mb-3 sm:mb-0">
 						<form.Field
 							name="matricula"
 							children={field => {
@@ -245,9 +241,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 								/>
 							</div>
 						</div>
-					</div>
 
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 mb-3 sm:mb-0">
 						<div className="flex-1 flex flex-col gap-1">
 							<Label>Firma Digital</Label>
 							<div className="card p-2 bg-background sm:bg-accent text-sm h-full">
@@ -304,7 +298,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 								}}
 								type="button"
 								disabled={isPending}
-								className="textM w-1/2 flex gap-3 items-center justify-center card p-1 ml-auto"
+								className="textM text-sm sm:text-base w-1/2 flex gap-3 items-center justify-center card p-1 ml-auto"
 							>
 								<Pencil size={16} className="text-foreground/75" />
 								Editar
@@ -318,14 +312,14 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 									}}
 									type="button"
 									disabled={isPending}
-									className="textM w-1/2 flex gap-3 items-center justify-center card p-1"
+									className="textM text-sm sm:text-base w-1/2 flex gap-3 items-center justify-center card p-1"
 								>
 									Cancelar
 								</button>
 								<button
 									type="submit"
 									disabled={isPending}
-									className="themeBtnBackground textM w-1/2 flex gap-3 items-center justify-center card p-1"
+									className="themeBtnBackground textM text-sm sm:text-base w-1/2 flex gap-3 items-center justify-center card p-1"
 								>
 									{isPending ? (
 										<div className="flex gap-2 w-full justify-center items-center">

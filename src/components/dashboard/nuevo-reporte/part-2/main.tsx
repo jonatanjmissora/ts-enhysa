@@ -59,7 +59,7 @@ export default function NewReportPart2({
 					{sector.nombre || "Depósito"}
 				</span>
 				<button
-					className="themeBtnAccent py-1 px-4 rounded-lg sm:text-lg 2xl:text-xl font-semibold tracking-wilder"
+					className="themeBtnAccent py-1 px-4 rounded-lg sm:text-lg 2xl:text-xl font-semibold tracking-wilder my-shadow"
 					onClick={() => {
 						//TODO logica
 					}}

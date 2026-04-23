@@ -17,7 +17,9 @@ export default function Part2Data() {
 				<div className="textXL py-3 flex items-center gap-8">
 					Areas <RulerDimensionLine className="sm:size-7 2xl:size-9" />
 				</div>
-				<button className="card bg-background py-2 px-4">+ Nueva Area</button>
+				<button className="card bg-background py-2 px-6 my-shadow">
+					+ Nueva Area
+				</button>
 			</div>
 
 			<Accordion

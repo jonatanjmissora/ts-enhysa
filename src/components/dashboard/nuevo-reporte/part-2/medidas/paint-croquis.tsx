@@ -20,7 +20,7 @@ export function AlertPaintCroquis({
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild>
-				<button className="cardBackground w-full py-3  sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75 text-center">
+				<button className="cardBackground w-full py-3  sm:text-base 2xl:text-lg cursor-pointer hover:bg-background/75 text-center my-shadow">
 					{croquis.celdasSeleccionadas.length === 0 ? (
 						<span className="flex items-center gap-2 w-full justify-center">
 							Dibujar Croquis <Paintbrush size={16} />
@@ -105,7 +105,7 @@ function CroquisGridToPaint({
 											agregarCelda(index)
 										}
 									}}
-									className={`border border-gray-400 size-20 cursor-pointer ${croquis.celdasSeleccionadas.includes(index) ? "bg-blue-500" : ""}`}
+									className={`border border-gray-400 size-20 cursor-pointer  my-shadow ${croquis.celdasSeleccionadas.includes(index) ? "bg-blue-500" : ""}`}
 								/>
 							)
 						})}

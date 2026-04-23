@@ -75,24 +75,23 @@ export function LogoutAlertDialog() {
 					Cerrar sesion
 				</span>
 			</AlertDialogTrigger>
-			<AlertDialogContent className="p-10 sm:p-20 dark:bg-background bg-accent backdrop-blur-xl w-11/12 sm:w-auto">
+			<AlertDialogContent className="p-10 sm:p-20 dark:bg-background bg-accent backdrop-blur-xl w-11/12 sm:w-[40dvw] h-[30dvh] sm:h-[40dvh] justify-center items-center">
 				<AlertDialogTitle className="text-center sm:text-lg 2xl:text-xl">
 					¿Estás seguro de que quieres cerrar sesión?
 				</AlertDialogTitle>
-				<AlertDialogDescription className="text-center">
+				<AlertDialogDescription className="text-center w-3/4 text-pretty mx-auto">
 					Esto cerrará tu sesión y necesitarás iniciar sesión de nuevo.
 				</AlertDialogDescription>
 				<div className="flex justify-end gap-4">
-					<Button
-						variant="outline"
-						className="cursor-pointer w-1/2"
+					<button
+						className="cursor-pointer w-1/2 card py-1 justify-center"
 						onClick={() => {
 							setOpen(false)
 						}}
 					>
 						Cancelar
-					</Button>
-					<Button className="cursor-pointer w-1/2" onClick={logout}>
+					</button>
+					<Button className="cursor-pointer w-1/2 my-shadow" onClick={logout}>
 						Confirmar
 					</Button>
 				</div>

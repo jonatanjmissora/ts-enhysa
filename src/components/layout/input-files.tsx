@@ -40,7 +40,7 @@ export const InputFiles = ({
 							<FileUploadTrigger asChild disabled={!editMode}>
 								<div className="flex items-center justify-center flex-wrap gap-0 w-full cursor-pointer">
 									<CloudUpload className="size-6 mx-2 text-foreground/20 pointer-events-none" />
-									<span className="text-foreground/20 sm:text-sm 2xl:text-lg">
+									<span className="text-foreground/20 sm:text-sm 2xl:text-lg text-pretty">
 										{text}
 									</span>
 								</div>
@@ -93,7 +93,9 @@ export const InputFiles = ({
 						<FileUploadTrigger asChild disabled={!editMode}>
 							<div className="flex items-center justify-center flex-wrap gap-0 w-full cursor-pointer">
 								<CloudUpload className="size-7 sm:mx-2 text-foreground/20 pointer-events-none" />
-								<span className="text-foreground/50 textXS">{text}</span>
+								<span className="text-foreground/50 textXS text-pretty">
+									{text}
+								</span>
 							</div>
 						</FileUploadTrigger>
 						<p className="text-xs tracking-wide text-foreground/30 italic">

@@ -122,7 +122,12 @@ export function RegisterForm({
 					>
 						<FieldGroup>
 							<Field>
-								<Button variant="theme" type="button" onClick={signIn}>
+								<Button
+									variant="theme"
+									type="button"
+									onClick={signIn}
+									className="my-shadow"
+								>
 									{loading ? (
 										"Iniciando..."
 									) : (
@@ -232,7 +237,7 @@ export function RegisterForm({
 												<button
 													type="button"
 													onClick={() => setShowPassword(!showPassword)}
-													className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
+													className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer  my-shadow"
 												>
 													{showPassword ? (
 														<EyeClosed size={16} />
@@ -252,7 +257,7 @@ export function RegisterForm({
 							<Field>
 								<button
 									type="submit"
-									className="themeBtnAccent tracking-wider font-semibold shadow cursor-pointer rounded-xl py-2 dark:text-shadow-sm/50 ring ring-green-500/30"
+									className="themeBtnAccent tracking-wider font-semibold  my-shadow cursor-pointer rounded-xl py-2 dark:text-shadow-sm/50 ring ring-green-500/30"
 								>
 									Registrar
 								</button>
@@ -262,7 +267,7 @@ export function RegisterForm({
 										type="button"
 										onClick={() => setActiveForm("login")}
 										// viewTransition={{ types: ["rotateZ"] }}
-										className="cursor-pointer dark:hover:text-green-400 underline dark:text-shadow-sm/50"
+										className="cursor-pointer dark:hover:text-green-400 underline dark:text-shadow-sm/50 my-shadow"
 									>
 										Ingresar
 									</button>

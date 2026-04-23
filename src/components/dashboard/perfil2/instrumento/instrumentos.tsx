@@ -8,9 +8,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { InstrumentoType } from "db/instrumentos/schema"
-import { Trash2, Pencil, Ellipsis } from "lucide-react"
+import { Pencil, Ellipsis } from "lucide-react"
 import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
 import { Suspense } from "react"
+import DeleteInstrumento from "./delete-instrumento"
 
 export default function ProfileInstrumentos() {
 	return (
@@ -61,7 +62,7 @@ function InstrumentosList() {
 const Instrumento = ({ instrumento }: { instrumento: InstrumentoType }) => {
 	return (
 		<div className="bg-accent sm:bg-background py-10 sm:p-10 flex items-center justify-center flex-col relative border border-purple-700 dark:border-purple-600">
-			<Trash2 className="sm:block hidden absolute sm:top-4 sm:right-15 size-6 cursor-pointer text-red-600/50" />
+			<DeleteInstrumento instrumento={instrumento} />
 			<Ellipsis className="sm:hidden block absolute top-4 right-5 size-6 cursor-pointer text-foreground/50" />
 			<div className="grid-cols-1 grid sm:grid-cols-2 gap-8 w-5/6 my-10">
 				<div className="flex flex-col gap-1">

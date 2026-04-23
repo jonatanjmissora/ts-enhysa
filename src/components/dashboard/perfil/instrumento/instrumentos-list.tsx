@@ -141,7 +141,7 @@ export function DeleteInstrumentoAlertDialog({
 					Borrar
 				</Button>
 			</AlertDialogTrigger>
-			<AlertDialogContent className="py-20 px-10 bg-accent/50 backdrop-blur-xl">
+			<AlertDialogContent className="py-20 px-10 bg-accent/90 backdrop-blur-xl">
 				<AlertDialogTitle></AlertDialogTitle>
 				<AlertDialogDescription></AlertDialogDescription>
 				<DeleteInstrumentoForm
@@ -168,7 +168,7 @@ export function EditInstrumentoAlertDialog({
 					Edit
 				</Button>
 			</AlertDialogTrigger>
-			<AlertDialogContent className="p-20 bg-accent/40 backdrop-blur-xl w-1/2 min-h-[50dvh]">
+			<AlertDialogContent className="p-20 bg-accent/90 backdrop-blur-xl w-1/2 min-h-[50dvh]">
 				<AlertDialogTitle></AlertDialogTitle>
 				<AlertDialogDescription></AlertDialogDescription>
 				<EditInstrumentoForm

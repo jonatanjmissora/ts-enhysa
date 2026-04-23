@@ -35,12 +35,12 @@ export function CreateInstrumento() {
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild className="hover:bg-accent">
-				<button className="text-sm sm:text-base card bg-background py-1 px-2">
+				<button className="text-sm sm:text-base card bg-background py-1 px-3">
 					+ Nuevo
 				</button>
 			</AlertDialogTrigger>
 
-			<AlertDialogContent className="p-20 sm:py-15 2xl:py-20 bg-accent/80 backdrop-blur-xl w-1/2 min-h-[50dvh]">
+			<AlertDialogContent className="p-6 py-12 pb-40 sm:p-20 sm:py-15 2xl:py-20 bg-accent/80 backdrop-blur-xl w-full sm:w-1/2 h-screen sm:h-[95dvh] overflow-auto">
 				<AlertDialogTitle className="h-max sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2 border-b border-foreground/20 w-full mb-10">
 					Instrumento Nuevo
 				</AlertDialogTitle>
@@ -116,41 +116,41 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 			}}
 		>
 			<FieldGroup className="gap-5">
-				<form.Field
-					name="nombre"
-					children={field => {
-						const isInvalid =
-							field.state.meta.isTouched && !field.state.meta.isValid
+				<div className="grid grid-cols-1 sm:grid-cols-2 gap-7 sm:gap-y-4 sm:gap-x-10 justify-center items-start w-5/6 sm:w-full mx-auto">
+					<form.Field
+						name="nombre"
+						children={field => {
+							const isInvalid =
+								field.state.meta.isTouched && !field.state.meta.isValid
 
-						return (
-							<Field data-invalid={isInvalid} className="relative gap-1">
-								<FieldLabel htmlFor={field.name}>
-									Nombre
-									<Asterisk className="text-destructive size-3" />
-								</FieldLabel>
+							return (
+								<Field data-invalid={isInvalid} className="relative gap-1">
+									<FieldLabel htmlFor={field.name}>
+										Nombre
+										<Asterisk className="text-destructive size-3" />
+									</FieldLabel>
 
-								<Input
-									id={field.name}
-									name={field.name}
-									value={field.state.value}
-									onBlur={field.handleBlur}
-									onChange={e => field.handleChange(e.target.value)}
-									aria-invalid={isInvalid}
-									placeholder="Ej. Luxómetro"
-								/>
-
-								{isInvalid && (
-									<FieldError
-										errors={field.state.meta.errors}
-										className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+									<Input
+										id={field.name}
+										name={field.name}
+										value={field.state.value}
+										onBlur={field.handleBlur}
+										onChange={e => field.handleChange(e.target.value)}
+										aria-invalid={isInvalid}
+										placeholder="Ej. Luxómetro"
 									/>
-								)}
-							</Field>
-						)
-					}}
-				/>
 
-				<div className="flex gap-10">
+									{isInvalid && (
+										<FieldError
+											errors={field.state.meta.errors}
+											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+										/>
+									)}
+								</Field>
+							)
+						}}
+					/>
+
 					<form.Field
 						name="marca"
 						children={field => {
@@ -215,9 +215,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 							)
 						}}
 					/>
-				</div>
 
-				<div className="flex gap-10">
 					<form.Field
 						name="serie"
 						children={field => {
@@ -298,39 +296,38 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 							)
 						}}
 					/>
+
+					<form.Field
+						name="imagenes"
+						children={field => {
+							const isInvalid =
+								field.state.meta.isTouched && !field.state.meta.isValid
+
+							return (
+								<Field data-invalid={isInvalid} className="relative gap-1">
+									<FieldLabel htmlFor={field.name}>Imagenes</FieldLabel>
+
+									<div className="card px-2 sm:px-0 bg-background py-2">
+										<InputFiles
+											files={instrumentoFiles}
+											setFiles={setInstrumentoFiles}
+											text="Imágen del certificado de calibración e instrumento"
+											maxFiles={3}
+											editMode={true}
+										/>
+									</div>
+
+									{isInvalid && (
+										<FieldError
+											errors={field.state.meta.errors}
+											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+										/>
+									)}
+								</Field>
+							)
+						}}
+					/>
 				</div>
-
-				<form.Field
-					name="imagenes"
-					children={field => {
-						const isInvalid =
-							field.state.meta.isTouched && !field.state.meta.isValid
-
-						return (
-							<Field data-invalid={isInvalid} className="relative gap-1">
-								<FieldLabel htmlFor={field.name}>Imagenes</FieldLabel>
-
-								<div className="card bg-background py-2">
-									<InputFiles
-										files={instrumentoFiles}
-										setFiles={setInstrumentoFiles}
-										text="Imágen del certificado de calibración y del instrumento"
-										maxFiles={3}
-										editMode={true}
-									/>
-								</div>
-
-								{isInvalid && (
-									<FieldError
-										errors={field.state.meta.errors}
-										className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
-									/>
-								)}
-							</Field>
-						)
-					}}
-				/>
-
 				<div className="flex justify-end items-center gap-2 w-full text-destructive">
 					<Asterisk className="text-destructive size-3" />
 
@@ -344,7 +341,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 						onClick={() => setOpen(false)}
 						type="button"
 						disabled={isPending}
-						className="flex-1 card bg-background justify-center textM p-2 cursor-pointer"
+						className="flex-1 card bg-background justify-center textM text-sm sm:text-base p-2 cursor-pointer"
 					>
 						Cancelar
 					</button>
@@ -352,7 +349,7 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 					<button
 						type="submit"
 						disabled={isPending}
-						className="flex-1 themeBtnBackground py-2 rounded-lg textM my-shadow"
+						className="flex-1 themeBtnBackground py-2 rounded-lg textM text-sm sm:text-base my-shadow"
 					>
 						{isPending ? (
 							<div className="flex gap-2 w-full justify-center">

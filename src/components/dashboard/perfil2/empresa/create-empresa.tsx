@@ -27,11 +27,11 @@ export default function CreateEmpresa() {
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild className="hover:bg-accent">
-				<button className="text-sm sm:text-base card bg-background py-1 px-2">
+				<button className="text-sm sm:text-base card bg-background py-1 px-3">
 					+ Nueva
 				</button>
 			</AlertDialogTrigger>
-			<AlertDialogContent className="p-20 sm:py-15 2xl:py-20 bg-accent/80 backdrop-blur-xl w-1/2 min-h-[50dvh]">
+			<AlertDialogContent className="p-6 py-12 pb-40 sm:p-20 sm:py-15 2xl:py-20 bg-accent/80 backdrop-blur-xl w-full sm:w-1/2 h-screen sm:h-[95dvh] overflow-auto">
 				<AlertDialogTitle className="h-max sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2 border-b border-foreground/20 w-full mb-10">
 					Empresa Nueva
 				</AlertDialogTitle>
@@ -86,7 +86,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 			}}
 		>
 			<FieldGroup className="gap-5">
-				<div className="flex gap-10">
+				<div className="grid grid-cols-1 sm:grid-cols-2 gap-7 sm:gap-y-4 sm:gap-x-10 justify-center items-center w-5/6 sm:w-full mx-auto">
 					<form.Field
 						name="razonSocial"
 						children={field => {
@@ -148,9 +148,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 							)
 						}}
 					/>
-				</div>
 
-				<div className="flex gap-10">
 					<form.Field
 						name="direccion"
 						children={field => {
@@ -206,9 +204,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 							)
 						}}
 					/>
-				</div>
 
-				<div className="flex gap-10">
 					<form.Field
 						name="codigoPostal"
 						children={field => {
@@ -264,9 +260,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 							)
 						}}
 					/>
-				</div>
 
-				<div className="flex gap-10">
 					<form.Field
 						name="horarios"
 						children={field => {
@@ -325,7 +319,6 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 						}}
 					/>
 				</div>
-
 				<div className="flex justify-end items-center gap-2 w-full text-destructive">
 					<Asterisk className="text-destructive size-3" />
 					<span className="text-xs 2xl:text-sm italic tracking-wide">
@@ -338,14 +331,14 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 						onClick={() => setOpen(false)}
 						type="button"
 						disabled={isPending}
-						className="flex-1 card bg-background justify-center textM p-2 cursor-pointer"
+						className="flex-1 card bg-background justify-center textM text-sm sm:text-base p-2 cursor-pointer"
 					>
 						Cancelar
 					</button>
 					<button
 						type="submit"
 						disabled={isPending}
-						className="flex-1 themeBtnBackground py-2 rounded-lg textM my-shadow"
+						className="flex-1 themeBtnBackground py-2 rounded-lg textM text-sm sm:text-base my-shadow"
 					>
 						{isPending ? (
 							<div className="flex gap-2 w-full justify-center">

@@ -30,7 +30,7 @@ export function CreateEmpresaForm({ children }: { children: React.ReactNode }) {
 			<AlertDialogTrigger asChild className="hover:bg-accent">
 				{children}
 			</AlertDialogTrigger>
-			<AlertDialogContent className="p-20 bg-accent/40 backdrop-blur-xl w-1/2 min-h-[50dvh]">
+			<AlertDialogContent className="p-20 bg-accent/90 backdrop-blur-xl w-1/2 min-h-[50dvh]">
 				<AlertDialogTitle className="h-max sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2 border-b border-foreground/20 w-full mb-10">
 					Empresa Nueva
 				</AlertDialogTitle>
@@ -376,14 +376,14 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 						onClick={() => setOpen(false)}
 						type="button"
 						disabled={isPending}
-						className="ring ring-foreground/5 shadow bg-background  h-full py-2 rounded-lg tracking-wider 2xl:text-lg font-semibold flex-1 hover:bg-background/75 cursor-pointer"
+						className="ring ring-foreground/5 bg-background  h-full py-2 rounded-lg tracking-wider 2xl:text-lg font-semibold flex-1 hover:bg-background/75 cursor-pointer my-shadow"
 					>
 						Cancelar
 					</button>
 					<button
 						type="submit"
 						disabled={isPending}
-						className="themeBtnBackground py-2 rounded-lg tracking-wider 2xl:text-lg font-semibold flex-1"
+						className="themeBtnBackground py-2 rounded-lg tracking-wider 2xl:text-lg font-semibold flex-1 my-shadow"
 					>
 						{isPending ? (
 							<div className="flex gap-2 w-full justify-center">

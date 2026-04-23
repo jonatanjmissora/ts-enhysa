@@ -196,7 +196,7 @@ function NewPuntoForm({
 					<div className="w-full flex items-center gap-4">
 						<button
 							type="button"
-							className="flex-1 card bg-background py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer"
+							className="flex-1 card bg-background py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer my-shadow"
 							onClick={() => {
 								setOpenValue(false)
 								setActualPunto(defaultPunto)
@@ -206,7 +206,7 @@ function NewPuntoForm({
 						</button>
 						<button
 							type="submit"
-							className="flex-1 card bg-accent py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer"
+							className="flex-1 card bg-accent py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer my-shadow"
 						>
 							Guardar
 						</button>
@@ -301,7 +301,7 @@ function EditPuntoForm({
 					<div className="w-full flex items-center gap-4">
 						<button
 							type="button"
-							className="flex-1 card bg-background py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer"
+							className="flex-1 card bg-background py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointe"
 							onClick={() => {
 								setOpenValue(false)
 								setActualPunto(defaultPunto)
@@ -394,7 +394,7 @@ function CroquisGridToPoint({
 			</div>
 			<button
 				onClick={() => setOpen(false)}
-				className="cardBackground px-4 py-3 cursor-pointer w-1/2 mx-auto justify-center tracking-widest font-semibold gap-4 mt-10"
+				className="cardBackground px-4 py-3 cursor-pointer w-1/2 mx-auto justify-center tracking-widest font-semibold gap-4 mt-10 my-shadow"
 			>
 				Listo
 				<ThumbsUp size={16} />

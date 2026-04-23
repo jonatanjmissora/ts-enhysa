@@ -11,7 +11,7 @@ export default function SkeltonTecnicoForm() {
 				id="create-form"
 			>
 				<FieldGroup className="gap-5">
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 mb-3 sm:mb-0">
+					<div className="grid grid-cols-1 sm:grid-cols-2 gap-7 sm:gap-y-4 sm:gap-x-10 justify-center items-start w-full mx-auto mb-3 sm:mb-0">
 						<Field className="relative gap-1">
 							<FieldLabel>
 								Nombre Completo
@@ -30,9 +30,7 @@ export default function SkeltonTecnicoForm() {
 								className="animate-pulse bg-background sm:bg-accent"
 							/>
 						</Field>
-					</div>
 
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 mb-3 sm:mb-0">
 						<Field className="relative gap-1">
 							<FieldLabel>
 								Cargo
@@ -51,9 +49,7 @@ export default function SkeltonTecnicoForm() {
 								className="animate-pulse bg-background sm:bg-accent"
 							/>
 						</Field>
-					</div>
 
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 items-end mb-3 sm:mb-0">
 						<Field className="relative gap-1">
 							<FieldLabel>
 								Matrícula
@@ -72,9 +68,7 @@ export default function SkeltonTecnicoForm() {
 								className="animate-pulse bg-background sm:bg-accent"
 							/>
 						</div>
-					</div>
 
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 mb-3 sm:mb-0">
 						<div className="flex-1 flex flex-col gap-1">
 							<Label>Firma Digital</Label>
 							<Input
@@ -116,7 +110,7 @@ export default function SkeltonTecnicoForm() {
 					<div className="w-full sm:w-1/2 ml-auto sm:pl-5">
 						<button
 							type="button"
-							className="textM w-1/2 flex gap-3 items-center justify-center card p-1 ml-auto"
+							className="textM text-sm 2xl:text-base w-1/2 flex gap-3 items-center justify-center card p-1 ml-auto"
 						>
 							<Pencil size={16} className="text-foreground/75" />
 							Editar

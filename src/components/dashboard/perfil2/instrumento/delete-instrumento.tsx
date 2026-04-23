@@ -3,16 +3,44 @@ import { useForm } from "@tanstack/react-form"
 import { useRouter } from "@tanstack/react-router"
 import { instrumentoIdValidator } from "db/instrumentos/instrumento-validator"
 import { InstrumentoType } from "db/instrumentos/schema"
-import { Loader } from "lucide-react"
+import { Loader, Trash2 } from "lucide-react"
 import { useDeleteInstrumento } from "queries/instrumentos/use-delete-instrumento"
 import { toast } from "sonner"
+import {
+	AlertDialog,
+	AlertDialogTrigger,
+	AlertDialogContent,
+	AlertDialogTitle,
+	AlertDialogDescription,
+} from "@/components/ui/alert-dialog"
+import { useState } from "react"
 
-export default function DeleteInstrumentoForm({
+export default function DeleteInstrumento({
 	instrumento,
-	setIsMenuOpen,
 }: {
 	instrumento: InstrumentoType
-	setIsMenuOpen: (open: boolean) => void
+}) {
+	const [open, setOpen] = useState(false)
+	return (
+		<AlertDialog open={open} onOpenChange={setOpen}>
+			<AlertDialogTrigger asChild>
+				<Trash2 className="sm:block hidden absolute sm:top-4 sm:right-15 size-6 cursor-pointer text-red-600/50" />
+			</AlertDialogTrigger>
+			<AlertDialogContent className="py-20 px-10 bg-accent/90 backdrop-blur-xl">
+				<AlertDialogTitle></AlertDialogTitle>
+				<AlertDialogDescription></AlertDialogDescription>
+				<DeleteInstrumentoForm instrumento={instrumento} setOpen={setOpen} />
+			</AlertDialogContent>
+		</AlertDialog>
+	)
+}
+
+function DeleteInstrumentoForm({
+	instrumento,
+	setOpen,
+}: {
+	instrumento: InstrumentoType
+	setOpen: (open: boolean) => void
 }) {
 	const {
 		mutateAsync: deleteInstrumentoMutation,
@@ -61,7 +89,7 @@ export default function DeleteInstrumentoForm({
 			<div className="flex justify-center items-center gap-2 w-full">
 				<button
 					type="button"
-					onClick={() => setIsMenuOpen(false)}
+					onClick={() => setOpen(false)}
 					className="w-1/2 cursor-pointer card py-1 justify-center"
 				>
 					Cancelar

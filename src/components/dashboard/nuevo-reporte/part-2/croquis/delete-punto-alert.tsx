@@ -42,16 +42,15 @@ export function DeletePuntoAlertDialog({
 				</AlertDialogTitle>
 				<AlertDialogDescription className="text-center"></AlertDialogDescription>
 				<div className="flex justify-end gap-4">
-					<Button
-						variant="outline"
-						className="cursor-pointer"
+					<button
+						className="cursor-pointer card py-1 justify-center"
 						onClick={() => {
 							setOpen(false)
 						}}
 					>
 						Cancelar
-					</Button>
-					<Button className="cursor-pointer" onClick={eliminarPunto}>
+					</button>
+					<Button className="cursor-pointer my-shadow" onClick={eliminarPunto}>
 						Confirmar
 					</Button>
 				</div>

@@ -15,8 +15,9 @@ export default function Profile() {
 	return (
 		<article className="w-full my-10 sm:my-4">
 			<Accordion
-				type="multiple"
-				defaultValue={["tecnico"]}
+				type="single"
+				collapsible
+				defaultValue="tecnico"
 				className="flex flex-col gap-8"
 			>
 				<AccordionItem

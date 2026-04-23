@@ -3,16 +3,40 @@ import { useForm } from "@tanstack/react-form"
 import { useRouter } from "@tanstack/react-router"
 import { empresaIdValidator } from "db/empresas/empresa-validator"
 import { EmpresaType } from "db/empresas/schema"
-import { Loader } from "lucide-react"
+import { Loader, Trash2 } from "lucide-react"
 import { useDeleteEmpresa } from "queries/empresas/use-delete-empresa"
 import { toast } from "sonner"
+import {
+	AlertDialog,
+	AlertDialogTrigger,
+	AlertDialogContent,
+	AlertDialogTitle,
+	AlertDialogDescription,
+} from "@/components/ui/alert-dialog"
+import { useState } from "react"
+
+export function DeleteEmpresa({ empresa }: { empresa: EmpresaType }) {
+	const [open, setOpen] = useState(false)
+	return (
+		<AlertDialog open={open} onOpenChange={setOpen}>
+			<AlertDialogTrigger asChild>
+				<Trash2 className="sm:block hidden absolute sm:top-4 sm:right-15 size-6 cursor-pointer text-red-600/50" />
+			</AlertDialogTrigger>
+			<AlertDialogContent className="py-20 px-10 bg-accent/90 backdrop-blur-xl">
+				<AlertDialogTitle></AlertDialogTitle>
+				<AlertDialogDescription></AlertDialogDescription>
+				<DeleteEmpresaForm empresa={empresa} setOpen={setOpen} />
+			</AlertDialogContent>
+		</AlertDialog>
+	)
+}
 
 export default function DeleteEmpresaForm({
 	empresa,
-	setIsMenuOpen,
+	setOpen,
 }: {
 	empresa: EmpresaType
-	setIsMenuOpen: (open: boolean) => void
+	setOpen: (open: boolean) => void
 }) {
 	const {
 		mutateAsync: deleteEmpresaMutation,
@@ -61,7 +85,7 @@ export default function DeleteEmpresaForm({
 			<div className="flex justify-center items-center gap-2 w-full">
 				<button
 					type="button"
-					onClick={() => setIsMenuOpen(false)}
+					onClick={() => setOpen(false)}
 					className="w-1/2 cursor-pointer card py-1 justify-center"
 				>
 					Cancelar
@@ -69,7 +93,7 @@ export default function DeleteEmpresaForm({
 				<Button
 					type="submit"
 					disabled={isPending}
-					className="w-1/2 cursor-pointer my-shadow"
+					className="w-1/2 cursor-pointer card py-1"
 				>
 					{isPending ? (
 						<div className="flex gap-2">

@@ -8,10 +8,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { EmpresaType } from "db/empresas/schema"
-import { Ellipsis, Pencil, Trash2 } from "lucide-react"
+import { Ellipsis, Pencil } from "lucide-react"
 import { empresasQueryOptions } from "queries/empresas/empresas-query"
 import { Suspense } from "react"
-
+import { DeleteEmpresa } from "./delete-empresa"
 export default function ProfileEmpresas() {
 	return (
 		<Suspense
@@ -60,7 +60,7 @@ function EmpresasList() {
 const Empresa = ({ empresa }: { empresa: EmpresaType }) => {
 	return (
 		<div className="bg-accent sm:bg-background py-10 sm:p-10 flex items-center justify-center flex-col relative border border-orange-700 dark:border-orange-600">
-			<Trash2 className="sm:block hidden absolute sm:top-4 sm:right-15 size-6 cursor-pointer text-red-600/50" />
+			<DeleteEmpresa empresa={empresa} />
 			<Ellipsis className="sm:hidden block absolute top-4 right-5 size-6 cursor-pointer text-foreground/50" />
 			<div className="grid-cols-1 grid sm:grid-cols-2 gap-8 w-5/6 my-10">
 				<div className="flex flex-col gap-1">

@@ -106,16 +106,16 @@ export const Part3Data = () => {
 				<div className="flex flex-col gap-2 w-full sm:w-3/4">
 					<Label
 						className="tracking-wider sm:text-base 2xl:text-xl flex items-center gap-4"
-						htmlFor="matricula"
+						htmlFor="observacion"
 					>
 						<Search className="size-5 text-amber-500/70" />
 						Observacion General
 					</Label>
 					<textarea
-						id="matricula"
+						id="observacion"
 						className={`card bg-accent sm:bg-background px-4 text-center min-h-30 sm:min-h-24 italic text-foreground/40 tracking-wider py-6 textXS`}
-						placeholder="N° Matrícula "
-						defaultValue="Detalle general del estado del terreno de medición, condiciones generales, etc. En caso de no haber observaciones, dejar este campo en blanco."
+						placeholder="Observación "
+						defaultValue={`Detalle general de las condiciones en las que tomamos las mediciones. En caso de no haber observaciones, poner "Sin Observaciones"`}
 						readOnly
 					/>
 				</div>
@@ -123,16 +123,16 @@ export const Part3Data = () => {
 				<div className="flex flex-col gap-2 w-full sm:w-3/4">
 					<Label
 						className="tracking-wider sm:text-base 2xl:text-xl flex items-center gap-4"
-						htmlFor="matricula"
+						htmlFor="conclusion"
 					>
 						<NotebookPen className="size-5 text-amber-500/70" />
 						Conclusiónes Finales
 					</Label>
 					<textarea
-						id="matricula"
+						id="conclusion"
 						className={`card bg-accent sm:bg-background px-4 text-center min-h-30 sm:min-h-24 italic text-foreground/40 tracking-wider py-6 textXS`}
-						placeholder="N° Matrícula "
-						defaultValue="Conclusión final del reporte, detalles observados, etc. En caso de no haber conclusiones, dejar este campo en blanco."
+						placeholder="Conclusión"
+						defaultValue={`Conclusión final del reporte, análisis de los resultados de las mediciones, Conclusiones. En caso de no haber conclusiones, poner "Análisis Pendiente"`}
 						readOnly
 					/>
 				</div>
@@ -140,16 +140,16 @@ export const Part3Data = () => {
 				<div className="flex flex-col gap-2 w-full sm:w-3/4">
 					<Label
 						className="tracking-wider sm:text-base 2xl:text-xl flex items-center gap-4"
-						htmlFor="matricula"
+						htmlFor="recomendacion"
 					>
 						<List className="size-5 text-amber-500/70" />
 						Recomendaciones Generales
 					</Label>
 					<textarea
-						id="matricula"
+						id="recomendacion"
 						className={`card bg-accent sm:bg-background px-4 text-center min-h-30 sm:min-h-24 italic text-foreground/40 tracking-wider py-6 textXS`}
-						placeholder="N° Matrícula "
-						defaultValue="Recomendaciones generales luego de efectuar las mediciones, sin especificaciones técnicas. En caso de no haber recomendaciones, dejar este campo en blanco."
+						placeholder="Recomendación"
+						defaultValue={`Luego de realizar un análisis de los resultados de las mediciones, dar nuestro asesoramiento técnico, oportunidad de mejora, condiciones de mejora, cambios solicitados. En caso de no tener recomendaciones, poner "Sin Recomendaciones"`}
 						readOnly
 					/>
 				</div>

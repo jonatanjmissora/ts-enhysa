@@ -64,7 +64,7 @@ export default function CreateTecnicoForm() {
 				}}
 			>
 				<FieldGroup className="gap-5">
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 mb-3 sm:mb-0">
+					<div className="grid grid-cols-1 sm:grid-cols-2 gap-7 sm:gap-y-4 sm:gap-x-10 justify-center items-start w-5/6 sm:w-full mx-auto mb-3 sm:mb-0">
 						<form.Field
 							name="nombre"
 							children={field => {
@@ -125,9 +125,7 @@ export default function CreateTecnicoForm() {
 								)
 							}}
 						/>
-					</div>
 
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 mb-3 sm:mb-0">
 						<form.Field
 							name="cargo"
 							children={field => {
@@ -188,9 +186,7 @@ export default function CreateTecnicoForm() {
 								)
 							}}
 						/>
-					</div>
 
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 items-end mb-3 sm:mb-0">
 						<form.Field
 							name="matricula"
 							children={field => {
@@ -233,9 +229,7 @@ export default function CreateTecnicoForm() {
 								/>
 							</div>
 						</div>
-					</div>
 
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 mb-3 sm:mb-0">
 						<div className="flex-1 flex flex-col gap-1">
 							<Label>Firma Digital</Label>
 							<div className="card p-2 bg-background sm:bg-accent text-sm h-full">
@@ -300,7 +294,7 @@ export default function CreateTecnicoForm() {
 						<button
 							type="submit"
 							disabled={isPending}
-							className="themeBtnBackground py-2 rounded-lg sm:text-sm 2xl:text-base tracking-wider cursor-pointer w-full"
+							className="themeBtnBackground py-2 rounded-lg text-sm 2xl:text-base tracking-wider cursor-pointer w-full  my-shadow"
 						>
 							{isPending ? (
 								<div className="w-full flex items-center justify-center gap-2">
