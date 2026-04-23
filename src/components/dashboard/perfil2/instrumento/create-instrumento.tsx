@@ -224,7 +224,10 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 
 							return (
 								<Field data-invalid={isInvalid} className="relative gap-1">
-									<FieldLabel htmlFor={field.name}>Nro de serie</FieldLabel>
+									<FieldLabel htmlFor={field.name}>
+										Nro de serie{" "}
+										<Asterisk className="text-destructive size-3" />
+									</FieldLabel>
 
 									<Input
 										id={field.name}

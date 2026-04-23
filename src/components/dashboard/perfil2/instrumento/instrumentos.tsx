@@ -8,18 +8,17 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { InstrumentoType } from "db/instrumentos/schema"
-import { Pencil, Ellipsis } from "lucide-react"
+import { Pencil } from "lucide-react"
 import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
 import { Suspense } from "react"
 import DeleteInstrumento from "./delete-instrumento"
+import InstrumentoDropdownMenu from "@/components/movil/profile/instrumento-dropdown-menu"
 
 export default function ProfileInstrumentos() {
 	return (
 		<Suspense
 			fallback={
-				<span className="p-20 text-foreground/70">
-					Cargando Instrumentos ...
-				</span>
+				<span className="p-20 text-foreground/70">Cargando Instrumentos</span>
 			}
 		>
 			<InstrumentosList />
@@ -62,8 +61,12 @@ function InstrumentosList() {
 const Instrumento = ({ instrumento }: { instrumento: InstrumentoType }) => {
 	return (
 		<div className="bg-accent sm:bg-background py-10 sm:p-10 flex items-center justify-center flex-col relative border border-purple-700 dark:border-purple-600">
-			<DeleteInstrumento instrumento={instrumento} />
-			<Ellipsis className="sm:hidden block absolute top-4 right-5 size-6 cursor-pointer text-foreground/50" />
+			<div className="hidden sm:block">
+				<DeleteInstrumento instrumento={instrumento} />
+			</div>
+			<div className="sm:hidden block absolute top-6 right-6">
+				<InstrumentoDropdownMenu instrumento={instrumento} />
+			</div>
 			<div className="grid-cols-1 grid sm:grid-cols-2 gap-8 w-5/6 my-10">
 				<div className="flex flex-col gap-1">
 					<Label className="tracking-wider" htmlFor="marca">

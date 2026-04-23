@@ -8,16 +8,17 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { EmpresaType } from "db/empresas/schema"
-import { Ellipsis, Pencil } from "lucide-react"
+import { Pencil } from "lucide-react"
 import { empresasQueryOptions } from "queries/empresas/empresas-query"
 import { Suspense } from "react"
 import DeleteEmpresa from "./delete-empresa"
+import EmpresaDropdownMenu from "@/components/movil/profile/empresa-dropdown-menu"
 
 export default function ProfileEmpresas() {
 	return (
 		<Suspense
 			fallback={
-				<span className="p-20 text-foreground/70">Cargando Empresas ...</span>
+				<span className="p-20 text-foreground/70">Cargando Empresas</span>
 			}
 		>
 			<EmpresasList />
@@ -61,8 +62,12 @@ function EmpresasList() {
 const Empresa = ({ empresa }: { empresa: EmpresaType }) => {
 	return (
 		<div className="bg-accent sm:bg-background py-10 sm:p-10 flex items-center justify-center flex-col relative border border-orange-700 dark:border-orange-600">
-			<DeleteEmpresa empresa={empresa} />
-			<Ellipsis className="sm:hidden block absolute top-4 right-5 size-6 cursor-pointer text-foreground/50" />
+			<div className="hidden sm:block">
+				<DeleteEmpresa empresa={empresa} />
+			</div>
+			<div className="sm:hidden block absolute top-6 right-6">
+				<EmpresaDropdownMenu empresa={empresa} />
+			</div>
 			<div className="grid-cols-1 grid sm:grid-cols-2 gap-8 w-5/6 my-10">
 				<div className="flex flex-col gap-1">
 					<Label className="tracking-wider" htmlFor="razon-social">
