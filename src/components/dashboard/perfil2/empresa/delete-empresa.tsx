@@ -1,37 +1,41 @@
-import { Button } from "@/components/ui/button"
-import { useForm } from "@tanstack/react-form"
-import { useRouter } from "@tanstack/react-router"
-import { empresaIdValidator } from "db/empresas/empresa-validator"
-import { EmpresaType } from "db/empresas/schema"
-import { Loader, Trash2 } from "lucide-react"
-import { useDeleteEmpresa } from "queries/empresas/use-delete-empresa"
-import { toast } from "sonner"
+import { useState } from "react"
 import {
 	AlertDialog,
-	AlertDialogTrigger,
 	AlertDialogContent,
-	AlertDialogTitle,
 	AlertDialogDescription,
+	AlertDialogTitle,
+	AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { useState } from "react"
+import { Loader, Trash2 } from "lucide-react"
+import { EmpresaType } from "db/empresas/schema"
+import { useDeleteEmpresa } from "queries/empresas/use-delete-empresa"
+import { useRouter } from "@tanstack/react-router"
+import { useForm } from "@tanstack/react-form"
+import { empresaIdValidator } from "db/empresas/empresa-validator"
+import { toast } from "sonner"
+import { Button } from "@/components/ui/button"
 
-export function DeleteEmpresa({ empresa }: { empresa: EmpresaType }) {
+export default function DeleteEmpresa({ empresa }: { empresa: EmpresaType }) {
 	const [open, setOpen] = useState(false)
+
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
-			<AlertDialogTrigger asChild>
+			<AlertDialogTrigger asChild className="hover:bg-accent">
 				<Trash2 className="sm:block hidden absolute sm:top-4 sm:right-15 size-6 cursor-pointer text-red-600/50" />
 			</AlertDialogTrigger>
-			<AlertDialogContent className="py-20 px-10 bg-accent/90 backdrop-blur-xl">
-				<AlertDialogTitle></AlertDialogTitle>
-				<AlertDialogDescription></AlertDialogDescription>
-				<DeleteEmpresaForm empresa={empresa} setOpen={setOpen} />
+			<AlertDialogContent className="p-20 sm:py-15 2xl:py-20 bg-accent/80 backdrop-blur-xl w-1/2 min-h-[50dvh]">
+				<AlertDialogTitle className="h-max sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2 border-b border-foreground/20 w-full mb-10">
+					Eliminar Empresa
+				</AlertDialogTitle>
+				<AlertDialogDescription className="text-center">
+					<DeleteEmpresaForm empresa={empresa} setOpen={setOpen} />
+				</AlertDialogDescription>
 			</AlertDialogContent>
 		</AlertDialog>
 	)
 }
 
-export default function DeleteEmpresaForm({
+function DeleteEmpresaForm({
 	empresa,
 	setOpen,
 }: {
@@ -74,10 +78,10 @@ export default function DeleteEmpresaForm({
 			}}
 		>
 			<p className="text-center sm:text-lg 2xl:text-2xl font-semibold">
-				¿Estás seguro de borrar {empresa.razonSocial.toUpperCase()}?
+				¿Estás seguro de borrar {empresa.razonSocial}?
 			</p>
 
-			<p className="text-center opacity-50 sm:text-sm 2xl:text-base text-pretty w-3/4">
+			<p className="text-center opacity-50 sm:text-sm 2xl:text-base text-pretty w-3/4 mb-8">
 				Esta acción no se puede deshacer. Esto eliminará permanentemente el dato
 				de nuestros servidores.
 			</p>
@@ -86,17 +90,17 @@ export default function DeleteEmpresaForm({
 				<button
 					type="button"
 					onClick={() => setOpen(false)}
-					className="w-1/2 cursor-pointer card py-1 justify-center"
+					className="w-1/2 cursor-pointer card p-[5px] justify-center my-shadow"
 				>
 					Cancelar
 				</button>
 				<Button
 					type="submit"
 					disabled={isPending}
-					className="w-1/2 cursor-pointer card py-1"
+					className="w-1/2 cursor-pointer my-shadow"
 				>
 					{isPending ? (
-						<div className="flex gap-2">
+						<div className="flex gap-2 items-center justify-center">
 							Eliminando... <Loader className="animate-spin size-4"></Loader>
 						</div>
 					) : (
@@ -105,7 +109,7 @@ export default function DeleteEmpresaForm({
 				</Button>
 			</div>
 			{error && (
-				<p className="text-red-500 text-xs">Error al eliminar el pago</p>
+				<p className="text-red-500 text-xs">Error al eliminar la empresa</p>
 			)}
 		</form>
 	)

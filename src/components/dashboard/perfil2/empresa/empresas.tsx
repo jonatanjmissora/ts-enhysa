@@ -11,7 +11,7 @@ import { EmpresaType } from "db/empresas/schema"
 import { Ellipsis, Pencil } from "lucide-react"
 import { empresasQueryOptions } from "queries/empresas/empresas-query"
 import { Suspense } from "react"
-import { DeleteEmpresa } from "./delete-empresa"
+
 export default function ProfileEmpresas() {
 	return (
 		<Suspense
@@ -164,7 +164,7 @@ const Empresa = ({ empresa }: { empresa: EmpresaType }) => {
 
 function EmpresasVacias() {
 	return (
-		<p className="py-10 text-center w-full text-pretty textM italic text-foreground/70">
+		<p className="m-10 text-center w-full text-pretty textM italic text-foreground/70">
 			Todavia no tiene empresas cargadas.
 		</p>
 	)

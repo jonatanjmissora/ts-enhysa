@@ -341,7 +341,7 @@ const EmpresaForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 						className="flex-1 themeBtnBackground py-2 rounded-lg textM text-sm sm:text-base my-shadow"
 					>
 						{isPending ? (
-							<div className="flex gap-2 w-full justify-center">
+							<div className="flex gap-2 w-full justify-center items-center">
 								Guardando... <Loader className="animate-spin size-4"></Loader>
 							</div>
 						) : (

@@ -23,13 +23,16 @@ export default function DeleteInstrumento({
 	const [open, setOpen] = useState(false)
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
-			<AlertDialogTrigger asChild>
+			<AlertDialogTrigger asChild className="hover:bg-accent">
 				<Trash2 className="sm:block hidden absolute sm:top-4 sm:right-15 size-6 cursor-pointer text-red-600/50" />
 			</AlertDialogTrigger>
-			<AlertDialogContent className="py-20 px-10 bg-accent/90 backdrop-blur-xl">
-				<AlertDialogTitle></AlertDialogTitle>
-				<AlertDialogDescription></AlertDialogDescription>
-				<DeleteInstrumentoForm instrumento={instrumento} setOpen={setOpen} />
+			<AlertDialogContent className="p-20 sm:py-15 2xl:py-20 bg-accent/80 backdrop-blur-xl w-1/2 min-h-[50dvh]">
+				<AlertDialogTitle className="h-max sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2 border-b border-foreground/20 w-full mb-10">
+					Eliminar Instrumento
+				</AlertDialogTitle>
+				<AlertDialogDescription className="text-center">
+					<DeleteInstrumentoForm instrumento={instrumento} setOpen={setOpen} />
+				</AlertDialogDescription>
 			</AlertDialogContent>
 		</AlertDialog>
 	)
@@ -78,10 +81,10 @@ function DeleteInstrumentoForm({
 			}}
 		>
 			<p className="text-center sm:text-lg 2xl:text-2xl font-semibold">
-				¿Estás seguro de borrar {instrumento.nombre.toUpperCase()}?
+				¿Estás seguro de borrar {instrumento.nombre}?
 			</p>
 
-			<p className="text-center opacity-50 sm:text-sm 2xl:text-base text-pretty w-3/4">
+			<p className="text-center opacity-50 sm:text-sm 2xl:text-base text-pretty w-3/4 mb-8">
 				Esta acción no se puede deshacer. Esto eliminará permanentemente el dato
 				de nuestros servidores.
 			</p>
@@ -90,7 +93,7 @@ function DeleteInstrumentoForm({
 				<button
 					type="button"
 					onClick={() => setOpen(false)}
-					className="w-1/2 cursor-pointer card py-1 justify-center"
+					className="w-1/2 cursor-pointer card p-[5px] justify-center my-shadow"
 				>
 					Cancelar
 				</button>
@@ -109,7 +112,7 @@ function DeleteInstrumentoForm({
 				</Button>
 			</div>
 			{error && (
-				<p className="text-red-500 text-xs">Error al eliminar el pago</p>
+				<p className="text-red-500 text-xs">Error al eliminar el instrumento</p>
 			)}
 		</form>
 	)
