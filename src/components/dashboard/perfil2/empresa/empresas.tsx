@@ -11,6 +11,7 @@ import { EmpresaType } from "db/empresas/schema"
 import { Ellipsis, Pencil } from "lucide-react"
 import { empresasQueryOptions } from "queries/empresas/empresas-query"
 import { Suspense } from "react"
+import DeleteEmpresa from "./delete-empresa"
 
 export default function ProfileEmpresas() {
 	return (
