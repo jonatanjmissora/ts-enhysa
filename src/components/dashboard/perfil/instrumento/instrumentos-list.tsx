@@ -23,8 +23,8 @@ import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-quer
 import { InstrumentoType } from "db/instrumentos/schema"
 import { CreateInstrumentoForm } from "./create-instrumento-form"
 import DeleteInstrumentoForm from "./delete-instrumento-form"
-import { EditInstrumentoForm } from "./edit-instrumento-form"
 import { sortedByNombre } from "@/lib/utils"
+import { EditInstrumentoForm } from "../../perfil2/instrumento/edit-instrumento"
 
 export default function InstrumentosList({
 	tecnico,
