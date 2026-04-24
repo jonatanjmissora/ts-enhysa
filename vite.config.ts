@@ -14,6 +14,7 @@ const config = defineConfig({
 			"@": fileURLToPath(new URL("./src", import.meta.url)),
 		},
 	},
+	base: "/",
 	plugins: [
 		devtools(),
 		// this is the plugin that enables path aliases
@@ -21,7 +22,12 @@ const config = defineConfig({
 			projects: ["./tsconfig.json"],
 		}),
 		tailwindcss(),
-		tanstackStart(),
+		tanstackStart({
+			// 👇 esto ayuda a assets en SSR
+			server: {
+				preset: "netlify",
+			},
+		}),
 		netlify(),
 		viteReact(),
 	],
