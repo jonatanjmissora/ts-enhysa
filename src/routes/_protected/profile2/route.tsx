@@ -16,8 +16,8 @@ export const Route = createFileRoute("/_protected/profile2")({
 })
 
 function RouteComponent() {
-	const isMobile = window.innerWidth < 640
-	if (isMobile) return <MovilProfile />
+	const isMobil = typeof window !== "undefined" && window.innerWidth < 640
+	if (isMobil) return <MovilProfile />
 
 	return (
 		<div className="min-h-screen flex flex-col">

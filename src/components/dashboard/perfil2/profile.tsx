@@ -17,7 +17,7 @@ export default function Profile() {
 			<Accordion
 				type="single"
 				collapsible
-				defaultValue="tecnico"
+				defaultValue=""
 				className="flex flex-col gap-8"
 			>
 				<AccordionItem

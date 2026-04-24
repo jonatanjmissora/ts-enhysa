@@ -9,7 +9,11 @@ export function NotFound({ children }: { children?: any }) {
 
 			<p className="flex items-center gap-2 flex-wrap">
 				<button
-					onClick={() => window.history.back()}
+					onClick={() => {
+						if (typeof window !== "undefined") {
+							window.history.back()
+						}
+					}}
 					className="bg-emerald-500 text-white px-2 py-1 rounded-sm uppercase font-black text-sm  my-shadow"
 				>
 					Go back

@@ -12,6 +12,7 @@ dashboard
     croquis cotas?
     agregar areas
     scroll de area cuando abro una nueva del acordion
+    agregar punto de referencia en el croquis    
 
 * mis informes
 ----------------
@@ -67,3 +68,25 @@ poner lo de components/disenio2 en components/nuevo-reporte
     borrar perfil, dejar perfil2
     borrar new-report, dejar new-report2
 realizar el lazy import que me aconsejo chatgpt para desktop / movil
+
+EL INSTALL PARA NETLIFY
+los pasos que empece a realizar. 
+instale el @netlify/vite-plugin-tanstack-start 
+luego la consola me dijo que corra: npx netlify init (NO HACERLO)
+luego me fue pidiendo autorizaciones en consola y en netlify 
+Create & configure a new project 
+me pidio el nombre del sitio: enhysa 
+me dijo que creo el projectoen : https://enhysa.netlify.app 
+? Your build command (hugo build/yarn run build/etc): vite build 
+? Directory to deploy (blank for current dir): dist\client 
+Success! Netlify CI/CD Configured! 
+git push Push to your git repository to trigger new project builds netlify open Open the Netlify admin URL of your project git push luego cambie el deploy settings de netlify a: Build command = npm run build 
+Publish directory =Not set 
+Functions directory = netlify/functions 
+el package.json build a : "build": "vite build" 
+y este netlify.toml 
+[build] command = "npm run 
+build" publish = "dist/client" 
+y este vite.config: 
+export default defineConfig({ base: "/", build: { outDir: "dist", }, 
+plugins: [ devtools(), viteTsConfigPaths({ projects: ["./tsconfig.json"], }), tailwindcss(), tanstackStart(), netlify(), viteReact(), ], })

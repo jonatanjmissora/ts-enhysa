@@ -3,7 +3,7 @@ import { toast } from "sonner"
 
 // Check if Better Auth base URL is configured
 const checkBetterAuthConfig = () => {
-	const baseURL = process.env.VITE_BETTER_AUTH_BASE_URL
+	const baseURL = import.meta.env.VITE_BETTER_AUTH_BASE_URL
 
 	if (!baseURL) {
 		const warningMessage =

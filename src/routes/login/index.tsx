@@ -14,8 +14,8 @@ function RouteComponent() {
 	const authPosition =
 		activeForm === "login" ? "translate-x-0" : "-translate-x-[50dvw]"
 
-	const isMovil = window.innerWidth < 640
-	if (isMovil) return <MovilLogin />
+	const isMobil = typeof window !== "undefined" && window.innerWidth < 640
+	if (isMobil) return <MovilLogin />
 
 	return (
 		<section className="w-screen h-screen flex items-center relative overflow-hidden">

@@ -159,10 +159,12 @@ function NewPuntoForm({
 
 	useEffect(() => {
 		if (openValue && inputRef.current) {
-			window.scrollTo({
-				top: 200,
-				behavior: "smooth", // Use 'auto' for an instant jump
-			})
+			if (typeof window !== "undefined") {
+				window.scrollTo({
+					top: 200,
+					behavior: "smooth", // Use 'auto' for an instant jump
+				})
+			}
 			inputRef.current.focus()
 		}
 	}, [openValue])
@@ -255,10 +257,12 @@ function EditPuntoForm({
 
 	useEffect(() => {
 		if (openValue && inputRef.current) {
-			window.scrollTo({
-				top: 200,
-				behavior: "smooth", // Use 'auto' for an instant jump
-			})
+			if (typeof window !== "undefined") {
+				window.scrollTo({
+					top: 200,
+					behavior: "smooth", // Use 'auto' for an instant jump
+				})
+			}
 			inputRef.current.focus()
 		}
 	}, [openValue])

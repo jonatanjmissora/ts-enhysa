@@ -5,7 +5,7 @@ export default function Footer() {
 	const actualYear = new Date().getFullYear()
 
 	return (
-		<article className="mt-40 p-6 border-t border-foreground/20 flex flex-col justify-center gap-3 dark:bg-green-900 bg-green-700 relative overflow-hidden text-shadow-lg/50 text-gray-50">
+		<article className="mt-40 p-6 border-t border-foreground/20 flex flex-col justify-center gap-3 bg-background relative overflow-hidden text-shadow-lg/50 text-gray-50">
 			<img
 				src="/EnHySa_logo.webp"
 				alt="logo EnHySa"

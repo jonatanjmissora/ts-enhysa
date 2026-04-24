@@ -10,6 +10,7 @@ import { EmpresaType } from "db/schema"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import DeleteEmpresa from "@/components/dashboard/perfil2/empresa/delete-empresa"
+import { EditEmpresa } from "@/components/dashboard/perfil2/empresa/edit-empresa"
 
 export default function EmpresaDropdownMenu({
 	empresa,
@@ -29,7 +30,7 @@ export default function EmpresaDropdownMenu({
 				align="end"
 			>
 				<DropdownMenuGroup className="flex flex-col gap-4 p-4">
-					EDITAR
+					<EditEmpresa empresa={empresa} setIsMenuOpen={setIsMenuOpen} />
 					<DropdownMenuSeparator />
 					<DeleteEmpresa empresa={empresa} setIsMenuOpen={setIsMenuOpen} />
 				</DropdownMenuGroup>

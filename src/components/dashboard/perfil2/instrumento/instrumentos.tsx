@@ -8,11 +8,11 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { InstrumentoType } from "db/instrumentos/schema"
-import { Pencil } from "lucide-react"
 import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
 import { Suspense } from "react"
 import DeleteInstrumento from "./delete-instrumento"
 import InstrumentoDropdownMenu from "@/components/movil/profile/instrumento-dropdown-menu"
+import { EditInstrumento } from "./edit-instrumento"
 
 export default function ProfileInstrumentos() {
 	return (
@@ -130,12 +130,7 @@ const Instrumento = ({ instrumento }: { instrumento: InstrumentoType }) => {
 					</div>
 				</div>
 			</div>
-			<div className="sm:block hidden my-10 w-5/6">
-				<button className="card bg-background sm:bg-accent rounded-lg cursor-pointer textM py-2 w-2/3 sm:w-1/4 justify-center gap-4 ml-auto">
-					<Pencil className="size-6 text-foreground/70" />
-					Editar
-				</button>
-			</div>
+			<EditInstrumento instrumento={instrumento} />
 		</div>
 	)
 }

@@ -10,6 +10,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import DeleteInstrumento from "@/components/dashboard/perfil2/instrumento/delete-instrumento"
 import { InstrumentoType } from "db/instrumentos/schema"
+import { EditInstrumento } from "@/components/dashboard/perfil2/instrumento/edit-instrumento"
 
 export default function InstrumentoDropdownMenu({
 	instrumento,
@@ -29,7 +30,10 @@ export default function InstrumentoDropdownMenu({
 				align="end"
 			>
 				<DropdownMenuGroup className="flex flex-col gap-4 p-4">
-					EDITAR
+					<EditInstrumento
+						instrumento={instrumento}
+						setIsMenuOpen={setIsMenuOpen}
+					/>
 					<DropdownMenuSeparator />
 					<DeleteInstrumento
 						instrumento={instrumento}

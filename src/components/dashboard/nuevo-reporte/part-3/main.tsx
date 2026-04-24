@@ -31,7 +31,9 @@ export default function NewReportPart3({
 }) {
 	const pasarAlPaso4 = () => {
 		if (part3Data.conclusion && part3Data.recomendacion) {
-			window.scrollTo(0, 0)
+			if (typeof window !== "undefined") {
+				window.scrollTo(0, 0)
+			}
 			setActualStep(4)
 		} else toast.error("Por favor, complete los Conclusiones y Recomendaciones")
 	}

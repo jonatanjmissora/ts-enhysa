@@ -15,7 +15,7 @@ export const Route = createFileRoute("/_protected")({
 })
 
 function RouteComponent() {
-	const isMobil = window.innerWidth < 640
+	const isMobil = typeof window !== "undefined" && window.innerWidth < 640
 
 	if (isMobil) return <MovilRoute />
 	return (

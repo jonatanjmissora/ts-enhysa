@@ -8,7 +8,7 @@ export default function MovilMenu() {
 	return (
 		<>
 			<header
-				className={`w-full fixed top-0 left-0 right-0 h-18 z-50 flex items-center justify-between p-4 dark:bg-green-900 bg-green-700 text-gray-50 ${isOpen ? "" : "shadow-[0px_2px_2px_rgb(0,0,0,0.4)]"}`}
+				className={`w-full absolute top-0 left-0 right-0 h-18 z-50 flex items-center justify-between p-4 bg-background text-gray-50`}
 			>
 				<Link to="/" className="flex items-center gap-3">
 					<img

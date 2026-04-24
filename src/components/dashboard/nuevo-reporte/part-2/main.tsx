@@ -38,7 +38,9 @@ export default function NewReportPart2({
 			}
 		})
 		if (completos) {
-			window.scrollTo(0, 0)
+			if (typeof window !== "undefined") {
+				window.scrollTo(0, 0)
+			}
 			setActualStep(3)
 		} else toast.error("Por favor, complete los valores de la tabla")
 	}

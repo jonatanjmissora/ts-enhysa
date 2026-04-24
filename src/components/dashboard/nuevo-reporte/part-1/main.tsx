@@ -33,7 +33,9 @@ export default function NewReportPart1({
 			<button
 				onClick={() => {
 					setActualStep(2)
-					window.scrollTo(0, 0)
+					if (typeof window !== "undefined") {
+						window.scrollTo(0, 0)
+					}
 				}}
 				type="button"
 				className="flex items-center gap-4 themeBtnAccent justify-center rounded-xl my-shadow text-lg text-foreground tracking-wide px-6 py-4 cursor-pointer m-0"
