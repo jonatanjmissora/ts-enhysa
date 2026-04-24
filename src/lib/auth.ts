@@ -6,10 +6,10 @@ import { drizzle } from "drizzle-orm/neon-http"
 import * as schema from "../../db/schema"
 
 // Get base URL from environment variables
-const baseURL = process.env.BETTER_AUTH_BASE_URL
+const baseURL = import.meta.env.VITE_BETTER_AUTH_BASE_URL
 
 // Database configuration
-const databaseUrl = process.env.DATABASE_URL
+const databaseUrl = import.meta.env.VITE_DATABASE_URL
 
 interface AuthOptions {
 	baseURL?: string
@@ -30,8 +30,8 @@ const authOptions: AuthOptions = {
 	baseURL,
 	socialProviders: {
 		google: {
-			clientId: process.env.GOOGLE_CLIENT_ID as string,
-			clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+			clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID as string,
+			clientSecret: import.meta.env.VITE_GOOGLE_CLIENT_SECRET as string,
 		},
 	},
 	emailAndPassword: {
