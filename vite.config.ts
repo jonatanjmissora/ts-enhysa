@@ -22,12 +22,7 @@ const config = defineConfig({
 			projects: ["./tsconfig.json"],
 		}),
 		tailwindcss(),
-		tanstackStart({
-			// 👇 esto ayuda a assets en SSR
-			server: {
-				preset: "netlify",
-			},
-		}),
+		tanstackStart(),
 		netlify(),
 		viteReact(),
 	],
