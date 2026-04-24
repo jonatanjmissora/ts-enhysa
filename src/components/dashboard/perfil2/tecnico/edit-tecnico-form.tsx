@@ -298,7 +298,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 								}}
 								type="button"
 								disabled={isPending}
-								className="textM text-sm sm:text-base w-1/2 flex gap-3 items-center justify-center card p-1 ml-auto"
+								className="textM text-sm sm:text-base w-1/2 flex gap-3 items-center justify-center card p-2 ml-auto"
 							>
 								<Pencil size={16} className="text-foreground/75" />
 								Editar

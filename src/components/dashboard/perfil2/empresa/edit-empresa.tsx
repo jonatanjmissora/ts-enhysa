@@ -36,15 +36,15 @@ export function EditEmpresa({
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild>
-				<div>
+				<div className="mx-auto w-5/6">
 					<div className="w-full sm:hidden flex items-center gap-2 justify-center">
 						<Pencil size={14} className="text-foreground/70" />
 						Editar
 					</div>
-					<div className="sm:block hidden my-10 w-5/6">
-						<button className="card bg-background sm:bg-accent rounded-lg cursor-pointer textM text-sm sm:text-base py-2 w-2/3 sm:w-1/4 justify-center gap-4 ml-auto">
+					<div className="sm:block hidden my-10 w-1/4 ml-auto">
+						<button className="card bg-background sm:bg-accent rounded-lg cursor-pointer textM text-sm sm:text-base py-2 w-full justify-center gap-4 ml-auto">
 							<Pencil className="size-6 text-foreground/70" />
-							Editarlo
+							Editar
 						</button>
 					</div>
 				</div>
