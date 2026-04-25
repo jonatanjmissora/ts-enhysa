@@ -11,7 +11,7 @@ import {
 import { Label } from "@/components/ui/label"
 import { Cpu, UserRound, Warehouse } from "lucide-react"
 import { Cloud, CloudRain, CloudSun, Sun } from "lucide-react"
-import { Dispatch, SetStateAction, Suspense } from "react"
+import { Dispatch, SetStateAction, Suspense, useEffect } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { empresasQueryOptions } from "queries/empresas/empresas-query"
@@ -21,6 +21,7 @@ import { Part1DataType } from "@/routes/_protected/new-report2"
 export default function MovilPart1Data({setReportStep, part1Data, setPart1Data}: {setReportStep: Dispatch<SetStateAction<1 | 2 | 3 | 4>>, setPart1Data: (data: Part1DataType) => void, part1Data: Part1DataType} ) {
 	return (
 		<article className="w-full my-20 sm:my-4 flex flex-col gap-8">
+			{JSON.stringify(part1Data)}
 			<div className="flex flex-col gap-3 relative">
 				<TextTooltip
 					text={"Datos obtenidos a través del perfil."}
@@ -49,7 +50,7 @@ export default function MovilPart1Data({setReportStep, part1Data, setPart1Data}:
 						. . .
 					</div>
 					}>
-					<Empresas />
+					<Empresas part1Data={part1Data} setPart1Data={setPart1Data}/>
 				</Suspense>
 				
 			</div>
@@ -63,7 +64,7 @@ export default function MovilPart1Data({setReportStep, part1Data, setPart1Data}:
 						. . .
 					</div>
 					}>
-					<Instrumentos />
+					<Instrumentos part1Data={part1Data} setPart1Data={setPart1Data}/>
 				</Suspense>
 			</div>
 
@@ -84,20 +85,27 @@ export default function MovilPart1Data({setReportStep, part1Data, setPart1Data}:
 function Tecnico() {
 	const { data: tecnico } = useSuspenseQuery(tecnicoQueryOptions)
 	return (
-		<span className="w-5/6 mx-auto px-6 py-2 card justify-center bg-accent textXS">
+		<span className="w-5/6 mx-auto px-6 py-2 card justify-end bg-accent textXS">
 					{tecnico?.nombre?.toUpperCase() || "SIN DATOS"}
 				</span>
 	)
 }
 
-function Empresas () {
+function Empresas ({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Data: (data: Part1DataType) => void}) {
 	const { data: empresas } = useSuspenseQuery(empresasQueryOptions)
+	if(!empresas || empresas?.length === 0) return
+	const actualEmpresa = empresas?.find(empresa => empresa.id === part1Data.empresaId)
 	return (
 		<div className="w-5/6 mx-auto">
-					<Select defaultValue={empresas?.[0]?.razonSocial.toUpperCase() || ""}>
+					<Select 
+						defaultValue={empresas?.[0]?.razonSocial.toUpperCase() || actualEmpresa?.razonSocial.toUpperCase() || ""}
+						onValueChange={e => {
+							const newEmpresa = {...part1Data}
+							setPart1Data({...newEmpresa, empresaId: actualEmpresa?.id || ""})
+						} }>
 						<SelectTrigger
 							className="w-full mx-auto px-6 py-2 text-right dark:bg-accent text-xs tracking-widest"
-							onClick={e => e.stopPropagation()}
+							value={actualEmpresa?.razonSocial.toUpperCase() || ""}
 						>
 							<SelectValue
 								placeholder="Seleccione Empresa"
@@ -120,14 +128,23 @@ function Empresas () {
 	)
 }
 
-function Instrumentos () {
+function Instrumentos ({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Data: (data: Part1DataType) => void}) {
 	const { data: instrumentos } = useSuspenseQuery(instrumentosQueryOptions)
+	if(!instrumentos || instrumentos?.length === 0) return
+	const actualInstrumento = instrumentos?.find(instrumento => instrumento.id === part1Data.instrumentoId) || instrumentos[0]
+	useEffect(() => {
+		if(actualInstrumento) 
+		setPart1Data({...part1Data, instrumentoId: actualInstrumento.id})
+	}, [])
 	return (
 		<div className="w-5/6 mx-auto">
-					<Select defaultValue={instrumentos?.[0]?.nombre.toUpperCase() || ""}>
+					<Select defaultValue={actualInstrumento?.id}
+						onValueChange={e => {
+							const newInstrumentos = {...part1Data}
+							setPart1Data({...newInstrumentos, instrumentoId: e})
+						}}>
 						<SelectTrigger
 							className="w-full mx-auto px-6 py-2 text-right dark:bg-accent text-xs tracking-widest"
-							onClick={e => e.stopPropagation()}
 						>
 							<SelectValue
 								placeholder="Seleccione Instrumento"
@@ -139,7 +156,7 @@ function Instrumentos () {
 								<SelectLabel>Instrumentos</SelectLabel>
 
 								{instrumentos?.map(instrumento => (
-									<SelectItem key={instrumento.id} value={instrumento.nombre.toUpperCase()}>
+									<SelectItem key={instrumento.id} value={instrumento.id}>
 										{instrumento.nombre.toUpperCase()}
 									</SelectItem>
 								))}

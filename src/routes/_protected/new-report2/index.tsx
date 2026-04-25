@@ -40,6 +40,7 @@ function RouteComponent() {
 	const [part3Data, setPart3Data] = useState<Part3DataType>(part3DataDefault)
 
 	const isMobil = typeof window !== "undefined" && window.innerWidth < 640
+	
 	if (isMobil) return <MovilNewReport part1Data={part1Data} part2Data={part2Data} part3Data={part3Data} setPart1Data={setPart1Data} setPart2Data={setPart2Data} setPart3Data={setPart3Data}/>
 
 	return (
