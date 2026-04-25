@@ -15,9 +15,63 @@ import { updateTecnicoValidator } from "db/tecnicos/tecnico-validator"
 import { checkTecnicoDiference } from "@/lib/utils"
 import { InputFiles } from "@/components/layout/input-files"
 import { Label } from "@/components/ui/label"
+import {
+	AlertDialog,
+	AlertDialogTrigger,
+	AlertDialogContent,
+	AlertDialogTitle,
+	AlertDialogDescription,
+} from "@/components/ui/alert-dialog"
 
-export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
-	const [editMode, setEditMode] = useState<boolean>(false)
+export default function EditTecnico({
+	tecnico,
+	setIsMenuOpen,
+}: {
+	tecnico: TecnicoType
+	setIsMenuOpen?: (open: boolean) => void
+}) {
+	const [open, setOpen] = useState(false)
+	return (
+		<AlertDialog open={open} onOpenChange={setOpen}>
+			<AlertDialogTrigger asChild>
+				<div className="mx-auto w-5/6">
+					<div className="w-1/2 ml-auto sm:hidden flex items-center gap-2 justify-center card p-2 bg-background textM text-sm sm:text-base">
+						<Pencil size={14} className="text-foreground/70" />
+						Editar
+					</div>
+					<div className="sm:block hidden my-10 w-1/4 ml-auto">
+						<button className="card bg-background sm:bg-accent rounded-lg cursor-pointer textM text-sm sm:text-base py-2 w-full justify-center gap-4 ml-auto">
+							<Pencil className="size-6 text-foreground/70" />
+							Editar
+						</button>
+					</div>
+				</div>
+			</AlertDialogTrigger>
+			<AlertDialogContent className="p-6 py-12 pb-40 sm:p-20 sm:py-15 2xl:py-20 bg-accent/80 backdrop-blur-xl w-full sm:w-1/2 h-screen sm:h-[95dvh] overflow-auto">
+				<AlertDialogTitle className="h-max sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2 border-b border-foreground/20 w-full mb-10">
+					Editar Técnico
+				</AlertDialogTitle>
+				<AlertDialogDescription className="text-center">
+					<EditTecnicoForm
+						tecnico={tecnico}
+						setOpen={setOpen}
+						setIsMenuOpen={setIsMenuOpen}
+					/>
+				</AlertDialogDescription>
+			</AlertDialogContent>
+		</AlertDialog>
+	)
+}
+
+export function EditTecnicoForm({
+	tecnico,
+	setOpen,
+	setIsMenuOpen,
+}: {
+	tecnico: TecnicoType
+	setOpen: (open: boolean) => void
+	setIsMenuOpen?: (open: boolean) => void
+}) {
 	const [matriculaFiles, setMatriculaFiles] = useState<File[]>([])
 	const [firmaFiles, setFirmaFiles] = useState<File[]>([])
 
@@ -45,7 +99,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 		},
 		onSubmit: async ({ value }) => {
 			if (checkTecnicoDiference(value, tecnico)) {
-				setEditMode(false)
+				setOpen(false)
 				return
 			}
 			const result = await editTecnicoMutation({ data: value })
@@ -53,14 +107,14 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 				console.error("Error al editar técnico", error)
 				toast.error("Error al editar técnico")
 			}
-
-			setEditMode(false)
+			if (setIsMenuOpen) setIsMenuOpen(false)
+			setOpen(false)
 			toast.success("Técnico editado exitosamente")
 		},
 	})
 
 	return (
-		<article className="flex items-center justify-center w-full border border-cyan-700 dark:border-cyan-600 bg-accent sm:bg-background py-10 sm:px-10 sm:py-20 relative">
+		<article className="grid grid-cols-1 sm:grid-cols-2 gap-7 sm:gap-y-4 sm:gap-x-10 justify-center items-center w-5/6 sm:w-full mx-auto">
 			<form
 				className="flex items-center justify-center flex-col w-5/6"
 				id="create-form"
@@ -90,7 +144,6 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="Nombre Completo"
-											readOnly={!editMode}
 											className="bg-background sm:bg-accent"
 										/>
 										{isInvalid && (
@@ -120,7 +173,6 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="000-0000000"
-											readOnly={!editMode}
 											className="bg-background sm:bg-accent"
 										/>
 										{isInvalid && (
@@ -153,7 +205,6 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="Ej. Seguridad e Higiene"
-											readOnly={!editMode}
 											className="bg-background sm:bg-accent"
 										/>
 										{isInvalid && (
@@ -183,7 +234,6 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="Ej. Andorra"
-											readOnly={!editMode}
 											className="bg-background sm:bg-accent"
 										/>
 										{isInvalid && (
@@ -216,7 +266,6 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 											onChange={e => field.handleChange(e.target.value)}
 											aria-invalid={isInvalid}
 											placeholder="N° Matrícula"
-											readOnly={!editMode}
 											className="bg-background sm:bg-accent"
 										/>
 										{isInvalid && (
@@ -237,7 +286,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 									setFiles={setMatriculaFiles}
 									text="Imágen matrícula"
 									maxFiles={1}
-									editMode={editMode}
+									editMode={true}
 								/>
 							</div>
 						</div>
@@ -250,7 +299,7 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 									setFiles={setFirmaFiles}
 									text="Imágen Firma Digital"
 									maxFiles={1}
-									editMode={editMode}
+									editMode={true}
 								/>
 							</div>
 						</div>
@@ -289,50 +338,32 @@ export default function EditTecnicoForm({ tecnico }: { tecnico: TecnicoType }) {
 						</span>
 					</div>
 
-					<div className="w-full sm:w-1/2 ml-auto sm:pl-5">
-						{!editMode ? (
-							<button
-								onClick={e => {
-									e.preventDefault()
-									setEditMode(true)
-								}}
-								type="button"
-								disabled={isPending}
-								className="textM text-sm sm:text-base w-1/2 flex gap-3 items-center justify-center card p-2 ml-auto"
-							>
-								<Pencil size={16} className="text-foreground/75" />
-								Editar
-							</button>
-						) : (
-							<div className="flex item-center w-full gap-3">
-								<button
-									onClick={() => {
-										form.reset()
-										setEditMode(false)
-									}}
-									type="button"
-									disabled={isPending}
-									className="textM text-sm sm:text-base w-1/2 flex gap-3 items-center justify-center card p-1"
-								>
-									Cancelar
-								</button>
-								<button
-									type="submit"
-									disabled={isPending}
-									className="themeBtnBackground textM text-sm sm:text-base w-1/2 flex gap-3 items-center justify-center card p-1"
-								>
-									{isPending ? (
-										<div className="flex gap-2 w-full justify-center items-center">
-											Editando...{" "}
-											<Loader className="animate-spin size-4"></Loader>
-										</div>
-									) : (
-										"Guardar"
-									)}
-								</button>
-							</div>
-						)}
-					</div>
+					<Field className="flex flex-row justify-center gap-10 items-center w-full mt-10">
+						<button
+							onClick={() => {
+								setOpen(false)
+								if (setIsMenuOpen) setIsMenuOpen(false)
+							}}
+							type="button"
+							disabled={isPending}
+							className="ring ring-foreground/5 bg-background h-full py-2 rounded-lg tracking-wider text-sm sm:text-base font-semibold flex-1 hover:bg-background/75 cursor-pointer my-shadow"
+						>
+							Cancelar
+						</button>
+						<button
+							type="submit"
+							disabled={isPending}
+							className="themeBtnBackground py-2 rounded-lg tracking-wider text-sm sm:text-base font-semibold flex-1 my-shadow"
+						>
+							{isPending ? (
+								<div className="flex gap-2 w-full justify-center">
+									Editando... <Loader className="animate-spin size-4"></Loader>
+								</div>
+							) : (
+								"Guardar"
+							)}
+						</button>
+					</Field>
 
 					{error && <p>{error.message}</p>}
 				</FieldGroup>

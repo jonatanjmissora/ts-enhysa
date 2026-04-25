@@ -1,4 +1,13 @@
 import {
+	Cloud,
+	CloudRain,
+	CloudSun,
+	Sun,
+	Cpu,
+	UserRound,
+	Warehouse,
+} from "lucide-react"
+import {
 	Accordion,
 	AccordionContent,
 	AccordionItem,
@@ -13,7 +22,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select"
-import { Cpu, UserRound, Warehouse } from "lucide-react"
+import { Label } from "@/components/ui/label"
 import { TextTooltip } from "../../layout/text-tooltip"
 import { Input } from "../../ui/input"
 
@@ -123,6 +132,80 @@ export default function Part1Data() {
 					</AccordionContent>
 				</AccordionItem>
 			</Accordion>
+
+			<div className="grid grid-cols-3 gap-8 sm:w-3/4 mx-auto my-10">
+				<div className="flex flex-col gap-1 sm:w-full w-5/6 mx-auto">
+					<Label className="tracking-wider" htmlFor="matricula">
+						Clima
+					</Label>
+					<Select defaultValue="soleado">
+						<SelectTrigger className="w-full">
+							<SelectValue />
+						</SelectTrigger>
+						<SelectContent className="w-full p-2 px-6">
+							<SelectGroup>
+								<SelectLabel>Estado del clima</SelectLabel>
+								<SelectItem value="soleado">
+									<Sun size={12} />
+									Soleado
+								</SelectItem>
+								<SelectItem value="numblado">
+									<Cloud size={12} />
+									Nublado
+								</SelectItem>
+								<SelectItem value="templado">
+									<CloudSun size={12} />
+									Templado
+								</SelectItem>
+								<SelectItem value="lluvioso">
+									<CloudRain size={12} />
+									Lluvioso
+								</SelectItem>
+							</SelectGroup>
+						</SelectContent>
+					</Select>
+				</div>
+
+				<div className="flex flex-col gap-1 sm:w-full w-5/6 mx-auto">
+					<Label className="tracking-wider" htmlFor="matricula">
+						Humedad
+					</Label>
+					<Select defaultValue="60">
+						<SelectTrigger className="w-full">
+							<SelectValue />
+						</SelectTrigger>
+						<SelectContent className="w-full p-2">
+							<SelectGroup>
+								<SelectLabel>Humedad</SelectLabel>
+								<SelectItem value="60">60%</SelectItem>
+								<SelectItem value="70">70%</SelectItem>
+								<SelectItem value="80">80%</SelectItem>
+								<SelectItem value="90">90%</SelectItem>
+							</SelectGroup>
+						</SelectContent>
+					</Select>
+				</div>
+
+				<div className="flex flex-col gap-1 sm:w-full w-5/6 mx-auto">
+					<Label className="tracking-wider" htmlFor="matricula">
+						Temperatura
+					</Label>
+					<Select defaultValue="20">
+						<SelectTrigger className="w-full">
+							<SelectValue />
+						</SelectTrigger>
+						<SelectContent className="w-full p-2">
+							<SelectGroup>
+								<SelectLabel>Tempreatura</SelectLabel>
+								<SelectItem value="10">10°C</SelectItem>
+								<SelectItem value="20">20°C</SelectItem>
+								<SelectItem value="30">30°C</SelectItem>
+								<SelectItem value="40">40°C</SelectItem>
+							</SelectGroup>
+						</SelectContent>
+					</Select>
+				</div>
+			</div>
 		</article>
 	)
 }

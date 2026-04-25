@@ -2,10 +2,10 @@ import { Suspense } from "react"
 import SkeltonTecnicoForm from "./skelton-tecnico-form"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
-import EditTecnicoForm from "./edit-tecnico-form"
-import CreateTecnicoForm from "./create-tecnico-form"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
+import CreateTecnico from "./create-tecnico"
+import EditTecnico from "./edit-tecnico"
 
 export default function ProfileTecnico() {
 	return (
@@ -17,11 +17,10 @@ export default function ProfileTecnico() {
 
 const Tecnico = () => {
 	const { data: tecnico } = useSuspenseQuery(tecnicoQueryOptions)
-
 	if (!tecnico) return <TecnicoVacio />
 
 	return (
-		<div className="bg-accent sm:bg-background py-10 sm:p-10 flex items-center justify-center flex-col relative border border-orange-700 dark:border-orange-600">
+		<div className="bg-accent sm:bg-background py-10 sm:p-10 flex items-center justify-center flex-col relative border border-cyan-700 dark:border-cyan-600">
 			<div className="grid-cols-1 grid sm:grid-cols-2 gap-8 w-5/6 my-10">
 				<div className="flex flex-col gap-1">
 					<Label className="tracking-wider" htmlFor="nombre">
@@ -29,7 +28,7 @@ const Tecnico = () => {
 					</Label>
 					<Input
 						id="nombre"
-						placeholder="Nombre de la empresa"
+						placeholder="Nombre Completo"
 						value={tecnico.nombre.toUpperCase()}
 						readOnly
 						className="bg-background sm:bg-accent"
@@ -53,7 +52,7 @@ const Tecnico = () => {
 					</Label>
 					<Input
 						id="cargo"
-						placeholder="Calle, Altura"
+						placeholder="Ej Técnico SeH"
 						value={tecnico.cargo.toUpperCase()}
 						readOnly
 						className="bg-background sm:bg-accent"
@@ -65,62 +64,63 @@ const Tecnico = () => {
 					</Label>
 					<Input
 						id="localidad"
-						placeholder="Ciudad, Provincia, Pais"
+						placeholder="Ej. Bahia Blanca"
 						value={tecnico.localidad.toUpperCase()}
 						readOnly
 						className="bg-background sm:bg-accent"
 					/>
 				</div>
-				{/* <div className="flex flex-col gap-1 w-full">
-					<Label className="tracking-wider" htmlFor="codigoPostal">
-						CP
+				<div className="flex flex-col gap-1 w-full">
+					<Label className="tracking-wider" htmlFor="matricula">
+						Matrícula
 					</Label>
 					<Input
-						id="codigoPostal"
-						placeholder="Ciudad, Provincia, Pais"
-						value={empresa.codigoPostal}
+						id="matricula"
+						placeholder="00-00000"
+						value={tecnico.matricula}
 						readOnly
 						className="bg-background sm:bg-accent"
 					/>
 				</div>
-				<div className="flex flex-col gap-1 w-full">
-					<Label className="tracking-wider" htmlFor="provincia">
-						Provincia
-					</Label>
-					<Input
-						id="provincia"
-						placeholder="Ciudad, Provincia, Pais"
-						value={empresa.provincia.toUpperCase()}
-						readOnly
-						className="bg-background sm:bg-accent"
-					/>
-				</div>
-				<div className="flex flex-col gap-1 w-full">
-					<Label htmlFor="horarios">Horarios</Label>
-					<Input
-						id="horarios"
-						placeholder="Lun a Vie 8:00 a 16:00"
-						value={empresa.horarios.toUpperCase()}
-						readOnly
-						className="bg-background sm:bg-accent"
-					/>
-				</div> */}
 				<div className="flex flex-col gap-1">
-					<Label>Logo</Label>
-					<div className="card bg-background sm:bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
-						<img src="/telefonica.png" alt="luxometro" className="size-20" />
+					<Label>Matrícula Digital</Label>
+					<div className="card p-2 bg-background sm:bg-accent text-sm h-full min-h-9"></div>
+				</div>
+
+				<div className="flex-1 flex flex-col gap-1">
+					<Label>Firma Digital</Label>
+					<div className="card p-2 bg-background sm:bg-accent text-sm h-full min-h-9"></div>
+				</div>
+
+				<div className="flex-1 flex flex-col gap-1">
+					<Label>Pie de Página</Label>
+					<div className="flex flex-col gap-[0.5px]">
+						<Input
+							placeholder="Nombre Completo..."
+							readOnly
+							className="bg-background sm:bg-accent text-center"
+						/>
+
+						<Input
+							placeholder="Matricula..."
+							readOnly
+							className="bg-background sm:bg-accent text-center"
+						/>
 					</div>
 				</div>
 			</div>
-			{/* <EditEmpresa empresa={empresa} /> */}
+			<EditTecnico tecnico={tecnico} />
 		</div>
 	)
 }
 
 const TecnicoVacio = () => {
 	return (
-		<p className="m-10 text-center w-full text-pretty textM italic text-foreground/70">
-			Todavia no tiene sus datos cargados.
-		</p>
+		<div className="flex flex-col items-center justify-center gap-4 m-10 mx-0 sm:mx-10">
+			<p className="text-center w-full text-pretty textM text-base sm:text-base italic text-foreground/70">
+				Todavia no tiene sus datos cargados.
+			</p>
+			<CreateTecnico />
+		</div>
 	)
 }
