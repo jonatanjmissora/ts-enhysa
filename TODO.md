@@ -90,3 +90,14 @@ build" publish = "dist/client"
 y este vite.config: 
 export default defineConfig({ base: "/", build: { outDir: "dist", }, 
 plugins: [ devtools(), viteTsConfigPaths({ projects: ["./tsconfig.json"], }), tailwindcss(), tanstackStart(), netlify(), viteReact(), ], })
+
+FOLDERS
+========
+perfil
+perfil/tecnico
+perfil/empresas
+perfil/instrumentos
+
+nuevo-proyecto/id
+nuevo-proyecto/area?id=
+nuevo-proyecto/resumen
