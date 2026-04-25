@@ -20,12 +20,12 @@ export default function Part2Plano() {
 			<div className="flex flex-col items-center gap-8 w-full">
 				<div className="grid grid-cols-1 sm:grid-cols-3 gap-8 w-3/4">
 					<div className="flex flex-col gap-1">
-						<Label className="tracking-wider" htmlFor="matricula">
+						<Label className="tracking-wider" htmlFor="largo">
 							Largo (m)
 						</Label>
 						<Input
-							id="matricula"
-							placeholder="N° Matrícula "
+							id="largo"
+							placeholder="Ej. 4"
 							defaultValue="Ej. 4"
 							readOnly
 							className="bg-background sm:bg-accent"
@@ -33,12 +33,12 @@ export default function Part2Plano() {
 					</div>
 
 					<div className="flex flex-col gap-1">
-						<Label className="tracking-wider" htmlFor="matricula">
+						<Label className="tracking-wider" htmlFor="ancho">
 							Ancho (m)
 						</Label>
 						<Input
-							id="matricula"
-							placeholder="N° Matrícula "
+							id="ancho"
+							placeholder="Ej. 6"
 							defaultValue="Ej. 6"
 							readOnly
 							className="bg-background sm:bg-accent"
@@ -46,12 +46,12 @@ export default function Part2Plano() {
 					</div>
 
 					<div className="flex flex-col gap-1">
-						<Label className="tracking-wider" htmlFor="matricula">
+						<Label className="tracking-wider" htmlFor="altomontaje">
 							Alto del montaje (m)
 						</Label>
 						<Input
-							id="matricula"
-							placeholder="N° Matrícula "
+							id="altomontaje"
+							placeholder="Ej. 2"
 							defaultValue="Ej. 2"
 							readOnly
 							className="bg-background sm:bg-accent"

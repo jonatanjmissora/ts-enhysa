@@ -11,8 +11,14 @@ import {
 import { Label } from "@/components/ui/label"
 import { Cpu, UserRound, Warehouse } from "lucide-react"
 import { Cloud, CloudRain, CloudSun, Sun } from "lucide-react"
+import { Dispatch, SetStateAction, Suspense } from "react"
+import { useSuspenseQuery } from "@tanstack/react-query"
+import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
+import { empresasQueryOptions } from "queries/empresas/empresas-query"
+import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
+import { Part1DataType } from "@/routes/_protected/new-report2"
 
-export default function MovilPart1Data() {
+export default function MovilPart1Data({setReportStep, part1Data, setPart1Data}: {setReportStep: Dispatch<SetStateAction<1 | 2 | 3 | 4>>, setPart1Data: (data: Part1DataType) => void, part1Data: Part1DataType} ) {
 	return (
 		<article className="w-full my-20 sm:my-4 flex flex-col gap-8">
 			<div className="flex flex-col gap-3 relative">
@@ -24,9 +30,13 @@ export default function MovilPart1Data() {
 					<UserRound className="size-6" />
 					Técnico responsable
 				</div>
-				<span className="w-5/6 mx-auto px-6 py-2 card justify-center bg-accent textXS">
-					MISSORA JONATAN
-				</span>
+				<Suspense fallback={
+					<div className="w-5/6 mx-auto px-6 py-2 card justify-center bg-accent textXS animate-pulse">
+						. . .
+					</div>
+					}>
+					<Tecnico />
+				</Suspense>
 			</div>
 
 			<div className="flex flex-col gap-3 relative">
@@ -34,37 +44,87 @@ export default function MovilPart1Data() {
 					<Warehouse className="size-6" />
 					Empresa receptora
 				</span>
-				<div className="w-5/6 mx-auto">
-					<Select defaultValue="telefonica">
-						<SelectTrigger
-							className="w-full mx-auto px-6 py-2 text-right dark:bg-accent text-xs tracking-widest"
-							onClick={e => e.stopPropagation()}
-						>
-							<SelectValue
-								placeholder="Seleccione Empresa"
-								className="text-center"
-							/>
-						</SelectTrigger>
-						<SelectContent position="popper">
-							<SelectGroup>
-								<SelectLabel>Empresas</SelectLabel>
-
-								<SelectItem value="telefonica">TELEFONICA</SelectItem>
-								<SelectItem value="fravega">FRAVEGA</SelectItem>
-								<SelectItem value="codimat">CODIMAT</SelectItem>
-							</SelectGroup>
-						</SelectContent>
-					</Select>
-				</div>
+				<Suspense fallback={
+					<div className="w-5/6 mx-auto px-6 py-2 card justify-center bg-accent textXS animate-pulse">
+						. . .
+					</div>
+					}>
+					<Empresas />
+				</Suspense>
+				
 			</div>
 
 			<div className="flex flex-col gap-3 relative">
 				<span className="flex items-center gap-3">
 					<Cpu className="size-6" /> Instrumento utilizado
 				</span>
+				<Suspense fallback={
+					<div className="w-5/6 mx-auto px-6 py-2 card justify-center bg-accent textXS animate-pulse">
+						. . .
+					</div>
+					}>
+					<Instrumentos />
+				</Suspense>
+			</div>
 
-				<div className="w-5/6 mx-auto">
-					<Select defaultValue="luxometro1">
+			<Clima />
+
+			<div className="w-5/6 mx-auto my-10">
+				<button
+					onClick={() => setReportStep(2)}
+					className="card p-2 px-6 w-1/2 ml-auto justify-center textM text-sm sm:text-base bg-accent"
+				>
+					Siguiente
+				</button>
+			</div>
+		</article>
+	)
+}
+
+function Tecnico() {
+	const { data: tecnico } = useSuspenseQuery(tecnicoQueryOptions)
+	return (
+		<span className="w-5/6 mx-auto px-6 py-2 card justify-center bg-accent textXS">
+					{tecnico?.nombre?.toUpperCase() || "SIN DATOS"}
+				</span>
+	)
+}
+
+function Empresas () {
+	const { data: empresas } = useSuspenseQuery(empresasQueryOptions)
+	return (
+		<div className="w-5/6 mx-auto">
+					<Select defaultValue={empresas?.[0]?.razonSocial.toUpperCase() || ""}>
+						<SelectTrigger
+							className="w-full mx-auto px-6 py-2 text-right dark:bg-accent text-xs tracking-widest"
+							onClick={e => e.stopPropagation()}
+						>
+							<SelectValue
+								placeholder="Seleccione Empresa"
+								className="text-right"
+							/>
+						</SelectTrigger>
+						<SelectContent position="popper">
+							<SelectGroup >
+								<SelectLabel>Empresas</SelectLabel>
+
+								{empresas?.map(empresa => (
+									<SelectItem key={empresa.id} value={empresa.razonSocial.toUpperCase()} className="justify-center">
+										{empresa.razonSocial.toUpperCase()}
+									</SelectItem>
+								))}
+							</SelectGroup>
+						</SelectContent>
+					</Select>
+				</div>
+	)
+}
+
+function Instrumentos () {
+	const { data: instrumentos } = useSuspenseQuery(instrumentosQueryOptions)
+	return (
+		<div className="w-5/6 mx-auto">
+					<Select defaultValue={instrumentos?.[0]?.nombre.toUpperCase() || ""}>
 						<SelectTrigger
 							className="w-full mx-auto px-6 py-2 text-right dark:bg-accent text-xs tracking-widest"
 							onClick={e => e.stopPropagation()}
@@ -78,16 +138,21 @@ export default function MovilPart1Data() {
 							<SelectGroup>
 								<SelectLabel>Instrumentos</SelectLabel>
 
-								<SelectItem value="luxometro1">LUXOMETRO-1</SelectItem>
-								<SelectItem value="luxometro2">LUXOMETRO-2</SelectItem>
-								<SelectItem value="luxometro3">LUXOMETRO-3</SelectItem>
+								{instrumentos?.map(instrumento => (
+									<SelectItem key={instrumento.id} value={instrumento.nombre.toUpperCase()}>
+										{instrumento.nombre.toUpperCase()}
+									</SelectItem>
+								))}
 							</SelectGroup>
 						</SelectContent>
 					</Select>
 				</div>
-			</div>
+	)
+}
 
-			<div className="grid grid-cols-1 gap-8 w-full ">
+function Clima() {
+	return (
+<div className="grid grid-cols-1 gap-8 w-full ">
 				<div className="flex flex-col gap-1 w-5/6 mx-auto">
 					<Label className="tracking-wider" htmlFor="matricula">
 						Clima
@@ -160,6 +225,5 @@ export default function MovilPart1Data() {
 					</Select>
 				</div>
 			</div>
-		</article>
 	)
 }

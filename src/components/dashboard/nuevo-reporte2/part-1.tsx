@@ -25,8 +25,10 @@ import {
 import { Label } from "@/components/ui/label"
 import { TextTooltip } from "../../layout/text-tooltip"
 import { Input } from "../../ui/input"
+import { Part1DataType } from "@/routes/_protected/new-report2"
+import { Dispatch, SetStateAction } from "react"
 
-export default function Part1Data() {
+export default function Part1Data({setReportStep, part1Data, setPart1Data}: {setReportStep?: Dispatch<SetStateAction<1 | 2 | 3 | 4>>, part1Data: Part1DataType, setPart1Data: (data: Part1DataType) => void}) {
 	return (
 		<article className="w-full my-10 sm:my-4 relative">
 			<TextTooltip

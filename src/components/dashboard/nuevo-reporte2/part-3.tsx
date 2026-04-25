@@ -1,10 +1,12 @@
 import { Database, List, NotebookPen, Search } from "lucide-react"
 import { Label } from "@/components/ui/label"
+import { Dispatch, SetStateAction } from "react"
+import { Part3DataType } from "@/routes/_protected/new-report2"
 
-export const Part3Data = () => {
+export default function Part3Data({setReportStep, part3Data, setPart3Data}: {setReportStep?: Dispatch<SetStateAction<1 | 2 | 3 | 4>>, part3Data: Part3DataType, setPart3Data: (data: Part3DataType) => void}) {
 	return (
 		<article className="w-full flex flex-col justify-center items-center">
-			<div className="flex items-center justify-between w-full mb-10 px-5 rounded bg-pink-500/25">
+			<div className="flex items-center justify-between w-full px-5 rounded border-b border-pink-500/25 m-15 sm:mt-0 sm:border-none sm:bg-pink-500/15">
 				<div className="textXL py-2 px-2 flex items-center gap-8 justify-between w-full sm:w-max">
 					Resumen <Database className="sm:size-7 2xl:size-9" />
 				</div>
@@ -61,6 +63,14 @@ export const Part3Data = () => {
 						readOnly
 					/>
 				</div>
+			</div>
+			<div className="flex items-center gap-2 w-full">
+			<button onClick={() => setReportStep && setReportStep(2)} className="card py-2 px-4 my-20 flex items-center justify-center gap-2 mx-auto w-5/6 sm:w-1/3 textM text-sm sm:text-base bg-accent sm:hidden">
+				Volver
+			</button>
+			<button onClick={() => setReportStep && setReportStep(4)} className="card py-2 px-4 my-20 flex items-center justify-center gap-2 mx-auto w-5/6 sm:w-1/3 textM text-sm sm:text-base bg-accent sm:hidden">
+				Finalizar
+			</button>
 			</div>
 		</article>
 	)
