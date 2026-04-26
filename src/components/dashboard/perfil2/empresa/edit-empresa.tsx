@@ -37,10 +37,6 @@ export function EditEmpresa({
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild>
 				<div className="mx-auto w-5/6">
-					<div className="w-full sm:hidden flex items-center gap-2 justify-center">
-						<Pencil size={14} className="text-foreground/70" />
-						Editar
-					</div>
 					<div className="sm:block hidden my-10 w-1/4 ml-auto">
 						<button className="card bg-background sm:bg-accent rounded-lg cursor-pointer textM text-sm sm:text-base py-2 w-full justify-center gap-4 ml-auto">
 							<Pencil className="size-6 text-foreground/70" />
@@ -49,7 +45,7 @@ export function EditEmpresa({
 					</div>
 				</div>
 			</AlertDialogTrigger>
-			<AlertDialogContent className="p-6 py-12 pb-40 sm:p-20 sm:py-15 2xl:py-20 bg-accent/80 backdrop-blur-xl w-full sm:w-1/2 h-screen sm:h-[95dvh] overflow-auto">
+			<AlertDialogContent className="p-6 sm:px-20 py-15 sm:py-6 bg-accent/80 backdrop-blur-xl w-full sm:w-1/2 h-screen sm:h-[95dvh] overflow-auto">
 				<AlertDialogTitle className="h-max sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2 border-b border-foreground/20 w-full mb-10">
 					Editar Empresa
 				</AlertDialogTitle>
@@ -374,7 +370,7 @@ export function EditEmpresaForm({
 					</span>
 				</div>
 
-				<Field className="flex flex-row justify-center gap-10 items-center w-full mt-10">
+				<Field className="flex flex-row justify-center gap-5 sm:gap-10 items-center w-5/6 mx-auto sm:w-full mt-10">
 					<button
 						onClick={() => {
 							setOpen(false)

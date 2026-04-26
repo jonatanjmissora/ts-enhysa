@@ -94,37 +94,40 @@ function Tecnico() {
 function Empresas ({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Data: (data: Part1DataType) => void}) {
 	const { data: empresas } = useSuspenseQuery(empresasQueryOptions)
 	if(!empresas || empresas?.length === 0) return
-	const actualEmpresa = empresas?.find(empresa => empresa.id === part1Data.empresaId)
+	const actualEmpresa = empresas?.find(empresa => empresa.id === part1Data.empresaId) || empresas[0]
+	useEffect(() => {
+		if(actualEmpresa) 
+		setPart1Data({...part1Data, empresaId: actualEmpresa.id})
+	}, [])
 	return (
 		<div className="w-5/6 mx-auto">
-					<Select 
-						defaultValue={empresas?.[0]?.razonSocial.toUpperCase() || actualEmpresa?.razonSocial.toUpperCase() || ""}
-						onValueChange={e => {
-							const newEmpresa = {...part1Data}
-							setPart1Data({...newEmpresa, empresaId: actualEmpresa?.id || ""})
-						} }>
-						<SelectTrigger
-							className="w-full mx-auto px-6 py-2 text-right dark:bg-accent text-xs tracking-widest"
-							value={actualEmpresa?.razonSocial.toUpperCase() || ""}
-						>
-							<SelectValue
-								placeholder="Seleccione Empresa"
-								className="text-right"
-							/>
-						</SelectTrigger>
-						<SelectContent position="popper">
-							<SelectGroup >
-								<SelectLabel>Empresas</SelectLabel>
+			<Select 
+				defaultValue={actualEmpresa?.id || ""}
+				onValueChange={e => {
+					const newPart1Data = {...part1Data}
+					setPart1Data({...newPart1Data, empresaId: e})
+				}}>
+				<SelectTrigger
+					className="w-full mx-auto px-6 py-2 text-right dark:bg-accent text-xs tracking-widest"
+				>
+					<SelectValue
+						placeholder="Seleccione Empresa"
+						className="text-right"
+					/>
+				</SelectTrigger>
+				<SelectContent position="popper">
+					<SelectGroup >
+						<SelectLabel>Empresas</SelectLabel>
 
-								{empresas?.map(empresa => (
-									<SelectItem key={empresa.id} value={empresa.razonSocial.toUpperCase()} className="justify-center">
-										{empresa.razonSocial.toUpperCase()}
-									</SelectItem>
-								))}
-							</SelectGroup>
-						</SelectContent>
-					</Select>
-				</div>
+						{empresas?.map(empresa => (
+							<SelectItem key={empresa.id} value={empresa.id} className="justify-center">
+								{empresa.razonSocial.toUpperCase()}
+							</SelectItem>
+						))}
+					</SelectGroup>
+				</SelectContent>
+			</Select>
+		</div>
 	)
 }
 
@@ -138,109 +141,109 @@ function Instrumentos ({part1Data, setPart1Data}: {part1Data: Part1DataType, set
 	}, [])
 	return (
 		<div className="w-5/6 mx-auto">
-					<Select defaultValue={actualInstrumento?.id}
-						onValueChange={e => {
-							const newInstrumentos = {...part1Data}
-							setPart1Data({...newInstrumentos, instrumentoId: e})
-						}}>
-						<SelectTrigger
-							className="w-full mx-auto px-6 py-2 text-right dark:bg-accent text-xs tracking-widest"
-						>
-							<SelectValue
-								placeholder="Seleccione Instrumento"
-								className="text-center"
-							/>
-						</SelectTrigger>
-						<SelectContent position="popper">
-							<SelectGroup>
-								<SelectLabel>Instrumentos</SelectLabel>
+			<Select defaultValue={actualInstrumento?.id || ""}
+				onValueChange={e => {
+					const newPart1Data = {...part1Data}
+					setPart1Data({...newPart1Data, instrumentoId: e})
+				}}>
+				<SelectTrigger
+					className="w-full mx-auto px-6 py-2 text-right dark:bg-accent text-xs tracking-widest"
+				>
+					<SelectValue
+						placeholder="Seleccione Instrumento"
+						className="text-center"
+					/>
+				</SelectTrigger>
+				<SelectContent position="popper">
+					<SelectGroup>
+						<SelectLabel>Instrumentos</SelectLabel>
 
-								{instrumentos?.map(instrumento => (
-									<SelectItem key={instrumento.id} value={instrumento.id}>
-										{instrumento.nombre.toUpperCase()}
-									</SelectItem>
-								))}
-							</SelectGroup>
-						</SelectContent>
-					</Select>
-				</div>
+						{instrumentos?.map(instrumento => (
+							<SelectItem key={instrumento.id} value={instrumento.id}>
+								{instrumento.nombre.toUpperCase()}
+							</SelectItem>
+						))}
+					</SelectGroup>
+				</SelectContent>
+			</Select>
+		</div>
 	)
 }
 
 function Clima() {
 	return (
 <div className="grid grid-cols-1 gap-8 w-full ">
-				<div className="flex flex-col gap-1 w-5/6 mx-auto">
-					<Label className="tracking-wider" htmlFor="matricula">
-						Clima
-					</Label>
-					<Select defaultValue="soleado">
-						<SelectTrigger className="w-full dark:bg-accent bg-accent">
-							<SelectValue />
-						</SelectTrigger>
-						<SelectContent className="w-full p-2 px-6">
-							<SelectGroup>
-								<SelectLabel>Estado del clima</SelectLabel>
-								<SelectItem value="soleado">
-									<Sun size={12} />
-									Soleado
-								</SelectItem>
-								<SelectItem value="numblado">
-									<Cloud size={12} />
-									Nublado
-								</SelectItem>
-								<SelectItem value="templado">
-									<CloudSun size={12} />
-									Templado
-								</SelectItem>
-								<SelectItem value="lluvioso">
-									<CloudRain size={12} />
-									Lluvioso
-								</SelectItem>
-							</SelectGroup>
-						</SelectContent>
-					</Select>
-				</div>
+	<div className="flex flex-col gap-1 w-5/6 mx-auto">
+		<Label className="tracking-wider" htmlFor="matricula">
+			Clima
+		</Label>
+		<Select defaultValue="soleado">
+			<SelectTrigger className="w-full dark:bg-accent bg-accent">
+				<SelectValue />
+			</SelectTrigger>
+			<SelectContent className="w-full p-2 px-6">
+				<SelectGroup>
+					<SelectLabel>Estado del clima</SelectLabel>
+					<SelectItem value="soleado">
+						<Sun size={12} />
+						Soleado
+					</SelectItem>
+					<SelectItem value="numblado">
+						<Cloud size={12} />
+						Nublado
+					</SelectItem>
+					<SelectItem value="templado">
+						<CloudSun size={12} />
+						Templado
+					</SelectItem>
+					<SelectItem value="lluvioso">
+						<CloudRain size={12} />
+						Lluvioso
+					</SelectItem>
+				</SelectGroup>
+			</SelectContent>
+		</Select>
+	</div>
 
-				<div className="flex flex-col gap-1 w-5/6 mx-auto">
-					<Label className="tracking-wider" htmlFor="matricula">
-						Humedad
-					</Label>
-					<Select defaultValue="60">
-						<SelectTrigger className="w-full dark:bg-accent bg-accent">
-							<SelectValue />
-						</SelectTrigger>
-						<SelectContent className="w-full p-2">
-							<SelectGroup>
-								<SelectLabel>Humedad</SelectLabel>
-								<SelectItem value="60">60%</SelectItem>
-								<SelectItem value="70">70%</SelectItem>
-								<SelectItem value="80">80%</SelectItem>
-								<SelectItem value="90">90%</SelectItem>
-							</SelectGroup>
-						</SelectContent>
-					</Select>
-				</div>
+	<div className="flex flex-col gap-1 w-5/6 mx-auto">
+		<Label className="tracking-wider" htmlFor="matricula">
+			Humedad
+		</Label>
+		<Select defaultValue="60">
+			<SelectTrigger className="w-full dark:bg-accent bg-accent">
+				<SelectValue />
+			</SelectTrigger>
+			<SelectContent className="w-full p-2">
+				<SelectGroup>
+					<SelectLabel>Humedad</SelectLabel>
+					<SelectItem value="60">60%</SelectItem>
+					<SelectItem value="70">70%</SelectItem>
+					<SelectItem value="80">80%</SelectItem>
+					<SelectItem value="90">90%</SelectItem>
+				</SelectGroup>
+			</SelectContent>
+		</Select>
+	</div>
 
-				<div className="flex flex-col gap-1 w-5/6 mx-auto">
-					<Label className="tracking-wider" htmlFor="matricula">
-						Temperatura
-					</Label>
-					<Select defaultValue="20">
-						<SelectTrigger className="w-full dark:bg-accent bg-accent">
-							<SelectValue />
-						</SelectTrigger>
-						<SelectContent className="w-full p-2">
-							<SelectGroup>
-								<SelectLabel>Tempreatura</SelectLabel>
-								<SelectItem value="10">10°C</SelectItem>
-								<SelectItem value="20">20°C</SelectItem>
-								<SelectItem value="30">30°C</SelectItem>
-								<SelectItem value="40">40°C</SelectItem>
-							</SelectGroup>
-						</SelectContent>
-					</Select>
-				</div>
-			</div>
+	<div className="flex flex-col gap-1 w-5/6 mx-auto">
+		<Label className="tracking-wider" htmlFor="matricula">
+			Temperatura
+		</Label>
+		<Select defaultValue="20">
+			<SelectTrigger className="w-full dark:bg-accent bg-accent">
+				<SelectValue />
+			</SelectTrigger>
+			<SelectContent className="w-full p-2">
+				<SelectGroup>
+					<SelectLabel>Tempreatura</SelectLabel>
+					<SelectItem value="10">10°C</SelectItem>
+					<SelectItem value="20">20°C</SelectItem>
+					<SelectItem value="30">30°C</SelectItem>
+					<SelectItem value="40">40°C</SelectItem>
+				</SelectGroup>
+			</SelectContent>
+		</Select>
+	</div>
+</div>
 	)
 }

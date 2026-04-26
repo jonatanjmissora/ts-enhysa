@@ -46,7 +46,7 @@ export default function Part1Data({setReportStep, part1Data, setPart1Data}: {set
 					className="border-b border-foreground/10 relative"
 				>
 					<div className="absolute top-2  left-1/2">
-						<span className="w-60 px-6 py-2 card bg-background textXS ring ring-foreground/10 dark:ring-foreground/7">
+						<span className="w-60 px-6 py-2 card bg-background textXS ring ring-foreground/10 dark:ring-foreground/7 justify-end">
 							MISSORA JONATAN
 						</span>
 					</div>

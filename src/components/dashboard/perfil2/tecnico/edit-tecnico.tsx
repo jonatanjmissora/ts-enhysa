@@ -47,7 +47,7 @@ export default function EditTecnico({
 					</div>
 				</div>
 			</AlertDialogTrigger>
-			<AlertDialogContent className="p-6 py-12 pb-40 sm:p-20 sm:py-15 2xl:py-20 bg-accent/80 backdrop-blur-xl w-full sm:w-1/2 h-screen sm:h-[95dvh] overflow-auto">
+			<AlertDialogContent className="p-6 sm:px-20 py-15 sm:py-6 bg-accent/80 backdrop-blur-xl w-full sm:w-1/2 h-screen sm:h-[95dvh] overflow-auto">
 				<AlertDialogTitle className="h-max sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2 border-b border-foreground/20 w-full mb-10">
 					Editar Técnico
 				</AlertDialogTitle>
@@ -114,9 +114,9 @@ export function EditTecnicoForm({
 	})
 
 	return (
-		<article className="grid grid-cols-1 sm:grid-cols-2 gap-7 sm:gap-y-4 sm:gap-x-10 justify-center items-center w-5/6 sm:w-full mx-auto">
+		<article className="grid grid-cols-1 gap-7 sm:gap-y-4 sm:gap-x-10 justify-center items-center w-5/6 sm:w-full mx-auto">
 			<form
-				className="flex items-center justify-center flex-col w-5/6"
+				className="flex items-center justify-center flex-col w-full"
 				id="create-form"
 				onSubmit={e => {
 					e.preventDefault()
@@ -338,7 +338,7 @@ export function EditTecnicoForm({
 						</span>
 					</div>
 
-					<Field className="flex flex-row justify-center gap-10 items-center w-full mt-10">
+					<Field className="flex flex-row justify-center gap-5 sm:gap-10 items-center w-full mt-10">
 						<button
 							onClick={() => {
 								setOpen(false)
