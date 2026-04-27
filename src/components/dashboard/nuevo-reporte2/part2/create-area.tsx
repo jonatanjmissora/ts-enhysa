@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
 import { useForm } from "@tanstack/react-form"
 import {
 	AlertDialog,
@@ -7,7 +7,22 @@ import {
 	AlertDialogTitle,
 	AlertDialogDescription,
 } from "@/components/ui/alert-dialog"
-import { Asterisk, Box, CircleAlert, Cloud, CloudRain, CloudSun, Equal, EqualApproximately, Lightbulb, Loader, RulerDimensionLine, Sun, Trash2 } from "lucide-react"
+import {
+	Asterisk,
+	Box,
+	CircleAlert,
+	Cloud,
+	CloudRain,
+	CloudSun,
+	Equal,
+	EqualApproximately,
+	HardHat,
+	Lightbulb,
+	Loader,
+	RulerDimensionLine,
+	Sun,
+	Trash2,
+} from "lucide-react"
 import { toast } from "sonner"
 import { useNavigate } from "@tanstack/react-router"
 import {
@@ -28,66 +43,89 @@ import {
 	SelectValue,
 } from "@/components/ui/select"
 import { InputFiles } from "@/components/layout/input-files"
-import { areaFormValidator, part2DataDefault, Part2DataType } from "@/routes/_protected/new-report2"
+import {
+	areaFormValidator,
+	part2DataDefault,
+	Part2DataType,
+} from "@/routes/_protected/new-report2"
+import Formula from "./formula"
+import { getIndiceDeLocal, getIndiceRedondeo } from "@/lib/utils"
 
-
-export default function CreateNewAreaAlert ({part2Data, setPart2Data}: {part2Data: Part2DataType, setPart2Data: React.Dispatch<React.SetStateAction<Part2DataType>>}	) {
+export default function CreateNewAreaAlert({
+	part2Data,
+	setPart2Data,
+}: {
+	part2Data: Part2DataType
+	setPart2Data: React.Dispatch<React.SetStateAction<Part2DataType>>
+}) {
 	const [open, setOpen] = useState(false)
 
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild className="hover:bg-accent">
 				<button className="card py-2 px-4 my-10 flex items-center justify-center gap-2 mx-auto w-5/6 sm:w-1/3 textM text-sm sm:text-base bg-accent cursor-pointer">
-				<span className="">+ Nueva Area</span>
-			</button>
+					<span className="">+ Nueva Area</span>
+				</button>
 			</AlertDialogTrigger>
 			<AlertDialogContent className="p-6 py-12 pb-40 sm:p-20 sm:py-15 2xl:py-20 bg-accent/80 backdrop-blur-xl w-full sm:w-1/2 h-screen sm:h-[95dvh] overflow-auto">
 				<AlertDialogTitle className="h-max sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2 border-b border-foreground/20 w-full mb-10">
 					Nueva Area
 				</AlertDialogTitle>
 				<AlertDialogDescription className="text-center">
-					<CreateNewAreaForm setOpen={setOpen} part2Data={part2Data} setPart2Data={setPart2Data}/>
+					<CreateNewAreaForm
+						setOpen={setOpen}
+						part2Data={part2Data}
+						setPart2Data={setPart2Data}
+					/>
 				</AlertDialogDescription>
 			</AlertDialogContent>
 		</AlertDialog>
 	)
 }
 
-function CreateNewAreaForm ({setOpen, part2Data, setPart2Data}: {setOpen: (open: boolean) => void, part2Data: Part2DataType, setPart2Data: React.Dispatch<React.SetStateAction<Part2DataType>>}) {
-const isPending = false
-const error = null
+function CreateNewAreaForm({
+	setOpen,
+	part2Data,
+	setPart2Data,
+}: {
+	setOpen: (open: boolean) => void
+	part2Data: Part2DataType
+	setPart2Data: React.Dispatch<React.SetStateAction<Part2DataType>>
+}) {
+	const isPending = false
+	const error = null
 	const [planoFiles, setPlanoFiles] = useState<File[]>([])
 
 	const form = useForm({
 		defaultValues: part2DataDefault,
 		validators: {
-			onSubmit: areaFormValidator, 
+			onSubmit: areaFormValidator,
 		},
 		onSubmit: async ({ value }) => {
 			console.log(value)
-		}
-			// defaultValues: {
-			// 	nombre: "",
-			// 	tipo: "",
-			// 	iluminacion: "",
-			// 	plano: "",
-			// 	imagenes: "",
-			// 	puntos: "",
-			// },
-			// validators: {
-			// 	onSubmit: areaFormValidator,
-			// },
-			// onSubmit: async ({ value }) => {
-			// 	const result = await createAreaMutation({ data: value })
-			// 	if (!result) {
-			// 		console.error("Error al crear el área", error)
-			// 		toast.error("Error al crear el área")
-			// 		return
-			// 	}
-			// 	setOpen(false)
-			// 	toast.success("Técnico creado exitosamente")
-			// },
-		})
+		},
+		// defaultValues: {
+		// 	nombre: "",
+		// 	tipo: "",
+		// 	iluminacion: "",
+		// 	plano: "",
+		// 	imagenes: "",
+		// 	puntos: "",
+		// },
+		// validators: {
+		// 	onSubmit: areaFormValidator,
+		// },
+		// onSubmit: async ({ value }) => {
+		// 	const result = await createAreaMutation({ data: value })
+		// 	if (!result) {
+		// 		console.error("Error al crear el área", error)
+		// 		toast.error("Error al crear el área")
+		// 		return
+		// 	}
+		// 	setOpen(false)
+		// 	toast.success("Técnico creado exitosamente")
+		// },
+	})
 
 	return (
 		<form
@@ -99,12 +137,15 @@ const error = null
 			}}
 		>
 			<FieldGroup className="gap-5">
-				
-				<AreaNombre form={form}/>
+				<AreaNombre form={form} />
 
 				<AreaIluminacion form={form} />
 
-				{/* <AreaDimensiones form={form}/> */}
+				<AreaDimensiones
+					form={form}
+					planoFiles={planoFiles}
+					setPlanoFiles={setPlanoFiles}
+				/>
 
 				{/* <AreaCroquis form={form}/> */}
 
@@ -138,38 +179,36 @@ const error = null
 	)
 }
 
-function AreaNombre({form}: {form: any}) {
+function AreaNombre({ form }: { form: any }) {
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-2 gap-7 sm:gap-y-4 sm:gap-x-10 justify-center items-start w-5/6 sm:w-full mx-auto mb-3 sm:mb-0">
 			<form.Field
-						name="nombre"
-						children={field => {
-							const isInvalid =
-								field.state.meta.isTouched && !field.state.meta.isValid
-							return (
-								<Field data-invalid={isInvalid} className="relative gap-1">
-									<FieldLabel htmlFor={field.name}>
-										Nombre del Area
-									</FieldLabel>
-									<Input
-										id={field.name}
-										name={field.name}
-										value={field.state.value}
-										onBlur={field.handleBlur}
-										onChange={e => field.handleChange(e.target.value)}
-										aria-invalid={isInvalid}
-										placeholder="Ej. Planta Baja"
-									/>
-									{isInvalid && (
-										<FieldError
-											errors={field.state.meta.errors}
-											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
-										/>
-									)}
-								</Field>
-							)
-						}}
-					/>
+				name="nombre"
+				children={field => {
+					const isInvalid =
+						field.state.meta.isTouched && !field.state.meta.isValid
+					return (
+						<Field data-invalid={isInvalid} className="relative gap-1">
+							<FieldLabel htmlFor={field.name}>Nombre del Area</FieldLabel>
+							<Input
+								id={field.name}
+								name={field.name}
+								value={field.state.value}
+								onBlur={field.handleBlur}
+								onChange={e => field.handleChange(e.target.value)}
+								aria-invalid={isInvalid}
+								placeholder="Ej. Planta Baja"
+							/>
+							{isInvalid && (
+								<FieldError
+									errors={field.state.meta.errors}
+									className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+								/>
+							)}
+						</Field>
+					)
+				}}
+			/>
 
 			<form.Field
 				name="tipo"
@@ -178,9 +217,7 @@ function AreaNombre({form}: {form: any}) {
 						field.state.meta.isTouched && !field.state.meta.isValid
 					return (
 						<Field data-invalid={isInvalid} className="relative gap-1">
-							<FieldLabel htmlFor={field.name}>
-								Tipo de Area
-							</FieldLabel>
+							<FieldLabel htmlFor={field.name}>Tipo de Area</FieldLabel>
 							<Input
 								id={field.name}
 								name={field.name}
@@ -204,8 +241,7 @@ function AreaNombre({form}: {form: any}) {
 	)
 }
 
-function AreaIluminacion({form}: {form: any}) {
-
+function AreaIluminacion({ form }: { form: any }) {
 	const TIPO = ["natural", "artificial", "mixta"]
 	const FUENTE = ["incandescente", "descarga", "mixta"]
 	const ILUMINACION = ["general", "localizada", "mixta"]
@@ -220,8 +256,7 @@ function AreaIluminacion({form}: {form: any}) {
 				</div>
 			</div>
 
-			<div className="grid grid-cols-1 sm:grid-cols-2 gap-7 sm:gap-y-4 sm:gap-x-10 justify-center items-start w-5/6 sm:w-full mx-auto mb-3 sm:mb-0">	
-				
+			<div className="grid grid-cols-1 sm:grid-cols-2 gap-7 sm:gap-y-4 sm:gap-x-10 justify-center items-start w-5/6 sm:w-full mx-auto mb-3 sm:mb-0">
 				<form.Field
 					name="iluminacionTipo"
 					defaultValue={TIPO[0]}
@@ -258,7 +293,6 @@ function AreaIluminacion({form}: {form: any}) {
 													{tipo.toUpperCase()}
 												</SelectItem>
 											))}
-								
 										</SelectGroup>
 									</SelectContent>
 								</Select>
@@ -283,9 +317,7 @@ function AreaIluminacion({form}: {form: any}) {
 
 						return (
 							<Field data-invalid={isInvalid} className="relative gap-1">
-								<FieldLabel htmlFor={field.name}>
-									Tipo de Fuente
-								</FieldLabel>
+								<FieldLabel htmlFor={field.name}>Tipo de Fuente</FieldLabel>
 
 								<Select
 									value={field.state.value || ""}
@@ -334,9 +366,7 @@ function AreaIluminacion({form}: {form: any}) {
 
 						return (
 							<Field data-invalid={isInvalid} className="relative gap-1">
-								<FieldLabel htmlFor={field.name}>
-									Iluminación
-								</FieldLabel>
+								<FieldLabel htmlFor={field.name}>Iluminación</FieldLabel>
 
 								<Select
 									value={field.state.value || ""}
@@ -385,9 +415,7 @@ function AreaIluminacion({form}: {form: any}) {
 
 						return (
 							<Field data-invalid={isInvalid} className="relative gap-1">
-								<FieldLabel htmlFor={field.name}>
-									Valor Requerido
-								</FieldLabel>
+								<FieldLabel htmlFor={field.name}>Valor Requerido</FieldLabel>
 
 								<Select
 									value={field.state.value || ""}
@@ -428,40 +456,46 @@ function AreaIluminacion({form}: {form: any}) {
 				/>
 
 				<form.Field
-				name="observacion"
-				children={field => {
-					const isInvalid =
-						field.state.meta.isTouched && !field.state.meta.isValid
-					return (
-						<Field data-invalid={isInvalid} className="relative gap-0">
-							<FieldLabel htmlFor={field.name}>
-								Observación
-							</FieldLabel>
-							<Input
-								id={field.name}
-								name={field.name}
-								value={field.state.value}
-								onBlur={field.handleBlur}
-								onChange={e => field.handleChange(e.target.value)}
-								aria-invalid={isInvalid}
-								placeholder="Ej. Iluminaria Led"
-							/>
-							{isInvalid && (
-								<FieldError
-									errors={field.state.meta.errors}
-									className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+					name="observacion"
+					children={field => {
+						const isInvalid =
+							field.state.meta.isTouched && !field.state.meta.isValid
+						return (
+							<Field data-invalid={isInvalid} className="relative gap-0">
+								<FieldLabel htmlFor={field.name}>Observación</FieldLabel>
+								<Input
+									id={field.name}
+									name={field.name}
+									value={field.state.value}
+									onBlur={field.handleBlur}
+									onChange={e => field.handleChange(e.target.value)}
+									aria-invalid={isInvalid}
+									placeholder="Ej. Iluminaria Led"
 								/>
-							)}
-						</Field>
-					)
-				}}
+								{isInvalid && (
+									<FieldError
+										errors={field.state.meta.errors}
+										className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+									/>
+								)}
+							</Field>
+						)
+					}}
 				/>
 			</div>
 		</>
 	)
 }
 
-function AreaDimensiones({form}: {form: any}) {
+function AreaDimensiones({
+	form,
+	planoFiles,
+	setPlanoFiles,
+}: {
+	form: any
+	planoFiles: File[]
+	setPlanoFiles: Dispatch<SetStateAction<File[]>>
+}) {
 	return (
 		<>
 			<div className="flex items-center justify-between border-b border-orange-700/50 dark:border-orange-300/50 my-10 w-full">
@@ -472,41 +506,91 @@ function AreaDimensiones({form}: {form: any}) {
 			</div>
 
 			<div className="grid grid-cols-1 sm:grid-cols-3 gap-8 w-5/6 mx-auto sm:w-full">
-				<div className="flex flex-col gap-1">
-					<Label className="tracking-wider" htmlFor="largo">
-						Largo (m)
-					</Label>
-					<Input
-						id="largo"
-						placeholder="Ej. 4"
-						defaultValue="Ej. 4"
-						readOnly
-					/>
-				</div>
+				<form.Field
+					name="largo"
+					children={field => {
+						const isInvalid =
+							field.state.meta.isTouched && !field.state.meta.isValid
+						return (
+							<Field data-invalid={isInvalid} className="relative gap-1">
+								<FieldLabel htmlFor={field.name}>Largo(m)</FieldLabel>
+								<Input
+									id={field.name}
+									name={field.name}
+									value={field.state.value}
+									onBlur={field.handleBlur}
+									onChange={e => field.handleChange(e.target.value)}
+									aria-invalid={isInvalid}
+									placeholder="Ej. 4"
+								/>
+								{isInvalid && (
+									<FieldError
+										errors={field.state.meta.errors}
+										className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+									/>
+								)}
+							</Field>
+						)
+					}}
+				/>
 
-				<div className="flex flex-col gap-1">
-					<Label className="tracking-wider" htmlFor="ancho">
-						Ancho (m)
-					</Label>
-					<Input
-						id="ancho"
-						placeholder="Ej. 6"
-						defaultValue="Ej. 6"
-						readOnly
-					/>
-				</div>
+				<form.Field
+					name="ancho"
+					children={field => {
+						const isInvalid =
+							field.state.meta.isTouched && !field.state.meta.isValid
+						return (
+							<Field data-invalid={isInvalid} className="relative gap-1">
+								<FieldLabel htmlFor={field.name}>Ancho(m)</FieldLabel>
+								<Input
+									id={field.name}
+									name={field.name}
+									value={field.state.value}
+									onBlur={field.handleBlur}
+									onChange={e => field.handleChange(e.target.value)}
+									aria-invalid={isInvalid}
+									placeholder="Ej. 5"
+								/>
+								{isInvalid && (
+									<FieldError
+										errors={field.state.meta.errors}
+										className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+									/>
+								)}
+							</Field>
+						)
+					}}
+				/>
 
-				<div className="flex flex-col gap-1">
-					<Label className="tracking-wider" htmlFor="altomontaje">
-						Alto del montaje (m)
-					</Label>
-					<Input
-						id="altomontaje"
-						placeholder="Ej. 2"
-						defaultValue="Ej. 2"
-						readOnly
-					/>
-				</div>
+				<form.Field
+					name="alto"
+					children={field => {
+						const isInvalid =
+							field.state.meta.isTouched && !field.state.meta.isValid
+						return (
+							<Field data-invalid={isInvalid} className="relative gap-1">
+								<FieldLabel htmlFor={field.name}>
+									Alto del montaje (m)
+								</FieldLabel>
+								<Input
+									id={field.name}
+									name={field.name}
+									value={field.state.value}
+									onBlur={field.handleBlur}
+									onChange={e => field.handleChange(e.target.value)}
+									aria-invalid={isInvalid}
+									placeholder="Ej. 2"
+								/>
+								{isInvalid && (
+									<FieldError
+										errors={field.state.meta.errors}
+										className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+									/>
+								)}
+							</Field>
+						)
+					}}
+				/>
 			</div>
 
 			<div className="flex flex-col gap-1 w-5/6 mx-auto sm:w-full">
@@ -514,57 +598,68 @@ function AreaDimensiones({form}: {form: any}) {
 					Imágenes del Área
 				</Label>
 				<div className="card p-2 bg-background ">
-						<InputFiles
-							text="Imágenes del área a medir."
-							files={planoFiles}
-							setFiles={setPlanoFiles}
-							editMode={true}
-						/>
+					<InputFiles
+						text="Imágenes del área a medir."
+						files={planoFiles}
+						setFiles={setPlanoFiles}
+						editMode={true}
+					/>
 				</div>
 			</div>
 
-			<div className="w-5/6 sm:w-full mx-auto flex flex-col items-stretch justify-between gap-3">
-					<span className="w-full italic font-semibold text-foreground/50 tracking-widest border-b border-foreground/10 text-left">
-						Indice del local{" "}
-					</span>
+			<form.Subscribe
+				selector={state => [
+					state.values.largo,
+					state.values.ancho,
+					state.values.alto,
+				]}
+				children={([largo, ancho, alto]) => {
+					return (
+						largo !== "" &&
+						ancho !== "" &&
+						alto !== "" && (
+							<Formula
+								alto={Number(alto)}
+								ancho={Number(ancho)}
+								largo={Number(largo)}
+							/>
+						)
+					)
+				}}
+			/>
 
-					<div className="w-full flex sm:flex-row flex-col">
-						<div className="flex flex-col gap-2 justify-center items-center flex-1">
-							<div className="flex justify-end items-center gap-3 py-4 text-xs sm:text-base">
-								<div className="flex flex-col">
-									<span className="p-1 border-b border-foreground/50 w-full text-center sm:px-10">
-										4 * 6
-									</span>
-									<span className="p-1 text-center">2 * ( 4 + 6 )</span>
-								</div>
-								<Equal size={16} />
-								<span className="italic font-semibold text-xs sm:text-lg tracking-widest">
-									0.83
-								</span>
-								<EqualApproximately size={16} />
-								<span className="text-xl sm:text-2xl bg-teal-500/50 px-4 py-1 rounded-lg">
-									1
-								</span>
-							</div>
-						</div>
-
-						<div className="flex-1 flex flex-col gap-2 items-center justify-end">
-							<span className="text-2xl sm:text-3xl font-semibold bg-pink-500/50 px-4 py-1 rounded-lg">
-								9
-							</span>
-							<span className="italic textXS">Número de mediciones</span>
-						</div>
-					</div>
-
-					<span className="italic  border-t border-foreground/10 py-2 w-full text-right textXS text-foreground/50">
-						Res. 84/2012 S.R.T.
-					</span>
+			<div className="flex items-center justify-between border-b border-purple-700/75 dark:border-purple-500/75 my-10 w-full">
+				<div className="textL py-2 px-3 flex items-center gap-8 justify-between w-full">
+					Mediciones{" "}
+					<HardHat className="sm:size-7 2xl:size-9 text-purple-700/75 dark:text-purple-500/75" />
 				</div>
+			</div>
+
+			<form.Subscribe
+				selector={state => [
+					state.values.largo,
+					state.values.ancho,
+					state.values.alto,
+				]}
+				children={([largo, ancho, alto]) => {
+					return (
+						largo !== "" &&
+						ancho !== "" &&
+						alto !== "" && (
+							<Grilla
+								ancho={Number(ancho)}
+								largo={Number(largo)}
+								alto={Number(alto)}
+							/>
+						)
+					)
+				}}
+			/>
 		</>
 	)
 }
 
-function AreaCroquis({form}: {form: any}) {
+function AreaCroquis({ form }: { form: any }) {
 	const PUNTOS = ["301", "299", "300", "287", "293", "*", "*", "*", "*"]
 	return (
 		<>
@@ -603,13 +698,81 @@ function AreaCroquis({form}: {form: any}) {
 						key={i}
 						className="px-2 sm:px-0 w-full flex items-center justify-between py-1 border-b border-foreground/10"
 					>
-						<span className="text-sm italic tracking-widest">punto-{i + 1}</span>
+						<span className="text-sm italic tracking-widest">
+							punto-{i + 1}
+						</span>
 						<span className="text-sm font-semibold">{p}</span>
 						<Trash2 size={14} className="text-destructive" />
 					</div>
 				))}
 			</div>
-			
 		</>
+	)
+}
+
+function Grilla({
+	ancho,
+	largo,
+	alto,
+}: {
+	ancho: number
+	largo: number
+	alto: number
+}) {
+	const indiceDeLocal = getIndiceDeLocal(largo, ancho, alto)
+	const indiceRedondeo = getIndiceRedondeo(indiceDeLocal)
+	const celdas = (indiceRedondeo + 2) ** 2
+	const div = Math.sqrt(celdas).toFixed(0)
+	const divisionesLargo = Number(div)
+	const divisionesAncho = Number(div)
+	const largoRatio = 150 * divisionesLargo
+	const anchoGrilla = `${(ancho / largo) * largoRatio}px`
+	const largoGrilla = `${150 * divisionesLargo}px`
+
+	return (
+		<div className="w-full min-h-[500px] overflow-auto flex flex-col  p-10">
+			<div
+				className="grid relative mx-auto"
+				style={{
+					height: largoGrilla,
+					width: anchoGrilla,
+					gridTemplateColumns: `repeat(${divisionesAncho}, 1fr)`,
+					gridTemplateRows: `repeat(${divisionesLargo}, 1fr)`,
+				}}
+			>
+				<span className="absolute left-0 -top-10 w-full border-b border-foreground/50 text-foreground/50">
+					Ancho: {ancho}m
+				</span>
+				<span
+					className={`absolute -left-4 bottom-0 border-b border-foreground/50 text-foreground/50 -rotate-90 origin-bottom-left`}
+					style={{ width: largoGrilla }}
+				>
+					Largo: {largo}m
+				</span>
+				{Array.from({ length: celdas }).map((_, index) => (
+					<div
+						key={index}
+						className={`border border-cyan-300/40 flex items-center justify-center text-xl text-black`}
+					>
+						<PuntoInput index={index} />
+					</div>
+				))}
+			</div>
+		</div>
+	)
+}
+
+function PuntoInput({ index }: { index: number }) {
+	const PUNTOS = ["301", "299", "300", "287", "293", "*", "*", "*", "*"]
+
+	return (
+		<div className="flex flex-col gap-1 items-center justify-center">
+			<span className="italic tracking-widest text-xs text-foreground">
+				punto-{index + 1}
+			</span>
+			<span className="w-15 text-xl font-semibold py-1 px-3 card bg-accent sm:bg-accent text-foreground justify-center items-center min-h-9">
+				{PUNTOS[index]}
+			</span>
+		</div>
 	)
 }

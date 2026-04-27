@@ -39,6 +39,9 @@ export const part2DataDefault = {
 	iluminacion: "general",
 	requerido: "200",
 	observacion: "",
+	largo: "",
+	ancho: "",
+	alto: "",
 }
 
 export const areaFormValidator = z.object({
@@ -49,6 +52,9 @@ export const areaFormValidator = z.object({
 	iluminacion: z.enum(["general", "localizada", "mixta"]),
 	requerido: z.enum(["100", "200", "300", "750", "1000"]),
 	observacion: z.string(),
+	largo: z.string(),
+	ancho: z.string(),
+	alto: z.string(),
 })
 export type Part3DataType = {}
 export const part3DataDefault = {}
