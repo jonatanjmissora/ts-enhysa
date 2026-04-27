@@ -17,11 +17,11 @@ import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { empresasQueryOptions } from "queries/empresas/empresas-query"
 import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
 import { Part1DataType } from "@/routes/_protected/new-report2"
+import { updateClima } from "@/lib/utils"
 
-export default function MovilPart1Data({setReportStep, part1Data, setPart1Data}: {setReportStep: Dispatch<SetStateAction<1 | 2 | 3 | 4>>, setPart1Data: (data: Part1DataType) => void, part1Data: Part1DataType} ) {
+export default function MovilPart1Data({setReportStep, part1Data, setPart1Data}: {setReportStep: Dispatch<SetStateAction<1 | 2 | 3 | 4>>, setPart1Data: Dispatch<SetStateAction<Part1DataType>>, part1Data: Part1DataType} ) {
 	return (
 		<article className="w-full my-20 sm:my-4 flex flex-col gap-8">
-			{JSON.stringify(part1Data)}
 			<div className="flex flex-col gap-3 relative">
 				<TextTooltip
 					text={"Datos obtenidos a través del perfil."}
@@ -68,7 +68,7 @@ export default function MovilPart1Data({setReportStep, part1Data, setPart1Data}:
 				</Suspense>
 			</div>
 
-			<Clima />
+			<Clima part1Data={part1Data} setPart1Data={setPart1Data}/>
 
 			<div className="w-5/6 mx-auto my-10">
 				<button
@@ -86,18 +86,19 @@ function Tecnico() {
 	const { data: tecnico } = useSuspenseQuery(tecnicoQueryOptions)
 	return (
 		<span className="w-5/6 mx-auto px-6 py-2 card justify-end bg-accent textXS">
-					{tecnico?.nombre?.toUpperCase() || "SIN DATOS"}
-				</span>
+			{tecnico?.nombre?.toUpperCase() || "SIN DATOS"}
+		</span>
 	)
 }
 
-function Empresas ({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Data: (data: Part1DataType) => void}) {
+function Empresas ({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Data: Dispatch<SetStateAction<Part1DataType>>}) {
 	const { data: empresas } = useSuspenseQuery(empresasQueryOptions)
 	if(!empresas || empresas?.length === 0) return
 	const actualEmpresa = empresas?.find(empresa => empresa.id === part1Data.empresaId) || empresas[0]
 	useEffect(() => {
-		if(actualEmpresa) 
-		setPart1Data({...part1Data, empresaId: actualEmpresa.id})
+		if(actualEmpresa) {
+			setPart1Data(prev =>({...prev, empresaId: actualEmpresa.id}))
+		}
 	}, [])
 	return (
 		<div className="w-5/6 mx-auto">
@@ -131,13 +132,14 @@ function Empresas ({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart
 	)
 }
 
-function Instrumentos ({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Data: (data: Part1DataType) => void}) {
+function Instrumentos ({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Data: Dispatch<SetStateAction<Part1DataType>>}) {
 	const { data: instrumentos } = useSuspenseQuery(instrumentosQueryOptions)
 	if(!instrumentos || instrumentos?.length === 0) return
 	const actualInstrumento = instrumentos?.find(instrumento => instrumento.id === part1Data.instrumentoId) || instrumentos[0]
 	useEffect(() => {
-		if(actualInstrumento) 
-		setPart1Data({...part1Data, instrumentoId: actualInstrumento.id})
+		if(actualInstrumento) {
+			setPart1Data(prev =>({...prev, instrumentoId: actualInstrumento.id}))
+		}
 	}, [])
 	return (
 		<div className="w-5/6 mx-auto">
@@ -170,80 +172,110 @@ function Instrumentos ({part1Data, setPart1Data}: {part1Data: Part1DataType, set
 	)
 }
 
-function Clima() {
+function Clima({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Data: Dispatch<SetStateAction<Part1DataType>>}) {
 	return (
-<div className="grid grid-cols-1 gap-8 w-full ">
-	<div className="flex flex-col gap-1 w-5/6 mx-auto">
-		<Label className="tracking-wider" htmlFor="matricula">
-			Clima
-		</Label>
-		<Select defaultValue="soleado">
-			<SelectTrigger className="w-full dark:bg-accent bg-accent">
-				<SelectValue />
-			</SelectTrigger>
-			<SelectContent className="w-full p-2 px-6">
-				<SelectGroup>
-					<SelectLabel>Estado del clima</SelectLabel>
-					<SelectItem value="soleado">
-						<Sun size={12} />
-						Soleado
-					</SelectItem>
-					<SelectItem value="numblado">
-						<Cloud size={12} />
-						Nublado
-					</SelectItem>
-					<SelectItem value="templado">
-						<CloudSun size={12} />
-						Templado
-					</SelectItem>
-					<SelectItem value="lluvioso">
-						<CloudRain size={12} />
-						Lluvioso
-					</SelectItem>
-				</SelectGroup>
-			</SelectContent>
-		</Select>
-	</div>
+		<div className="grid grid-cols-1 gap-8 w-full ">
+			<div className="flex flex-col gap-1 w-5/6 mx-auto">
+				<Label className="tracking-wider" htmlFor="matricula">
+					Clima
+				</Label>
+				<Select defaultValue={part1Data.clima[0]} 
+					onValueChange={(e) => 
+						setPart1Data(prev => {
+							const newClima = updateClima(part1Data.clima, 0, e)
+							return{
+								...prev,
+								clima: newClima
+							}
+						})
+					}
+					>
+					<SelectTrigger className="w-full dark:bg-accent bg-accent">
+						<SelectValue />
+					</SelectTrigger>
+					<SelectContent className="w-full p-2 px-6">
+						<SelectGroup>
+							<SelectLabel>Estado del clima</SelectLabel>
+							<SelectItem value="0">
+								<Sun size={12} />
+								Soleado
+							</SelectItem>
+							<SelectItem value="1">
+								<Cloud size={12} />
+								Nublado
+							</SelectItem>
+							<SelectItem value="2">
+								<CloudSun size={12} />
+								Templado
+							</SelectItem>
+							<SelectItem value="3">
+								<CloudRain size={12} />
+								Lluvioso
+							</SelectItem>
+						</SelectGroup>
+					</SelectContent>
+				</Select>
+			</div>
 
-	<div className="flex flex-col gap-1 w-5/6 mx-auto">
-		<Label className="tracking-wider" htmlFor="matricula">
-			Humedad
-		</Label>
-		<Select defaultValue="60">
-			<SelectTrigger className="w-full dark:bg-accent bg-accent">
-				<SelectValue />
-			</SelectTrigger>
-			<SelectContent className="w-full p-2">
-				<SelectGroup>
-					<SelectLabel>Humedad</SelectLabel>
-					<SelectItem value="60">60%</SelectItem>
-					<SelectItem value="70">70%</SelectItem>
-					<SelectItem value="80">80%</SelectItem>
-					<SelectItem value="90">90%</SelectItem>
-				</SelectGroup>
-			</SelectContent>
-		</Select>
-	</div>
+			<div className="flex flex-col gap-1 w-5/6 mx-auto">
+				<Label className="tracking-wider" htmlFor="matricula">
+					Humedad
+				</Label>
+				<Select defaultValue={part1Data.clima[1]}
+				onValueChange={(e) => 
+						setPart1Data(prev => {
+							const newClima = updateClima(part1Data.clima, 1, e)
+							return{
+								...prev,
+								clima: newClima
+							}
+						})
+					}
+				>
+					<SelectTrigger className="w-full dark:bg-accent bg-accent">
+						<SelectValue />
+					</SelectTrigger>
+					<SelectContent className="w-full p-2">
+						<SelectGroup>
+							<SelectLabel>Humedad</SelectLabel>
+							<SelectItem value="0">60%</SelectItem>
+							<SelectItem value="1">70%</SelectItem>
+							<SelectItem value="2">80%</SelectItem>
+							<SelectItem value="3">90%</SelectItem>
+						</SelectGroup>
+					</SelectContent>
+				</Select>
+			</div>
 
-	<div className="flex flex-col gap-1 w-5/6 mx-auto">
-		<Label className="tracking-wider" htmlFor="matricula">
-			Temperatura
-		</Label>
-		<Select defaultValue="20">
-			<SelectTrigger className="w-full dark:bg-accent bg-accent">
-				<SelectValue />
-			</SelectTrigger>
-			<SelectContent className="w-full p-2">
-				<SelectGroup>
-					<SelectLabel>Tempreatura</SelectLabel>
-					<SelectItem value="10">10°C</SelectItem>
-					<SelectItem value="20">20°C</SelectItem>
-					<SelectItem value="30">30°C</SelectItem>
-					<SelectItem value="40">40°C</SelectItem>
-				</SelectGroup>
-			</SelectContent>
-		</Select>
-	</div>
-</div>
+			<div className="flex flex-col gap-1 w-5/6 mx-auto">
+				<Label className="tracking-wider" htmlFor="matricula">
+					Temperatura
+				</Label>
+				<Select defaultValue={part1Data.clima[2]}
+				onValueChange={(e) => 
+						setPart1Data(prev => {
+							const newClima = updateClima(part1Data.clima, 2, e)
+							return{
+								...prev,
+								clima: newClima
+							}
+						})
+					}
+				>
+					<SelectTrigger className="w-full dark:bg-accent bg-accent">
+						<SelectValue />
+					</SelectTrigger>
+					<SelectContent className="w-full p-2">
+						<SelectGroup>
+							<SelectLabel>Tempreatura</SelectLabel>
+							<SelectItem value="0">10°C</SelectItem>
+							<SelectItem value="1">20°C</SelectItem>
+							<SelectItem value="2">30°C</SelectItem>
+							<SelectItem value="3">40°C</SelectItem>
+						</SelectGroup>
+					</SelectContent>
+				</Select>
+			</div>
+		</div>
 	)
 }

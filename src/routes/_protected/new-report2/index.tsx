@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { FileChartColumn } from "lucide-react"
-import Part1Data from "@/components/dashboard/nuevo-reporte2/part-1"
 import Part2Data from "@/components/dashboard/nuevo-reporte2/part-2"
 import Part3Data from "@/components/dashboard/nuevo-reporte2/part-3"
 import MovilNewReport from "@/components/movil/new-report"
 import { useState } from "react"
+import Part1Data from "@/components/dashboard/nuevo-reporte2/part1"
 
 export const Route = createFileRoute("/_protected/new-report2/")({
 	component: RouteComponent,
@@ -18,7 +18,7 @@ export type Part1DataType = {
 export const part1DataDefault: Part1DataType = {
 	empresaId: "",
 	instrumentoId: "",
-	clima: "",
+	clima: "000",
 }
 export type AreaType = {
 	id?: string

@@ -26,9 +26,12 @@ import { Label } from "@/components/ui/label"
 import { TextTooltip } from "../../layout/text-tooltip"
 import { Input } from "../../ui/input"
 import { Part1DataType } from "@/routes/_protected/new-report2"
-import { Dispatch, SetStateAction } from "react"
+import { useSuspenseQuery } from "@tanstack/react-query"
+import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
+import { Suspense } from "react"
+import { empresasQueryOptions } from "queries/empresas/empresas-query"
 
-export default function Part1Data({setReportStep, part1Data, setPart1Data}: {setReportStep?: Dispatch<SetStateAction<1 | 2 | 3 | 4>>, part1Data: Part1DataType, setPart1Data: (data: Part1DataType) => void}) {
+export default function Part1Data({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Data: (data: Part1DataType) => void}) {
 	return (
 		<article className="w-full my-10 sm:my-4 relative">
 			<TextTooltip
@@ -46,9 +49,11 @@ export default function Part1Data({setReportStep, part1Data, setPart1Data}: {set
 					className="border-b border-foreground/10 relative"
 				>
 					<div className="absolute top-2  left-1/2">
-						<span className="w-60 px-6 py-2 card bg-background textXS ring ring-foreground/10 dark:ring-foreground/7 justify-end">
-							MISSORA JONATAN
-						</span>
+						<Suspense fallback={<span className="w-60 px-6 py-2 card bg-background textXS ring ring-foreground/10 dark:ring-foreground/7 justify-end">
+							. . .
+						</span>}>
+							<TecnicoSuspended />
+						</Suspense>
 					</div>
 					<AccordionTrigger className="flex px-5 w-11/12 sm:w-full items-center justify-between">
 						<div className="flex items-center gap-2">
@@ -58,7 +63,7 @@ export default function Part1Data({setReportStep, part1Data, setPart1Data}: {set
 						<span className="flex-1 ml-auto text-right">ver</span>
 					</AccordionTrigger>
 					<AccordionContent>
-						<Tecnico />
+						<Tecnico/>
 					</AccordionContent>
 				</AccordionItem>
 
@@ -212,18 +217,28 @@ export default function Part1Data({setReportStep, part1Data, setPart1Data}: {set
 	)
 }
 
+function TecnicoSuspended() {
+	const { data: tecnico } = useSuspenseQuery(tecnicoQueryOptions)
+	return (
+		<span className="w-60 px-6 py-2 card bg-background textXS ring ring-foreground/10 dark:ring-foreground/7 justify-end">
+			{tecnico?.nombre?.toUpperCase() || "SIN DATOS"}
+		</span>
+	)
+}
+
 const Tecnico = () => {
+	const { data: tecnico } = useSuspenseQuery(tecnicoQueryOptions)
 	return (
 		<div className="bg-accent sm:bg-background py-10 sm:p-10 flex items-center justify-center">
 			<div className="grid-cols-1 grid sm:grid-cols-2 gap-8 w-5/6">
 				<div className="flex flex-col gap-1">
-					<label className="tracking-wider" htmlFor="matricula">
-						Nombre
+					<label className="tracking-wider" htmlFor="nombre">
+						Nombre Completo
 					</label>
 					<Input
-						id="matricula"
-						placeholder="N° Matrícula "
-						defaultValue="MISSORA JONATAN"
+						id="nombre"
+						placeholder="Nombre Completo"
+						defaultValue={tecnico?.nombre?.toUpperCase()}
 						readOnly
 						className="bg-accent"
 					/>
@@ -235,7 +250,7 @@ const Tecnico = () => {
 					<Input
 						id="cargo"
 						placeholder="Ej. Seguridad e Higiene"
-						defaultValue="Técnico en Seguridad e Higiene"
+						defaultValue={tecnico?.cargo?.toUpperCase()}
 						readOnly
 						className="bg-accent"
 					/>
@@ -250,10 +265,10 @@ const Tecnico = () => {
 				<div className="flex flex-col gap-1">
 					<p className="tracking-wider text-left">pie de página</p>
 					<span className="card bg-background sm:bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
-						SeH MISSORA JONATAN
+						{tecnico?.cargo?.toUpperCase()} {tecnico?.nombre?.toUpperCase()}
 					</span>
 					<span className="card bg-background sm:bg-accent py-2 px-4 rounded-lg flex items-center justify-center">
-						MAT 1234523
+						MAT {tecnico?.matricula}
 					</span>
 				</div>
 			</div>
@@ -261,7 +276,15 @@ const Tecnico = () => {
 	)
 }
 
+function EmpresasSuspended() {
+	const {data: empresas} = useSuspenseQuery(empresasQueryOptions)
+	return (
+		
+	)
+}
+
 const Empresa = () => {
+	const {data: empresas} = useSuspenseQuery(empresasQueryOptions)
 	return (
 		<div className="bg-accent sm:bg-background py-10 sm:p-10 flex items-center justify-center">
 			<div className="grid-cols-1 grid sm:grid-cols-2 gap-8 w-5/6">
@@ -272,7 +295,7 @@ const Empresa = () => {
 					<Input
 						id="razon-social"
 						placeholder="Nombre de la empresa"
-						value="TELEFONICA S.A"
+						value={"TELEFONICA S.A"}
 						readOnly
 						className="bg-accent"
 					/>

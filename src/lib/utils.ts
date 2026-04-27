@@ -168,3 +168,11 @@ export const getLastPuntoOrden = (puntos: PuntoType[] | []) => {
 	const lastPunto = puntos[puntos.length - 1]
 	return lastPunto?.orden ?? 0
 }
+
+export const updateClima = (clima: string, position: number, value: string) => {
+	let newClima = clima.split("")
+	console.log("new clima split", {newClima, position, value})
+	newClima[position] = value
+	console.log("new clima join", newClima.join(""))
+	return newClima.join("")
+}
