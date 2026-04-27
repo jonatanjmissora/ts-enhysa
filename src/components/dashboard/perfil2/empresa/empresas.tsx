@@ -18,7 +18,7 @@ export default function ProfileEmpresas() {
 	return (
 		<Suspense
 			fallback={
-				<span className="p-20 text-foreground/70">Cargando Empresas</span>
+				<span className="flex items-center justify-center text-foreground/70">Cargando Empresas</span>
 			}
 		>
 			<EmpresasList />
@@ -158,7 +158,9 @@ const Empresa = ({ empresa }: { empresa: EmpresaType }) => {
 					</div>
 				</div>
 			</div>
-			<EditEmpresa empresa={empresa} />
+			<div className="hidden sm:block">
+				<EditEmpresa empresa={empresa} />
+			</div>
 		</div>
 	)
 }

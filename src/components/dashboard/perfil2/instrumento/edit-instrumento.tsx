@@ -43,6 +43,10 @@ export function EditInstrumento({
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild>
 				<div className="mx-auto w-5/6">
+					<div className="w-full sm:hidden flex items-center gap-2 justify-center">
+						<Pencil size={14} className="text-foreground" />
+						Editar
+					</div>
 					<div className="sm:block hidden my-10 w-1/4 ml-auto">
 						<button className="card bg-background sm:bg-accent rounded-lg cursor-pointer textM text-sm sm:text-base py-2 w-full justify-center gap-4 ml-auto">
 							<Pencil className="size-6 text-foreground/70" />
@@ -156,7 +160,7 @@ export function EditInstrumentoForm({
 									<Input
 										id={field.name}
 										name={field.name}
-										value={field.state.value}
+										value={field.state.value.toUpperCase()}
 										onBlur={field.handleBlur}
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
@@ -187,7 +191,7 @@ export function EditInstrumentoForm({
 									<Input
 										id={field.name}
 										name={field.name}
-										value={field.state.value}
+										value={field.state.value.toUpperCase()}
 										onBlur={field.handleBlur}
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
@@ -215,7 +219,7 @@ export function EditInstrumentoForm({
 									<Input
 										id={field.name}
 										name={field.name}
-										value={field.state.value}
+										value={field.state.value.toUpperCase()}
 										onBlur={field.handleBlur}
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
@@ -245,7 +249,7 @@ export function EditInstrumentoForm({
 									<Input
 										id={field.name}
 										name={field.name}
-										value={field.state.value}
+										value={field.state.value.toUpperCase()}
 										onBlur={field.handleBlur}
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}

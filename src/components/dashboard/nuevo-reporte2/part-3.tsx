@@ -1,9 +1,9 @@
 import { Database, List, NotebookPen, Search } from "lucide-react"
 import { Label } from "@/components/ui/label"
 import { Dispatch, SetStateAction } from "react"
-import { Part3DataType } from "@/routes/_protected/new-report2"
+import { Part1DataType, Part3DataType } from "@/routes/_protected/new-report2"
 
-export default function Part3Data({setReportStep, setPart3Data, part3Data}: {setReportStep?: Dispatch<SetStateAction<1 | 2 | 3 | 4>>, setPart3Data: (data: Part3DataType) => void, part3Data: Part3DataType}) {
+export default function Part3Data({setReportStep, setPart3Data, part3Data}: {setReportStep?: Dispatch<SetStateAction<1 | 2 | 3 | 4>>, setPart3Data: Dispatch<SetStateAction<Part3DataType>>, part3Data: Part3DataType}) {
 	return (
 		<article className="w-full flex flex-col justify-center items-center">
 			<div className="flex items-center justify-between w-full px-5 rounded border-b border-pink-500/25 m-15 sm:mt-0 sm:border-none sm:bg-pink-500/15">

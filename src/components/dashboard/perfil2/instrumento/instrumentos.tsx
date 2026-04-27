@@ -18,7 +18,7 @@ export default function ProfileInstrumentos() {
 	return (
 		<Suspense
 			fallback={
-				<span className="p-20 text-foreground/70">Cargando Instrumentos</span>
+				<span className="flex items-center justify-center text-foreground/70">Cargando Instrumentos</span>
 			}
 		>
 			<InstrumentosList />
@@ -130,7 +130,9 @@ const Instrumento = ({ instrumento }: { instrumento: InstrumentoType }) => {
 					</div>
 				</div>
 			</div>
-			<EditInstrumento instrumento={instrumento} />
+			<div className="hidden sm:block">
+				<EditInstrumento instrumento={instrumento} />
+			</div>
 		</div>
 	)
 }
