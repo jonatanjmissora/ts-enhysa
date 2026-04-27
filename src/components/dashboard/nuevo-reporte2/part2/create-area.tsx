@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { useForm } from "@tanstack/react-form"
 import {
 	AlertDialog,
@@ -95,6 +95,7 @@ function CreateNewAreaForm({
 	const isPending = false
 	const error = null
 	const [planoFiles, setPlanoFiles] = useState<File[]>([])
+	const [puntos, setPuntos] = useState<number[]>([])
 
 	const form = useForm({
 		defaultValues: part2DataDefault,
@@ -145,7 +146,11 @@ function CreateNewAreaForm({
 					form={form}
 					planoFiles={planoFiles}
 					setPlanoFiles={setPlanoFiles}
+					puntos={puntos}
+					setPuntos={setPuntos}
 				/>
+
+				{JSON.stringify(puntos)}
 
 				{/* <AreaCroquis form={form}/> */}
 
@@ -491,10 +496,14 @@ function AreaDimensiones({
 	form,
 	planoFiles,
 	setPlanoFiles,
+	puntos,
+	setPuntos,
 }: {
 	form: any
 	planoFiles: File[]
 	setPlanoFiles: Dispatch<SetStateAction<File[]>>
+	puntos: number[]
+	setPuntos: Dispatch<SetStateAction<number[]>>
 }) {
 	return (
 		<>
@@ -628,13 +637,6 @@ function AreaDimensiones({
 				}}
 			/>
 
-			<div className="flex items-center justify-between border-b border-purple-700/75 dark:border-purple-500/75 my-10 w-full">
-				<div className="textL py-2 px-3 flex items-center gap-8 justify-between w-full">
-					Mediciones{" "}
-					<HardHat className="sm:size-7 2xl:size-9 text-purple-700/75 dark:text-purple-500/75" />
-				</div>
-			</div>
-
 			<form.Subscribe
 				selector={state => [
 					state.values.largo,
@@ -647,6 +649,8 @@ function AreaDimensiones({
 						ancho !== "" &&
 						alto !== "" && (
 							<Grilla
+								puntos={puntos}
+								setPuntos={setPuntos}
 								ancho={Number(ancho)}
 								largo={Number(largo)}
 								alto={Number(alto)}
@@ -659,58 +663,9 @@ function AreaDimensiones({
 	)
 }
 
-function AreaCroquis({ form }: { form: any }) {
-	const PUNTOS = ["301", "299", "300", "287", "293", "*", "*", "*", "*"]
-	return (
-		<>
-			<div className="flex items-center justify-between border-b border-purple-500 dark:border-purple-500/25 my-10 w-full">
-				<div className="textL py-2 px-3 flex items-center gap-8 justify-between w-full">
-					Croquis{" "}
-					<RulerDimensionLine className="sm:size-7 2xl:size-9 text-purple-500 dark:text-purple-500/75" />
-				</div>
-			</div>
-
-			<div className="w-full grid grid-cols-3 relative">
-				{Array.from({ length: 3 }).map((_, i) => (
-					<div key={i} className="flex flex-col">
-						{Array.from({ length: 3 }).map((_, j) => (
-							<div
-								key={j}
-								className="h-34 border border-foreground/30 flex items-center justify-center"
-							>
-								<div className="flex flex-col gap-1 items-center justify-center">
-									<span className="italic tracking-widest text-xs">
-										punto-{i * 3 + j + 1}
-									</span>
-									<span className="w-15 text-xl font-semibold py-1 px-3 card bg-accent sm:bg-background justify-center items-center">
-										{PUNTOS[i * 3 + j]}
-									</span>
-								</div>
-							</div>
-						))}
-					</div>
-				))}
-			</div>
-
-			<div className="p-2 sm:p-0 w-full min-h-full grid grid-cols-2 justify-between sm:gap-2 gap-4">
-				{PUNTOS.map((p, i) => (
-					<div
-						key={i}
-						className="px-2 sm:px-0 w-full flex items-center justify-between py-1 border-b border-foreground/10"
-					>
-						<span className="text-sm italic tracking-widest">
-							punto-{i + 1}
-						</span>
-						<span className="text-sm font-semibold">{p}</span>
-						<Trash2 size={14} className="text-destructive" />
-					</div>
-				))}
-			</div>
-		</>
-	)
-}
-
 function Grilla({
+	puntos,
+	setPuntos,
 	ancho,
 	largo,
 	alto,
@@ -718,7 +673,12 @@ function Grilla({
 	ancho: number
 	largo: number
 	alto: number
+	puntos: number[]
+	setPuntos: Dispatch<SetStateAction<number[]>>
 }) {
+	const [openMenu, setOpenMenu] = useState<boolean>(false)
+	const [actualPunto, setActualPunto] = useState<number | null>(null)
+
 	const indiceDeLocal = getIndiceDeLocal(largo, ancho, alto)
 	const indiceRedondeo = getIndiceRedondeo(indiceDeLocal)
 	const celdas = (indiceRedondeo + 2) ** 2
@@ -728,51 +688,149 @@ function Grilla({
 	const largoRatio = 150 * divisionesLargo
 	const anchoGrilla = `${(ancho / largo) * largoRatio}px`
 	const largoGrilla = `${150 * divisionesLargo}px`
+	useEffect(() => {
+		const newPuntos: number[] = Array.from({ length: celdas }, () => 0)
+		setPuntos(newPuntos)
+	}, [celdas, setPuntos])
 
 	return (
-		<div className="w-full min-h-[500px] overflow-auto flex flex-col  p-10">
-			<div
-				className="grid relative mx-auto"
-				style={{
-					height: largoGrilla,
-					width: anchoGrilla,
-					gridTemplateColumns: `repeat(${divisionesAncho}, 1fr)`,
-					gridTemplateRows: `repeat(${divisionesLargo}, 1fr)`,
-				}}
-			>
-				<span className="absolute left-0 -top-10 w-full border-b border-foreground/50 text-foreground/50">
-					Ancho: {ancho}m
-				</span>
-				<span
-					className={`absolute -left-4 bottom-0 border-b border-foreground/50 text-foreground/50 -rotate-90 origin-bottom-left`}
-					style={{ width: largoGrilla }}
-				>
-					Largo: {largo}m
-				</span>
-				{Array.from({ length: celdas }).map((_, index) => (
-					<div
-						key={index}
-						className={`border border-cyan-300/40 flex items-center justify-center text-xl text-black`}
-					>
-						<PuntoInput index={index} />
-					</div>
-				))}
+		<>
+			<div className="flex items-center justify-between border-b border-purple-700/75 dark:border-purple-500/75 my-10 w-full">
+				<div className="textL py-2 px-3 flex items-center gap-8 justify-between w-full">
+					Mediciones{" "}
+					<HardHat className="sm:size-7 2xl:size-9 text-purple-700/75 dark:text-purple-500/75" />
+				</div>
 			</div>
-		</div>
+			<div className="w-full min-h-[500px] overflow-auto flex flex-col p-10">
+				<div
+					className="grid relative mx-auto"
+					style={{
+						height: largoGrilla,
+						width: anchoGrilla,
+						gridTemplateColumns: `repeat(${divisionesAncho}, 1fr)`,
+						gridTemplateRows: `repeat(${divisionesLargo}, 1fr)`,
+					}}
+				>
+					{openMenu ? (
+						<InputMenu
+							setOpenMenu={setOpenMenu}
+							puntos={puntos}
+							setPuntos={setPuntos}
+							actualPunto={actualPunto}
+							setActualPunto={setActualPunto}
+						/>
+					) : (
+						<>
+							<span className="absolute left-0 -top-10 w-full border-b border-foreground/50 text-foreground/50">
+								Ancho: {ancho}m
+							</span>
+							<span
+								className={`absolute -left-4 bottom-0 border-b border-foreground/50 text-foreground/50 -rotate-90 origin-bottom-left`}
+								style={{ width: largoGrilla }}
+							>
+								Largo: {largo}m
+							</span>
+							{Array.from({ length: celdas }).map((_, index) => (
+								<div
+									key={index}
+									className={`border border-cyan-300/40 flex items-center justify-center text-xl text-black`}
+								>
+									<Punto
+										index={index}
+										puntos={puntos}
+										setOpenMenu={setOpenMenu}
+										setActualPunto={setActualPunto}
+									/>
+								</div>
+							))}
+						</>
+					)}
+				</div>
+			</div>
+		</>
 	)
 }
 
-function PuntoInput({ index }: { index: number }) {
-	const PUNTOS = ["301", "299", "300", "287", "293", "*", "*", "*", "*"]
-
+function Punto({
+	index,
+	setOpenMenu,
+	puntos,
+	setActualPunto,
+}: {
+	index: number
+	setOpenMenu: Dispatch<SetStateAction<boolean>>
+	puntos: number[]
+	setActualPunto: Dispatch<SetStateAction<number | null>>
+}) {
 	return (
 		<div className="flex flex-col gap-1 items-center justify-center">
 			<span className="italic tracking-widest text-xs text-foreground">
 				punto-{index + 1}
 			</span>
-			<span className="w-15 text-xl font-semibold py-1 px-3 card bg-accent sm:bg-accent text-foreground justify-center items-center min-h-9">
-				{PUNTOS[index]}
-			</span>
+			<button
+				onClick={() => {
+					setOpenMenu(true)
+					setActualPunto(index)
+				}}
+				className="w-15 text-xl font-semibold py-1 px-3 card bg-accent sm:bg-accent text-foreground justify-center items-center min-h-9"
+			>
+				{puntos[index] !== 0 ? puntos[index] : "*"}
+			</button>
 		</div>
+	)
+}
+
+function InputMenu({
+	setOpenMenu,
+	puntos,
+	setPuntos,
+	actualPunto,
+	setActualPunto,
+}: {
+	setOpenMenu: Dispatch<SetStateAction<boolean>>
+	puntos: number[]
+	setPuntos: Dispatch<SetStateAction<number[]>>
+	actualPunto: number | null
+	setActualPunto: Dispatch<SetStateAction<number | null>>
+}) {
+	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+		e.preventDefault()
+		if (actualPunto === null) return
+		const newPuntos = [...puntos]
+		newPuntos[actualPunto] = e.currentTarget.value
+		setPuntos(newPuntos)
+		setOpenMenu(false)
+		setActualPunto(null)
+	}
+	return (
+		<form
+			onSubmit={handleSubmit}
+			className="absolute top-0 left-0 card bg-background items-center justify-center gap-10 flex-col w-full h-1/2 p-10"
+		>
+			<span className="textL border-b py-2 border-foreground/50 w-full text-left text-foreground/70">
+				Punto {actualPunto ? actualPunto + 1 : "*"}
+			</span>
+			<input
+				type="number"
+				id="punto"
+				name="punto"
+				className="dark:bg-foreground/50 bg-foreground/5 text-background/75 textXL text-4xl w-1/2 p-4 h-20 text-center rounded-md"
+			/>
+			<div className="w-full flex justify-between gap-2 textM">
+				<button
+					type="button"
+					onClick={() => setOpenMenu(false)}
+					className="card p-2 cursor-pointer bg-background justify-center flex-1"
+				>
+					Cancelar
+				</button>
+				<button
+					type="submit"
+					className="card p-2 bg-accent cursor-pointer justify-center flex-1"
+				>
+					Guardar
+				</button>
+			</div>
+		</form>
 	)
 }

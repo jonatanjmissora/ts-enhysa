@@ -13,7 +13,15 @@ import { Dispatch, SetStateAction } from "react"
 import CreateNewAreaAlert from "./create-area"
 import { Part2DataType } from "@/routes/_protected/new-report2"
 
-export default function Part2Data({setReportStep, setPart2Data, part2Data}: {setReportStep?: Dispatch<SetStateAction<1 | 2 | 3 | 4>>, setPart2Data: Dispatch<SetStateAction<Part2DataType>>, part2Data: Part2DataType} ) {
+export default function Part2Data({
+	setReportStep,
+	setPart2Data,
+	part2Data,
+}: {
+	setReportStep?: Dispatch<SetStateAction<1 | 2 | 3 | 4>>
+	setPart2Data: Dispatch<SetStateAction<Part2DataType>>
+	part2Data: Part2DataType
+}) {
 	return (
 		<article className="w-full flex flex-col justify-center items-center">
 			<div className="flex items-center justify-between w-full px-5 rounded border-b border-orange-500/25 mt-15 sm:mt-0 sm:border-none sm:bg-orange-500/15">
@@ -22,32 +30,37 @@ export default function Part2Data({setReportStep, setPart2Data, part2Data}: {set
 					<RulerDimensionLine className="sm:size-7 2xl:size-9" />
 				</div>
 			</div>
-			
+
 			<AreaAccordion areas={[]} />
 
-			<CreateNewAreaAlert part2Data={part2Data} setPart2Data={setPart2Data}/>
-			
+			<CreateNewAreaAlert part2Data={part2Data} setPart2Data={setPart2Data} />
+
 			<div className="flex items-center gap-2 w-full">
-			<button onClick={() => setReportStep && setReportStep(1)} className="card py-2 px-4 my-20 flex items-center justify-center gap-2 mx-auto w-5/6 sm:w-1/3 textM text-sm sm:text-base bg-accent sm:hidden">
-				Volver
-			</button>
-			
-			<button onClick={() => setReportStep && setReportStep(3)} className="card py-2 px-4 my-20 flex items-center justify-center gap-2 mx-auto w-5/6 sm:w-1/3 textM text-sm sm:text-base bg-accent sm:hidden">
-				Siguiente
-			</button>
+				<button
+					onClick={() => setReportStep?.(1)}
+					className="card py-2 px-4 my-20 flex items-center justify-center gap-2 mx-auto w-5/6 sm:w-1/3 textM text-sm sm:text-base bg-accent sm:hidden"
+				>
+					Volver
+				</button>
+
+				<button
+					onClick={() => setReportStep?.(3)}
+					className="card py-2 px-4 my-20 flex items-center justify-center gap-2 mx-auto w-5/6 sm:w-1/3 textM text-sm sm:text-base bg-accent sm:hidden"
+				>
+					Siguiente
+				</button>
 			</div>
 		</article>
 	)
 }
 
-
-
-const AreaAccordion = ({areas}: {areas: any}) => {
-	if (areas.length === 0) return (
-		<div className="w-full pt-10 flex items-center justify-center textM text-sm sm:text-base italic">
-			<p>Agregue una nueva area de trabajo.</p>
-		</div>
-	)
+const AreaAccordion = ({ areas }: { areas: any }) => {
+	if (areas.length === 0)
+		return (
+			<div className="w-full pt-10 flex items-center justify-center textM text-sm sm:text-base italic">
+				<p>Agregue una nueva area de trabajo.</p>
+			</div>
+		)
 	return (
 		<Accordion
 			type="single"
