@@ -40,7 +40,7 @@ function EmpresasSuspended({part1Data, setPart1Data}: {part1Data: Part1DataType,
 			setPart1Data(prev => ({...prev, empresaId: empresa.id}))
 		}
 	}, [])
-	return (
+	return (	
 		<div className="absolute top-2 left-1/2">
             <Select defaultValue={part1Data.empresaId || empresas?.[0].id || ""} onValueChange={(value) => setPart1Data(prev => ({...prev, empresaId: value}))}>
                 <SelectTrigger

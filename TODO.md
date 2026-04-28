@@ -101,3 +101,8 @@ perfil/instrumentos
 nuevo-proyecto/id
 nuevo-proyecto/area?id=
 nuevo-proyecto/resumen
+
+
+viendo lo de separar los forms, y las actualizaciones de part1Data, ... en los botones siguientes
+clima no me toma el CLIMA[0]
+limitar ancho largo y alto a valores positivos

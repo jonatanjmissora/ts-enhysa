@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 import { Cpu, UserRound, Warehouse } from "lucide-react"
-import { Cloud, CloudRain, CloudSun, Sun } from "lucide-react"
 import { Dispatch, SetStateAction, Suspense, useEffect } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
@@ -18,6 +17,27 @@ import { empresasQueryOptions } from "queries/empresas/empresas-query"
 import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
 import { Part1DataType } from "@/routes/_protected/new-report2"
 import { updateClima } from "@/lib/utils"
+
+const CLIMA = [
+	"soleado",
+	"nublado",
+	"templado",
+	"lluvioso"
+]
+
+const HUMEDAD = [
+	"60",
+	"70",
+	"80",
+	"90"
+]
+
+const TEMPERATURA = [
+	"10",
+	"20",
+	"30",
+	"40"
+]
 
 export default function MovilPart1Data({setReportStep, part1Data, setPart1Data}: {setReportStep: Dispatch<SetStateAction<1 | 2 | 3 | 4>>, setPart1Data: Dispatch<SetStateAction<Part1DataType>>, part1Data: Part1DataType} ) {
 	return (
@@ -72,7 +92,10 @@ export default function MovilPart1Data({setReportStep, part1Data, setPart1Data}:
 
 			<div className="w-5/6 mx-auto my-10">
 				<button
-					onClick={() => setReportStep(2)}
+					onClick={() => {
+						console.log("PART1 : ", part1Data)
+						setReportStep(2)
+					}}
 					className="card p-2 px-6 w-1/2 ml-auto justify-center textM text-sm sm:text-base bg-accent"
 				>
 					Siguiente
@@ -179,7 +202,7 @@ function Clima({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Dat
 				<Label className="tracking-wider" htmlFor="matricula">
 					Clima
 				</Label>
-				<Select defaultValue={part1Data.clima[0]} 
+				<Select defaultValue={part1Data.clima.split("-")[0] || CLIMA[0]} 
 					onValueChange={(e) => 
 						setPart1Data(prev => {
 							const newClima = updateClima(part1Data.clima, 0, e)
@@ -196,22 +219,11 @@ function Clima({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Dat
 					<SelectContent className="w-full p-2 px-6">
 						<SelectGroup>
 							<SelectLabel>Estado del clima</SelectLabel>
-							<SelectItem value="0">
-								<Sun size={12} />
-								Soleado
-							</SelectItem>
-							<SelectItem value="1">
-								<Cloud size={12} />
-								Nublado
-							</SelectItem>
-							<SelectItem value="2">
-								<CloudSun size={12} />
-								Templado
-							</SelectItem>
-							<SelectItem value="3">
-								<CloudRain size={12} />
-								Lluvioso
-							</SelectItem>
+							{CLIMA.map(clima => (
+								<SelectItem key={clima} value={clima}>
+									{clima.toUpperCase()}
+								</SelectItem>
+							))}
 						</SelectGroup>
 					</SelectContent>
 				</Select>
@@ -221,7 +233,7 @@ function Clima({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Dat
 				<Label className="tracking-wider" htmlFor="matricula">
 					Humedad
 				</Label>
-				<Select defaultValue={part1Data.clima[1]}
+				<Select defaultValue={part1Data.clima.split("-")[1] || HUMEDAD[0]}
 				onValueChange={(e) => 
 						setPart1Data(prev => {
 							const newClima = updateClima(part1Data.clima, 1, e)
@@ -238,10 +250,11 @@ function Clima({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Dat
 					<SelectContent className="w-full p-2">
 						<SelectGroup>
 							<SelectLabel>Humedad</SelectLabel>
-							<SelectItem value="0">60%</SelectItem>
-							<SelectItem value="1">70%</SelectItem>
-							<SelectItem value="2">80%</SelectItem>
-							<SelectItem value="3">90%</SelectItem>
+							{HUMEDAD.map(humedad => (
+								<SelectItem key={humedad} value={humedad}>
+									{humedad}%
+								</SelectItem>
+							))}
 						</SelectGroup>
 					</SelectContent>
 				</Select>
@@ -251,7 +264,7 @@ function Clima({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Dat
 				<Label className="tracking-wider" htmlFor="matricula">
 					Temperatura
 				</Label>
-				<Select defaultValue={part1Data.clima[2]}
+				<Select defaultValue={part1Data.clima.split("-")[2] || TEMPERATURA[1]}
 				onValueChange={(e) => 
 						setPart1Data(prev => {
 							const newClima = updateClima(part1Data.clima, 2, e)
@@ -268,10 +281,11 @@ function Clima({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Dat
 					<SelectContent className="w-full p-2">
 						<SelectGroup>
 							<SelectLabel>Tempreatura</SelectLabel>
-							<SelectItem value="0">10°C</SelectItem>
-							<SelectItem value="1">20°C</SelectItem>
-							<SelectItem value="2">30°C</SelectItem>
-							<SelectItem value="3">40°C</SelectItem>
+							{TEMPERATURA.map(temperatura => (
+								<SelectItem key={temperatura} value={temperatura}>
+									{temperatura}°C
+								</SelectItem>
+							))}
 						</SelectGroup>
 					</SelectContent>
 				</Select>
