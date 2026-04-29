@@ -1,3 +1,4 @@
+import { CLIMA, HUMEDAD, TEMPERATURA } from "@/lib/constants"
 import { user } from "db/users/schema"
 import { pgTable, text } from "drizzle-orm/pg-core"
 
@@ -11,13 +12,15 @@ export const NRpart1s = pgTable("NRpart1s", {
 	instrumentoId: text("instrumento_id").notNull(),
 
 	clima: text("clima", {
-		enum: ["soleado", "nublado", "templado", "lluvioso"],
+		enum: CLIMA as [string, ...string[]],
 	}).notNull(),
 
-	humedad: text("humedad", { enum: ["60", "70", "80", "90"] }).notNull(),
+	humedad: text("humedad", {
+		enum: HUMEDAD as [string, ...string[]],
+	}).notNull(),
 
 	temperatura: text("temperatura", {
-		enum: ["10", "20", "30", "40"],
+		enum: TEMPERATURA as [string, ...string[]],
 	}).notNull(),
 
 	userId: text("userId")

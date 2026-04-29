@@ -113,5 +113,5 @@ nuevo reporte, finalizar reporte
 4to paso, mostrar resumen, grafico, y generar pdf
 
 
-hacer el skelton del part1
+mejorar el cargando de part1, por que tarda tanto, si tengo el skelton del part1
 

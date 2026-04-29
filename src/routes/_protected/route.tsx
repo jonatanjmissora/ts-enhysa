@@ -19,14 +19,15 @@ function RouteComponent() {
 
 	if (isMobil) return <MovilRoute />
 	return (
-		<section className="w-screen min-h-screen overflow-hidden flex">
-			<aside className="sm:w-[22dvw] 2xl:w-1/4">
-				<DashboardMenu />
-			</aside>
-			<article className="sm:w-[78dvw] 2xl:w-3/4">
-				<Outlet />
-			</article>
-		</section>
+		// <section className="w-screen min-h-screen overflow-hidden flex">
+		// 	<aside className="sm:w-[22dvw] 2xl:w-1/4">
+		// 		<DashboardMenu />
+		// 	</aside>
+		// 	<article className="sm:w-[78dvw] 2xl:w-3/4">
+		// 		<Outlet />
+		// 	</article>
+		// </section>
+		<Outlet />
 	)
 }
 

@@ -8,7 +8,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select"
-import { Label } from "@/components/ui/label"
 import { Cpu, Loader, UserRound, Warehouse } from "lucide-react"
 import { Dispatch, SetStateAction, Suspense } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
@@ -28,6 +27,7 @@ import {
 import { Input } from "@/components/ui/input"
 import {
 	defaultPart1Data,
+	Part1DataFormType,
 	part1DataFormValidator,
 } from "db/new-report/part1/nrpart1-validator"
 import { checkPart1DataDiference } from "@/lib/utils"
@@ -59,7 +59,8 @@ function Part1Data({
 		...defaultPart1Data,
 		tecnicoNombre: tecnico?.nombre.toUpperCase() ?? "",
 	}
-	const actualPart1Data = part1Data || actualDefaultPart1Data
+	const actualPart1Data =
+		(part1Data as Part1DataFormType) || actualDefaultPart1Data
 
 	const { mutateAsync: createNRpart1, isPending, error } = useCreatePart1Data()
 	const {
@@ -140,7 +141,7 @@ function Part1Data({
 									value={field.state.value}
 									readOnly
 									aria-invalid={isInvalid}
-									className="bg-background sm:bg-accent text-right"
+									className="bg-background sm:bg-accent text-right text-sm"
 								/>
 								{isInvalid && (
 									<FieldError
@@ -482,74 +483,84 @@ function Part1Data({
 
 function Part1DataSkelton() {
 	return (
-		<div className="w-full my-20 sm:my-4 flex flex-col gap-8">
-			<div className="flex flex-col gap-3 relative">
-				<TextTooltip
-					text={"Datos obtenidos a través del perfil."}
-					className={"top-0 right-0"}
-				/>
-				<div className="flex items-center gap-2">
-					<UserRound className="size-6" />
-					Técnico responsable
-				</div>
-				<div className="w-5/6 mx-auto px-6 py-2.5 card justify-end bg-accent textXS animate-pulse">
-					. . .
-				</div>
-			</div>
+		<div className="w-full my-20 sm:my-4 flex flex-col gap-8 relative">
+			<TextTooltip
+				text={"Datos obtenidos a través del perfil."}
+				className={"-top-10 right-5"}
+			/>
 
-			<div className="flex flex-col gap-3 relative">
-				<span className="flex items-center gap-3">
-					<Warehouse className="size-6" />
-					Empresa receptora
-				</span>
+			<FieldGroup className="gap-5">
+				<Field className="relative gap-1">
+					<FieldLabel className="flex items-center gap-3 textL">
+						{" "}
+						<UserRound className="size-6" />
+						Técnico responsable
+					</FieldLabel>
+					<div className="w-full mx-auto px-6 py-2.5 card justify-end bg-accent textXS animate-pulse">
+						. . .
+					</div>
+				</Field>
 
-				<div className="w-5/6 mx-auto px-6 py-2.5 card justify-end bg-accent textXS animate-pulse">
-					. . .
-				</div>
-			</div>
+				<Field className="relative gap-1">
+					<FieldLabel className="flex items-center gap-3 textL">
+						<Warehouse className="size-6" />
+						Empresa receptora
+					</FieldLabel>
 
-			<div className="flex flex-col gap-3 relative">
-				<span className="flex items-center gap-3">
-					<Cpu className="size-6" /> Instrumento utilizado
-				</span>
+					<div className="w-full mx-auto px-6 py-2.5 card justify-end bg-accent textXS animate-pulse">
+						. . .
+					</div>
+				</Field>
 
-				<div className="w-5/6 mx-auto px-6 py-2.5 card justify-end bg-accent textXS animate-pulse">
-					. . .
-				</div>
-			</div>
+				<Field className="relative gap-1">
+					<FieldLabel className="flex items-center gap-3 textL">
+						<Cpu className="size-6" /> Instrumento utilizado
+					</FieldLabel>
 
-			<div className="flex flex-col gap-1 w-5/6 mx-auto">
-				<Label className="tracking-wider" htmlFor="matricula">
-					Clima
-				</Label>
-				<div className="w-full mx-auto px-6 py-2.5 card justify-end bg-accent textXS animate-pulse">
-					. . .
-				</div>
-			</div>
+					<div className="w-full mx-auto px-6 py-2.5 card justify-end bg-accent textXS animate-pulse">
+						. . .
+					</div>
+				</Field>
 
-			<div className="flex flex-col gap-1 w-5/6 mx-auto">
-				<Label className="tracking-wider" htmlFor="matricula">
-					Humedad
-				</Label>
-				<div className="w-full mx-auto px-6 py-2.5 card justify-end bg-accent textXS animate-pulse">
-					. . .
-				</div>
-			</div>
+				<Field className="relative gap-1">
+					<FieldLabel className="flex items-center gap-3 textL">
+						Clima
+					</FieldLabel>
 
-			<div className="flex flex-col gap-1 w-5/6 mx-auto">
-				<Label className="tracking-wider" htmlFor="matricula">
-					Temperatura
-				</Label>
-				<div className="w-full mx-auto px-6 py-2.5 card justify-end bg-accent textXS animate-pulse">
-					. . .
-				</div>
-			</div>
+					<div className="w-full mx-auto px-6 py-2.5 card justify-end bg-accent textXS animate-pulse">
+						. . .
+					</div>
+				</Field>
 
-			<div className="w-5/6 mx-auto my-10">
-				<button className="card p-2 px-6 w-1/2 ml-auto justify-center textM text-sm sm:text-base bg-accent">
-					Siguiente
-				</button>
-			</div>
+				<Field className="relative gap-1">
+					<FieldLabel className="flex items-center gap-3 textL">
+						Humedad
+					</FieldLabel>
+
+					<div className="w-full mx-auto px-6 py-2.5 card justify-end bg-accent textXS animate-pulse">
+						. . .
+					</div>
+				</Field>
+
+				<Field className="relative gap-1">
+					<FieldLabel className="flex items-center gap-3 textL">
+						Temperatura
+					</FieldLabel>
+
+					<div className="w-full mx-auto px-6 py-2.5 card justify-end bg-accent textXS animate-pulse">
+						. . .
+					</div>
+				</Field>
+
+				<Field className="flex flex-row justify-center gap-5 sm:gap-10 items-center w-5/6 mx-auto mt-10">
+					<button
+						type="submit"
+						className="themeBtnBackground py-2 rounded-lg textL text-sm sm:text-base"
+					>
+						"Siguiente"
+					</button>
+				</Field>
+			</FieldGroup>
 		</div>
 	)
 }

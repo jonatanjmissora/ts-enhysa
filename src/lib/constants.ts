@@ -32,3 +32,11 @@ export const MUESTREO = [
 	"Y",
 	"Z",
 ]
+
+export const ILUMINACION_TIPO = ["natural", "artificial", "mixta"]
+
+export const ILUMINACION_FUENTE = ["incandescente", "descarga", "mixta"]
+
+export const ILUMINACION = ["general", "localizada", "mixta"]
+
+export const VALORES_REQUERIDOS = ["100", "200", "300", "750", "1000"]
