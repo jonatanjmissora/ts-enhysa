@@ -3,7 +3,7 @@ import { FileChartColumn } from "lucide-react"
 import Part2Data from "@/components/dashboard/nuevo-reporte2/part2/part-2"
 import Part3Data from "@/components/dashboard/nuevo-reporte2/part-3"
 import MovilNewReport from "@/components/movil/new-report"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Part1Data from "@/components/dashboard/nuevo-reporte2/part1"
 import {
 	part2DataDefault,
@@ -23,7 +23,18 @@ function RouteComponent() {
 	const [part2Data, setPart2Data] = useState<Part2DataType>(part2DataDefault)
 	const [part3Data, setPart3Data] = useState<Part3DataType>(part3DataDefault)
 
-	const isMobil = typeof window !== "undefined" && window.innerWidth < 640
+	// null = aún no se conoce el tamaño (SSR / primer render)
+	const [isMobil, setIsMobil] = useState<boolean | null>(null)
+
+	useEffect(() => {
+		const check = () => setIsMobil(window.innerWidth < 640)
+		check()
+		window.addEventListener("resize", check)
+		return () => window.removeEventListener("resize", check)
+	}, [])
+
+	// Durante SSR y el primer render no se sabe el viewport → no renderizar nada
+	if (isMobil === null) return <span className="text-4xl">CARGANDO</span>
 
 	if (isMobil)
 		return (

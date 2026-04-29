@@ -113,4 +113,5 @@ nuevo reporte, finalizar reporte
 4to paso, mostrar resumen, grafico, y generar pdf
 
 
-en newReport movil, no necesito cargar en el route, ni a empresas ni a instrumentos
+hacer el skelton del part1
+

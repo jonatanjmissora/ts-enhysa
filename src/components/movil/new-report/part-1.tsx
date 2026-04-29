@@ -285,7 +285,11 @@ function Part1Data({
 
 								<Select
 									value={field.state.value || ""}
-									onValueChange={value => field.handleChange(value)}
+									onValueChange={value =>
+										field.handleChange(
+											value as "soleado" | "nublado" | "templado" | "lluvioso"
+										)
+									}
 								>
 									<SelectTrigger
 										id={field.name}
@@ -342,7 +346,9 @@ function Part1Data({
 
 								<Select
 									value={field.state.value || ""}
-									onValueChange={value => field.handleChange(value)}
+									onValueChange={value =>
+										field.handleChange(value as "60" | "70" | "80" | "90")
+									}
 								>
 									<SelectTrigger
 										id={field.name}
@@ -399,7 +405,9 @@ function Part1Data({
 
 								<Select
 									value={field.state.value || ""}
-									onValueChange={value => field.handleChange(value)}
+									onValueChange={value =>
+										field.handleChange(value as "10" | "20" | "30" | "40")
+									}
 								>
 									<SelectTrigger
 										id={field.name}

@@ -20,7 +20,7 @@ export const Route = createFileRoute("/_protected/new-report2")({
 function RouteComponent() {
 	return (
 		<div className="min-h-screen flex flex-col">
-			<header className="hidden sm:flex sm:text-base 2xl:text-xl font-semibold tracking-wider sm:h-20 2xl:h-24 px-20 bg-accent border border-background flex justify-between items-center">
+			<header className="hidden sm:flex sm:text-base 2xl:text-xl font-semibold tracking-wider sm:h-20 2xl:h-24 px-20 bg-accent border border-background justify-between items-center">
 				<span>Protocolo de Iluminación Res 84/12 SRT</span>
 				<Link
 					to="/"
