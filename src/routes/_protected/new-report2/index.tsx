@@ -5,6 +5,7 @@ import Part3Data from "@/components/dashboard/nuevo-reporte2/part-3"
 import MovilNewReport from "@/components/movil/new-report"
 import { useState } from "react"
 import Part1Data from "@/components/dashboard/nuevo-reporte2/part1"
+import { HUMEDAD, TEMPERATURA, CLIMA } from "@/lib/constants"
 import { z } from "zod"
 
 export const Route = createFileRoute("/_protected/new-report2/")({
@@ -19,7 +20,7 @@ export type Part1DataType = {
 export const part1DataDefault: Part1DataType = {
 	empresaId: "",
 	instrumentoId: "",
-	clima: "000",
+	clima: `${CLIMA[0]}-${HUMEDAD[0]}-${TEMPERATURA[0]}`,
 }
 
 export type Part2DataType = {

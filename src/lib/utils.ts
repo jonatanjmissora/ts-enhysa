@@ -8,35 +8,6 @@ import { TecnicoFormType } from "db/tecnicos/tecnico-validator"
 import { twMerge } from "tailwind-merge"
 import { PuntoType } from "./types"
 
-export const MUESTREO = [
-	"A",
-	"B",
-	"C",
-	"D",
-	"E",
-	"F",
-	"G",
-	"H",
-	"I",
-	"J",
-	"K",
-	"L",
-	"M",
-	"N",
-	"O",
-	"P",
-	"Q",
-	"R",
-	"S",
-	"T",
-	"U",
-	"V",
-	"W",
-	"X",
-	"Y",
-	"Z",
-]
-
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
 }
@@ -170,8 +141,8 @@ export const getLastPuntoOrden = (puntos: PuntoType[] | []) => {
 }
 
 export const updateClima = (clima: string, position: number, value: string) => {
-	let newClima = clima.split("")
-	console.log("new clima split", {newClima, position, value})
+	const newClima = clima.split("")
+	console.log("new clima split", { newClima, position, value })
 	newClima[position] = value
 	console.log("new clima join", newClima.join(""))
 	return newClima.join("")

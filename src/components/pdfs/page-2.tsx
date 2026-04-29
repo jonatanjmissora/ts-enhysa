@@ -1,10 +1,10 @@
 import { PuntoType, SectorType } from "@/lib/types"
-import { MUESTREO } from "@/lib/utils"
 import { Page, Text, View, StyleSheet } from "@react-pdf/renderer"
 import { EmpresaType } from "db/empresas/schema"
 import MembreteSuperior from "./membrete-superior"
 import MembreteInferior from "./membrete-inferior"
 import { TecnicoType } from "db/tecnicos/schema"
+import { MUESTREO } from "@/lib/constants"
 
 // Create styles
 const styles = StyleSheet.create({

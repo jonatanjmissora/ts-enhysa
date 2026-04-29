@@ -17,29 +17,17 @@ import { empresasQueryOptions } from "queries/empresas/empresas-query"
 import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
 import { Part1DataType } from "@/routes/_protected/new-report2"
 import { updateClima } from "@/lib/utils"
+import { CLIMA, HUMEDAD, TEMPERATURA } from "@/lib/constants"
 
-const CLIMA = [
-	"soleado",
-	"nublado",
-	"templado",
-	"lluvioso"
-]
-
-const HUMEDAD = [
-	"60",
-	"70",
-	"80",
-	"90"
-]
-
-const TEMPERATURA = [
-	"10",
-	"20",
-	"30",
-	"40"
-]
-
-export default function MovilPart1Data({setReportStep, part1Data, setPart1Data}: {setReportStep: Dispatch<SetStateAction<1 | 2 | 3 | 4>>, setPart1Data: Dispatch<SetStateAction<Part1DataType>>, part1Data: Part1DataType} ) {
+export default function MovilPart1Data({
+	setReportStep,
+	part1Data,
+	setPart1Data,
+}: {
+	setReportStep: Dispatch<SetStateAction<1 | 2 | 3 | 4>>
+	setPart1Data: Dispatch<SetStateAction<Part1DataType>>
+	part1Data: Part1DataType
+}) {
 	return (
 		<article className="w-full my-20 sm:my-4 flex flex-col gap-8">
 			<div className="flex flex-col gap-3 relative">
@@ -51,11 +39,13 @@ export default function MovilPart1Data({setReportStep, part1Data, setPart1Data}:
 					<UserRound className="size-6" />
 					Técnico responsable
 				</div>
-				<Suspense fallback={
-					<div className="w-5/6 mx-auto px-6 py-2 card justify-center bg-accent textXS animate-pulse">
-						. . .
-					</div>
-					}>
+				<Suspense
+					fallback={
+						<div className="w-5/6 mx-auto px-6 py-2 card justify-center bg-accent textXS animate-pulse">
+							. . .
+						</div>
+					}
+				>
 					<Tecnico />
 				</Suspense>
 			</div>
@@ -65,30 +55,33 @@ export default function MovilPart1Data({setReportStep, part1Data, setPart1Data}:
 					<Warehouse className="size-6" />
 					Empresa receptora
 				</span>
-				<Suspense fallback={
-					<div className="w-5/6 mx-auto px-6 py-2 card justify-center bg-accent textXS animate-pulse">
-						. . .
-					</div>
-					}>
-					<Empresas part1Data={part1Data} setPart1Data={setPart1Data}/>
+				<Suspense
+					fallback={
+						<div className="w-5/6 mx-auto px-6 py-2 card justify-center bg-accent textXS animate-pulse">
+							. . .
+						</div>
+					}
+				>
+					<Empresas part1Data={part1Data} setPart1Data={setPart1Data} />
 				</Suspense>
-				
 			</div>
 
 			<div className="flex flex-col gap-3 relative">
 				<span className="flex items-center gap-3">
 					<Cpu className="size-6" /> Instrumento utilizado
 				</span>
-				<Suspense fallback={
-					<div className="w-5/6 mx-auto px-6 py-2 card justify-center bg-accent textXS animate-pulse">
-						. . .
-					</div>
-					}>
-					<Instrumentos part1Data={part1Data} setPart1Data={setPart1Data}/>
+				<Suspense
+					fallback={
+						<div className="w-5/6 mx-auto px-6 py-2 card justify-center bg-accent textXS animate-pulse">
+							. . .
+						</div>
+					}
+				>
+					<Instrumentos part1Data={part1Data} setPart1Data={setPart1Data} />
 				</Suspense>
 			</div>
 
-			<Clima part1Data={part1Data} setPart1Data={setPart1Data}/>
+			<Clima part1Data={part1Data} setPart1Data={setPart1Data} />
 
 			<div className="w-5/6 mx-auto my-10">
 				<button
@@ -114,37 +107,47 @@ function Tecnico() {
 	)
 }
 
-function Empresas ({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Data: Dispatch<SetStateAction<Part1DataType>>}) {
+function Empresas({
+	part1Data,
+	setPart1Data,
+}: {
+	part1Data: Part1DataType
+	setPart1Data: Dispatch<SetStateAction<Part1DataType>>
+}) {
 	const { data: empresas } = useSuspenseQuery(empresasQueryOptions)
-	if(!empresas || empresas?.length === 0) return
-	const actualEmpresa = empresas?.find(empresa => empresa.id === part1Data.empresaId) || empresas[0]
+	const actualEmpresa =
+		empresas?.find(empresa => empresa.id === part1Data.empresaId) || empresas[0]
 	useEffect(() => {
-		if(actualEmpresa) {
-			setPart1Data(prev =>({...prev, empresaId: actualEmpresa.id}))
+		if (actualEmpresa) {
+			setPart1Data(prev => ({ ...prev, empresaId: actualEmpresa.id }))
 		}
-	}, [])
+	}, [actualEmpresa, setPart1Data])
+	if (!empresas || empresas?.length === 0) return
 	return (
 		<div className="w-5/6 mx-auto">
-			<Select 
+			<Select
 				defaultValue={actualEmpresa?.id || ""}
 				onValueChange={e => {
-					const newPart1Data = {...part1Data}
-					setPart1Data({...newPart1Data, empresaId: e})
-				}}>
-				<SelectTrigger
-					className="w-full mx-auto px-6 py-2 text-right dark:bg-accent text-xs tracking-widest"
-				>
+					const newPart1Data = { ...part1Data }
+					setPart1Data({ ...newPart1Data, empresaId: e })
+				}}
+			>
+				<SelectTrigger className="w-full mx-auto px-6 py-2 text-right dark:bg-accent text-xs tracking-widest">
 					<SelectValue
 						placeholder="Seleccione Empresa"
 						className="text-right"
 					/>
 				</SelectTrigger>
 				<SelectContent position="popper">
-					<SelectGroup >
+					<SelectGroup>
 						<SelectLabel>Empresas</SelectLabel>
 
 						{empresas?.map(empresa => (
-							<SelectItem key={empresa.id} value={empresa.id} className="justify-center">
+							<SelectItem
+								key={empresa.id}
+								value={empresa.id}
+								className="justify-center"
+							>
 								{empresa.razonSocial.toUpperCase()}
 							</SelectItem>
 						))}
@@ -155,25 +158,34 @@ function Empresas ({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart
 	)
 }
 
-function Instrumentos ({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Data: Dispatch<SetStateAction<Part1DataType>>}) {
+function Instrumentos({
+	part1Data,
+	setPart1Data,
+}: {
+	part1Data: Part1DataType
+	setPart1Data: Dispatch<SetStateAction<Part1DataType>>
+}) {
 	const { data: instrumentos } = useSuspenseQuery(instrumentosQueryOptions)
-	if(!instrumentos || instrumentos?.length === 0) return
-	const actualInstrumento = instrumentos?.find(instrumento => instrumento.id === part1Data.instrumentoId) || instrumentos[0]
+	if (!instrumentos || instrumentos?.length === 0) return
+	const actualInstrumento =
+		instrumentos?.find(
+			instrumento => instrumento.id === part1Data.instrumentoId
+		) || instrumentos[0]
 	useEffect(() => {
-		if(actualInstrumento) {
-			setPart1Data(prev =>({...prev, instrumentoId: actualInstrumento.id}))
+		if (actualInstrumento) {
+			setPart1Data(prev => ({ ...prev, instrumentoId: actualInstrumento.id }))
 		}
-	}, [])
+	}, [actualInstrumento, setPart1Data])
 	return (
 		<div className="w-5/6 mx-auto">
-			<Select defaultValue={actualInstrumento?.id || ""}
+			<Select
+				defaultValue={actualInstrumento?.id || ""}
 				onValueChange={e => {
-					const newPart1Data = {...part1Data}
-					setPart1Data({...newPart1Data, instrumentoId: e})
-				}}>
-				<SelectTrigger
-					className="w-full mx-auto px-6 py-2 text-right dark:bg-accent text-xs tracking-widest"
-				>
+					const newPart1Data = { ...part1Data }
+					setPart1Data({ ...newPart1Data, instrumentoId: e })
+				}}
+			>
+				<SelectTrigger className="w-full mx-auto px-6 py-2 text-right dark:bg-accent text-xs tracking-widest">
 					<SelectValue
 						placeholder="Seleccione Instrumento"
 						className="text-center"
@@ -195,24 +207,32 @@ function Instrumentos ({part1Data, setPart1Data}: {part1Data: Part1DataType, set
 	)
 }
 
-function Clima({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Data: Dispatch<SetStateAction<Part1DataType>>}) {
+function Clima({
+	part1Data,
+	setPart1Data,
+}: {
+	part1Data: Part1DataType
+	setPart1Data: Dispatch<SetStateAction<Part1DataType>>
+}) {
+	const inicialClima = part1Data.clima || "SOLEADO-60-10"
 	return (
 		<div className="grid grid-cols-1 gap-8 w-full ">
 			<div className="flex flex-col gap-1 w-5/6 mx-auto">
 				<Label className="tracking-wider" htmlFor="matricula">
 					Clima
 				</Label>
-				<Select defaultValue={part1Data.clima.split("-")[0] || CLIMA[0]} 
-					onValueChange={(e) => 
+				<Select
+					defaultValue={part1Data.clima.split("-")[0] || CLIMA[0]}
+					onValueChange={e =>
 						setPart1Data(prev => {
 							const newClima = updateClima(part1Data.clima, 0, e)
-							return{
+							return {
 								...prev,
-								clima: newClima
+								clima: newClima,
 							}
 						})
 					}
-					>
+				>
 					<SelectTrigger className="w-full dark:bg-accent bg-accent">
 						<SelectValue />
 					</SelectTrigger>
@@ -233,13 +253,14 @@ function Clima({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Dat
 				<Label className="tracking-wider" htmlFor="matricula">
 					Humedad
 				</Label>
-				<Select defaultValue={part1Data.clima.split("-")[1] || HUMEDAD[0]}
-				onValueChange={(e) => 
+				<Select
+					defaultValue={part1Data.clima.split("-")[1] || HUMEDAD[0]}
+					onValueChange={e =>
 						setPart1Data(prev => {
 							const newClima = updateClima(part1Data.clima, 1, e)
-							return{
+							return {
 								...prev,
-								clima: newClima
+								clima: newClima,
 							}
 						})
 					}
@@ -264,13 +285,14 @@ function Clima({part1Data, setPart1Data}: {part1Data: Part1DataType, setPart1Dat
 				<Label className="tracking-wider" htmlFor="matricula">
 					Temperatura
 				</Label>
-				<Select defaultValue={part1Data.clima.split("-")[2] || TEMPERATURA[1]}
-				onValueChange={(e) => 
+				<Select
+					defaultValue={part1Data.clima.split("-")[2] || TEMPERATURA[1]}
+					onValueChange={e =>
 						setPart1Data(prev => {
 							const newClima = updateClima(part1Data.clima, 2, e)
-							return{
+							return {
 								...prev,
-								clima: newClima
+								clima: newClima,
 							}
 						})
 					}
