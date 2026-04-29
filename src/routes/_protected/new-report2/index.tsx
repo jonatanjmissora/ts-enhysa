@@ -5,66 +5,21 @@ import Part3Data from "@/components/dashboard/nuevo-reporte2/part-3"
 import MovilNewReport from "@/components/movil/new-report"
 import { useState } from "react"
 import Part1Data from "@/components/dashboard/nuevo-reporte2/part1"
-import { HUMEDAD, TEMPERATURA, CLIMA } from "@/lib/constants"
-import { z } from "zod"
+import {
+	part2DataDefault,
+	Part2DataType,
+	part3DataDefault,
+	Part3DataType,
+} from "@/lib/types2"
+import { Part1DataType } from "db/new-report/part1/schema"
+import { defaultPart1Data } from "db/new-report/part1/nrpart1-validator"
 
 export const Route = createFileRoute("/_protected/new-report2/")({
 	component: RouteComponent,
 })
 
-export type Part1DataType = {
-	empresaId: string
-	instrumentoId: string
-	clima: string
-}
-export const part1DataDefault: Part1DataType = {
-	empresaId: "",
-	instrumentoId: "",
-	clima: `${CLIMA[0]}-${HUMEDAD[0]}-${TEMPERATURA[0]}`,
-}
-
-export type Part2DataType = {
-	nombre: string
-	tipo: string
-	iluminacionTipo: string
-	iluminacionFuente: string
-	iluminacion: string
-	requerido: string
-	observacion: string
-	largo: number
-	ancho: number
-	alto: number
-}[]
-export const part2DataDefault = {
-	nombre: "",
-	tipo: "",
-	iluminacionTipo: "natural",
-	iluminacionFuente: "incandescente",
-	iluminacion: "general",
-	requerido: "200",
-	observacion: "",
-	largo: 0,
-	ancho: 0,
-	alto: 0,
-}
-
-export const areaFormValidator = z.object({
-	nombre: z.string().min(3, "Mínimo 3 caracteres"),
-	tipo: z.string().min(3, "Mínimo 3 caracteres"),
-	iluminacionTipo: z.enum(["natural", "artificial", "mixta"]),
-	iluminacionFuente: z.enum(["incandescente", "descarga", "mixta"]),
-	iluminacion: z.enum(["general", "localizada", "mixta"]),
-	requerido: z.enum(["100", "200", "300", "750", "1000"]),
-	observacion: z.string(),
-	largo: z.number(),
-	ancho: z.number(),
-	alto: z.number(),
-})
-export type Part3DataType = {}
-export const part3DataDefault = {}
-
 function RouteComponent() {
-	const [part1Data, setPart1Data] = useState<Part1DataType>(part1DataDefault)
+	const [part1Data, setPart1Data] = useState<Part1DataType>(defaultPart1Data)
 	const [part2Data, setPart2Data] = useState<Part2DataType>(part2DataDefault)
 	const [part3Data, setPart3Data] = useState<Part3DataType>(part3DataDefault)
 
@@ -73,8 +28,6 @@ function RouteComponent() {
 	if (isMobil)
 		return (
 			<MovilNewReport
-				part1Data={part1Data}
-				setPart1Data={setPart1Data}
 				part2Data={part2Data}
 				setPart2Data={setPart2Data}
 				part3Data={part3Data}

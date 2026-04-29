@@ -7,6 +7,7 @@ import { TecnicoType } from "db/tecnicos/schema"
 import { TecnicoFormType } from "db/tecnicos/tecnico-validator"
 import { twMerge } from "tailwind-merge"
 import { PuntoType } from "./types"
+import { Part1DataFormType } from "db/new-report/part1/nrpart1-validator"
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
@@ -70,6 +71,20 @@ export const checkInstrumentoDiference = (
 		formValues.serie === instrumento.serie &&
 		formValues.fechaCalibracion === instrumento.fechaCalibracion &&
 		formValues.imagenes === instrumento.imagenes
+	)
+}
+
+export const checkPart1DataDiference = (
+	formValues: Part1DataFormType,
+	part1Data: Part1DataFormType
+) => {
+	return (
+		formValues.tecnicoNombre === part1Data.tecnicoNombre &&
+		formValues.empresaId === part1Data.empresaId &&
+		formValues.instrumentoId === part1Data.instrumentoId &&
+		formValues.clima === part1Data.clima &&
+		formValues.humedad === part1Data.humedad &&
+		formValues.temperatura === part1Data.temperatura
 	)
 }
 
@@ -141,9 +156,7 @@ export const getLastPuntoOrden = (puntos: PuntoType[] | []) => {
 }
 
 export const updateClima = (clima: string, position: number, value: string) => {
-	const newClima = clima.split("")
-	console.log("new clima split", { newClima, position, value })
+	const newClima = clima.split("-")
 	newClima[position] = value
-	console.log("new clima join", newClima.join(""))
-	return newClima.join("")
+	return newClima.join("-")
 }

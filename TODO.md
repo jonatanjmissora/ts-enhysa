@@ -105,4 +105,12 @@ nuevo-proyecto/resumen
 
 viendo lo de separar los forms, y las actualizaciones de part1Data, ... en los botones siguientes
 clima no me toma el CLIMA[0]
+funcion clima, para almacenar todo en un string
 limitar ancho largo y alto a valores positivos
+constantes
+menu de incio de movil, mostrar mas protocolos
+nuevo reporte, finalizar reporte
+4to paso, mostrar resumen, grafico, y generar pdf
+
+
+en newReport movil, no necesito cargar en el route, ni a empresas ni a instrumentos

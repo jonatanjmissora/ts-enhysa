@@ -18,10 +18,10 @@ import {
 	SectorType,
 	defaultClima,
 	defaultCroquis,
-	defaultPart1Data,
 	defaultPart3Data,
 	defaultSector,
 } from "@/lib/types"
+import { defaultPart1Data } from "db/new-report/part1/nrpart1-validator"
 
 export const Route = createFileRoute("/_protected/new-report/")({
 	loader: ({ context }) => {

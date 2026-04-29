@@ -4,19 +4,20 @@ import { Link } from "@tanstack/react-router"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { empresasQueryOptions } from "queries/empresas/empresas-query"
 import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
+import { part1DataQueryOptions } from "queries/new-report/part1/nrpart1-query"
 
 export const Route = createFileRoute("/_protected/new-report2")({
 	loader: ({ context }) => {
 		context.queryClient.ensureQueryData(tecnicoQueryOptions)
 		context.queryClient.ensureQueryData(empresasQueryOptions)
 		context.queryClient.ensureQueryData(instrumentosQueryOptions)
+		context.queryClient.ensureQueryData(part1DataQueryOptions)
 		return null
 	},
 	component: RouteComponent,
 })
 
 function RouteComponent() {
-
 	return (
 		<div className="min-h-screen flex flex-col">
 			<header className="hidden sm:flex sm:text-base 2xl:text-xl font-semibold tracking-wider sm:h-20 2xl:h-24 px-20 bg-accent border border-background flex justify-between items-center">

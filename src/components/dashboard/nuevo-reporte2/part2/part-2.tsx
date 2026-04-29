@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Dispatch, SetStateAction } from "react"
 import CreateNewAreaAlert from "./create-area"
-import { Part2DataType } from "@/routes/_protected/new-report2"
+import { Part2DataType } from "@/@/lib/types2"
 
 export default function Part2Data({
 	setReportStep,

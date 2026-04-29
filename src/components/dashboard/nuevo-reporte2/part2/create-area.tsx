@@ -25,14 +25,14 @@ import {
 	SelectValue,
 } from "@/components/ui/select"
 import { InputFiles } from "@/components/layout/input-files"
+import Formula from "./formula"
+import { getIndiceDeLocal, getIndiceRedondeo } from "@/lib/utils"
+import { Box, HardHat, Lightbulb, Loader, Trash2 } from "lucide-react"
 import {
 	areaFormValidator,
 	part2DataDefault,
 	Part2DataType,
-} from "@/routes/_protected/new-report2"
-import Formula from "./formula"
-import { getIndiceDeLocal, getIndiceRedondeo } from "@/lib/utils"
-import { Box, HardHat, Lightbulb, Loader, Trash2 } from "lucide-react"
+} from "@/lib/types2"
 
 export default function CreateNewAreaAlert({
 	part2Data,
@@ -94,7 +94,7 @@ function CreateNewAreaForm({
 			console.log(value)
 			setOpen(false)
 		},
-		
+
 		// defaultValues: {
 		// 	nombre: "",
 		// 	tipo: "",
@@ -131,30 +131,30 @@ function CreateNewAreaForm({
 				<div className="grid grid-cols-1 sm:grid-cols-2 gap-7 sm:gap-y-4 sm:gap-x-10 justify-center items-start w-5/6 sm:w-full mx-auto mb-3 sm:mb-0">
 					<form.Field
 						name="nombre"
-					children={field => {
-						const isInvalid =
-							field.state.meta.isTouched && !field.state.meta.isValid
-						return (
-							<Field data-invalid={isInvalid} className="relative gap-1">
-								<FieldLabel htmlFor={field.name}>Nombre del Area</FieldLabel>
-								<Input
-									id={field.name}
-									name={field.name}
-									value={field.state.value}
-									onBlur={field.handleBlur}
-									onChange={e => field.handleChange(e.target.value)}
-									aria-invalid={isInvalid}
-									placeholder="Ej. Planta Baja"
-								/>
-								{isInvalid && (
-									<FieldError
-										errors={field.state.meta.errors}
-										className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+						children={field => {
+							const isInvalid =
+								field.state.meta.isTouched && !field.state.meta.isValid
+							return (
+								<Field data-invalid={isInvalid} className="relative gap-1">
+									<FieldLabel htmlFor={field.name}>Nombre del Area</FieldLabel>
+									<Input
+										id={field.name}
+										name={field.name}
+										value={field.state.value}
+										onBlur={field.handleBlur}
+										onChange={e => field.handleChange(e.target.value)}
+										aria-invalid={isInvalid}
+										placeholder="Ej. Planta Baja"
 									/>
-								)}
-							</Field>
-						)
-					}}
+									{isInvalid && (
+										<FieldError
+											errors={field.state.meta.errors}
+											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+										/>
+									)}
+								</Field>
+							)
+						}}
 					/>
 
 					<form.Field
@@ -198,50 +198,50 @@ function CreateNewAreaForm({
 						name="iluminacionTipo"
 						defaultValue={TIPO[0]}
 						children={field => {
-						const isInvalid =
-							field.state.meta.isTouched && !field.state.meta.isValid
+							const isInvalid =
+								field.state.meta.isTouched && !field.state.meta.isValid
 
-						return (
-							<Field data-invalid={isInvalid} className="relative gap-1">
-								<FieldLabel htmlFor={field.name}>
-									Tipo de iluminación
-								</FieldLabel>
+							return (
+								<Field data-invalid={isInvalid} className="relative gap-1">
+									<FieldLabel htmlFor={field.name}>
+										Tipo de iluminación
+									</FieldLabel>
 
-								<Select
-									value={field.state.value || ""}
-									onValueChange={value => field.handleChange(value)}
-								>
-									<SelectTrigger
-										id={field.name}
-										name={field.name}
-										onBlur={field.handleBlur}
-										aria-invalid={isInvalid}
-										className="w-full"
+									<Select
+										value={field.state.value || ""}
+										onValueChange={value => field.handleChange(value)}
 									>
-										<SelectValue placeholder="Seleccione Tipo" />
-									</SelectTrigger>
+										<SelectTrigger
+											id={field.name}
+											name={field.name}
+											onBlur={field.handleBlur}
+											aria-invalid={isInvalid}
+											className="w-full"
+										>
+											<SelectValue placeholder="Seleccione Tipo" />
+										</SelectTrigger>
 
-									<SelectContent position="popper">
-										<SelectGroup>
-											<SelectLabel>Tipos Iluminación</SelectLabel>
+										<SelectContent position="popper">
+											<SelectGroup>
+												<SelectLabel>Tipos Iluminación</SelectLabel>
 
-											{TIPO.map((tipo, index) => (
-												<SelectItem key={index} value={tipo}>
-													{tipo.toUpperCase()}
-												</SelectItem>
-											))}
-										</SelectGroup>
-									</SelectContent>
-								</Select>
+												{TIPO.map((tipo, index) => (
+													<SelectItem key={index} value={tipo}>
+														{tipo.toUpperCase()}
+													</SelectItem>
+												))}
+											</SelectGroup>
+										</SelectContent>
+									</Select>
 
-								{isInvalid && (
-									<FieldError
-										errors={field.state.meta.errors}
-										className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
-									/>
-								)}
-							</Field>
-						)
+									{isInvalid && (
+										<FieldError
+											errors={field.state.meta.errors}
+											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+										/>
+									)}
+								</Field>
+							)
 						}}
 					/>
 
@@ -398,25 +398,25 @@ function CreateNewAreaForm({
 							const isInvalid =
 								field.state.meta.isTouched && !field.state.meta.isValid
 							return (
-							<Field data-invalid={isInvalid} className="relative gap-0">
-								<FieldLabel htmlFor={field.name}>Observación</FieldLabel>
-								<Input
-									id={field.name}
-									name={field.name}
-									value={field.state.value}
-									onBlur={field.handleBlur}
-									onChange={e => field.handleChange(e.target.value)}
-									aria-invalid={isInvalid}
-									placeholder="Ej. Iluminaria Led"
-								/>
-								{isInvalid && (
-									<FieldError
-										errors={field.state.meta.errors}
-										className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+								<Field data-invalid={isInvalid} className="relative gap-0">
+									<FieldLabel htmlFor={field.name}>Observación</FieldLabel>
+									<Input
+										id={field.name}
+										name={field.name}
+										value={field.state.value}
+										onBlur={field.handleBlur}
+										onChange={e => field.handleChange(e.target.value)}
+										aria-invalid={isInvalid}
+										placeholder="Ej. Iluminaria Led"
 									/>
-								)}
-							</Field>
-						)
+									{isInvalid && (
+										<FieldError
+											errors={field.state.meta.errors}
+											className="text-xs 2xl:text-sm absolute -bottom-4 left-0"
+										/>
+									)}
+								</Field>
+							)
 						}}
 					/>
 				</div>
@@ -442,7 +442,7 @@ function CreateNewAreaForm({
 										name={field.name}
 										value={field.state.value}
 										onBlur={field.handleBlur}
-										onChange={e => field.handleChange(e.target.value)}
+										onChange={e => field.handleChange(Number(e.target.value))}
 										aria-invalid={isInvalid}
 										placeholder="Ej. 4"
 										type="number"
@@ -471,7 +471,7 @@ function CreateNewAreaForm({
 										name={field.name}
 										value={field.state.value}
 										onBlur={field.handleBlur}
-										onChange={e => field.handleChange(e.target.value)}
+										onChange={e => field.handleChange(Number(e.target.value))}
 										aria-invalid={isInvalid}
 										placeholder="Ej. 5"
 										type="number"
@@ -502,7 +502,7 @@ function CreateNewAreaForm({
 										name={field.name}
 										value={field.state.value}
 										onBlur={field.handleBlur}
-										onChange={e => field.handleChange(e.target.value)}
+										onChange={e => field.handleChange(Number(e.target.value))}
 										aria-invalid={isInvalid}
 										placeholder="Ej. 2"
 										type="number"
@@ -539,27 +539,27 @@ function CreateNewAreaForm({
 						state.values.ancho,
 						state.values.alto,
 					]}
-				children={([largo, ancho, alto]) => {
-					return (
-						largo > 0 &&
-						ancho > 0 &&
-						alto > 0 && (
-							<>
-							<Formula
-								alto={Number(alto)}
-								ancho={Number(ancho)}
-								largo={Number(largo)}
-							/>
-							<Grilla
-								puntos={puntos}
-								setPuntos={setPuntos}
-								ancho={Number(ancho)}
-								largo={Number(largo)}
-								alto={Number(alto)}
-							/>
-							</>
+					children={([largo, ancho, alto]) => {
+						return (
+							largo > 0 &&
+							ancho > 0 &&
+							alto > 0 && (
+								<>
+									<Formula
+										alto={Number(alto)}
+										ancho={Number(ancho)}
+										largo={Number(largo)}
+									/>
+									<Grilla
+										puntos={puntos}
+										setPuntos={setPuntos}
+										ancho={Number(ancho)}
+										largo={Number(largo)}
+										alto={Number(alto)}
+									/>
+								</>
+							)
 						)
-					)
 					}}
 				/>
 
@@ -593,14 +593,18 @@ function CreateNewAreaForm({
 					selector={state => state.errors}
 					children={errors =>
 						errors.length > 0 && (
-							<p className="text-red-500">
+							<span className="text-red-500/70 italic w-full text-center">
 								Faltan campos por completar
-							</p>
+							</span>
 						)
 					}
 				/>
 			</FieldGroup>
-			{error && <p>{error.message}</p>}
+			{error && (
+				<span className="text-red-500/70 italic w-full text-center ">
+					{error.message}
+				</span>
+			)}
 		</form>
 	)
 }
@@ -760,7 +764,9 @@ function InputMenu({
 			<input
 				ref={inputRef}
 				defaultValue={
-					actualPunto !== null && puntos[actualPunto] !== 0 ? puntos[actualPunto] : ""
+					actualPunto !== null && puntos[actualPunto] !== 0
+						? puntos[actualPunto]
+						: ""
 				}
 				type="number"
 				id="punto"
@@ -796,9 +802,7 @@ function AreaPuntosList({
 	setPuntos: Dispatch<SetStateAction<number[]>>
 }) {
 	const handleSetPunto = (index: number) => {
-		const newPuntos = puntos.map((np, indexNP) =>
-			indexNP === index ? 0 : np
-		)
+		const newPuntos = puntos.map((np, indexNP) => (indexNP === index ? 0 : np))
 		setPuntos(newPuntos)
 	}
 
