@@ -2,10 +2,10 @@ import { protectedServerFn } from "@/lib/protected-serverFn"
 import { createServerFn } from "@tanstack/react-start"
 import { getRequest } from "@tanstack/react-start/server"
 import { createNRpart2DB } from "db/new-report/part2/create-nrpart2-db"
-import { part2DataFormValidator } from "db/new-report/part2/nrpart2-validator"
+import { part2DataValidator } from "db/new-report/part2/nrpart2-validator"
 
 export const createNRpart2Server = createServerFn({ method: "POST" })
-	.inputValidator(part2DataFormValidator)
+	.inputValidator(part2DataValidator)
 	.handler(async ({ data }) => {
 		const request = getRequest()
 		const session = await protectedServerFn(request)

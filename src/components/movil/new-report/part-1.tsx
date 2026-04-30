@@ -13,7 +13,7 @@ import { Dispatch, SetStateAction, Suspense } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { empresasQueryOptions } from "queries/empresas/empresas-query"
 import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
-import { CLIMA, HUMEDAD, TEMPERATURA } from "@/lib/constants"
+import { CLIMA, HUMEDAD, TEMPERATURA, ClimaType, HumedadType, TemperaturaType } from "@/lib/constants"
 import { part1DataQueryOptions } from "queries/new-report/part1/nrpart1-query"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { useCreatePart1Data } from "queries/new-report/part1/use-create-nrpart1"
@@ -287,9 +287,7 @@ function Part1Data({
 								<Select
 									value={field.state.value || ""}
 									onValueChange={value =>
-										field.handleChange(
-											value as "soleado" | "nublado" | "templado" | "lluvioso"
-										)
+										field.handleChange(value as ClimaType)
 									}
 								>
 									<SelectTrigger
@@ -348,7 +346,7 @@ function Part1Data({
 								<Select
 									value={field.state.value || ""}
 									onValueChange={value =>
-										field.handleChange(value as "60" | "70" | "80" | "90")
+										field.handleChange(value as HumedadType)
 									}
 								>
 									<SelectTrigger
@@ -407,7 +405,7 @@ function Part1Data({
 								<Select
 									value={field.state.value || ""}
 									onValueChange={value =>
-										field.handleChange(value as "10" | "20" | "30" | "40")
+										field.handleChange(value as TemperaturaType)
 									}
 								>
 									<SelectTrigger

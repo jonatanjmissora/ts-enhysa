@@ -15,19 +15,19 @@ export const NRpart2s = pgTable("NRpart2s", {
 	tipo: text("tipo").notNull(),
 
 	iluminacionTipo: text("iluminacion_tipo", {
-		enum: ILUMINACION_TIPO as [string, ...string[]],
+		enum: ILUMINACION_TIPO,
 	}).notNull(),
 
 	iluminacionFuente: text("iluminacion_fuente", {
-		enum: ILUMINACION_FUENTE as [string, ...string[]],
+		enum: ILUMINACION_FUENTE,
 	}).notNull(),
 
 	iluminacion: text("iluminacion", {
-		enum: ILUMINACION as [string, ...string[]],
+		enum: ILUMINACION,
 	}).notNull(),
 
 	valorRequerido: text("valor_requerido", {
-		enum: VALORES_REQUERIDOS as [string, ...string[]],
+		enum: VALORES_REQUERIDOS,
 	}).notNull(),
 
 	observaciones: text("observaciones").notNull(),

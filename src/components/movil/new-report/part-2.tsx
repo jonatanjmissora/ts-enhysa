@@ -1,4 +1,4 @@
-import { RulerDimensionLine } from "lucide-react"
+import { Edit, RulerDimensionLine, Trash2 } from "lucide-react"
 import {
 	Accordion,
 	AccordionContent,
@@ -17,6 +17,9 @@ import { useSuspenseQuery } from "@tanstack/react-query"
 import { part2DataQueryOptions } from "queries/new-report/part2/nrpart2-query"
 import { Part2DataType } from "db/new-report/part2/schema"
 import MovilCreateArea from "./create-area"
+import { Label } from "@/components/ui/label"
+import { getHalfMedia } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 
 export default function MovilPart2Data({
 	setReportStep,
@@ -31,7 +34,7 @@ export default function MovilPart2Data({
 					<RulerDimensionLine className="sm:size-7 2xl:size-9" />
 				</div>
 			</div>
-			<Suspense fallback={<span className="animate-pulse">Cargando...</span>}>
+			<Suspense fallback={<Part2DataSkeleton />}>
 				<Part2Data setReportStep={setReportStep} />
 			</Suspense>
 		</section>
@@ -67,7 +70,7 @@ function Part2Data({
 						Nueva Area
 					</AlertDialogTitle>
 					<AlertDialogDescription className="text-center">
-						<MovilCreateArea />
+						<MovilCreateArea setOpen={setOpen} />
 					</AlertDialogDescription>
 				</AlertDialogContent>
 			</AlertDialog>
@@ -82,8 +85,8 @@ function Part2Data({
 
 				<button
 					onClick={() => setReportStep?.(3)}
-					className={`card py-2 px-4 my-20 flex items-center justify-center gap-2 mx-auto w-5/6  textM text-sm  ${!!part2Data ? "opacity-30 cursor-not-allowed" : "bg-accent"} `}
-					disabled={!!part2Data}
+					className={`card py-2 px-4 my-20 flex items-center justify-center gap-2 mx-auto w-5/6  textM text-sm  ${part2Data && part2Data.length > 0 ? "bg-accent" : "opacity-30 cursor-not-allowed"} `}
+					disabled={part2Data && part2Data.length > 0}
 				>
 					Siguiente
 				</button>
@@ -112,12 +115,128 @@ const AreaAccordion = ({ part2Data }: { part2Data: Part2DataType[] }) => {
 						</div>
 					</AccordionTrigger>
 					<AccordionContent className="">
-						<div className="w-full card border-0 bg-accent sm:bg-background flex flex-col justify-center items-center gap-20 p-0 sm:p-8 pb-20">
-							MOSTRAR ACA UN MODAL
-						</div>
+						<Part2DataArea area={area} />
 					</AccordionContent>
 				</AccordionItem>
 			))}
 		</Accordion>
+	)
+}
+
+function Part2DataSkeleton() {
+	return (
+		<div className="w-full pt-10 flex flex-col gap-2 items-center justify-center textM text-sm sm:text-base italic">
+			<span className="animate-pulse card py-2 w-5/6 mx-auto bg-accent/20 h-8 shadow-none"></span>
+			<span className="animate-pulse card py-2 w-5/6 mx-auto bg-accent/20 h-8 shadow-none"></span>
+		</div>
+	)
+}
+
+function Part2DataArea({ area }: { area: Part2DataType }) {
+	const celdasMedidas = area.puntos.filter(punto => punto > 0)
+	const uniformidad =
+		celdasMedidas.reduce((acc, valor) => acc + valor, 0) /
+		celdasMedidas.length /
+		2
+
+	return (
+		<div className="w-full card border-0 bg-accent sm:bg-background flex flex-col justify-center items-center p-0 py-10">
+			<div className="w-5/6 grid grid-cols-2 gap-3 border-b border-foreground/10 pb-2">
+				<Label className="textL text-sm place-content-end">Nombre : </Label>
+				<span className="textL text-sm">{area.nombre.toUpperCase()}</span>
+
+				<Label className="place-content-end textL text-sm">Tipo : </Label>
+				<span className="text-left textL text-sm">
+					{area.tipo.toUpperCase()}
+				</span>
+			</div>
+			<div className="w-5/6 grid grid-cols-2 gap-3 border-b border-foreground/10 py-2">
+				<Label className="place-content-end textL text-sm">ilum. Tipo :</Label>
+				<span className="text-left textL text-sm">
+					{area.iluminacionTipo.toUpperCase()}
+				</span>
+
+				<Label className="place-content-end textL text-sm">
+					ilum. Fuente :{" "}
+				</Label>
+				<span className="text-left textL text-sm">
+					{area.iluminacionFuente.toUpperCase()}
+				</span>
+
+				<Label className="place-content-end textL text-sm">
+					iluminación :{" "}
+				</Label>
+				<span className="text-left textL text-sm">
+					{area.iluminacion.toUpperCase()}
+				</span>
+
+				<Label className="place-content-end textL text-sm">Valor Req. : </Label>
+				<span className="text-left textL text-sm">
+					{area.valorRequerido.toUpperCase()} lm
+				</span>
+
+				<Label className="place-content-end textL text-sm">
+					Observaciones :{" "}
+				</Label>
+				<span className="text-left textL text-sm">
+					{area.observaciones.toUpperCase()}
+				</span>
+			</div>
+			<div className="w-5/6 grid grid-cols-2 gap-3 border-b border-foreground/10 py-2">
+				<Label className="place-content-end textL text-sm">Largo : </Label>
+				<span className="text-left textL text-sm">
+					{area.largo.toFixed(0)} mts.
+				</span>
+
+				<Label className="place-content-end textL text-sm">Ancho : </Label>
+				<span className="text-left textL text-sm">
+					{area.ancho.toFixed(0)} mts.
+				</span>
+
+				<Label className="place-content-end textL text-sm">Alto : </Label>
+				<span className="text-left textL text-sm">
+					{area.alto.toFixed(0)} mts.
+				</span>
+
+				<Label className="place-content-end textL text-sm">
+					Celdas medidas :{" "}
+				</Label>
+				<span className="text-left textL text-sm">
+					{celdasMedidas.length}/{area.puntos.length}
+				</span>
+			</div>
+			<div className="w-5/6 grid grid-cols-2 gap-3 border-b border-foreground/10 py-2">
+				{area.puntos.map((punto, index) => (
+					<div
+						key={index}
+						className={`flex gap-2 justify-center items-center ${punto > 0 ? "bg-background" : "bg-accent"} p-1 rounded-sm`}
+					>
+						<Label className="textL text-sm text-foreground/50">
+							Punto {index + 1} :{" "}
+						</Label>
+						<span className="textL text-sm">{punto.toFixed(0)} lm</span>
+					</div>
+				))}
+			</div>
+
+			<div className="w-full flex justify-center items-center gap-2 mt-4">
+				<span className="text-left textL text-sm italic">
+					Uniformidad de iluminancia:
+				</span>
+				<span className="text-left textL text-sm font-bold">
+					{Math.ceil(uniformidad)}
+				</span>
+			</div>
+
+			<div className="w-5/6 flex gap-4 justify-betwen items-center h-20 mt-10">
+				<Button variant={"destructive"} className="my-shadow">
+					<Trash2 className="size-4 " />
+				</Button>
+				<button className="card py-2 px-4 my-20 flex items-center justify-center gap-2 w-max textM text-sm  bg-accent hover:bg-accent/90 ml-auto">
+					<Edit className="size-4" />
+					Editar
+				</button>
+			</div>
+		</div>
 	)
 }
