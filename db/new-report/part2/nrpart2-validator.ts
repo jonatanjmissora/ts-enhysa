@@ -35,6 +35,12 @@ export const updatePart2DataValidator = part2DataFormValidator.extend({
 
 export type UpdatePart2DataType = z.infer<typeof updatePart2DataValidator>
 
+export const nrPart2IdValidator = z.object({
+	id: z.string().min(1, "Id requerido"),
+})
+
+export type NrPart2IdType = z.infer<typeof nrPart2IdValidator>
+
 export const defaultPart2Data: Part2DataFormType = {
 	nombre: "",
 	tipo: "",
