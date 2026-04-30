@@ -5,7 +5,7 @@ import {
 	VALORES_REQUERIDOS,
 } from "@/lib/constants"
 import { user } from "db/users/schema"
-import { pgTable, text } from "drizzle-orm/pg-core"
+import { integer, pgTable, text } from "drizzle-orm/pg-core"
 
 export const NRpart2s = pgTable("NRpart2s", {
 	id: text("id").primaryKey(),
@@ -26,21 +26,21 @@ export const NRpart2s = pgTable("NRpart2s", {
 		enum: ILUMINACION as [string, ...string[]],
 	}).notNull(),
 
-	valoreRequerido: text("valor_requerido", {
+	valorRequerido: text("valor_requerido", {
 		enum: VALORES_REQUERIDOS as [string, ...string[]],
 	}).notNull(),
 
 	observaciones: text("observaciones").notNull(),
 
-	largo: text("largo").notNull(),
+	largo: integer("largo").notNull(),
 
-	ancho: text("ancho").notNull(),
+	ancho: integer("ancho").notNull(),
 
-	alto: text("alto").notNull(),
+	alto: integer("alto").notNull(),
 
 	imagenes: text("imagenes").array().notNull(),
 
-	puntos: text("puntos").array().notNull(),
+	puntos: integer("puntos").array().notNull(),
 
 	userId: text("userId")
 		.notNull()

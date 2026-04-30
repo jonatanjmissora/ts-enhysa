@@ -1,16 +1,16 @@
 import { delay } from "@/lib/utils"
 import { db } from "db"
 import { eq } from "drizzle-orm"
-import { UpdatePart1DataType } from "./nrpart2-validator"
-import { NRpart1s } from "./schema"
+import { UpdatePart2DataType } from "./nrpart2-validator"
+import { NRpart2s } from "./schema"
 
-export async function updateNrPart1DB(updatedPart1Data: UpdatePart1DataType) {
+export async function updateNrPart2DB(updatedPart2Data: UpdatePart2DataType) {
 	try {
 		await delay()
 		const result = await db
-			.update(NRpart1s)
-			.set(updatedPart1Data)
-			.where(eq(NRpart1s.id, updatedPart1Data.id))
+			.update(NRpart2s)
+			.set(updatedPart2Data)
+			.where(eq(NRpart2s.id, updatedPart2Data.id))
 			.returning()
 
 		return result[0]
