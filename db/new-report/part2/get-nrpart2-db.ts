@@ -6,12 +6,7 @@ import { delay } from "@/lib/utils"
 export async function getNRpart2DB(userId: string) {
 	try {
 		await delay()
-		return await db
-			.select()
-			.from(NRpart2s)
-			.where(eq(NRpart2s.userId, userId))
-			.limit(1)
-			.then(rows => rows[0] ?? null)
+		return await db.select().from(NRpart2s).where(eq(NRpart2s.userId, userId))
 	} catch (error) {
 		console.error(
 			"ERROR obteniendo parte1Data:",

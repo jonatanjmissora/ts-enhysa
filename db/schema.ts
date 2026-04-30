@@ -12,3 +12,6 @@ export * from "./instrumentos/schema"
 
 // New Report Part 1
 export * from "./new-report/part1/schema"
+
+// New Report Part 2
+export * from "./new-report/part2/schema"

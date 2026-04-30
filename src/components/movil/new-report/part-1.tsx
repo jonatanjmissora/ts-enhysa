@@ -459,7 +459,7 @@ function Part1Data({
 								Guardando... <Loader className="animate-spin size-4"></Loader>
 							</div>
 						) : (
-							"Siguiente"
+							<span>Siguiente</span>
 						)}
 					</button>
 				</Field>
