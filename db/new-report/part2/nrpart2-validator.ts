@@ -31,6 +31,8 @@ export type Part2DataWPuntosType = z.infer<typeof part2DataValidator>
 export const updatePart2DataValidator = part2DataFormValidator.extend({
 	id: z.string().min(1, "Id requerido"),
 	userId: z.string().min(1, "UserId requerido"),
+	puntos: z.array(z.number()).min(1, "Requerido"),
+	imagenes: z.array(z.string()),
 })
 
 export type UpdatePart2DataType = z.infer<typeof updatePart2DataValidator>

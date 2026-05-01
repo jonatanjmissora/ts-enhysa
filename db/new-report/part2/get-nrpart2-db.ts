@@ -9,7 +9,7 @@ export async function getNRpart2DB(userId: string) {
 		return await db.select().from(NRpart2s).where(eq(NRpart2s.userId, userId))
 	} catch (error) {
 		console.error(
-			"ERROR obteniendo parte1Data:",
+			"ERROR obteniendo parte2Data:",
 			error instanceof Error ? error.message : error
 		)
 	}

@@ -13,6 +13,7 @@ import {
 } from "@/lib/types2"
 import { Part1DataType } from "db/new-report/part1/schema"
 import { defaultPart1Data } from "db/new-report/part1/nrpart1-validator"
+import LoadingMovil from "@/components/layout/loading-movil"
 
 export const Route = createFileRoute("/_protected/new-report2/")({
 	component: RouteComponent,
@@ -34,17 +35,9 @@ function RouteComponent() {
 	}, [])
 
 	// Durante SSR y el primer render no se sabe el viewport → no renderizar nada
-	if (isMobil === null) return <span className="text-4xl">CARGANDO</span>
+	if (isMobil === null) return <LoadingMovil />
 
-	if (isMobil)
-		return (
-			<MovilNewReport
-				part2Data={part2Data}
-				setPart2Data={setPart2Data}
-				part3Data={part3Data}
-				setPart3Data={setPart3Data}
-			/>
-		)
+	if (isMobil) return <MovilNewReport />
 
 	return (
 		<div className="card bg-accent rounded-lg flex-col items-start gap-10 pb-40">

@@ -28,13 +28,7 @@ import {
 	ValoresRequeridosType,
 } from "@/lib/constants"
 import { useForm } from "@tanstack/react-form"
-import {
-	defaultPart2Data,
-	part2DataFormValidator,
-	Part2DataWPuntosType,
-} from "db/new-report/part2/nrpart2-validator"
-import { Box, HardHat, Lightbulb, Loader, Trash2 } from "lucide-react"
-import { useCreatePart2Data } from "queries/new-report/part2/use-create-nrpart2"
+import { Box, Edit, HardHat, Lightbulb, Loader, Trash2 } from "lucide-react"
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
 import Formula from "./formula"
 import { getIndiceDeLocal, getIndiceRedondeo } from "@/lib/utils"
@@ -45,41 +39,58 @@ import {
 	AlertDialogTitle,
 	AlertDialogDescription,
 } from "@/components/ui/alert-dialog"
+import { Part2DataType } from "db/new-report/part2/schema"
+import { useUpdateNrPart2 } from "queries/new-report/part2/use-update-nrpart2"
+import { part2DataFormValidator } from "db/new-report/part2/nrpart2-validator"
 
-export default function MovilCreateAreaAlert() {
+export default function MovilEditAreaAlert({ area }: { area: Part2DataType }) {
 	const [open, setOpen] = useState(false)
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild className="hover:bg-accent">
-				<button className="card py-2 px-4 my-10 flex items-center justify-center gap-2 mx-auto w-5/6 sm:w-1/3 textM text-sm sm:text-base sm:bg-background bg-accent cursor-pointer">
-					<span className="">+ Nueva Area</span>
+				<button className="card py-2 px-4 my-20 flex items-center justify-center gap-2 w-max textM text-sm  bg-accent hover:bg-accent/90 ml-auto">
+					<Edit className="size-4" />
+					Editar
 				</button>
 			</AlertDialogTrigger>
 			<AlertDialogContent className="p-6 py-12 pb-40 sm:p-20 sm:py-15 2xl:py-20 bg-accent/80 backdrop-blur-xl w-full sm:w-1/2 h-screen sm:h-[95dvh] overflow-auto">
 				<AlertDialogTitle className="h-max sm:text-lg 2xl:text-2xl font-semibold tracking-wider py-2 border-b border-foreground/20 w-full mb-10">
-					Nueva Area
+					Editar Area
 				</AlertDialogTitle>
 				<AlertDialogDescription className="text-center">
-					<MovilCreateArea setOpen={setOpen} />
+					<MovilEditArea area={area} setOpen={setOpen} />
 				</AlertDialogDescription>
 			</AlertDialogContent>
 		</AlertDialog>
 	)
 }
 
-function MovilCreateArea({
+function MovilEditArea({
+	area,
 	setOpen,
 }: {
+	area: Part2DataType
 	setOpen: Dispatch<SetStateAction<boolean>>
 }) {
-	const [puntos, setPuntos] = useState<number[]>([])
+	const [puntos, setPuntos] = useState<number[]>(area.puntos)
 	const [puntosError, setPuntosError] = useState<string | null>(null)
 	const [planoFiles, setPlanoFiles] = useState<File[]>([])
 
-	const { mutateAsync: createNRpart2, isPending, error } = useCreatePart2Data()
+	const { mutateAsync: updateNRpart2, isPending, error } = useUpdateNrPart2()
 
 	const form = useForm({
-		defaultValues: defaultPart2Data,
+		defaultValues: {
+			nombre: area.nombre,
+			tipo: area.tipo,
+			iluminacionTipo: area.iluminacionTipo,
+			iluminacionFuente: area.iluminacionFuente,
+			iluminacion: area.iluminacion,
+			valorRequerido: area.valorRequerido,
+			observaciones: area.observaciones,
+			largo: area.largo,
+			ancho: area.ancho,
+			alto: area.alto,
+		},
 		validators: {
 			onSubmit: part2DataFormValidator,
 		},
@@ -87,14 +98,16 @@ function MovilCreateArea({
 			setPuntosError(null)
 			if (puntos.every(punto => punto === 0))
 				return setPuntosError("Debe agregar al menos un punto de medición")
-			const newArea: Part2DataWPuntosType = {
+			const newArea: Part2DataType = {
 				...value,
+				userId: area.userId,
+				id: area.id,
 				puntos,
 				imagenes: [],
 			}
-			const result = await createNRpart2({ data: newArea })
+			const result = await updateNRpart2({ data: newArea })
 			if (!result) {
-				console.error("Error al crear part2Data", error)
+				console.error("Error al actualizar part2Data", error)
 			}
 			setOpen(false)
 		},
@@ -673,10 +686,6 @@ function Grilla({
 	const largoRatio = 150 * divisionesLargo
 	const anchoGrilla = `${(ancho / largo) * largoRatio}px`
 	const largoGrilla = `${150 * divisionesLargo}px`
-	useEffect(() => {
-		const newPuntos: number[] = Array.from({ length: celdas }, () => 0)
-		setPuntos(newPuntos)
-	}, [celdas, setPuntos])
 
 	return (
 		<>

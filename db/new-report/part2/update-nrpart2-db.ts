@@ -16,7 +16,7 @@ export async function updateNrPart2DB(updatedPart2Data: UpdatePart2DataType) {
 		return result[0]
 	} catch (error) {
 		console.error(
-			"ERROR actualizando part1Data:",
+			"ERROR actualizando part2Data:",
 			error instanceof Error ? error.message : error
 		)
 	}

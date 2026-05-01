@@ -13,7 +13,14 @@ import { Dispatch, SetStateAction, Suspense } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { empresasQueryOptions } from "queries/empresas/empresas-query"
 import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
-import { CLIMA, HUMEDAD, TEMPERATURA, ClimaType, HumedadType, TemperaturaType } from "@/lib/constants"
+import {
+	CLIMA,
+	HUMEDAD,
+	TEMPERATURA,
+	ClimaType,
+	HumedadType,
+	TemperaturaType,
+} from "@/lib/constants"
 import { part1DataQueryOptions } from "queries/new-report/part1/nrpart1-query"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { useCreatePart1Data } from "queries/new-report/part1/use-create-nrpart1"
@@ -112,11 +119,11 @@ function Part1Data({
 				e.preventDefault()
 				form.handleSubmit()
 			}}
-			className="w-full my-20 sm:my-4 flex flex-col gap-8 relative"
+			className="w-5/6 my-20 sm:my-4 mx-auto flex flex-col gap-8 relative"
 		>
 			<TextTooltip
 				text={"Datos obtenidos a través del perfil."}
-				className={"-top-10 right-5"}
+				className={"-top-10 right-0"}
 			/>
 
 			<FieldGroup className="gap-5">
@@ -481,7 +488,7 @@ function Part1Data({
 
 function Part1DataSkelton() {
 	return (
-		<div className="w-full my-20 sm:my-4 flex flex-col gap-8 relative">
+		<div className="w-5/6 mx-auto my-20 sm:my-4 flex flex-col gap-8 relative">
 			<TextTooltip
 				text={"Datos obtenidos a través del perfil."}
 				className={"-top-10 right-5"}
@@ -555,7 +562,7 @@ function Part1DataSkelton() {
 						type="submit"
 						className="themeBtnBackground py-2 rounded-lg textL text-sm sm:text-base"
 					>
-						"Siguiente"
+						Siguiente
 					</button>
 				</Field>
 			</FieldGroup>

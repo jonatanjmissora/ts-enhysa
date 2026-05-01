@@ -8,7 +8,17 @@ export function useUpdateNrPart2() {
 	return useMutation({
 		mutationFn: updatePart2DataServer,
 		onSuccess: data => {
-			queryClient.setQueryData<Part2DataType>(["part2Data"], data)
+			if (!data) return
+			queryClient.setQueryData<Part2DataType[]>(["part2Data"], oldData => {
+				if (!oldData) return oldData
+				const oldPart2Data = oldData.find(
+					oldPart2Data => oldPart2Data.id === data.id
+				)
+				if (!oldPart2Data) return oldData
+				return oldData.map(oldPart2Data =>
+					oldPart2Data.id === data.id ? data : oldPart2Data
+				)
+			})
 		},
 	})
 }
