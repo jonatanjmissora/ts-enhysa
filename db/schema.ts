@@ -15,3 +15,6 @@ export * from "./new-report/part1/schema"
 
 // New Report Part 2
 export * from "./new-report/part2/schema"
+
+// New Report Part 3
+export * from "./new-report/part3/schema"

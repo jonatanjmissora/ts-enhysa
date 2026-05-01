@@ -453,7 +453,7 @@ function Part1Data({
 					}}
 				/>
 
-				<Field className="flex flex-row justify-center gap-5 sm:gap-10 items-center w-5/6 mx-auto mt-10">
+				<Field className="flex flex-row justify-center gap-5 sm:gap-10 items-center w-full mx-auto mt-10">
 					<button
 						type="submit"
 						disabled={isPending || updatePending}
@@ -557,7 +557,7 @@ function Part1DataSkelton() {
 					</div>
 				</Field>
 
-				<Field className="flex flex-row justify-center gap-5 sm:gap-10 items-center w-5/6 mx-auto mt-10">
+				<Field className="flex flex-row justify-center gap-5 sm:gap-10 items-center w-full mx-auto mt-10">
 					<button
 						type="submit"
 						className="themeBtnBackground py-2 rounded-lg textL text-sm sm:text-base"

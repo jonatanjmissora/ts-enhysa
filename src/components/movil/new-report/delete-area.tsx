@@ -66,10 +66,11 @@ function DeletePart2DataForm({
 			const result = await deleteAreaMutation({ data: { id: value.id } })
 
 			if (!result) {
-				console.error("Error al eliminar la empresa", error)
-				toast.error("Error al eliminar la empresa")
+				console.error("Error al eliminar el area", error)
+				toast.error("Error al eliminar el area")
+				return
 			}
-			toast.success("Empresa eliminada exitosamente")
+			toast.success("Area eliminada exitosamente")
 			router.invalidate()
 		},
 	})

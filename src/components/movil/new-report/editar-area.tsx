@@ -42,6 +42,7 @@ import {
 import { Part2DataType } from "db/new-report/part2/schema"
 import { useUpdateNrPart2 } from "queries/new-report/part2/use-update-nrpart2"
 import { part2DataFormValidator } from "db/new-report/part2/nrpart2-validator"
+import { toast } from "sonner"
 
 export default function MovilEditAreaAlert({ area }: { area: Part2DataType }) {
 	const [open, setOpen] = useState(false)
@@ -107,8 +108,11 @@ function MovilEditArea({
 			}
 			const result = await updateNRpart2({ data: newArea })
 			if (!result) {
-				console.error("Error al actualizar part2Data", error)
+				console.error("Error al actualizar area", error)
+				toast.error("Error al actualizar area")
+				return
 			}
+			toast.success("Area actualizada exitosamente")
 			setOpen(false)
 		},
 	})

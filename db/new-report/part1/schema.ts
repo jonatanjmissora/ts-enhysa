@@ -12,15 +12,15 @@ export const NRpart1s = pgTable("NRpart1s", {
 	instrumentoId: text("instrumento_id").notNull(),
 
 	clima: text("clima", {
-		enum: CLIMA as [string, ...string[]],
+		enum: CLIMA,
 	}).notNull(),
 
 	humedad: text("humedad", {
-		enum: HUMEDAD as [string, ...string[]],
+		enum: HUMEDAD,
 	}).notNull(),
 
 	temperatura: text("temperatura", {
-		enum: TEMPERATURA as [string, ...string[]],
+		enum: TEMPERATURA,
 	}).notNull(),
 
 	userId: text("userId")

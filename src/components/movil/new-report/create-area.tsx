@@ -45,6 +45,7 @@ import {
 	AlertDialogTitle,
 	AlertDialogDescription,
 } from "@/components/ui/alert-dialog"
+import { toast } from "sonner"
 
 export default function MovilCreateAreaAlert() {
 	const [open, setOpen] = useState(false)
@@ -94,8 +95,11 @@ function MovilCreateArea({
 			}
 			const result = await createNRpart2({ data: newArea })
 			if (!result) {
-				console.error("Error al crear part2Data", error)
+				console.error("Error al crear area", error)
+				toast.error("Error al crear área")
+				return
 			}
+			toast.success("Área creada exitosamente")
 			setOpen(false)
 		},
 	})

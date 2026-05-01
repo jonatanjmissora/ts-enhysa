@@ -4,46 +4,94 @@ import {
 	FieldGroup,
 	FieldLabel,
 } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { useForm } from "@tanstack/react-form"
+import { useSuspenseQuery } from "@tanstack/react-query"
+import {
+	defaultPart3Data,
+	Part3DataFormType,
+	part3DataFormValidator,
+} from "db/new-report/part3/nrpart3-validator"
 import { Database, List, Loader, NotebookPen, Search } from "lucide-react"
+import { part3DataQueryOptions } from "queries/new-report/part3/nrpart3-query"
+import { useCreatePart3Data } from "queries/new-report/part3/use-create-nrpart3"
+import { useUpdateNrPart3 } from "queries/new-report/part3/use-update-nrpart3"
+import { Dispatch, SetStateAction, Suspense } from "react"
 
 export default function MovilPart3Data({
 	setReportStep,
 }: {
-	setReportStep: (step: 1 | 2 | 3 | 4) => void
+	setReportStep: Dispatch<SetStateAction<1 | 2 | 3 | 4>>
 }) {
-	const form =
-		useForm(
-			// {
-			// 	defaultValues: defaultPart3Data,
-			// 	validators: {
-			// 		onSubmit: part2DataFormValidator,
-			// 	},
-			// 	onSubmit: async ({ value }) => {
-			// 		setPuntosError(null)
-			// 		if (puntos.every(punto => punto === 0))
-			// 			return setPuntosError("Debe agregar al menos un punto de medición")
-			// 		const newArea: Part2DataWPuntosType = {
-			// 			...value,
-			// 			puntos,
-			// 			imagenes: [],
-			// 		}
-			// 		console.log("newArea", newArea)
-			// 		const result = await createNRpart2({ data: newArea })
-			// 		if (!result) {
-			// 			console.error("Error al crear part2Data", error)
-			// 		}
-			// 	},
-			// }
-		)
+	return (
+		<Suspense fallback={<Part3DataSkelton />}>
+			<Part3Data setReportStep={setReportStep} />
+		</Suspense>
+	)
+}
+
+function Part3Data({
+	setReportStep,
+}: {
+	setReportStep: Dispatch<SetStateAction<1 | 2 | 3 | 4>>
+}) {
+	const { data: part3Data } = useSuspenseQuery(part3DataQueryOptions)
+
+	const { mutateAsync: createNRpart3, isPending, error } = useCreatePart3Data()
+	const {
+		mutateAsync: updateNRpart3,
+		isPending: updatePending,
+		error: updateError,
+	} = useUpdateNrPart3()
+
+	const actualPart3Data = (part3Data as Part3DataFormType) || defaultPart3Data
+
+	const form = useForm({
+		defaultValues: actualPart3Data,
+		validators: {
+			onSubmit: part3DataFormValidator,
+		},
+		onSubmit: async ({ value }) => {
+			if (
+				part3Data &&
+				value.conclusion === part3Data.conclusion &&
+				value.observacion === part3Data.observacion &&
+				value.recomendacion === part3Data.recomendacion
+			) {
+				return setReportStep(4)
+			} else {
+				if (!part3Data) {
+					const newPart3Data = {
+						observacion: "Sin Observaciones",
+						conclusion: "Análisis Pendiente",
+						recomendacion: "Sin Recomendaciones",
+					}
+					const result = await createNRpart3({ data: newPart3Data })
+					if (!result) {
+						console.error("Error al crear part3Data", updateError)
+					}
+					return setReportStep(4)
+				} else {
+					const updatePart3Data = {
+						...value,
+						id: part3Data?.id ?? "",
+						userId: part3Data?.userId ?? "",
+					}
+
+					const result = await updateNRpart3({ data: updatePart3Data })
+					if (!result) {
+						console.error("Error al editar part3Data", updateError)
+					}
+					return setReportStep(4)
+				}
+			}
+		},
+	})
 
 	return (
 		<article className="w-full flex flex-col justify-center items-center">
 			<div className="flex items-center justify-between w-full px-5 rounded border-b border-pink-500/25 m-15 sm:mt-0 sm:border-none sm:bg-pink-500/15">
 				<div className="textXL py-2 px-2 flex items-center gap-8 justify-between w-full sm:w-max">
-					Resumen <Database className="sm:size-7 2xl:size-9" />
+					Finalizando <Database className="sm:size-7 2xl:size-9" />
 				</div>
 			</div>
 
@@ -53,9 +101,9 @@ export default function MovilPart3Data({
 					e.preventDefault()
 					form.handleSubmit()
 				}}
-				className="w-full my-5 sm:my-4 flex flex-col gap-8 relative"
+				className="w-5/6 relative"
 			>
-				<FieldGroup className="gap-5">
+				<FieldGroup className="gap-10">
 					<form.Field
 						name="conclusion"
 						children={field => {
@@ -70,15 +118,16 @@ export default function MovilPart3Data({
 										<NotebookPen className="size-5 text-amber-500/70" />
 										Conclusiónes Finales
 									</FieldLabel>
-									<Textarea
+									<textarea
 										id={field.name}
 										name={field.name}
-										defaultValue={`Conclusión final del reporte, análisis de los resultados de las mediciones, Conclusiones. En caso de no haber conclusiones, poner "Análisis Pendiente"`}
+										placeholder={`Conclusión final del reporte, análisis de los resultados de las mediciones, Conclusiones. En caso de no haber conclusiones, poner "Análisis Pendiente"`}
 										value={field.state.value}
 										onBlur={field.handleBlur}
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
-										className="bg-background sm:bg-accent text-right text-sm"
+										className="bg-accent text-center textXS italic card p-4 justify-center h-30"
+										onFocus={e => e.target.select()}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -105,15 +154,16 @@ export default function MovilPart3Data({
 										<Search className="size-5 text-amber-500/70" />
 										Observacion General
 									</FieldLabel>
-									<Textarea
+									<textarea
 										id={field.name}
 										name={field.name}
-										defaultValue={`Detalle general de las condiciones en las que tomamos las mediciones. En caso de no haber observaciones, poner "Sin Observaciones"`}
+										placeholder={`Detalle general de las condiciones en las que tomamos las mediciones. En caso de no haber observaciones, poner "Sin Observaciones"`}
 										value={field.state.value}
 										onBlur={field.handleBlur}
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
-										className="bg-background sm:bg-accent text-right text-sm"
+										className="bg-accent text-center textXS italic card p-4 justify-center h-30"
+										onFocus={e => e.target.select()}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -140,15 +190,16 @@ export default function MovilPart3Data({
 										<List className="size-5 text-amber-500/70" />
 										Recomendaciones Generales
 									</FieldLabel>
-									<Textarea
+									<textarea
 										id={field.name}
 										name={field.name}
-										defaultValue={`Luego de realizar un análisis de los resultados de las mediciones, dar nuestro asesoramiento técnico, oportunidad de mejora, condiciones de mejora, cambios solicitados. En caso de no tener recomendaciones, poner "Sin Recomendaciones"`}
+										placeholder={`Luego de realizar un análisis de los resultados de las mediciones, dar nuestro asesoramiento técnico, oportunidad de mejora, condiciones de mejora, cambios solicitados. En caso de no tener recomendaciones, poner "Sin Recomendaciones"`}
 										value={field.state.value}
 										onBlur={field.handleBlur}
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
-										className="bg-background sm:bg-accent text-right text-sm"
+										className="bg-accent text-center textXS italic card p-4 justify-center h-45"
+										onFocus={e => e.target.select()}
 									/>
 									{isInvalid && (
 										<FieldError
@@ -161,7 +212,7 @@ export default function MovilPart3Data({
 						}}
 					/>
 
-					<Field className="flex flex-row justify-center gap-5 sm:gap-10 items-center w-5/6 mx-auto mt-10">
+					<Field className="flex flex-row justify-center gap-5 sm:gap-10 items-center w-full mx-auto mt-10">
 						<button
 							type="submit"
 							disabled={isPending || updatePending}
@@ -169,7 +220,8 @@ export default function MovilPart3Data({
 						>
 							{isPending || updatePending ? (
 								<div className="flex gap-2 w-full justify-center items-center">
-									Finalizar... <Loader className="animate-spin size-4"></Loader>
+									Finalizando...{" "}
+									<Loader className="animate-spin size-4"></Loader>
 								</div>
 							) : (
 								<span>Finalizar Reporte</span>
@@ -199,6 +251,58 @@ export default function MovilPart3Data({
 					/>
 				</FieldGroup>
 			</form>
+		</article>
+	)
+}
+
+function Part3DataSkelton() {
+	return (
+		<article className="w-full flex flex-col justify-center items-center">
+			<div className="flex items-center justify-between w-full px-5 rounded border-b border-pink-500/25 m-15 sm:mt-0 sm:border-none sm:bg-pink-500/15">
+				<div className="textXL py-2 px-2 flex items-center gap-8 justify-between w-full sm:w-max">
+					Finalizando <Database className="sm:size-7 2xl:size-9" />
+				</div>
+			</div>
+
+			<div className="w-5/6 relative">
+				<FieldGroup className="gap-10">
+					<Field className="relative gap-1">
+						<FieldLabel className="flex items-center gap-3 textL">
+							<NotebookPen className="size-5 text-amber-500/70" />
+							Conclusiónes Finales
+						</FieldLabel>
+						<textarea
+							readOnly
+							className="bg-accent text-center textXS italic card p-4 justify-center h-30 opacity-50 animate-pulse"
+						/>
+					</Field>
+
+					<Field className="relative gap-1">
+						<FieldLabel className="flex items-center gap-3 textL">
+							<Search className="size-5 text-amber-500/70" />
+							Observacion General
+						</FieldLabel>
+						<textarea className="bg-accent text-center textXS italic card p-4 justify-center h-30 opacity-50 animate-pulse" />
+					</Field>
+
+					<Field className="relative gap-1">
+						<FieldLabel className="flex items-center gap-3 textL">
+							<List className="size-5 text-amber-500/70" />
+							Recomendaciones Generales
+						</FieldLabel>
+						<textarea className="bg-accent text-center textXS italic card p-4 justify-center h-45 opacity-50 animate-pulse" />
+					</Field>
+
+					<Field className="flex flex-row justify-center gap-5 sm:gap-10 items-center w-5/6 mx-auto mt-10">
+						<button
+							type="submit"
+							className="themeBtnBackground py-2 rounded-lg textL text-sm sm:text-base"
+						>
+							<span>Finalizar Reporte</span>
+						</button>
+					</Field>
+				</FieldGroup>
+			</div>
 		</article>
 	)
 }
