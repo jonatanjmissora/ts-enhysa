@@ -212,11 +212,19 @@ function Part3Data({
 						}}
 					/>
 
-					<Field className="flex flex-row justify-center gap-5 sm:gap-10 items-center w-full mx-auto mt-10">
+					<Field className="flex flex-row justify-center gap-5 sm:gap-10 items-center w-full mx-auto mt-10 p-0">
+						<button
+							type="button"
+							onClick={() => setReportStep?.(2)}
+							className="card w-1/2 py-2 px-4 flex items-center justify-center gap-2 mx-auto textM text-sm bg-accent"
+						>
+							Volver
+						</button>
+
 						<button
 							type="submit"
 							disabled={isPending || updatePending}
-							className="themeBtnBackground py-2 rounded-lg textL text-sm sm:text-base"
+							className="themeBtnBackground py-2 rounded-lg textL text-sm sm:text-base w-1/2"
 						>
 							{isPending || updatePending ? (
 								<div className="flex gap-2 w-full justify-center items-center">
@@ -224,7 +232,7 @@ function Part3Data({
 									<Loader className="animate-spin size-4"></Loader>
 								</div>
 							) : (
-								<span>Finalizar Reporte</span>
+								<span>Finalizar</span>
 							)}
 						</button>
 					</Field>
@@ -273,7 +281,8 @@ function Part3DataSkelton() {
 						</FieldLabel>
 						<textarea
 							readOnly
-							className="bg-accent text-center textXS italic card p-4 justify-center h-30 opacity-50 animate-pulse"
+							value={"cargando..."}
+							className="bg-accent/30 text-center textXS italic card p-4 justify-center h-30 animate-pulse"
 						/>
 					</Field>
 
@@ -282,7 +291,11 @@ function Part3DataSkelton() {
 							<Search className="size-5 text-amber-500/70" />
 							Observacion General
 						</FieldLabel>
-						<textarea className="bg-accent text-center textXS italic card p-4 justify-center h-30 opacity-50 animate-pulse" />
+						<textarea
+							className="bg-accent/30 text-center textXS italic card p-4 justify-center h-30 animate-pulse"
+							readOnly
+							value={"cargando..."}
+						/>
 					</Field>
 
 					<Field className="relative gap-1">
@@ -290,15 +303,26 @@ function Part3DataSkelton() {
 							<List className="size-5 text-amber-500/70" />
 							Recomendaciones Generales
 						</FieldLabel>
-						<textarea className="bg-accent text-center textXS italic card p-4 justify-center h-45 opacity-50 animate-pulse" />
+						<textarea
+							className="bg-accent/30 text-center textXS italic card p-4 justify-center h-45 animate-pulse"
+							readOnly
+							value={"cargando..."}
+						/>
 					</Field>
 
-					<Field className="flex flex-row justify-center gap-5 sm:gap-10 items-center w-5/6 mx-auto mt-10">
+					<Field className="flex flex-row justify-center gap-5 sm:gap-10 items-center w-full mx-auto mt-10 p-0">
 						<button
-							type="submit"
-							className="themeBtnBackground py-2 rounded-lg textL text-sm sm:text-base"
+							type="button"
+							className="card w-1/2 py-2 px-4 flex items-center justify-center gap-2 mx-auto textM text-sm bg-accent"
 						>
-							<span>Finalizar Reporte</span>
+							Volver
+						</button>
+
+						<button
+							type="button"
+							className="themeBtnBackground py-2 rounded-lg textL text-sm sm:text-base w-1/2"
+						>
+							<span>Finalizar</span>
 						</button>
 					</Field>
 				</FieldGroup>

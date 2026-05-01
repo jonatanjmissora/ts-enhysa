@@ -16,7 +16,7 @@ export default function MovilNewReport() {
 			{reportStep === 1 && <MovilPart1Data setReportStep={setReportStep} />}
 			{reportStep === 2 && <MovilPart2Data setReportStep={setReportStep} />}
 			{reportStep === 3 && <MovilPart3Data setReportStep={setReportStep} />}
-			{reportStep === 4 && <MovilPart4Data setReportStep={setReportStep} />}
+			{reportStep === 4 && <MovilPart4Data />}
 		</section>
 	)
 }

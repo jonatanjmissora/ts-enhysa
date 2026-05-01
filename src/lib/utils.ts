@@ -132,6 +132,11 @@ export const getHalfMedia = (puntos: PuntoType[]) => {
 	return sumatoria / puntos.length / 2
 }
 
+export const getUniformidad = (puntos: number[]) => {
+	const sumatoria = puntos.reduce((acc, valor) => acc + valor, 0)
+	return sumatoria / puntos.length / 2
+}
+
 export const puntosResult = (puntos: PuntoType[]) => {
 	const puntosQueCumplen: PuntoType[] = []
 	const puntosQueNoCumplen: PuntoType[] = []
