@@ -27,11 +27,7 @@ const chartConfig = {
 	},
 } satisfies ChartConfig
 
-export function ChartAreaInteractive({
-	area,
-}: {
-	area: Part2DataType | undefined
-}) {
+export function ChartAreaInteractive({ area }: { area: Part2DataType }) {
 	const puntosWithValue = area?.puntos?.filter(punto => punto > 0)
 	if (!puntosWithValue || puntosWithValue.length === 0)
 		return <span>No hay datos</span>
@@ -69,7 +65,7 @@ export function ChartAreaInteractive({
 									stopOpacity={0.1}
 								/>
 							</linearGradient>
-							<linearGradient id="fillUniformidad" x1="0" y1="0" x2="0" y2="1">
+							<linearGradient id="fillUniformidad" x1="0" y1="0" x2="0" y2="0">
 								<stop
 									offset="5%"
 									stopColor="var(--color-uniformidad)"
