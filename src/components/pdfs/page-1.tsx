@@ -1,4 +1,3 @@
-import { ClimaType, SectorType } from "@/lib/types"
 import { Page, Text, View, StyleSheet } from "@react-pdf/renderer"
 import { EmpresaType, InstrumentoType, TecnicoType } from "db/schema"
 import MembreteSuperior from "./membrete-superior"
@@ -60,7 +59,7 @@ export default function Page1({
 	membreteSupDerecho,
 	empresa,
 	instrumento,
-	sector,
+	observaciones,
 	clima,
 	tiempo,
 	tecnico,
@@ -69,8 +68,8 @@ export default function Page1({
 	tecnico: TecnicoType
 	empresa: EmpresaType
 	instrumento: InstrumentoType
-	sector: SectorType
-	clima: ClimaType
+	observaciones: string
+	clima: string
 	tiempo: {
 		fecha: string
 		horaInicio: string
@@ -146,10 +145,7 @@ export default function Page1({
 					</View>
 				</View>
 
-				<Text style={styles.row}>
-					(14) Condiciones atmosféricas: {clima.estado} humedad({clima.humedad}
-					%) temperatura({clima.temperatura}°C)
-				</Text>
+				<Text style={styles.row}>(14) Condiciones atmosféricas: {clima}</Text>
 
 				<Text style={styles.subtitle}>
 					Documentación que se Adjuntará a la Medición
@@ -161,9 +157,7 @@ export default function Page1({
 
 				<Text style={[styles.row, { height: 100, borderBottom: "none" }]}>
 					(17) Observaciones:{" "}
-					{sector.observaciones !== ""
-						? sector.observaciones
-						: "Sin observaciones"}
+					{observaciones !== "" ? observaciones : "Sin observaciones"}
 				</Text>
 			</View>
 			<MembreteInferior tecnico={tecnico} />

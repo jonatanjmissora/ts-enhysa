@@ -1,10 +1,10 @@
-import { PuntoType, SectorType } from "@/lib/types"
 import { Page, Text, View, StyleSheet } from "@react-pdf/renderer"
 import { EmpresaType } from "db/empresas/schema"
 import MembreteSuperior from "./membrete-superior"
 import MembreteInferior from "./membrete-inferior"
 import { TecnicoType } from "db/tecnicos/schema"
 import { MUESTREO } from "@/lib/constants"
+import { Part2DataType } from "db/new-report/part2/schema"
 
 // Create styles
 const styles = StyleSheet.create({
@@ -65,14 +65,12 @@ const COLUMNWIDTH = [6, 5, 16, 16, 10, 11, 10, 10, 6, 10]
 export default function Page2({
 	membreteSupDerecho,
 	empresa,
-	puntos,
-	sector,
+	area,
 	tecnico,
 }: {
 	membreteSupDerecho: string[]
 	empresa: EmpresaType
-	puntos: PuntoType[]
-	sector: SectorType
+	area: Part2DataType
 	tecnico: TecnicoType
 }) {
 	return (
@@ -257,15 +255,13 @@ export default function Page2({
 
 				{/* **************************************************************************************************** */}
 
-				<TablaDePuntos puntos={puntos} sector={sector} />
+				<TablaDePuntos area={area} />
 
 				{/* **************************************************************************************************** */}
 
 				<Text style={[styles.row, { height: 60, borderBottom: "none" }]}>
 					(34) Observaciones:{" "}
-					{sector.observaciones !== ""
-						? sector.observaciones
-						: "Sin observaciones"}
+					{area.observaciones !== "" ? area.observaciones : "Sin observaciones"}
 				</Text>
 			</View>
 			<MembreteInferior tecnico={tecnico} />
@@ -273,26 +269,18 @@ export default function Page2({
 	)
 }
 
-function TablaDePuntos({
-	puntos,
-	sector,
-}: {
-	puntos: PuntoType[]
-	sector: SectorType
-}) {
-	const Eminima = puntos.sort(
-		(a: PuntoType, b: PuntoType) => a.valor - b.valor
-	)[0].valor
+function TablaDePuntos({ area }: { area: Part2DataType }) {
+	const Eminima = area.puntos.sort((a: number, b: number) => a - b)[0]
 	const EmediaSobre2 = Math.round(
-		puntos.reduce((acc: number, punto: PuntoType) => acc + punto.valor, 0) /
-			puntos.length /
+		area.puntos.reduce((acc: number, punto: number) => acc + punto, 0) /
+			area.puntos.length /
 			2
 	)
 
 	return (
 		<>
-			{puntos.map(punto => (
-				<View key={punto.nombre} style={styles.flexrow}>
+			{area.puntos.map((punto, index) => (
+				<View key={index} style={styles.flexrow}>
 					<View
 						style={[
 							styles.flexRowElementWithHight,
@@ -310,7 +298,7 @@ function TablaDePuntos({
 					>
 						{/* HORA */}
 						<Text>
-							{new Date(punto.created).toLocaleTimeString().substring(0, 5)}
+							{/* {new Date(punto.created).toLocaleTimeString().substring(0, 5)} */}
 						</Text>
 					</View>
 					<View
@@ -320,7 +308,7 @@ function TablaDePuntos({
 						]}
 					>
 						{/* SECTOR NOMBRE */}
-						<Text>{sector.nombre}</Text>
+						<Text>{area.nombre}</Text>
 					</View>
 					<View
 						style={[
@@ -329,7 +317,7 @@ function TablaDePuntos({
 						]}
 					>
 						{/* Sección / Puesto / Tipo */}
-						<Text>{sector.tipo}</Text>
+						<Text>{area.tipo}</Text>
 					</View>
 					<View
 						style={[
@@ -338,7 +326,7 @@ function TablaDePuntos({
 						]}
 					>
 						{/* Tipo de iluminación */}
-						<Text>{sector.tipoIluminacion}</Text>
+						<Text>{area.iluminacionTipo}</Text>
 					</View>
 					<View
 						style={[
@@ -347,7 +335,7 @@ function TablaDePuntos({
 						]}
 					>
 						{/* Tipo de fuente */}
-						<Text>{sector.tipoFuente}</Text>
+						<Text>{area.iluminacionFuente}</Text>
 					</View>
 					<View
 						style={[
@@ -356,7 +344,7 @@ function TablaDePuntos({
 						]}
 					>
 						{/* Iluminación: */}
-						<Text>{sector.iluminacion}</Text>
+						<Text>{area.iluminacion}</Text>
 					</View>
 					<View
 						style={[
@@ -377,10 +365,10 @@ function TablaDePuntos({
 					>
 						<Text
 							style={{
-								color: `${punto.valor === Eminima ? "red" : "black"}`,
+								color: `${punto === Eminima ? "red" : "black"}`,
 							}}
 						>
-							{punto.valor}
+							{punto}
 						</Text>
 						{/* Valor Medido */}
 					</View>
@@ -390,7 +378,7 @@ function TablaDePuntos({
 							{ borderRight: "1px solid black", width: `${COLUMNWIDTH[9]}%` },
 						]}
 					>
-						<Text>{sector.valorRequerido}</Text>
+						<Text>{area.valorRequerido}</Text>
 						{/* Valor requerido */}
 					</View>
 				</View>

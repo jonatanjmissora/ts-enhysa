@@ -5,7 +5,7 @@ import {
 	VALORES_REQUERIDOS,
 } from "@/lib/constants"
 import { user } from "db/users/schema"
-import { integer, pgTable, text } from "drizzle-orm/pg-core"
+import { integer, pgTable, text, timestamp } from "drizzle-orm/pg-core"
 
 export const NRpart2s = pgTable("NRpart2s", {
 	id: text("id").primaryKey(),
@@ -41,6 +41,8 @@ export const NRpart2s = pgTable("NRpart2s", {
 	imagenes: text("imagenes").array().notNull(),
 
 	puntos: integer("puntos").array().notNull(),
+
+	timeStamp: timestamp("timestamp").array().notNull(),
 
 	userId: text("userId")
 		.notNull()

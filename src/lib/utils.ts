@@ -8,6 +8,7 @@ import { TecnicoFormType } from "db/tecnicos/tecnico-validator"
 import { twMerge } from "tailwind-merge"
 import { PuntoType } from "./types"
 import { Part1DataFormType } from "db/new-report/part1/nrpart1-validator"
+import { Part2DataType } from "db/new-report/part2/schema"
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
@@ -150,9 +151,10 @@ export const puntosResult = (puntos: PuntoType[]) => {
 	return { puntosQueCumplen, puntosQueNoCumplen }
 }
 
-export const getPuntosSortedByTimestamp = (puntos: PuntoType[] | []) => {
-	const newPuntos = [...puntos]
-	return newPuntos.sort((a, b) => a.created - b.created)
+export const getPuntosSortedByTimestamp = (areas: Part2DataType[] | []) => {
+	const newCreatedAt: Date[] = []
+	areas.map(area => newCreatedAt.push(area.createdAt))
+	return newCreatedAt.sort((a, b) => a.getTime() - b.getTime())
 }
 
 export const getLastPuntoOrden = (puntos: PuntoType[] | []) => {
