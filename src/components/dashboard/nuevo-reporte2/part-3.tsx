@@ -1,12 +1,10 @@
 import { Database, List, NotebookPen, Search } from "lucide-react"
 import { Label } from "@/components/ui/label"
 import { Dispatch, SetStateAction } from "react"
-import { Part3DataType } from "@/lib/types2"
+import { Part3DataType } from "db/new-report/part3/schema"
 
 export default function Part3Data({
 	setReportStep,
-	setPart3Data,
-	part3Data,
 }: {
 	setReportStep?: Dispatch<SetStateAction<1 | 2 | 3 | 4>>
 	setPart3Data: Dispatch<SetStateAction<Part3DataType>>
@@ -74,13 +72,13 @@ export default function Part3Data({
 			</div>
 			<div className="flex items-center gap-2 w-full">
 				<button
-					onClick={() => setReportStep && setReportStep(2)}
+					onClick={() => setReportStep?.(2)}
 					className="card py-2 px-4 my-20 flex items-center justify-center gap-2 mx-auto w-5/6 sm:w-1/3 textM text-sm sm:text-base bg-accent sm:hidden"
 				>
 					Volver
 				</button>
 				<button
-					onClick={() => setReportStep && setReportStep(4)}
+					onClick={() => setReportStep?.(4)}
 					className="card py-2 px-4 my-20 flex items-center justify-center gap-2 mx-auto w-5/6 sm:w-1/3 textM text-sm sm:text-base bg-accent sm:hidden"
 				>
 					Finalizar

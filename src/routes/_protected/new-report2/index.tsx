@@ -5,15 +5,14 @@ import Part3Data from "@/components/dashboard/nuevo-reporte2/part-3"
 import MovilNewReport from "@/components/movil/new-report"
 import { useEffect, useState } from "react"
 import Part1Data from "@/components/dashboard/nuevo-reporte2/part1"
-import {
-	part2DataDefault,
-	Part2DataType,
-	part3DataDefault,
-	Part3DataType,
-} from "@/lib/types2"
+
 import { Part1DataType } from "db/new-report/part1/schema"
-import { defaultPart1Data } from "db/new-report/part1/nrpart1-validator"
 import LoadingMovil from "@/components/layout/loading-movil"
+import { Part2DataType } from "db/new-report/part2/schema"
+import { Part3DataType } from "db/new-report/part3/schema"
+import { defaultPart1Data } from "db/new-report/part1/nrpart1-validator"
+import { defaultPart2Data } from "db/new-report/part2/nrpart2-validator"
+import { defaultPart3Data } from "db/new-report/part3/nrpart3-validator"
 
 export const Route = createFileRoute("/_protected/new-report2/")({
 	component: RouteComponent,
@@ -21,8 +20,8 @@ export const Route = createFileRoute("/_protected/new-report2/")({
 
 function RouteComponent() {
 	const [part1Data, setPart1Data] = useState<Part1DataType>(defaultPart1Data)
-	const [part2Data, setPart2Data] = useState<Part2DataType>(part2DataDefault)
-	const [part3Data, setPart3Data] = useState<Part3DataType>(part3DataDefault)
+	const [part2Data, setPart2Data] = useState<Part2DataType>(defaultPart2Data)
+	const [part3Data, setPart3Data] = useState<Part3DataType>(defaultPart3Data)
 
 	// null = aún no se conoce el tamaño (SSR / primer render)
 	const [isMobil, setIsMobil] = useState<boolean | null>(null)

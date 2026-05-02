@@ -56,14 +56,14 @@ function Part2Data({
 			<div className="flex items-center gap-2 w-11/12">
 				<button
 					onClick={() => setReportStep?.(1)}
-					className="card flex-1 py-2 px-4 my-20 flex items-center justify-center gap-2 mx-auto w-5/6 textM text-sm bg-accent my-shadow"
+					className="card py-2 px-4 my-20 flex items-center justify-center gap-2 w-1/2 textM text-sm bg-accent my-shadow"
 				>
 					Volver
 				</button>
 
 				<button
 					onClick={() => setReportStep?.(3)}
-					className={`flex-1 themeBtnBackground py-2 rounded-lg textL text-sm sm:text-base my-shadow  ${part2Data && part2Data.length > 0 ? "" : "opacity-20 cursor-not-allowed shadow-none"} `}
+					className={`w-1/2 themeBtnBackground py-2 rounded-lg textL text-sm sm:text-base my-shadow ${part2Data && part2Data.length > 0 ? "" : "opacity-20 cursor-not-allowed shadow-none"} `}
 					disabled={!part2Data || part2Data.length === 0}
 				>
 					Siguiente

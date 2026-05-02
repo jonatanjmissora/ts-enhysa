@@ -50,7 +50,7 @@ export default function MovilEditAreaAlert({ area }: { area: Part2DataType }) {
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild className="hover:bg-accent">
-				<button className="card py-2 px-4 my-20 flex items-center justify-center gap-2 w-max textM text-sm  bg-accent hover:bg-accent/90 ml-auto">
+				<button className="card py-2 px-4 my-20 flex items-center justify-center gap-2 w-max textM text-sm  bg-background hover:bg-accent/90 ml-auto my-shadow">
 					<Edit className="size-4" />
 					Editar
 				</button>

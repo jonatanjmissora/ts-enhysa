@@ -3,7 +3,7 @@ import MovilRecientes from "./iluminacion/recientes"
 import InicioPlan from "@/components/dashboard/inicio/plan"
 import MovilInicioTags from "./iluminacion/tags"
 import Footer from "../footer"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import MovilHeroGeneral from "./hero"
 
 export default function MovilIndex() {
@@ -25,6 +25,11 @@ export default function MovilIndex() {
 }
 
 function IluminacionSection() {
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			window.scrollTo(0, 0)
+		}
+	}, [])
 	return (
 		<div className="flex-1 flex flex-col gap-30 px-6">
 			<MovilHero />
@@ -44,6 +49,12 @@ function WorkingOnIt({
 }: {
 	setProtocoloId: (protocoloId: string | null) => void
 }) {
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			window.scrollTo(0, 0)
+		}
+	}, [])
+
 	return (
 		<div className="flex items-center flex-col mt-[70px] h-svh relative overflow-visible">
 			<p className="text-xl font-semibold text-center tracking-wider text-pretty dark:text-shadow-lg">

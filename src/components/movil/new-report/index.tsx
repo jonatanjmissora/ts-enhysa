@@ -1,12 +1,17 @@
 import { FileChartColumn } from "lucide-react"
 import MovilPart1Data from "./part-1"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import MovilPart2Data from "./part-2"
 import MovilPart3Data from "./part-3"
 import MovilPart4Data from "./part-4"
 
 export default function MovilNewReport() {
 	const [reportStep, setReportStep] = useState<1 | 2 | 3 | 4>(1)
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			window.scrollTo(0, 1)
+		}
+	}, [])
 
 	return (
 		<section className="min-h-screen w-11/12 py-30 pt-40 mx-auto">
