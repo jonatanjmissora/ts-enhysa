@@ -58,3 +58,5 @@ export type IluminacionType = (typeof ILUMINACION)[number]
 export const VALORES_REQUERIDOS = ["100", "200", "300", "750", "1000"] as const
 
 export type ValoresRequeridosType = (typeof VALORES_REQUERIDOS)[number]
+
+export const FECHA_1970 = new Date("1970-01-01")

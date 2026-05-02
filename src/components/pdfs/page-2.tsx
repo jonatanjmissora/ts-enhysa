@@ -270,16 +270,17 @@ export default function Page2({
 }
 
 function TablaDePuntos({ area }: { area: Part2DataType }) {
-	const Eminima = area.puntos.sort((a: number, b: number) => a - b)[0]
-	const EmediaSobre2 = Math.round(
-		area.puntos.reduce((acc: number, punto: number) => acc + punto, 0) /
-			area.puntos.length /
+	const celdasMedidas = area.puntos.filter(punto => punto > 0)
+	const Eminima = Math.min(...celdasMedidas)
+	const uniformidad = Math.ceil(
+		celdasMedidas.reduce((acc, valor) => acc + valor, 0) /
+			celdasMedidas.length /
 			2
 	)
 
 	return (
 		<>
-			{area.puntos.map((punto, index) => (
+			{celdasMedidas.map((punto, index) => (
 				<View key={index} style={styles.flexrow}>
 					<View
 						style={[
@@ -298,7 +299,9 @@ function TablaDePuntos({ area }: { area: Part2DataType }) {
 					>
 						{/* HORA */}
 						<Text>
-							{/* {new Date(punto.created).toLocaleTimeString().substring(0, 5)} */}
+							{new Date(area.timestamps[index])
+								.toLocaleTimeString("it-IT")
+								.substring(0, 5)}
 						</Text>
 					</View>
 					<View
@@ -353,7 +356,7 @@ function TablaDePuntos({ area }: { area: Part2DataType }) {
 						]}
 					>
 						<Text>
-							{Eminima} {"\u2265"} {EmediaSobre2}
+							{Eminima} {"\u2265"} {uniformidad}
 						</Text>
 						{/* Valor media*/}
 					</View>

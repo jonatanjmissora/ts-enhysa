@@ -9,6 +9,7 @@ import { Part1DataType } from "db/new-report/part1/schema"
 import { Part2DataType } from "db/new-report/part2/schema"
 import { Part3DataType } from "db/new-report/part3/schema"
 import Page2 from "./page-2"
+import Page3 from "./page-3"
 
 Font.register({
 	family: "Roboto",
@@ -35,19 +36,20 @@ export const MyDocument = ({
 		"Informe técnico - Medición de iluminación",
 	]
 
-	const sortedPuntosByTimestamp = getPuntosSortedByTimestamp(part2Data)
-	const firstPunto = sortedPuntosByTimestamp[0]
-	const lastPunto = sortedPuntosByTimestamp[sortedPuntosByTimestamp.length - 1]
-	// const fecha = new Date(firstPunto).toLocaleDateString()
-	// const horaInicio = new Date(firstPunto).toLocaleTimeString()
-	// const horaFin = new Date(lastPunto).toLocaleTimeString()
+	const [firstPunto, lastPunto] = getPuntosSortedByTimestamp(part2Data)
+	const fecha = new Date(firstPunto).toLocaleDateString()
+	const horaInicio = new Date(firstPunto)
+		.toLocaleTimeString("it-IT")
+		.substring(0, 5)
+	const horaFin = new Date(lastPunto)
+		.toLocaleTimeString("it-IT")
+		.substring(0, 5)
 
-	const fecha = ""
-	const horaInicio = ""
-	const horaFin = ""
+	const actualFecha = new Date().toLocaleDateString()
+	const nombreArchivo = `${empresa.razonSocial}_${actualFecha}`
 
 	return (
-		<Document>
+		<Document title={nombreArchivo}>
 			<Page1
 				membreteSupDerecho={membreteSupDerecho}
 				tecnico={tecnico}
@@ -66,13 +68,13 @@ export const MyDocument = ({
 					tecnico={tecnico}
 				/>
 			))}
-			{/* <Page3
+			<Page3
 				empresa={empresa}
 				part3Data={part3Data}
 				membreteSupDerecho={membreteSupDerecho}
 				tecnico={tecnico}
 			/>
-			<Page4
+			{/*<Page4
 				sector={sector}
 				croquis={croquis}
 				puntos={puntos}

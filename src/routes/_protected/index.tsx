@@ -9,13 +9,14 @@ import MovilHero from "@/components/movil/inicio/hero"
 import MovilInicioTags from "@/components/movil/inicio/tags"
 import MovilRecientes from "@/components/movil/inicio/recientes"
 
+import { useIsMobile } from "@/hooks/use-is-mobile"
+
 export const Route = createFileRoute("/_protected/")({
 	component: App,
 })
 
 function App() {
-	// const isMobil = typeof window !== "undefined" && window.innerWidth < 640
-	const isMobil = true
+	const isMobil = useIsMobile()
 
 	if (isMobil) return <MovilIndex />
 	return (

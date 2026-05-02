@@ -114,6 +114,3 @@ nuevo reporte, finalizar reporte
 
 
 mejorar el cargando de part1, por que tarda tanto, si tengo el skelton del part1
-
-colocar hora de inicio, y fin en el pdf en Page1
-todas las horas en Page2

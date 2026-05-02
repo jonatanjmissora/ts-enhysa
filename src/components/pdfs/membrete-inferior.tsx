@@ -50,7 +50,13 @@ export default function MembreteInferior({
 				}}
 			>
 				<Text style={{ flex: 1, textAlign: "left" }}>Seguridad e Higiene</Text>
-				<Text style={{ flex: 1, textAlign: "right" }}>Pagina 1 de 10</Text>
+				<Text
+					style={{ flex: 1, textAlign: "right" }}
+					render={({ pageNumber, totalPages }) =>
+						`Hoja ${pageNumber} de ${totalPages}`
+					}
+					fixed
+				/>
 			</View>
 		</View>
 	)

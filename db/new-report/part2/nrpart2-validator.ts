@@ -23,6 +23,7 @@ export type Part2DataFormType = z.infer<typeof part2DataFormValidator>
 
 export const part2DataValidator = part2DataFormValidator.extend({
 	puntos: z.array(z.number()).min(1, "Requerido"),
+	timestamps: z.array(z.date()).min(1, "Requerido"),
 	imagenes: z.array(z.string()),
 })
 
@@ -32,6 +33,7 @@ export const updatePart2DataValidator = part2DataFormValidator.extend({
 	id: z.string().min(1, "Id requerido"),
 	userId: z.string().min(1, "UserId requerido"),
 	puntos: z.array(z.number()).min(1, "Requerido"),
+	timestamps: z.array(z.date()).min(1, "Requerido"),
 	imagenes: z.array(z.string()),
 })
 

@@ -142,11 +142,12 @@ export default function Page3({
 					<View
 						style={[
 							styles.flexrowelement,
-							{ borderRight: "1px solid black", flex: 1 },
+							{ borderRight: "1px solid black", flex: 1, height: 30 },
 						]}
 					>
 						<Text>(41) Conclusiones</Text>
 					</View>
+
 					<View style={[styles.flexrowelement, { flex: 1 }]}>
 						<Text>
 							(42) Recomendaciones parta adecuar el nivel de iluminación a la
@@ -155,25 +156,17 @@ export default function Page3({
 					</View>
 				</View>
 
-				<View style={[styles.flexrow, { borderBottom: "none" }]}>
+				<View style={[styles.flexrow, { borderBottom: "none", flex: 1 }]}>
 					<View
 						style={[
 							styles.flexrowelement,
-							{ borderRight: "1px solid black", flex: 1, height: 200 },
+							{ borderRight: "1px solid black", flex: 1, height: "100%" },
 						]}
 					>
-						<Text>
-							{part3Data.conclusion !== ""
-								? part3Data.conclusion
-								: "No hay conclusiones."}
-						</Text>
+						<Text>{part3Data.conclusion}</Text>
 					</View>
-					<View style={[styles.flexrowelement, { height: 200, flex: 1 }]}>
-						<Text>
-							{part3Data.recomendacion !== ""
-								? part3Data.recomendacion
-								: "No hay recomendaciones."}
-						</Text>
+					<View style={[styles.flexrowelement, { height: "100%", flex: 1 }]}>
+						<Text>{part3Data.recomendacion}</Text>
 					</View>
 				</View>
 			</View>

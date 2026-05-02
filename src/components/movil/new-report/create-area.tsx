@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import {
+	FECHA_1970,
 	ILUMINACION,
 	ILUMINACION_FUENTE,
 	ILUMINACION_TIPO,
@@ -74,6 +75,7 @@ function MovilCreateArea({
 	setOpen: Dispatch<SetStateAction<boolean>>
 }) {
 	const [puntos, setPuntos] = useState<number[]>([])
+	const [timestamps, setTimestamps] = useState<Date[]>([])
 	const [puntosError, setPuntosError] = useState<string | null>(null)
 	const [planoFiles, setPlanoFiles] = useState<File[]>([])
 
@@ -91,6 +93,7 @@ function MovilCreateArea({
 			const newArea: Part2DataWPuntosType = {
 				...value,
 				puntos,
+				timestamps,
 				imagenes: [],
 			}
 			const result = await createNRpart2({ data: newArea })
@@ -592,6 +595,8 @@ function MovilCreateArea({
 									<Grilla
 										puntos={puntos}
 										setPuntos={setPuntos}
+										timestamps={timestamps}
+										setTimestamps={setTimestamps}
 										ancho={Number(ancho)}
 										largo={Number(largo)}
 										alto={Number(alto)}
@@ -655,6 +660,8 @@ function MovilCreateArea({
 function Grilla({
 	puntos,
 	setPuntos,
+	timestamps,
+	setTimestamps,
 	ancho,
 	largo,
 	alto,
@@ -664,6 +671,8 @@ function Grilla({
 	alto: number
 	puntos: number[]
 	setPuntos: Dispatch<SetStateAction<number[]>>
+	timestamps: Date[]
+	setTimestamps: Dispatch<SetStateAction<Date[]>>
 }) {
 	const [openInputMenu, setOpenInputMenu] = useState<boolean>(false)
 	const [actualPunto, setActualPunto] = useState<number | null>(null)
@@ -680,7 +689,12 @@ function Grilla({
 	useEffect(() => {
 		const newPuntos: number[] = Array.from({ length: celdas }, () => 0)
 		setPuntos(newPuntos)
-	}, [celdas, setPuntos])
+		const newTimestamps: Date[] = Array.from(
+			{ length: celdas },
+			() => FECHA_1970
+		)
+		setTimestamps(newTimestamps)
+	}, [celdas, setPuntos, setTimestamps])
 
 	return (
 		<>
@@ -696,6 +710,8 @@ function Grilla({
 					setOpenInputMenu={setOpenInputMenu}
 					puntos={puntos}
 					setPuntos={setPuntos}
+					timestamps={timestamps}
+					setTimestamps={setTimestamps}
 					actualPunto={actualPunto}
 					setActualPunto={setActualPunto}
 				/>
@@ -736,7 +752,12 @@ function Grilla({
 				</div>
 			)}
 
-			<AreaPuntosList puntos={puntos} setPuntos={setPuntos} />
+			<AreaPuntosList
+				puntos={puntos}
+				setPuntos={setPuntos}
+				timestamps={timestamps}
+				setTimestamps={setTimestamps}
+			/>
 		</>
 	)
 }
@@ -774,12 +795,16 @@ function InputMenu({
 	setOpenInputMenu,
 	puntos,
 	setPuntos,
+	timestamps,
+	setTimestamps,
 	actualPunto,
 	setActualPunto,
 }: {
 	setOpenInputMenu: Dispatch<SetStateAction<boolean>>
 	puntos: number[]
 	setPuntos: Dispatch<SetStateAction<number[]>>
+	timestamps: Date[]
+	setTimestamps: Dispatch<SetStateAction<Date[]>>
 	actualPunto: number | null
 	setActualPunto: Dispatch<SetStateAction<number | null>>
 }) {
@@ -798,6 +823,9 @@ function InputMenu({
 		const newPuntos = [...puntos]
 		newPuntos[actualPunto] = Number(puntoValue)
 		setPuntos(newPuntos)
+		const newTimestamps = [...timestamps]
+		newTimestamps[actualPunto] = new Date()
+		setTimestamps(newTimestamps)
 		setOpenInputMenu(false)
 		setActualPunto(null)
 	}
@@ -842,13 +870,21 @@ function InputMenu({
 function AreaPuntosList({
 	puntos,
 	setPuntos,
+	timestamps,
+	setTimestamps,
 }: {
 	puntos: number[]
 	setPuntos: Dispatch<SetStateAction<number[]>>
+	timestamps: Date[]
+	setTimestamps: Dispatch<SetStateAction<Date[]>>
 }) {
 	const handleSetPunto = (index: number) => {
 		const newPuntos = puntos.map((np, indexNP) => (indexNP === index ? 0 : np))
 		setPuntos(newPuntos)
+		const newTimestamps = timestamps.map((nt, indexNT) =>
+			indexNT === index ? FECHA_1970 : nt
+		)
+		setTimestamps(newTimestamps)
 	}
 
 	return (

@@ -42,7 +42,7 @@ export const NRpart2s = pgTable("NRpart2s", {
 
 	puntos: integer("puntos").array().notNull(),
 
-	timeStamp: timestamp("timestamp").array().notNull(),
+	timestamps: timestamp("timestamps").array().notNull(),
 
 	userId: text("userId")
 		.notNull()

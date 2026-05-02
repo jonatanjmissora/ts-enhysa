@@ -5,6 +5,8 @@ import { useState } from "react"
 import { PreferencesMenu } from "@/components/layout/preferences-menu"
 import MovilLogin from "@/components/movil/login"
 
+import { useIsMobile } from "@/hooks/use-is-mobile"
+
 export const Route = createFileRoute("/login/")({
 	component: RouteComponent,
 })
@@ -14,7 +16,7 @@ function RouteComponent() {
 	const authPosition =
 		activeForm === "login" ? "translate-x-0" : "-translate-x-[50dvw]"
 
-	const isMobil = typeof window !== "undefined" && window.innerWidth < 640
+	const isMobil = useIsMobile()
 	if (isMobil) return <MovilLogin />
 
 	return (

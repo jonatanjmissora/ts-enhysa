@@ -152,9 +152,17 @@ export const puntosResult = (puntos: PuntoType[]) => {
 }
 
 export const getPuntosSortedByTimestamp = (areas: Part2DataType[] | []) => {
-	const newCreatedAt: Date[] = []
-	areas.map(area => newCreatedAt.push(area.createdAt))
-	return newCreatedAt.sort((a, b) => a.getTime() - b.getTime())
+	const newTimestamps: Date[] = []
+	areas.map(area =>
+		area.timestamps.map(timestamp => newTimestamps.push(timestamp))
+	)
+	const sortedByTimestamp = newTimestamps.sort(
+		(a, b) => a.getTime() - b.getTime()
+	)
+	return [
+		sortedByTimestamp[areas.length],
+		sortedByTimestamp[sortedByTimestamp.length - 1],
+	]
 }
 
 export const getLastPuntoOrden = (puntos: PuntoType[] | []) => {

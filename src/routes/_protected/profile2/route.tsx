@@ -5,6 +5,8 @@ import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-quer
 import { ChevronLeft } from "lucide-react"
 import MovilProfile from "@/components/movil/profile"
 
+import { useIsMobile } from "@/hooks/use-is-mobile"
+
 export const Route = createFileRoute("/_protected/profile2")({
 	loader: ({ context }) => {
 		context.queryClient.ensureQueryData(tecnicoQueryOptions)
@@ -16,7 +18,7 @@ export const Route = createFileRoute("/_protected/profile2")({
 })
 
 function RouteComponent() {
-	const isMobil = typeof window !== "undefined" && window.innerWidth < 640
+	const isMobil = useIsMobile()
 	if (isMobil) return <MovilProfile />
 
 	return (

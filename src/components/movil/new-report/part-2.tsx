@@ -112,10 +112,11 @@ function Part2DataSkeleton() {
 
 function Part2DataArea({ area }: { area: Part2DataType }) {
 	const celdasMedidas = area.puntos.filter(punto => punto > 0)
-	const uniformidad =
+	const uniformidad = Math.ceil(
 		celdasMedidas.reduce((acc, valor) => acc + valor, 0) /
-		celdasMedidas.length /
-		2
+			celdasMedidas.length /
+			2
+	)
 
 	return (
 		<div className="w-full card border-0 bg-accent sm:bg-background flex flex-col justify-center items-center p-0 py-10">
@@ -201,9 +202,7 @@ function Part2DataArea({ area }: { area: Part2DataType }) {
 				<span className="text-left textL text-sm italic">
 					Uniformidad de iluminancia:
 				</span>
-				<span className="text-left textL text-sm font-bold">
-					{Math.ceil(uniformidad)}
-				</span>
+				<span className="text-left textL text-sm font-bold">{uniformidad}</span>
 			</div>
 
 			<div className="w-5/6 flex gap-4 justify-betwen items-center h-20 mt-10">
