@@ -20,7 +20,7 @@
   /* Base colors */
   --color-white: oklch(1 0 0);
   --color-black: oklch(0.141 0.005 285.823);
-  --color-dark-bg: oklch(23.29% 0.00957 285.602);
+  --color-dark-bg: oklch(17.03% 0.00828 285.462);
   --color-dark-popover: oklch(24.235% 0.01328 285.346);
 
   /* Gray scale */
@@ -118,7 +118,7 @@
   --secondary-foreground: var(--gray-50);
   --muted: var(--gray-700);
   --muted-foreground: var(--gray-600);
-  --accent: var(--gray-700);
+  --accent: var(--gray-800);
   --accent-foreground: var(--gray-50);
   --destructive: var(--red-400);
   --destructive-foreground: var(--red-300);
@@ -157,7 +157,7 @@
     --secondary-foreground: var(--gray-50);
     --muted: var(--gray-700);
     --muted-foreground: var(--gray-600);
-    --accent: var(--gray-700);
+    --accent: var(--gray-800);
     --accent-foreground: var(--gray-50);
     --destructive: var(--red-400);
     --destructive-foreground: var(--red-300);
@@ -266,7 +266,7 @@ code {
   }
 
   .card {
-    @apply shadow-(--shadow) ring ring-foreground/10 rounded-lg flex items-center p-10 2xl:px-14
+    @apply ring ring-foreground/7 rounded-lg flex items-center p-10 2xl:px-14
   }
 
   .textXL {

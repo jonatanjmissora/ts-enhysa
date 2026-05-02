@@ -339,12 +339,12 @@ const InstrumentoForm = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
 					</span>
 				</div>
 
-					<Field className="flex flex-row justify-center gap-5 sm:gap-10 items-center w-5/6 mx-auto sm:w-full mt-10">
-						<button
+				<Field className="flex flex-row justify-center gap-5 sm:gap-10 items-center w-5/6 mx-auto sm:w-full mt-10">
+					<button
 						onClick={() => setOpen(false)}
 						type="button"
 						disabled={isPending}
-						className="flex-1 card bg-background justify-center textM text-sm sm:text-base p-2 cursor-pointer"
+						className="flex-1 card my-shadow bg-background justify-center textM text-sm sm:text-base p-2 cursor-pointer"
 					>
 						Cancelar
 					</button>

@@ -53,7 +53,7 @@ export default function MovilCreateAreaAlert() {
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild className="hover:bg-accent">
-				<button className="card py-2 px-4 my-10 flex items-center justify-center gap-2 mx-auto w-5/6 sm:w-1/3 textM text-sm sm:text-base sm:bg-background bg-accent cursor-pointer">
+				<button className="card py-2 px-4 my-10 flex items-center justify-center gap-2 mx-auto w-5/6 sm:w-1/3 textM text-sm sm:text-base sm:bg-background bg-accent cursor-pointer my-shadow">
 					<span className="">+ Nueva Area</span>
 				</button>
 			</AlertDialogTrigger>
@@ -219,7 +219,7 @@ function MovilCreateArea({
 											name={field.name}
 											onBlur={field.handleBlur}
 											aria-invalid={isInvalid}
-											className="w-full"
+											className="w-full dark:bg-background"
 										>
 											<SelectValue placeholder="Seleccione Clima" />
 										</SelectTrigger>
@@ -278,7 +278,7 @@ function MovilCreateArea({
 											name={field.name}
 											onBlur={field.handleBlur}
 											aria-invalid={isInvalid}
-											className="w-full"
+											className="w-full dark:bg-background"
 										>
 											<SelectValue placeholder="Seleccione Fuente" />
 										</SelectTrigger>
@@ -337,7 +337,7 @@ function MovilCreateArea({
 											name={field.name}
 											onBlur={field.handleBlur}
 											aria-invalid={isInvalid}
-											className="w-full"
+											className="w-full dark:bg-background"
 										>
 											<SelectValue placeholder="Seleccione Iluminacion" />
 										</SelectTrigger>
@@ -396,7 +396,7 @@ function MovilCreateArea({
 											name={field.name}
 											onBlur={field.handleBlur}
 											aria-invalid={isInvalid}
-											className="w-full"
+											className="w-full dark:bg-background"
 										>
 											<SelectValue placeholder="Seleccione Valor" />
 										</SelectTrigger>
@@ -612,7 +612,7 @@ function MovilCreateArea({
 						onClick={() => setOpen(false)}
 						type="button"
 						disabled={isPending}
-						className="flex-1 card bg-background justify-center textM text-sm sm:text-base p-2 cursor-pointer"
+						className="flex-1 card my-shadow bg-background justify-center textM text-sm sm:text-base p-2 cursor-pointer"
 					>
 						Cancelar
 					</button>
@@ -783,7 +783,7 @@ function Punto({
 					setOpenInputMenu(true)
 					setActualPunto(index)
 				}}
-				className="w-15 text-xl font-semibold py-1 px-3 card bg-accent sm:bg-accent text-foreground justify-center items-center min-h-9"
+				className="w-15 text-xl font-semibold py-1 px-3 card bg-background sm:bg-accent text-foreground justify-center items-center min-h-9"
 			>
 				{puntos[index] !== 0 ? puntos[index] : "*"}
 			</button>
@@ -830,7 +830,7 @@ function InputMenu({
 		setActualPunto(null)
 	}
 	return (
-		<div className="card bg-background items-center justify-center gap-10 flex-col w-full p-10">
+		<div className="card bg-accent items-center justify-center gap-10 flex-col w-full p-10">
 			<span className="textL border-b py-2 border-foreground/50 w-full text-left text-foreground/70">
 				Punto {actualPunto !== null ? actualPunto + 1 : ""}
 			</span>
@@ -851,13 +851,13 @@ function InputMenu({
 				<button
 					type="button"
 					onClick={() => setOpenInputMenu(false)}
-					className="card p-2 cursor-pointer bg-background justify-center flex-1"
+					className="card p-2 my-shadow cursor-pointer bg-background justify-center flex-1"
 				>
 					Cancelar
 				</button>
 				<button
 					type="button"
-					className="card p-2 bg-accent cursor-pointer justify-center flex-1"
+					className="card p-2 bg-accent my-shadow cursor-pointer justify-center flex-1"
 					onClick={handleSetPunto}
 				>
 					Guardar

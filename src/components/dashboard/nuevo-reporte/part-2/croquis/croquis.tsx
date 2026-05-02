@@ -305,7 +305,7 @@ function EditPuntoForm({
 					<div className="w-full flex items-center gap-4">
 						<button
 							type="button"
-							className="flex-1 card bg-background py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointe"
+							className="flex-1 card my-shadow bg-background py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointe"
 							onClick={() => {
 								setOpenValue(false)
 								setActualPunto(defaultPunto)
@@ -315,7 +315,7 @@ function EditPuntoForm({
 						</button>
 						<button
 							type="submit"
-							className="flex-1 card bg-accent py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer"
+							className="flex-1 card my-shadow bg-accent py-2 text-lg 2xl:text-xl font-semibold dark:hover:bg-background/75 justify-center cursor-pointer"
 						>
 							Editar
 						</button>

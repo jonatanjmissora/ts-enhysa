@@ -35,7 +35,7 @@ export default function EditTecnico({
 		<AlertDialog open={open} onOpenChange={setOpen}>
 			<AlertDialogTrigger asChild>
 				<div className="mx-auto w-5/6">
-					<div className="w-1/2 ml-auto sm:hidden flex items-center gap-2 justify-center card p-2 bg-background textM text-sm sm:text-base">
+					<div className="w-1/2 ml-auto sm:hidden flex items-center gap-2 justify-center card p-2 bg-background my-shadow textM text-sm sm:text-base">
 						<Pencil size={14} className="text-foreground/70" />
 						Editar
 					</div>

@@ -43,7 +43,7 @@ export function DeletePuntoAlertDialog({
 				<AlertDialogDescription className="text-center"></AlertDialogDescription>
 				<div className="flex justify-end gap-4">
 					<button
-						className="cursor-pointer card py-1 justify-center"
+						className="cursor-pointer card py-1 justify-center my-shadow "
 						onClick={() => {
 							setOpen(false)
 						}}

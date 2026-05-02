@@ -4,19 +4,15 @@ import InicioTags from "@/components/dashboard/inicio/tags"
 import InicioRecientes from "@/components/dashboard/inicio/recientes"
 import InicioPlan from "@/components/dashboard/inicio/plan"
 import { PreferencesMenu } from "@/components/layout/preferences-menu"
-import Footer from "@/components/movil/footer"
-import MovilHero from "@/components/movil/inicio/hero"
-import MovilInicioTags from "@/components/movil/inicio/tags"
-import MovilRecientes from "@/components/movil/inicio/recientes"
-
-import { useIsMobile } from "@/hooks/use-is-mobile"
+import MovilIndex from "@/components/movil/inicio"
 
 export const Route = createFileRoute("/_protected/")({
 	component: App,
 })
 
 function App() {
-	const isMobil = useIsMobile()
+	// const isMobil = typeof window !== "undefined" && window.innerWidth < 640
+	const isMobil = true
 
 	if (isMobil) return <MovilIndex />
 	return (
@@ -37,24 +33,5 @@ function App() {
 				</div>
 			</main>
 		</div>
-	)
-}
-
-const MovilIndex = () => {
-	return (
-		<section className="w-full pt-18 overflow-visible">
-			<div className="flex-1 flex flex-col gap-30 px-6">
-				<MovilHero />
-
-				<MovilInicioTags />
-
-				<div className="flex gap-30 flex-col sm:flex-row">
-					<MovilRecientes />
-					<InicioPlan />
-				</div>
-			</div>
-
-			<Footer />
-		</section>
 	)
 }

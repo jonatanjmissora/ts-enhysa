@@ -62,7 +62,7 @@ export default function DeleteInstrumentoForm({
 				<button
 					type="button"
 					onClick={() => setIsMenuOpen(false)}
-					className="w-1/2 cursor-pointer card py-1 justify-center"
+					className="w-1/2 cursor-pointer card my-shadow py-1 justify-center"
 				>
 					Cancelar
 				</button>

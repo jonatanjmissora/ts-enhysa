@@ -56,14 +56,14 @@ function Part2Data({
 			<div className="flex items-center gap-2 w-11/12">
 				<button
 					onClick={() => setReportStep?.(1)}
-					className="card flex-1 py-2 px-4 my-20 flex items-center justify-center gap-2 mx-auto w-5/6 textM text-sm bg-accent"
+					className="card flex-1 py-2 px-4 my-20 flex items-center justify-center gap-2 mx-auto w-5/6 textM text-sm bg-accent my-shadow"
 				>
 					Volver
 				</button>
 
 				<button
 					onClick={() => setReportStep?.(3)}
-					className={`flex-1 themeBtnBackground py-2 rounded-lg textL text-sm sm:text-base ${part2Data && part2Data.length > 0 ? "" : "opacity-20 cursor-not-allowed shadow-none"} `}
+					className={`flex-1 themeBtnBackground py-2 rounded-lg textL text-sm sm:text-base my-shadow  ${part2Data && part2Data.length > 0 ? "" : "opacity-20 cursor-not-allowed shadow-none"} `}
 					disabled={!part2Data || part2Data.length === 0}
 				>
 					Siguiente
@@ -104,8 +104,12 @@ const AreaAccordion = ({ part2Data }: { part2Data: Part2DataType[] }) => {
 function Part2DataSkeleton() {
 	return (
 		<div className="w-full pt-10 flex flex-col gap-2 items-center justify-center textM text-sm sm:text-base italic">
-			<span className="animate-pulse card py-2 w-5/6 mx-auto bg-accent/20 h-8 shadow-none"></span>
-			<span className="animate-pulse card py-2 w-5/6 mx-auto bg-accent/20 h-8 shadow-none"></span>
+			<span className="animate-pulse card py-2 w-5/6 mx-auto bg-accent/20 h-8 shadow-none justify-center">
+				. . .
+			</span>
+			<span className="animate-pulse card py-2 w-5/6 mx-auto bg-accent/20 h-8 shadow-none justify-center">
+				. . .
+			</span>
 		</div>
 	)
 }

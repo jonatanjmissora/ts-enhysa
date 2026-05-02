@@ -148,7 +148,7 @@ function Part1Data({
 									value={field.state.value}
 									readOnly
 									aria-invalid={isInvalid}
-									className="bg-background sm:bg-accent text-right text-sm"
+									className="bg-accent sm:bg-accent text-right text-sm"
 								/>
 								{isInvalid && (
 									<FieldError
@@ -560,7 +560,7 @@ function Part1DataSkelton() {
 				<Field className="flex flex-row justify-center gap-5 sm:gap-10 items-center w-full mx-auto mt-10">
 					<button
 						type="submit"
-						className="themeBtnBackground py-2 rounded-lg textL text-sm sm:text-base"
+						className="themeBtnBackground py-2 rounded-lg textL text-sm sm:text-base my-shadow "
 					>
 						Siguiente
 					</button>

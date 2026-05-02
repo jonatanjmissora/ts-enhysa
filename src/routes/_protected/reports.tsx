@@ -34,7 +34,7 @@ function RouteComponent() {
 				</div>
 
 				<div className="flex flex-col gap-4">
-					<div className="px-4 sm:px-6 py-4 2xl:py-6 cardAccent justify-between w-full">
+					<div className="px-4 sm:px-6 py-4 2xl:py-6 card bg-accent justify-between w-full">
 						<div className="flex gap-2 items-center">
 							<FileChartColumn className="sm:size-8 2xl:size-10 text-blue-700/70" />
 							<div className="flex flex-col gap-0">
@@ -54,7 +54,7 @@ function RouteComponent() {
 						<Ellipsis className="sm:hidden size-6" />
 					</div>
 
-					<div className="px-4 sm:px-6 py-4 2xl:py-6 cardAccent justify-between w-full">
+					<div className="px-4 sm:px-6 py-4 2xl:py-6 card bg-accent justify-between w-full">
 						<div className="flex gap-2 items-center">
 							<FileChartColumn className="sm:size-8 2xl:size-10 text-blue-700/70" />
 							<div className="flex flex-col gap-0">
@@ -74,7 +74,7 @@ function RouteComponent() {
 						<Ellipsis className="sm:hidden size-6" />
 					</div>
 
-					<div className="px-4 sm:px-6 py-4 2xl:py-6 cardAccent justify-between w-full">
+					<div className="px-4 sm:px-6 py-4 2xl:py-6 card bg-accent justify-between w-full">
 						<div className="flex gap-2 items-center">
 							<Clock className="sm:size-8 2xl:size-10 text-amber-700/70" />
 							<div className="flex flex-col gap-0">
@@ -94,7 +94,7 @@ function RouteComponent() {
 						<Ellipsis className="sm:hidden size-6" />
 					</div>
 
-					<div className="px-4 sm:px-6 py-4 2xl:py-6 cardAccent justify-between w-full">
+					<div className="px-4 sm:px-6 py-4 2xl:py-6 card bg-accent justify-between w-full">
 						<div className="flex gap-2 items-center">
 							<FileChartColumn className="sm:size-8 2xl:size-10 text-blue-700/70" />
 							<div className="flex flex-col gap-0">
@@ -114,7 +114,7 @@ function RouteComponent() {
 						<Ellipsis className="sm:hidden size-6" />
 					</div>
 
-					<div className="px-4 sm:px-6 py-4 2xl:py-6 cardAccent justify-between w-full">
+					<div className="px-4 sm:px-6 py-4 2xl:py-6 card bg-accent justify-between w-full">
 						<div className="flex gap-2 items-center">
 							<Clock className="sm:size-8 2xl:size-10 text-amber-700/70" />
 							<div className="flex flex-col gap-0">
@@ -134,7 +134,7 @@ function RouteComponent() {
 						<Ellipsis className="sm:hidden size-6" />
 					</div>
 
-					<div className="px-4 sm:px-6 py-4 2xl:py-6 cardAccent justify-between w-full">
+					<div className="px-4 sm:px-6 py-4 2xl:py-6 card bg-accent justify-between w-full">
 						<div className="flex gap-2 items-center">
 							<FileChartColumn className="sm:size-8 2xl:size-10 text-blue-700/70" />
 							<div className="flex flex-col gap-0">

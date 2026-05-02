@@ -84,7 +84,7 @@ export function LogoutAlertDialog() {
 				</AlertDialogDescription>
 				<div className="flex justify-end gap-4">
 					<button
-						className="cursor-pointer w-1/2 card py-1 justify-center"
+						className="cursor-pointer w-1/2 card my-shadow py-1 justify-center"
 						onClick={() => {
 							setOpen(false)
 						}}

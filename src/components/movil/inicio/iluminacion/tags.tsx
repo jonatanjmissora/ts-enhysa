@@ -6,7 +6,7 @@ import FileChart, {
 export default function MovilInicioTags() {
 	return (
 		<div className="grid grid-cols-1 gap-8 ">
-			<div className="p-2 card bg-accent rounded-lg gap-4 justify-center w-5/6 relative mx-auto py-5 ">
+			<div className="card bg-accent rounded-lg gap-4 justify-center w-11/12 relative mx-auto p-6 ">
 				<FileChart className="absolute -top-4 -left-4 " />
 				<div className="flex flex-col gap-0 w-full">
 					<p className="absolute top-0 right-7 text-[40px] font-bold text-blue-500 dark:text-blue-700 dark:text-shadow-sm/50">
@@ -21,7 +21,7 @@ export default function MovilInicioTags() {
 				</div>
 			</div>
 
-			<div className="p-2 card bg-accent gap-4 justify-center w-5/6 relative mx-auto py-5 ">
+			<div className="card bg-accent rounded-lg gap-4 justify-center w-11/12 relative mx-auto p-6 ">
 				<CheckCircle className="absolute -top-4 -left-4" />
 				<div className="flex flex-col gap-0 w-full">
 					<p className="absolute top-0 right-7 text-[40px] font-bold text-green-600 dark:text-shadow-sm/50">
@@ -36,7 +36,7 @@ export default function MovilInicioTags() {
 				</div>
 			</div>
 
-			<div className="p-2 card bg-accent gap-4 justify-center w-5/6 relative mx-auto py-5 ">
+			<div className="card bg-accent rounded-lg gap-4 justify-center w-11/12 relative mx-auto p-6 ">
 				<ClockComponent className="absolute -top-4 -left-4" />
 				<div className="flex flex-col gap-0 w-full">
 					<p className="absolute top-0 right-7 text-[40px] font-bold text-amber-600 dark:text-shadow-lg/50">

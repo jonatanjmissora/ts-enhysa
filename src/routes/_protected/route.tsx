@@ -9,15 +9,13 @@ import DashboardMenu from "@/components/dashboard/menu/menu"
 import MovilMenu from "@/components/movil/menu"
 import { ChevronLeft } from "lucide-react"
 
-import { useIsMobile } from "@/hooks/use-is-mobile"
-
 export const Route = createFileRoute("/_protected")({
 	loader: async () => await protectedRoute(),
 	component: RouteComponent,
 })
 
 function RouteComponent() {
-	const isMobil = useIsMobile()
+	const isMobil = typeof window !== "undefined" && window.innerWidth < 640
 
 	if (isMobil) return <MovilRoute />
 	return (

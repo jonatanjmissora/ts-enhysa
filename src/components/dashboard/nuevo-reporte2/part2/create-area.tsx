@@ -570,7 +570,7 @@ function CreateNewAreaForm({
 						onClick={() => setOpen(false)}
 						type="button"
 						disabled={isPending}
-						className="flex-1 card bg-background justify-center textM text-sm sm:text-base p-2 cursor-pointer"
+						className="flex-1 card my-shadow bg-background justify-center textM text-sm sm:text-base p-2 cursor-pointer"
 					>
 						Cancelar
 					</button>
@@ -778,13 +778,13 @@ function InputMenu({
 				<button
 					type="button"
 					onClick={() => setOpenInputMenu(false)}
-					className="card p-2 cursor-pointer bg-background justify-center flex-1"
+					className="card my-shadow p-2 cursor-pointer bg-background justify-center flex-1"
 				>
 					Cancelar
 				</button>
 				<button
 					type="button"
-					className="card p-2 bg-accent cursor-pointer justify-center flex-1"
+					className="card p-2 bg-accent cursor-pointer justify-center my-shadow flex-1"
 					onClick={handleSetPunto}
 				>
 					Guardar

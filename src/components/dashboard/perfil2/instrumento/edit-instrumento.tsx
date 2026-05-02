@@ -357,7 +357,7 @@ export function EditInstrumentoForm({
 						}}
 						type="button"
 						disabled={isPending}
-						className="flex-1 card bg-background justify-center textM text-sm sm:text-base p-2 cursor-pointer"
+						className="flex-1 card my-shadow bg-background justify-center textM text-sm sm:text-base p-2 cursor-pointer"
 					>
 						Cancelar
 					</button>
