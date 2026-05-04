@@ -340,3 +340,85 @@ html:active-view-transition-type(rotateZ) {
     opacity: 1;
   }
 }
+
+.focus {
+--componentSize: 257px;
+--maskSize: 35px;
+--speed: 2s;
+--borderOffset: 8px;
+--animationProps: var(--speed) linear infinite alternate;
+}
+@media (min-width: 640px) {
+  .focus {
+    --componentSize: 215px;
+  }
+}
+@media (min-width: 1500px) {
+  .focus {
+    --componentSize: 225px;
+  }
+}
+
+@keyframes move {
+  0%   { 
+    transform: translateX(0);
+  }
+  100% { 
+    transform: translateX(calc(var(--componentSize) - var(--maskSize)));
+  }
+}
+
+@keyframes iMove {
+  0%   { 
+    transform: translateX(0);
+  }
+  100% { 
+    transform: translateX(calc(-1*(var(--componentSize) - var(--maskSize))));
+  }
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.focus {
+  font-size: 3rem;
+  /* color: rgb(65, 145, 65); */
+  letter-spacing: 1rem;
+  line-height: 1;
+  position: relative;
+  width: var(--componentSize);
+  }
+
+  .focus:before {
+      content: 'EnHySa';
+      filter: blur(3px);
+  }
+
+  .focus:after {
+    content: '';
+    position: absolute;
+    width: var(--maskSize);
+    height: calc(100% + var(--borderOffset) + 10px);
+    top: -(var(--borderOffset) / 2);
+    left: 0;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    animation: move var(--animationProps);
+  }
+
+  .focus-mask {
+    overflow: hidden;
+    position: absolute;
+    width: var(--maskSize);
+    height: calc(100% + 10px);
+    top: 0;
+    left: 0;
+    animation: move var(--animationProps);
+  }
+
+  .focus-inner-mask {
+    color:  white;
+      animation: iMove var(--animationProps);
+    }

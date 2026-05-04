@@ -22,7 +22,7 @@ import {
 	Part3DataType,
 } from "db/schema"
 
-export const Route = createFileRoute("/_protected/new-report2/pdf/")({
+export const Route = createFileRoute("/_protected/iluminacion/pdf/")({
 	component: RouteComponent,
 })
 
@@ -71,14 +71,14 @@ function PDFContent() {
 				</span>
 			}
 		>
-			<DownloadBtn
+			{/* <DownloadBtn
 				tecnico={tecnico}
 				empresa={empresaSelected}
 				instrumento={instrumentoSelected}
 				part1Data={part1Data}
 				part2Data={part2Data}
 				part3Data={part3Data}
-			/>
+			/> */}
 
 			<PDFViewer
 				width="100%"
@@ -96,14 +96,14 @@ function PDFContent() {
 				/>
 			</PDFViewer>
 
-			<DownloadBtn
+			{/* <DownloadBtn
 				tecnico={tecnico}
 				empresa={empresaSelected}
 				instrumento={instrumentoSelected}
 				part1Data={part1Data}
 				part2Data={part2Data}
 				part3Data={part3Data}
-			/>
+			/> */}
 		</ClientOnly>
 	)
 }

@@ -9,7 +9,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select"
 import { Cpu, Loader, UserRound, Warehouse } from "lucide-react"
-import { Dispatch, SetStateAction, Suspense } from "react"
+import { Dispatch, SetStateAction, Suspense, useEffect } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { empresasQueryOptions } from "queries/empresas/empresas-query"
 import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
@@ -57,6 +57,12 @@ function Part1Data({
 }: {
 	setReportStep: Dispatch<SetStateAction<1 | 2 | 3 | 4>>
 }) {
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			window.scrollTo(0, 0)
+		}
+	}, [])
+
 	const { data: part1Data } = useSuspenseQuery(part1DataQueryOptions)
 	const { data: tecnico } = useSuspenseQuery(tecnicoQueryOptions)
 	const { data: empresas } = useSuspenseQuery(empresasQueryOptions)

@@ -8,6 +8,8 @@ import { protectedRoute } from "@/lib/protected-route"
 import DashboardMenu from "@/components/dashboard/menu/menu"
 import MovilMenu from "@/components/movil/menu"
 import { ChevronLeft } from "lucide-react"
+import { useIsMobile } from "@/hooks/use-is-mobile"
+import LoadingMovil from "@/components/layout/loading-movil"
 
 export const Route = createFileRoute("/_protected")({
 	loader: async () => await protectedRoute(),
@@ -15,19 +17,31 @@ export const Route = createFileRoute("/_protected")({
 })
 
 function RouteComponent() {
-	const isMobil = typeof window !== "undefined" && window.innerWidth < 640
-
-	if (isMobil) return <MovilRoute />
+	const { isMobile, isLoading } = useIsMobile()
 	return (
-		// <section className="w-screen min-h-screen overflow-hidden flex">
-		// 	<aside className="sm:w-[22dvw] 2xl:w-1/4">
-		// 		<DashboardMenu />
-		// 	</aside>
-		// 	<article className="sm:w-[78dvw] 2xl:w-3/4">
-		// 		<Outlet />
-		// 	</article>
-		// </section>
-		<Outlet />
+		<>
+			{isLoading ? (
+				<LoadingMovil />
+			) : (
+				<>
+					{isMobile && <MovilRoute />}
+					{!isMobile && <DesktopRoute />}
+				</>
+			)}
+		</>
+	)
+}
+
+const DesktopRoute = () => {
+	return (
+		<section className="w-screen min-h-screen overflow-hidden flex">
+			<aside className="sm:w-[22dvw] 2xl:w-1/4">
+				<DashboardMenu />
+			</aside>
+			<article className="sm:w-[78dvw] 2xl:w-3/4">
+				<Outlet />
+			</article>
+		</section>
 	)
 }
 

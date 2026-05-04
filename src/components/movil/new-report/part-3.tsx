@@ -15,13 +15,19 @@ import { Database, List, Loader, NotebookPen, Search } from "lucide-react"
 import { part3DataQueryOptions } from "queries/new-report/part3/nrpart3-query"
 import { useCreatePart3Data } from "queries/new-report/part3/use-create-nrpart3"
 import { useUpdateNrPart3 } from "queries/new-report/part3/use-update-nrpart3"
-import { Dispatch, SetStateAction, Suspense } from "react"
+import { Dispatch, SetStateAction, Suspense, useEffect } from "react"
 
 export default function MovilPart3Data({
 	setReportStep,
 }: {
 	setReportStep: Dispatch<SetStateAction<1 | 2 | 3 | 4>>
 }) {
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			window.scrollTo(0, 0)
+		}
+	}, [])
+
 	return (
 		<Suspense fallback={<Part3DataSkelton />}>
 			<Part3Data setReportStep={setReportStep} />

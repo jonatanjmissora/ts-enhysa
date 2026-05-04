@@ -9,7 +9,7 @@ import {
 	Trash2,
 } from "lucide-react"
 
-export const Route = createFileRoute("/_protected/reports")({
+export const Route = createFileRoute("/_protected/iluminacion/reports")({
 	component: RouteComponent,
 })
 

@@ -6,7 +6,7 @@ import { empresasQueryOptions } from "queries/empresas/empresas-query"
 import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
 import { part1DataQueryOptions } from "queries/new-report/part1/nrpart1-query"
 
-export const Route = createFileRoute("/_protected/new-report2")({
+export const Route = createFileRoute("/_protected/iluminacion/new-report")({
 	loader: ({ context }) => {
 		context.queryClient.ensureQueryData(tecnicoQueryOptions)
 		context.queryClient.ensureQueryData(empresasQueryOptions)

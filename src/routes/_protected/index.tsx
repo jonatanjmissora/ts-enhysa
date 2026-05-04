@@ -5,16 +5,30 @@ import InicioRecientes from "@/components/dashboard/inicio/recientes"
 import InicioPlan from "@/components/dashboard/inicio/plan"
 import { PreferencesMenu } from "@/components/layout/preferences-menu"
 import MovilIndex from "@/components/movil/inicio"
+import { useIsMobile } from "@/hooks/use-is-mobile"
+import LoadingMovil from "@/components/layout/loading-movil"
 
 export const Route = createFileRoute("/_protected/")({
 	component: App,
 })
 
 function App() {
-	// const isMobil = typeof window !== "undefined" && window.innerWidth < 640
-	const isMobil = true
+	const { isMobile, isLoading } = useIsMobile()
+	return (
+		<>
+			{isLoading ? (
+				<LoadingMovil />
+			) : (
+				<>
+					{isMobile && <MovilIndex />}
+					{!isMobile && <DesktopIndex />}
+				</>
+			)}
+		</>
+	)
+}
 
-	if (isMobil) return <MovilIndex />
+function DesktopIndex() {
 	return (
 		<div className="min-h-screen flex flex-col">
 			<header className="sm:text-base 2xl:text-xl font-semibold tracking-wider sm:h-20 2xl:h-24 px-20 bg-accent border border-background flex justify-between items-center">

@@ -6,7 +6,7 @@ import { part2DataQueryOptions } from "queries/new-report/part2/nrpart2-query"
 import { part3DataQueryOptions } from "queries/new-report/part3/nrpart3-query"
 import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 
-export const Route = createFileRoute("/_protected/new-report2/pdf")({
+export const Route = createFileRoute("/_protected/iluminacion/pdf")({
 	loader: ({ context }) => {
 		context.queryClient.ensureQueryData(tecnicoQueryOptions)
 		context.queryClient.ensureQueryData(empresasQueryOptions)

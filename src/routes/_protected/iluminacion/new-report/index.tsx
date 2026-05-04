@@ -14,7 +14,7 @@ import { defaultPart1Data } from "db/new-report/part1/nrpart1-validator"
 import { defaultPart2Data } from "db/new-report/part2/nrpart2-validator"
 import { defaultPart3Data } from "db/new-report/part3/nrpart3-validator"
 
-export const Route = createFileRoute("/_protected/new-report2/")({
+export const Route = createFileRoute("/_protected/iluminacion/new-report/")({
 	component: RouteComponent,
 })
 

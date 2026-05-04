@@ -5,7 +5,7 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion"
-import { Dispatch, SetStateAction, Suspense } from "react"
+import { Dispatch, SetStateAction, Suspense, useEffect } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { part2DataQueryOptions } from "queries/new-report/part2/nrpart2-query"
 import { Part2DataType } from "db/new-report/part2/schema"
@@ -19,6 +19,12 @@ export default function MovilPart2Data({
 }: {
 	setReportStep?: Dispatch<SetStateAction<1 | 2 | 3 | 4>>
 }) {
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			window.scrollTo(0, 0)
+		}
+	}, [])
+
 	return (
 		<section>
 			<div className="flex items-center justify-between w-full px-5 rounded border-b border-orange-500/25 mt-15 sm:mt-0 sm:border-none sm:bg-orange-500/15">

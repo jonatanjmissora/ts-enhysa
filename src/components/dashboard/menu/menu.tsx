@@ -24,7 +24,7 @@ export default function DashboardMenu() {
 							Inicio
 						</Link>
 						<Link
-							to="/new-report2"
+							to="/iluminacion/new-report"
 							className="flex items-center gap-4 sm:text-lg 2xl:text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
 							activeProps={{ className: "themeBtnBackground  my-shadow" }}
 						>
@@ -32,7 +32,7 @@ export default function DashboardMenu() {
 							Nuevo Proyecto
 						</Link>
 						<Link
-							to="/reports"
+							to="/iluminacion/reports"
 							className="flex items-center gap-4 sm:text-lg 2xl:text-xl font-semibold tracking-wider p-4 rounded-lg hover:bg-background/50 transition-colors cursor-pointer"
 							activeProps={{ className: "themeBtnBackground  my-shadow" }}
 						>

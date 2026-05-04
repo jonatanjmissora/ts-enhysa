@@ -2,14 +2,28 @@ export default function LoadingMovil() {
 	return (
 		<div className="h-svh w-svw flex items-center justify-center opacity-75">
 			<div className="flex items-center justify-center flex-col gap-4">
-				<img src="/EnHySa_logo.webp" alt="logo EnHySa" className="size-50" />
+				<img
+					src="/EnHySa_logo.webp"
+					alt="logo EnHySa"
+					className="size-50 animate-pulse"
+				/>
 
-				<p className="textXL text-4xl font-bold tracking-widest dark:text-shadow-lg/50">
-					EnHySa App
-				</p>
-				<p className="textL font-bold tracking-widest dark:text-shadow-lg/50 animate-pulse">
-					Cargando...
-				</p>
+				{Math.random() > 0.5 ? (
+					<div className="flex leading-none text-[3rem] font-semibold tracking-[1rem] dark:text-shadow-lg/50">
+						<span className="animate-bounce delay-50">E</span>
+						<span className="animate-bounce delay-100">n</span>
+						<span className="animate-bounce delay-150">H</span>
+						<span className="animate-bounce delay-200">y</span>
+						<span className="animate-bounce delay-250">S</span>
+						<span className="animate-bounce delay-300">a</span>
+					</div>
+				) : (
+					<div className="focus text-4xl tracking-[0.3em]">
+						<div className="focus-mask">
+							<div className="focus-inner-mask">EnHySa</div>
+						</div>
+					</div>
+				)}
 			</div>
 		</div>
 	)

@@ -3,7 +3,7 @@ import { ChartAreaInteractive } from "./chart"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { ListChecks } from "lucide-react"
 import { part2DataQueryOptions } from "queries/new-report/part2/nrpart2-query"
-import { Suspense, useState } from "react"
+import { Dispatch, SetStateAction, Suspense, useEffect, useState } from "react"
 import {
 	Select,
 	SelectTrigger,
@@ -16,8 +16,14 @@ import { Link } from "@tanstack/react-router"
 export default function MovilPart4Data({
 	setReportStep,
 }: {
-	setReportStep: (step: 4) => void
+	setReportStep: Dispatch<SetStateAction<1 | 2 | 3 | 4>>
 }) {
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			window.scrollTo(0, 0)
+		}
+	}, [])
+
 	return (
 		<Suspense fallback={<Part4DataSkeleton />}>
 			<Part4Data setReportStep={setReportStep} />
@@ -25,7 +31,11 @@ export default function MovilPart4Data({
 	)
 }
 
-function Part4Data({ setReportStep }: { setReportStep: (step: 4) => void }) {
+function Part4Data({
+	setReportStep,
+}: {
+	setReportStep: Dispatch<SetStateAction<1 | 2 | 3 | 4>>
+}) {
 	const { data: areas } = useSuspenseQuery(part2DataQueryOptions)
 	const [areaId, setAreaId] = useState(areas?.[0]?.id || "")
 
@@ -83,13 +93,16 @@ function Part4Data({ setReportStep }: { setReportStep: (step: 4) => void }) {
 				<span>{uniformidad}</span>
 
 				<span>Valor Mínimo : </span>
-				<span>{minValue(puntosWithValue)}</span>
+				<span>{minValue(puntosWithValue)} lux</span>
 
 				<span>Valor Máximo : </span>
-				<span>{maxValue(puntosWithValue)}</span>
+				<span>{maxValue(puntosWithValue)} lux</span>
 
 				<span>Puntos Medidos : </span>
 				<span>{puntosWithValue.length}</span>
+
+				<span>Valor Requerido : </span>
+				<span>{areaData.valorRequerido} lux</span>
 
 				<span>Cumplen valor requerido : </span>
 				<span>

@@ -4,9 +4,14 @@ import { FilePlus } from "lucide-react"
 export default function MovilHero() {
 	return (
 		<div className="flex justify-between items-center flex-col mt-[70px] h-[550px] relative overflow-visible">
-			<p className="text-[28px] font-semibold text-center tracking-wider text-pretty dark:text-shadow-lg">
-				Elige tu próximo informe de iluminación.
-			</p>
+			<div className="text-center flex flex-col gap-1">
+				<p className="text-[26px] font-semibold text-center tracking-wider text-pretty dark:text-shadow-lg">
+					Protocolo de Iluminación
+				</p>
+				<p className="text-[26px] font-semibold text-center tracking-wider text-pretty dark:text-shadow-lg">
+					Res 84/12 SRT.
+				</p>
+			</div>
 			<img
 				src="/movil-hero-light-meter.webp"
 				alt="logo EnHySa"
