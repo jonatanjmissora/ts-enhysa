@@ -1,7 +1,11 @@
-import { Link } from "@tanstack/react-router"
+import { Link, useLocation } from "@tanstack/react-router"
 import { CheckCircle, Shield } from "lucide-react"
 
 export default function InicioPlan() {
+	const pathname = useLocation({
+		select: location => location.pathname,
+	})
+
 	return (
 		<div className="px-4 py-12 flex-1 sm:p-6 2xl:p-10 card bg-accent flex-col justify-between items-start text-lg relative">
 			<div className="flex flex-col">
@@ -32,6 +36,7 @@ export default function InicioPlan() {
 			</div>
 			<Link
 				to="/pricing"
+				search={{ from: pathname.split("/")[1] }}
 				className="flex items-center gap-2 p-6 py-2 sm:py-4 textM font-semibold rounded-xl themeBtnAccent   my-shadow w-full justify-center dark:text-shadow-lg/50 mt-10 sm:mt-0"
 			>
 				Gestionar Plan

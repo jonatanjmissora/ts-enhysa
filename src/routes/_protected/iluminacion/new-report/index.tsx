@@ -13,6 +13,7 @@ import { Part3DataType } from "db/new-report/part3/schema"
 import { defaultPart1Data } from "db/new-report/part1/nrpart1-validator"
 import { defaultPart2Data } from "db/new-report/part2/nrpart2-validator"
 import { defaultPart3Data } from "db/new-report/part3/nrpart3-validator"
+import { useIsMobile } from "@/hooks/use-is-mobile"
 
 export const Route = createFileRoute("/_protected/iluminacion/new-report/")({
 	component: RouteComponent,
@@ -24,19 +25,20 @@ function RouteComponent() {
 	const [part3Data, setPart3Data] = useState<Part3DataType>(defaultPart3Data)
 
 	// null = aún no se conoce el tamaño (SSR / primer render)
-	const [isMobil, setIsMobil] = useState<boolean | null>(null)
+	// const [isMobil, setIsMobil] = useState<boolean | null>(null)
 
-	useEffect(() => {
-		const check = () => setIsMobil(window.innerWidth < 640)
-		check()
-		window.addEventListener("resize", check)
-		return () => window.removeEventListener("resize", check)
-	}, [])
+	// useEffect(() => {
+	// 	const check = () => setIsMobil(window.innerWidth < 640)
+	// 	check()
+	// 	window.addEventListener("resize", check)
+	// 	return () => window.removeEventListener("resize", check)
+	// }, [])
 
 	// Durante SSR y el primer render no se sabe el viewport → no renderizar nada
-	if (isMobil === null) return <LoadingMovil />
+	// if (isMobil === null) return <LoadingMovil />
+	const isMobile = useIsMobile()
 
-	if (isMobil) return <MovilNewReport />
+	if (isMobile) return <MovilNewReport />
 
 	return (
 		<div className="card bg-accent rounded-lg flex-col items-start gap-10 pb-40">

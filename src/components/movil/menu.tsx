@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router"
+import { Link, useLocation } from "@tanstack/react-router"
 import { Menu, X } from "lucide-react"
 import { useState } from "react"
 import User from "../dashboard/menu/user"
@@ -39,6 +39,10 @@ const MovilMenuContent = ({
 	isOpen: boolean
 	setIsOpen: (open: boolean) => void
 }) => {
+	const pathname = useLocation({
+		select: location => location.pathname,
+	})
+
 	return (
 		<div
 			className={`flex flex-col justify-between items-center fixed inset-0 w-screen h-screen dark:bg-green-900 bg-green-700 z-40 ${isOpen ? "translate-y-0" : "-translate-y-full"} transition-transform duration-500 text-gray-50`}
@@ -55,23 +59,8 @@ const MovilMenuContent = ({
 					Inicio
 				</Link>
 				<Link
-					to="/new-report2"
-					onClick={() => setIsOpen(!isOpen)}
-					resetScroll={true}
-					className="w-full py-2 text-center"
-				>
-					Nuevo Proyecto
-				</Link>
-				<Link
-					to="/reports"
-					onClick={() => setIsOpen(!isOpen)}
-					resetScroll={true}
-					className="w-full py-2 text-center"
-				>
-					Mis Informes
-				</Link>
-				<Link
 					to="/profile2"
+					search={{ from: pathname.split("/")[1] }}
 					onClick={() => setIsOpen(!isOpen)}
 					resetScroll={true}
 					className="w-full py-2 text-center"
@@ -80,6 +69,7 @@ const MovilMenuContent = ({
 				</Link>
 				<Link
 					to="/pricing"
+					search={{ from: pathname.split("/")[1] }}
 					onClick={() => setIsOpen(!isOpen)}
 					resetScroll={true}
 					className="w-full py-2 text-center"

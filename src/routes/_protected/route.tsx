@@ -46,20 +46,9 @@ const DesktopRoute = () => {
 }
 
 const MovilRoute = () => {
-	const pathname = useLocation({
-		select: location => location.pathname,
-	})
-	const isHome = pathname === "/"
-
 	return (
 		<main className="w-screen min-h-screen overflow-hidden flex flex-col relative">
 			<MovilMenu />
-			<Link
-				to="/"
-				className={`absolute top-20 left-4 ${isHome ? "hidden" : ""}`}
-			>
-				<ChevronLeft size={24} />
-			</Link>
 			<Outlet />
 		</main>
 	)

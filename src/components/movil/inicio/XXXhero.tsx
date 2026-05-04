@@ -6,6 +6,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select"
 import { PROTOCOLOS } from "@/lib/constants"
+import { Link } from "@tanstack/react-router"
 
 export default function MovilHeroGeneral({
 	setProtocoloId,
@@ -38,7 +39,7 @@ export default function MovilHeroGeneral({
 								value={protocolo.id}
 								className="text-right! text-nowrap! flex justify-start! py-2 truncate"
 							>
-								{protocolo.title}
+								<Link to={protocolo.link}>{protocolo.title}</Link>
 							</SelectItem>
 						))}
 					</SelectContent>

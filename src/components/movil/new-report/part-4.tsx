@@ -124,7 +124,7 @@ function Part4Data({
 				</button>
 
 				<Link
-					to="/new-report2/pdf"
+					to="/iluminacion/pdf"
 					className="themeBtnBackground py-2 rounded-lg textL text-sm sm:text-base w-1/2 flex items-center justify-center"
 				>
 					<span>Generar PDF</span>

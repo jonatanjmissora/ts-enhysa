@@ -5,6 +5,8 @@ import { tecnicoQueryOptions } from "queries/tecnico/tecnico-query"
 import { empresasQueryOptions } from "queries/empresas/empresas-query"
 import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
 import { part1DataQueryOptions } from "queries/new-report/part1/nrpart1-query"
+import { part2DataQueryOptions } from "queries/new-report/part2/nrpart2-query"
+import { part3DataQueryOptions } from "queries/new-report/part3/nrpart3-query"
 
 export const Route = createFileRoute("/_protected/iluminacion/new-report")({
 	loader: ({ context }) => {
@@ -12,6 +14,8 @@ export const Route = createFileRoute("/_protected/iluminacion/new-report")({
 		context.queryClient.ensureQueryData(empresasQueryOptions)
 		context.queryClient.ensureQueryData(instrumentosQueryOptions)
 		context.queryClient.ensureQueryData(part1DataQueryOptions)
+		context.queryClient.ensureQueryData(part2DataQueryOptions)
+		context.queryClient.ensureQueryData(part3DataQueryOptions)
 		return null
 	},
 	component: RouteComponent,

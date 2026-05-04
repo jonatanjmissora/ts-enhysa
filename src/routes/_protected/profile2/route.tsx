@@ -4,8 +4,15 @@ import { empresasQueryOptions } from "queries/empresas/empresas-query"
 import { instrumentosQueryOptions } from "queries/instrumentos/instrumentos-query"
 import { ChevronLeft } from "lucide-react"
 import MovilProfile from "@/components/movil/profile"
+import { useIsMobile } from "@/hooks/use-is-mobile"
+import { z } from "zod"
+
+const fromSearchSchema = z.object({
+	from: z.string().optional(),
+})
 
 export const Route = createFileRoute("/_protected/profile2")({
+	validateSearch: fromSearchSchema,
 	loader: ({ context }) => {
 		context.queryClient.ensureQueryData(tecnicoQueryOptions)
 		context.queryClient.ensureQueryData(empresasQueryOptions)
@@ -16,8 +23,10 @@ export const Route = createFileRoute("/_protected/profile2")({
 })
 
 function RouteComponent() {
-	const isMobil = typeof window !== "undefined" && window.innerWidth < 640
-	if (isMobil) return <MovilProfile />
+	const isMobile = useIsMobile()
+	const { from } = Route.useSearch()
+
+	if (isMobile) return <MovilProfile from={from ? `/${from}` : "/"} />
 
 	return (
 		<div className="min-h-screen flex flex-col">
@@ -25,7 +34,7 @@ function RouteComponent() {
 				<span>Protocolo de Iluminación Res 84/12 SRT</span>
 				<div className="flex gap-10 items-center justify-center">
 					<Link
-						to="/"
+						to={from ? `/${from}` : "/"}
 						className="flex items-center justify-center gap-2 themeBtnAccent rounded-lg my-shadow sm:text-sm 2xl:text-lg text-foreground tracking-wider px-6 py-2 cursor-pointer m-0"
 					>
 						<ChevronLeft className="size-5" />

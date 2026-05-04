@@ -114,3 +114,5 @@ nuevo reporte, finalizar reporte
 
 
 mejorar el cargando de part1, por que tarda tanto, si tengo el skelton del part1
+
+isMobile se puede guardar en cookies para no tener que invocar el hook cada vez que navego.

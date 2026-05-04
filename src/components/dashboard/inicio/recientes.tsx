@@ -69,7 +69,7 @@ export default function InicioRecientes() {
 			</div>
 
 			<Link
-				to="/reports"
+				to="/iluminacion/reports"
 				className=" text-sm text-foreground/70 hover:underline py-2 border-t border-foreground/10 w-full text-right"
 			>
 				Ver todos

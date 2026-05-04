@@ -1,55 +1,24 @@
+import { PLANS } from "@/lib/constants"
 import { createFileRoute, Link } from "@tanstack/react-router"
 import { ArrowRight, Check, ChevronLeft, Shield } from "lucide-react"
 import { useState } from "react"
+import { z } from "zod"
 
-const PLANS = [
-	{
-		title: "Gratis",
-		price: 0,
-		subtitle: "Lorem ipsum dolor sit amet.",
-		benefits: [
-			"beneficio adquirido 1",
-			"beneficio adquirido 2",
-			"beneficio adquirido 3",
-			"beneficio adquirido 4",
-			"beneficio adquirido 5",
-		],
-	},
-	{
-		title: "Profesional",
-		price: 25,
-		subtitle: "Lorem ipsum dolor sit amet.",
-		benefits: [
-			"beneficio adquirido 1",
-			"beneficio adquirido 2",
-			"beneficio adquirido 3",
-			"beneficio adquirido 4",
-			"beneficio adquirido 5",
-		],
-	},
-	{
-		title: "Empresarial",
-		price: 55,
-		subtitle: "Lorem ipsum dolor sit amet.",
-		benefits: [
-			"beneficio adquirido 1",
-			"beneficio adquirido 2",
-			"beneficio adquirido 3",
-			"beneficio adquirido 4",
-			"beneficio adquirido 5",
-		],
-	},
-]
+const fromSearchSchema = z.object({
+	from: z.string().optional(),
+})
 
 export const Route = createFileRoute("/_protected/pricing")({
 	component: RouteComponent,
+	validateSearch: fromSearchSchema,
 })
 
 function RouteComponent() {
 	const [actualPlan, setActualPlan] = useState<0 | 1 | 2>(1)
+	const { from } = Route.useSearch()
 
 	return (
-		<div className="min-h-screen flex flex-col">
+		<div className="min-h-screen flex flex-col relative">
 			<header className="hidden sm:text-base 2xl:text-xl font-semibold tracking-wider sm:h-20 2xl:h-24 px-20 bg-accent border border-background sm:flex justify-between items-center">
 				<span>Protocolo de Iluminación Res 84/12 SRT</span>
 				<div className="flex gap-10 items-center justify-center">
@@ -58,10 +27,15 @@ function RouteComponent() {
 						className="flex items-center justify-center gap-2 themeBtnAccent rounded-lg my-shadow sm:text-sm 2xl:text-lg text-foreground tracking-wider px-6 py-2 cursor-pointer m-0"
 					>
 						<ChevronLeft className="size-5" />
-						Volver
 					</Link>
 				</div>
 			</header>
+
+			<div className="sm:hidden flex gap-10 items-center justify-center">
+				<Link to={from ? `/${from}` : "/"} className={`absolute top-20 left-4`}>
+					<ChevronLeft size={24} />
+				</Link>
+			</div>
 
 			<div className="flex-1 flex justify-center items-center flex-col gap-6 pt-40 sm:py-10 2xl:py-20">
 				<div className="flex items-center gap-2 text-5xl 2xl:text-6xl font-bold tracking-wildest relative">
