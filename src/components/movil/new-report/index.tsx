@@ -16,7 +16,7 @@ export default function MovilNewReport() {
 
 	return (
 		<section className="min-h-screen w-11/12 py-30 pt-40 mx-auto relative">
-			<Link to="/iluminacion" className={`absolute top-20 left-4`}>
+			<Link to="/iluminacion" className={`absolute top-20 left-0`}>
 				<ChevronLeft size={24} />
 			</Link>
 			<p className="w-full text-left textXL bg-blue-500/25 py-4 flex items-center gap-8 px-5 rounded justify-between">

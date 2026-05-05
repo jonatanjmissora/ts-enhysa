@@ -107,7 +107,7 @@ function Part3Data({
 					e.preventDefault()
 					form.handleSubmit()
 				}}
-				className="w-5/6 relative"
+				className="w-11/12 relative"
 			>
 				<FieldGroup className="gap-10">
 					<form.Field
@@ -132,7 +132,7 @@ function Part3Data({
 										onBlur={field.handleBlur}
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
-										className="bg-accent text-center textXS italic card p-4 justify-center h-30"
+										className={`bg-accent text-center textXS italic card p-4 justify-center ${part3Data?.conclusion !== "" ? "h-max" : "h-30"}`}
 										onFocus={e => e.target.select()}
 									/>
 									{isInvalid && (
@@ -168,7 +168,7 @@ function Part3Data({
 										onBlur={field.handleBlur}
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
-										className="bg-accent text-center textXS italic card p-4 justify-center h-30"
+										className={`bg-accent text-center textXS italic card p-4 justify-center ${part3Data?.observacion !== "" ? "h-max" : "h-30"}`}
 										onFocus={e => e.target.select()}
 									/>
 									{isInvalid && (
@@ -204,7 +204,7 @@ function Part3Data({
 										onBlur={field.handleBlur}
 										onChange={e => field.handleChange(e.target.value)}
 										aria-invalid={isInvalid}
-										className="bg-accent text-center textXS italic card p-4 justify-center h-45"
+										className={`bg-accent text-center textXS italic card p-4 justify-center ${part3Data?.recomendacion !== "" ? "h-max" : "h-45"}`}
 										onFocus={e => e.target.select()}
 									/>
 									{isInvalid && (
@@ -218,7 +218,7 @@ function Part3Data({
 						}}
 					/>
 
-					<Field className="flex flex-row justify-center gap-5 sm:gap-10 items-center w-full mx-auto mt-10 p-0">
+					<Field className="flex flex-row justify-center gap-2 sm:gap-10 items-center w-full mx-auto mt-10 p-0">
 						<button
 							type="button"
 							onClick={() => setReportStep?.(2)}
@@ -238,7 +238,7 @@ function Part3Data({
 									<Loader className="animate-spin size-4"></Loader>
 								</div>
 							) : (
-								<span>Finalizar</span>
+								<span>Siguiente</span>
 							)}
 						</button>
 					</Field>

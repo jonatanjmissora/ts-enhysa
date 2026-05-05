@@ -84,7 +84,7 @@ function PDFContent() {
 				width="100%"
 				height="100%"
 				className="min-h-screen w-full"
-				showToolbar={false}
+				// showToolbar={false}
 			>
 				<MyDocument
 					tecnico={tecnico}

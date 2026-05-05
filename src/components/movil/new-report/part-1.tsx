@@ -463,7 +463,7 @@ function Part1Data({
 					<button
 						type="submit"
 						disabled={isPending || updatePending}
-						className="themeBtnBackground py-2 rounded-lg textL text-sm sm:text-base"
+						className="themeBtnBackground py-3 rounded-lg textL text-sm sm:text-base"
 					>
 						{isPending || updatePending ? (
 							<div className="flex gap-2 w-full justify-center items-center">

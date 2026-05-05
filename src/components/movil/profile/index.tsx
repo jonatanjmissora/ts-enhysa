@@ -5,7 +5,7 @@ import { Link } from "@tanstack/react-router"
 export default function MovilProfile({ from }: { from: string }) {
 	return (
 		<section className="min-h-screen py-30 pt-30 mx-auto w-11/12 relative">
-			<Link to={from} className={`absolute top-20 left-4`}>
+			<Link to={from} className={`absolute top-20 left-0`}>
 				<ChevronLeft size={24} />
 			</Link>
 			<div className="text-left textXL bg-blue-500/25 py-4 mt-10 px-5 rounded w-full">

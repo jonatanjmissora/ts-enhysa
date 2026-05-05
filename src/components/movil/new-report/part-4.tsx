@@ -136,11 +136,22 @@ function Part4Data({
 
 function Part4DataSkeleton() {
 	return (
-		<div className="w-full pt-10 flex flex-col gap-2 items-center justify-center textM text-sm sm:text-base italic">
+		<article className="w-full flex flex-col justify-center items-center">
+			<div className="flex items-center justify-between w-full rounded border-b border-pink-500/25 m-10 sm:border-none sm:bg-pink-500/15">
+				<div className="textXL py-2 flex items-center gap-8 justify-between w-full sm:w-max">
+					Resumen <ListChecks className="sm:size-7 2xl:size-9" />
+				</div>
+			</div>
+			<Label className="textL text-xl mr-auto">Area</Label>
+
 			<span className="animate-pulse card py-2 w-5/6 mx-auto bg-accent/20 h-8 shadow-none">
-				CARGANDO
+				. . .
 			</span>
-		</div>
+
+			<span className="mt-10 animate-pulse card py-2 w-5/6 mx-auto bg-accent/20 h-40 shadow-none">
+				. . .
+			</span>
+		</article>
 	)
 }
 

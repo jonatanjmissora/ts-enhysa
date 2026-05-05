@@ -6,13 +6,12 @@ dashboard
 ===============
 * nuevo proyecto
 -------------------
-    cuando borro un punto, cambiar el nombre de los restantes
-    conectar logica con disenio2
-    croquis
-    croquis cotas?
-    agregar areas
-    scroll de area cuando abro una nueva del acordion
-    agregar punto de referencia en el croquis    
+    agregar punto de referencia en el croquis
+    verificar si hay empresas, instrumentos y tecnico cargados
+    verificar si hay reporte en curso
+    funcion clima, para almacenar todo en un string
+    limitar ancho largo y alto a valores positivos
+    nuevo reporte, finalizar reporte
 
 * mis informes
 ----------------
@@ -20,20 +19,11 @@ dashboard
     filtros todos, pendientes
     search de empresas
     paginacion
-    logica
-    funcionalidad de los ... para reports (movil)
-
+    logica de menu para cada informe
 
 * mi perfil
 ------------
-    ordenar empresas e instrumentos por nombre cuando creo, o edito
-    verificar q en empresas, tengo imagenes como string, y en instrumentos, lo tengo como string[]
-    el check para ver si cambian los valores en edit, agregar la comparacion de imagenes
-    logica para el perfil2
-    colocar boton para crear nueva empresa e instrumento en perfil
-    funcionalidad de los ... para perfil empresas e instrumentos (movil)
     no hay pie de pagina en la base de datos
-    cuando edito, pero le doy a cancelar, tiene que volver a los datos originales
 
 * planes
 ----------
@@ -41,20 +31,16 @@ dashboard
 
 styles
 ===============
-    hacer cards con foco radial
-    bordes psicodelicos
-    luz con el mouse en las cards
+    hacer cards bordes en esquinas alternas
+    animaciones de border, de svg, de scroll fade in
 
 
 PDF
 ====
-tengo que refrescar la pagina, para que tome los cambios el pdf
-alargar la ventana del pdf
 cambiar nombre de archivo a bajar
 agregar membretes y logos
-contador para cantidad de paginas
 anexo de fotos
-
+arreglar cuando la tabla es muy extensa y pasa a otra pagina
 
 TODO
 ======
@@ -62,12 +48,6 @@ zustand
 uploadThing
 polar
 PWA
-ver los scroll to top, cada que navego
-borrar new-report y profile, ya que me quedo con new-report2 y profile2
-poner lo de components/disenio2 en components/nuevo-reporte
-    borrar perfil, dejar perfil2
-    borrar new-report, dejar new-report2
-realizar el lazy import que me aconsejo chatgpt para desktop / movil
 
 EL INSTALL PARA NETLIFY
 los pasos que empece a realizar. 
@@ -103,16 +83,11 @@ nuevo-proyecto/area?id=
 nuevo-proyecto/resumen
 
 
-viendo lo de separar los forms, y las actualizaciones de part1Data, ... en los botones siguientes
-clima no me toma el CLIMA[0]
-funcion clima, para almacenar todo en un string
-limitar ancho largo y alto a valores positivos
-constantes
-menu de incio de movil, mostrar mas protocolos
-nuevo reporte, finalizar reporte
-4to paso, mostrar resumen, grafico, y generar pdf
+guardar par1Data, part2Data, part3Data en localstorage sirve?
 
 
-mejorar el cargando de part1, por que tarda tanto, si tengo el skelton del part1
-
-isMobile se puede guardar en cookies para no tener que invocar el hook cada vez que navego.
+nueva version:
+=============
+voy a cambiar movil first
+restructuracion de carpetas
+restructuracion de tablas
